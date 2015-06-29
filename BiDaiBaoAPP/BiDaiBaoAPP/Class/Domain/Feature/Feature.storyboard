@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jZh-BL-i6G">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Feature View Controller-->
+        <scene sceneID="aJh-iF-EMb">
+            <objects>
+                <viewController id="jZh-BL-i6G" customClass="BDBFeatureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qhd-tE-9X0"/>
+                        <viewControllerLayoutGuide type="bottom" id="89o-VM-kda"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jT2-am-aKR" userLabel="根视图">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaD-NR-xDF" userLabel="滑动视图">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jZh-BL-i6G" id="NWD-aa-Qcf"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ch0-RF-scO">
+                                <rect key="frame" x="257" y="23" width="40" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="跳过">
+                                    <color key="titleColor" red="0.34509803921568627" green="0.5725490196078431" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Bvf-48-JeX">
+                                <rect key="frame" x="60" y="516" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="HlQ-Du-Hq2"/>
+                                    <constraint firstAttribute="height" constant="30" id="Vnf-Mf-yMk"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.85490196080000003" green="0.94117647059999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.38823529410000002" green="0.71764705880000002" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EaD-NR-xDF" secondAttribute="trailing" id="6JN-mh-SXl"/>
+                            <constraint firstItem="EaD-NR-xDF" firstAttribute="leading" secondItem="jT2-am-aKR" secondAttribute="leading" id="CIi-G3-3hj"/>
+                            <constraint firstItem="ch0-RF-scO" firstAttribute="top" secondItem="jT2-am-aKR" secondAttribute="topMargin" constant="23" id="TKU-XM-ZWK"/>
+                            <constraint firstItem="EaD-NR-xDF" firstAttribute="top" secondItem="jT2-am-aKR" secondAttribute="top" id="UWt-he-Iqh"/>
+                            <constraint firstItem="89o-VM-kda" firstAttribute="bottom" secondItem="EaD-NR-xDF" secondAttribute="bottom" id="fY1-1T-OS9"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Bvf-48-JeX" secondAttribute="bottom" constant="22" id="gYy-9H-s6X"/>
+                            <constraint firstAttribute="centerX" secondItem="Bvf-48-JeX" secondAttribute="centerX" id="jZT-Mr-oCe"/>
+                            <constraint firstAttribute="trailing" secondItem="ch0-RF-scO" secondAttribute="trailing" constant="23" id="xLw-4G-VFm"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="featurePageControl" destination="Bvf-48-JeX" id="yFk-ii-YhS"/>
+                        <outlet property="featurePageScrollView" destination="EaD-NR-xDF" id="Ja0-iL-VPl"/>
+                        <outlet property="skipToIndexButton" destination="ch0-RF-scO" id="uDZ-VL-x9O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6a-cT-gDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="445" y="256"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Index</string>
+		<key>title</key>
+		<string>首页</string>
+		<key>icon</key>
+		<string>tabbar_icon_index.png</string>
+		<key>icon_highlighted</key>
+		<string>tabbar_icon_index_highlighted.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Subject</string>
+		<key>title</key>
+		<string>标的</string>
+		<key>icon</key>
+		<string>tabbar_icon_subject.png</string>
+		<key>icon_highlighted</key>
+		<string>tabbar_icon_subject_highlighted.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Discovery</string>
+		<key>title</key>
+		<string>发现</string>
+		<key>icon</key>
+		<string>tabbar_icon_discovery.png</string>
+		<key>icon_highlighted</key>
+		<string>tabbar_icon_discovery_highlighted.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Warning</string>
+		<key>title</key>
+		<string>预警</string>
+		<key>icon</key>
+		<string>tabbar_icon_warning.png</string>
+		<key>icon_highlighted</key>
+		<string>tabbar_icon_warning_highlighted.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>User</string>
+		<key>title</key>
+		<string>我的</string>
+		<key>icon</key>
+		<string>tabbar_icon_user.png</string>
+		<key>icon_highlighted</key>
+		<string>tabbar_icon_user_highlighted.png</string>
+	</dict>
+</array>
+</plist>

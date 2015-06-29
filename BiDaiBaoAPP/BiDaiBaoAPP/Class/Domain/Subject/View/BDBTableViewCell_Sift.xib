@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellIdentify_sift" rowHeight="200" id="KGk-i7-Jjw" customClass="BDBTableViewCell_Sift">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odg-9H-M8g">
+                        <rect key="frame" x="8" y="89" width="306" height="2"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="1gF-t8-y0e"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年化收益率:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3c-ye-tDm">
+                        <rect key="frame" x="8" y="8" width="75" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="VGR-nE-0Rq"/>
+                            <constraint firstAttribute="width" constant="75" id="XTO-O9-HRR"/>
+                            <constraint firstAttribute="width" constant="54" id="eaK-wk-bt5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.23529411764705882" green="0.24313725490196078" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="eaK-wk-bt5"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kM3-bJ-dQs">
+                        <rect key="frame" x="0.0" y="0.0" width="322" height="89"/>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kM3-bJ-dQs" firstAttribute="leading" secondItem="odg-9H-M8g" secondAttribute="trailing" constant="-314" id="KHR-Fz-7qg"/>
+                    <constraint firstItem="kM3-bJ-dQs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L5f-0w-2f4"/>
+                    <constraint firstItem="odg-9H-M8g" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Lj9-Fd-m2H"/>
+                    <constraint firstItem="odg-9H-M8g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Tal-3L-8lX"/>
+                    <constraint firstItem="kM3-bJ-dQs" firstAttribute="leading" secondItem="p3c-ye-tDm" secondAttribute="trailing" constant="-83" id="TeD-H3-tQR"/>
+                    <constraint firstAttribute="trailing" secondItem="kM3-bJ-dQs" secondAttribute="trailing" id="TlF-Hw-bna"/>
+                    <constraint firstItem="p3c-ye-tDm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="UXz-88-ueh"/>
+                    <constraint firstItem="odg-9H-M8g" firstAttribute="top" secondItem="kM3-bJ-dQs" secondAttribute="bottom" id="YeI-Xv-C7N"/>
+                    <constraint firstItem="odg-9H-M8g" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="aUG-6u-OJJ"/>
+                    <constraint firstItem="p3c-ye-tDm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="azy-Mj-9hD"/>
+                    <constraint firstItem="kM3-bJ-dQs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hu8-da-CNU"/>
+                    <constraint firstItem="kM3-bJ-dQs" firstAttribute="top" secondItem="p3c-ye-tDm" secondAttribute="bottom" id="ujs-vI-puN"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="KHR-Fz-7qg"/>
+                        <exclude reference="TeD-H3-tQR"/>
+                        <exclude reference="ujs-vI-puN"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="scrollView" destination="kM3-bJ-dQs" id="uBT-zD-yuR"/>
+                <outlet property="sectionTitle" destination="p3c-ye-tDm" id="hVC-oo-4j6"/>
+            </connections>
+            <point key="canvasLocation" x="174" y="229"/>
+        </tableViewCell>
+    </objects>
+</document>

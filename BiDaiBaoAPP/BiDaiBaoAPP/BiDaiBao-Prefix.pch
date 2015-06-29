@@ -1,0 +1,230 @@
+//
+//  PrefixHeader.pch
+//  BiDaiBao(比贷宝)
+//
+//  Created by zhang xianglu on 15/6/5.
+//  Copyright (c) 2015年 zhang xianglu. All rights reserved.
+//
+
+#ifndef BiDaiBao_PrefixHeader_pch
+#define BiDaiBao_PrefixHeader_pch
+
+
+#ifdef __OBJC__
+	/**
+	 *  引入公共框架
+	 */
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+	
+	/**
+	*  第三方框架
+	*/
+	#import "AFNetworking.h"
+	#import "AFHTTPRequestOperation.h"
+	#import "MJExtension.h"
+	#import "MJRefresh.h"
+	#import "FLAnimatedImage.h"
+	#import "UITableView+FDTemplateLayoutCell.h"
+	
+	/**
+	 *  自定义
+	 */
+	#import "BDBTableViewRefreshHeader.h"
+	#import "BDBTableViewRefreshFooter.h"
+	
+	/**
+	 *  类别
+	 */
+	#import "UIView+Extensions.h"
+	#import "UIBarButtonItem+Extensions.h"
+	#import "UIButton+Extensions.h"
+	
+	/**
+	 *  全局配置文件
+	 */
+	#import "GlobalConfigurations.h"
+	
+#endif
+
+
+//---------------------打印日志--------------------------
+/**
+ *  常规日志
+ */
+#ifdef DEBUG
+	#define ZXLLOG(format,...)	\
+	do{	\
+		fprintf(stderr, "<%s : %d> %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __func__);	\
+		(NSLog)((format), ##__VA_ARGS__);	\
+		fprintf(stderr, "-----------------\n");	\
+	} while(0);
+#else
+	#define ZXLLOG(...) 
+#endif
+
+/**
+ *  矩形日志
+ */
+#ifdef DEBUG
+	#define ZXLLOGRect(rect) ZXLLOG(@"%s x:%.4f, y:%.4f, w:%.4f, h:%.4f", #rect, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)
+#else
+	#define ZXLLOGRect(rect) 
+#endif
+
+/**
+ *  尺寸日志
+ */
+#ifdef DEBUG
+	#define ZXLLOGSize(size) ZXLLOG(@"%s w:%.4f, h:%.4f", #size, size.width, size.height)
+#else
+	#define ZXLLOGSize(size) 
+#endif
+
+/**
+ *  位置日志
+ */
+#ifdef DEBUG
+	#define ZXLLOGPoint(point) ZXLLOG(@"%s x:%.4f, y:%.4f", #point, point.x, point.y)
+#else
+	#define ZXLLOGPoint(point) 
+#endif
+//---------------------打印日志--------------------------
+
+
+
+//----------------------系统----------------------------
+/**
+ *  设别类型
+ */
+#define IPHONE_DEVICE (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+#define IPAD_DEVICE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IPHONE_DEVICE_UUID ([UIDevice currentDevice].identifierForVendor.UUIDString)
+ 
+/**
+ *  获取系统版本
+ */
+#define SYSTEM_VERSION_NUMBER [[[UIDevice currentDevice] systemVersion] floatValue]
+#define SYSTEM_VERSION [[UIDevice currentDevice] systemVersion]
+
+//判断设备的操做系统是不是ios7
+#define SYSTEM_VERSION_7 (SYSTEM_VERSION_NUMBER >= 7.0)
+ 
+//获取当前语言
+#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+ 
+/**
+ *  判断是否 Retina屏
+ */
+#define RETINA_SCREEN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/**
+ *  设备是否ihone 5
+ */
+#define DEVICE_TYPE_IPHONE_5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+ 
+/**
+ *  获取当前屏幕的高度
+ */
+#define SCREEN_HEIGHT ([UIScreen mainScreen].applicationFrame.size.height)
+ 
+/**
+ *  获取当前屏幕的宽度
+ */
+#define SCREEN_WIDTH ([UIScreen mainScreen].applicationFrame.size.width)
+
+//判断是真机还是模拟器
+#if TARGET_OS_IPHONE
+//iPhone Device
+#endif
+
+#if TARGET_IPHONE_SIMULATOR
+//iPhone Simulator
+#endif
+
+/**
+ *  对比当前系统版本
+ */
+#define SYSTEM_VERSION_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+
+#define SYSTEM_VERSION_GREATER_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
+//----------------------系统----------------------------
+
+
+
+//----------------------颜色类---------------------------
+// rgb颜色转换（16进制->10进制）
+#define UIColorWithRGB16Radix(rgbValue) ([UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0])
+
+// 获取RGB颜色
+#define UIColorWithRGBA(r,g,b,a) ([UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a])
+
+#define UIColorWithRGB(r,g,b) (UIColorWithRGBA(r,g,b,1.0f))
+
+#define UIColorWithName(name) ([UIColor name##Color])
+
+//背景色
+//#define BACKGROUND_COLOR [UIColor colorWithRed:242.0/255.0 green:236.0/255.0 blue:231.0/255.0 alpha:1.0]
+
+//清除背景色
+#define UIColorWithNULL ([UIColor clearColor])
+//----------------------颜色类--------------------------
+
+
+//----------------------图片----------------------------
+//读取本地图片
+#define UIImageWithPathAndType(path,type) ([UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:path ofType:type]])
+
+//定义UIImage对象
+#define UIImageWithPath(path) ([UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:path ofType:nil]])
+
+//定义UIImage对象
+#define UIImageWithName(name) ([UIImage imageNamed:name])
+
+//建议使用前两种宏定义,性能高于后者
+//----------------------图片----------------------------
+
+
+//----------------------字体----------------------------
+#define UIFontWithNameAndSize(name,size) ([UIFont fontWithName:name size:size])
+#define UIFontWithSize(size) ([UIFont systemFontOfSize:size])
+//----------------------字体----------------------------
+
+
+//----------------------路径----------------------------
+/**
+ *  沙盒
+ */
+//Home(根路径)
+#define HOME_DIRECTORY NSHomeDirectory()
+//Documents
+#define DOCUMENTS_DIRECTORY (NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0])
+//Library
+#define LIBRARY_DIRECTORY (NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0])
+//Cache
+#define CACHE_DIRECTORY (NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0])
+//tmp
+#define TMP_DIRECTORY NSTemporaryDirectory()
+
+/**
+ *  Bundle
+ */
+#define MAIN_BUNDLE ([NSBundle mainBundle])
+//Bundle文件路径
+#define FilePathInBundleWithNameAndType(name,type) ([MAIN_BUNDLE pathForResource:name ofType:type])
+
+//----------------------路径----------------------------
+
+
+
+
+
+#endif

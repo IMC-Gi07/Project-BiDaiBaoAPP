@@ -15,6 +15,7 @@
 		13F8880D54257E264763C22CBAE34E2A /* MJRefreshBackNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63DC67FD183641DBC0F7F6E5189615 /* MJRefreshBackNormalFooter.m */; };
 		14FE20E5DC59494217131FC08A801E28 /* BDBSortTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF0DC5C006F26AC233A99E794E3932C /* BDBSortTableViewCell.m */; };
 		1A72ED5374A28423498DB2747AD3BF90 /* Warning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */; };
+		1D15B0B864435FBDAA5B9586F8C7FAFD /* BDBQuestionTypeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F258144E7A4BDB82CFEF00F7921D104D /* BDBQuestionTypeListModel.m */; };
 		20B677575D97657AD147E8C59893A58F /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BDB744F3B04B41DEDCFBCAC8B633B28 /* Discovery.storyboard */; };
 		2183049BB2ECBEAFC0C35336227ABE37 /* BDBFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557BBE4609EB76BF0FA82A3FB2B0ACDC /* BDBFeatureViewController.m */; };
 		270D6AB393E2AEDF7DF0B577F798CA23 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FF80FD8E1B437240C433446686B250 /* MJRefreshAutoGifFooter.m */; };
@@ -76,11 +77,14 @@
 		99215B46CA299E25A87D001168214820 /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8588E027B0B271751BFE750B71E4EFB4 /* MJRefreshHeader.m */; };
 		9E46A42EEC2EA8DB67D585E820A8C729 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0AED009CDFBAF5245889AB9DAD46B /* SDWebImageDownloader.m */; };
 		A3312B4C5893505DA277CC188A2DA9A8 /* MJRefreshAutoStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F36B795D737DDFF2667CF1E0EB7CCD /* MJRefreshAutoStateFooter.m */; };
+		A4506A8319E5AE8ECBF8AE4090BFBAA1 /* BDBQuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435D6B9B0B399519E1701D1A7618E44 /* BDBQuestionTableViewCell.m */; };
 		A76A5E2235DFB0E16665A27FBCBE300B /* BDBSiftButtonInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D21A2B10F602DE70203B6DD18EF00AC9 /* BDBSiftButtonInfoModel.m */; };
 		A7F91F1FE755597312FCE4F0E87F6F55 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0A1C67421FD03F7A5ADC46F39ED63 /* UIImage+MultiFormat.m */; };
 		A89D3A555D7A91A5FDEE2052F96E8895 /* BDBDetailedMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BC8EE3A8380E39444AD2D7A8716D9F /* BDBDetailedMessageTableViewCell.m */; };
+		A9C1309CECE7EABB87683F27206BB6D3 /* BDBQuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E594AC808087067AEC4C5BF6788F85A /* BDBQuestionTableViewCell.xib */; };
 		A9EED2254C7D61D2E501A1EB0F59DDD4 /* UIButton+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D290A838A9E2BE193ED98E0B803A2D90 /* UIButton+Extensions.m */; };
 		ABB2156E8182DFAECFE41D1425773F49 /* BDBNoticeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9467B77A2F66A65545B311F6196DA6F /* BDBNoticeResponseModel.m */; };
+		ABF5B3C18628A9A96F043349DF346BB2 /* BDBQuestionTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE55BF3A5EB9684C4E99E122AA2F69E9 /* BDBQuestionTypeModel.m */; };
 		ACE0D0081A99A8DC113171B1D003D201 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 619DCFC07ABD3A16A41A8732F4CC7B5E /* MJConst.m */; };
 		B0FE4B02CDEFA1E44AEEF8D700507C09 /* MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4225464962B69BF9DB7694E76F3B92A6 /* MJRefreshFooter.m */; };
 		B297DA342B046B91862BD0BD3635A13A /* ZXLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D55D818C8B6B5DBFAD045B686EE7A /* ZXLNavigationController.m */; };
@@ -267,11 +271,14 @@
 		7A75646E09031EAA2342AEAC098595F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A88B785FA57A1850DEBE250DD8F463C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		7AE2FD1467D796007DFB6BDB92B35166 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
+		7E594AC808087067AEC4C5BF6788F85A /* BDBQuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBQuestionTableViewCell.xib; sourceTree = "<group>"; };
 		7EEA37BAC2946E4DA4A17A66DAAE57D5 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
 		7F342EC0EF3870E16A8CE8B5A05298CA /* BDBWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningViewController.m; sourceTree = "<group>"; };
 		812ADB69C38CA8CC7D7731237CB45EA6 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		81A255897C60EC680AB5533AA0615FB6 /* BDBQuestionTypeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTypeListModel.h; sourceTree = "<group>"; };
 		81F6896E4FFE708444A225BFC0D0C46E /* MJRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshComponent.h; sourceTree = "<group>"; };
 		8386A3E172AE3120EF81A3639B59D732 /* BDBNoticeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBNoticeTableViewCell.xib; sourceTree = "<group>"; };
+		8435D6B9B0B399519E1701D1A7618E44 /* BDBQuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTableViewCell.m; sourceTree = "<group>"; };
 		8449B5B32834EB6E72088090E4756A1A /* BDBTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBTableViewCell.h; sourceTree = "<group>"; };
 		848C57C1DFFAC14BD3D7B53DF33599C3 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
 		8588E027B0B271751BFE750B71E4EFB4 /* MJRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeader.m; sourceTree = "<group>"; };
@@ -303,6 +310,7 @@
 		9D933BAE1E334231FCF8DACC2772DF54 /* BDBButtonForSift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBButtonForSift.h; sourceTree = "<group>"; };
 		9DF0580A733D07944C49FF016A50F24A /* BDBSortTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSortTableViewCell.h; sourceTree = "<group>"; };
 		A43BDFDCDFEBE98C9A4D8DDC46ED9D06 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
+		A5C5FDC5E6779E87D00E841DE2C053ED /* BDBQuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTableViewCell.h; sourceTree = "<group>"; };
 		A640CABA5F864FF7FA21EAE6B4D5CCF3 /* BDBButtonForTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBButtonForTopView.h; sourceTree = "<group>"; };
 		A6D8AA492AA4E9298473FF6690DEBB34 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		A81A8F7C95585944B349215FE2B4891A /* MJRefreshBackGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackGifFooter.h; sourceTree = "<group>"; };
@@ -321,6 +329,7 @@
 		C95D6515D804052C3058CCC1E20FED7E /* BDBNoticeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeTableViewCell.h; sourceTree = "<group>"; };
 		CBE9309E00499F37DDA012FC306CAFF5 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
 		CCEC1326EFCEA7D5A8CE79E7F97C701A /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		CE55BF3A5EB9684C4E99E122AA2F69E9 /* BDBQuestionTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTypeModel.m; sourceTree = "<group>"; };
 		D08C6EDF5D95D87271C169335A270194 /* MJRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshGifHeader.m; sourceTree = "<group>"; };
 		D21A2B10F602DE70203B6DD18EF00AC9 /* BDBSiftButtonInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSiftButtonInfoModel.m; sourceTree = "<group>"; };
 		D235CF2CAC036D97048D16C50FCD1D4E /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
@@ -359,6 +368,7 @@
 		D85B57871B427F0F00136713 /* BDBSortTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBSortTableViewCell.xib; sourceTree = "<group>"; };
 		D923ADC0682D260F850D7C9066AE0850 /* SDWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManager.h; sourceTree = "<group>"; };
 		D9513F7DDFA2E834D391D7FDFE4AF2F7 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
+		D97B5E09EE1959D43BA44A5880CD6348 /* BDBQuestionTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTypeModel.h; sourceTree = "<group>"; };
 		D9C6F0A8FB2F99E0F3DAD19434190453 /* BDBIndexResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexResponseModel.h; sourceTree = "<group>"; };
 		DB738C8C0F4229D6BB189B7B6189667E /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extensions.m"; sourceTree = "<group>"; };
 		DBC6BBE6E79175E482034E4AF1E77048 /* BiDaiBao-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BiDaiBao-Prefix.pch"; sourceTree = "<group>"; };
@@ -378,6 +388,7 @@
 		EB0BE125264B3F796A7C2E4BA367733E /* BDBIndexTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexTableViewHeader.h; sourceTree = "<group>"; };
 		ED1557075CA601F8BBAF3642937507EC /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
 		EE9A30DFB2C34BDC0A8ED4C15EFC89A3 /* ZXLLoadDataIndicatePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLLoadDataIndicatePage.m; sourceTree = "<group>"; };
+		F258144E7A4BDB82CFEF00F7921D104D /* BDBQuestionTypeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTypeListModel.m; sourceTree = "<group>"; };
 		F30492D218544D785A0206AF11462439 /* BDBNoticeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeDetailViewController.m; sourceTree = "<group>"; };
 		F4E74A90006B22638A10D7A31AD3FFBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F569396E684C7A2E2CB84D16024AE9B6 /* MJRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshGifHeader.h; sourceTree = "<group>"; };
@@ -409,13 +420,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02E763B4067BEA47B73CE7F536218555 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		040C06F8864565853ABC9D28A3A91A87 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +666,44 @@
 				2AA047772BD946CC0C18C67C2302EEEB /* ZXLNavigationBar.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		02E763B4067BEA47B73CE7F536218555 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				139D149A0936E3B400EA8B4B251B1373 /* QuestionModel */,
+				81A255897C60EC680AB5533AA0615FB6 /* BDBQuestionTypeListModel.h */,
+				F258144E7A4BDB82CFEF00F7921D104D /* BDBQuestionTypeListModel.m */,
+				D97B5E09EE1959D43BA44A5880CD6348 /* BDBQuestionTypeModel.h */,
+				CE55BF3A5EB9684C4E99E122AA2F69E9 /* BDBQuestionTypeModel.m */,
+			);
+			name = Model;
+			path = Controller/Model;
+			sourceTree = "<group>";
+		};
+		139D149A0936E3B400EA8B4B251B1373 /* QuestionModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QuestionModel;
+			sourceTree = "<group>";
+		};
+		C74BB1F1117875B851CEC5DD3B5A30C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F878731E6D544CFB8E6217111D49B544 /* QuestionModel */,
+				A5C5FDC5E6779E87D00E841DE2C053ED /* BDBQuestionTableViewCell.h */,
+				8435D6B9B0B399519E1701D1A7618E44 /* BDBQuestionTableViewCell.m */,
+				7E594AC808087067AEC4C5BF6788F85A /* BDBQuestionTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F878731E6D544CFB8E6217111D49B544 /* QuestionModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QuestionModel;
 			sourceTree = "<group>";
 		};
 		76E9A8842C727C9A6847A37B0C3E8435 /* Framework */ = {
@@ -950,11 +992,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		C74BB1F1117875B851CEC5DD3B5A30C2 /* View */ = {
+		CAD02B44E948352D815C0036DB194557 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D9C6F0A8FB2F99E0F3DAD19434190453 /* BDBIndexResponseModel.h */,
+				2C2EABEFF3B85BE675F3BE296A2F582F /* BDBIndexResponseModel.m */,
+				2F6C7B31CAF42A1D813EBE57103396EF /* BDBNoticeModel.h */,
+				E80CF550E11DE1C6AB9A19C133651865 /* BDBNoticeModel.m */,
+				5AB58D9288E6D140DB074ADD20434664 /* BDBNoticeResponseModel.h */,
+				F9467B77A2F66A65545B311F6196DA6F /* BDBNoticeResponseModel.m */,
 			);
-			path = View;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CAD02B44E948352D815C0036DB194557 /* Model */ = {
@@ -1198,6 +1246,7 @@
 				69B353C0F45E98F4BE5E054F2A1947A1 /* BDBMessageTableViewCell.xib in Resources */,
 				3A20DEF21BCD70EDE19BE1B85DD02FDD /* BDBNoticeTableViewCell.xib in Resources */,
 				5E7679B08F11DFD77173FB88EF8D21D5 /* BDBParameterTableViewCell.xib in Resources */,
+				A9C1309CECE7EABB87683F27206BB6D3 /* BDBQuestionTableViewCell.xib in Resources */,
 				34A8387D38FDAD0530DE080D7990EDDC /* BDBSortTableViewCell.xib in Resources */,
 				DF3301C7CC4F060DEF417106988D45D2 /* BDBTableViewCell.xib in Resources */,
 				D85B578B1B427F0F00136713 /* Index.storyboard in Resources */,
@@ -1265,6 +1314,9 @@
 				61D19B56C9415E3FCE4809DBF58203AF /* BDBNoticeViewController.m in Sources */,
 				89D252E86964BA69A06BC597E8853426 /* BDBParameterTableViewCell.m in Sources */,
 				D85B57891B427F0F00136713 /* BDBNoticeDetailViewController.m in Sources */,
+				A4506A8319E5AE8ECBF8AE4090BFBAA1 /* BDBQuestionTableViewCell.m in Sources */,
+				1D15B0B864435FBDAA5B9586F8C7FAFD /* BDBQuestionTypeListModel.m in Sources */,
+				ABF5B3C18628A9A96F043349DF346BB2 /* BDBQuestionTypeModel.m in Sources */,
 				A76A5E2235DFB0E16665A27FBCBE300B /* BDBSiftButtonInfoModel.m in Sources */,
 				14FE20E5DC59494217131FC08A801E28 /* BDBSortTableViewCell.m in Sources */,
 				7984EC56BC1F34B4DC836519133F6535 /* BDBSubjectViewController.m in Sources */,

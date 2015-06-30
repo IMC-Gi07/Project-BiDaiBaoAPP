@@ -139,11 +139,11 @@
     
     if(![[self titleForState:UIControlStateNormal] isEqualToString:@"筛选"]){
         
-        imageRect = CGRectMake(contentRect.size.width / 2 + 20, contentRect.size.height / 2 - 3, 9, 5);
+        imageRect = CGRectMake(contentRect.size.width / 2 + 20, contentRect.size.height / 2 - 4, 12, 8);
     }
     else{
         
-        imageRect = CGRectMake(contentRect.size.width / 2 + 20, contentRect.size.height / 2 - 3, 9, 9);
+        imageRect = CGRectMake(contentRect.size.width / 2 + 14, contentRect.size.height / 2 - 5, 12, 12);
     }
     
     return imageRect;

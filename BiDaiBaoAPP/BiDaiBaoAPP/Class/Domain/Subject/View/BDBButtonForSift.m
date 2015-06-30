@@ -15,8 +15,6 @@
 
 - (void)swithIsSelected;
 
-- (void)swithIsShowMore;
-
 @end
 
 @implementation BDBButtonForSift
@@ -27,12 +25,12 @@
     
     button.isShowMores = NO;
     
-    button.frame = CGRectMake(SCREEN_WIDTH - 30, 9, 16, 22);
+    button.frame = CGRectMake(SCREEN_WIDTH - 30, 10, 16, 16);
         
     return button;
 }
 
-+ (BDBButtonForSift *)buttonWithTitle: (NSString *)title section:(NSUInteger)aSection isSelected:(BOOL)selected frame: (CGRect)aFrame{
++ (BDBButtonForSift *)buttonWithTitle: (NSString *)title isSelected:(BOOL)selected frame: (CGRect)aFrame{
     
     BDBButtonForSift *button = [BDBButtonForSift buttonWithType:UIButtonTypeCustom];
     
@@ -65,17 +63,6 @@
     _singleSelectForSiftBlock([self titleForState:UIControlStateNormal],_isSelected);
 }
 
-- (void)swithIsShowMore{
-
-    if(_isShowMores){
-    
-        self.isShowMores = NO;
-    }
-    else{
-    
-        self.isShowMores = YES;
-    }
-}
 
 #pragma mark - Setter And Getter Methods
 

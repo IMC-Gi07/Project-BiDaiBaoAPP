@@ -14,11 +14,11 @@
 		09D79C5697AD51864DA8B3F616230D4D /* BDBIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 424958E2EA738DB57FF413CF642993F7 /* BDBIndexViewController.m */; };
 		11E26B7506D25381A3BDCBF1CA5A4656 /* BDBNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E47A3788B1CDCBE92EDAEA6E0FDFFBF9 /* BDBNoticeModel.m */; };
 		13F8880D54257E264763C22CBAE34E2A /* MJRefreshBackNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63DC67FD183641DBC0F7F6E5189615 /* MJRefreshBackNormalFooter.m */; };
-		18563AF11B422F52008C20A2 /* siftButtons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18563AF01B422F52008C20A2 /* siftButtons.plist */; };
 		1A72ED5374A28423498DB2747AD3BF90 /* Warning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */; };
 		20B677575D97657AD147E8C59893A58F /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BDB744F3B04B41DEDCFBCAC8B633B28 /* Discovery.storyboard */; };
 		2183049BB2ECBEAFC0C35336227ABE37 /* BDBFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557BBE4609EB76BF0FA82A3FB2B0ACDC /* BDBFeatureViewController.m */; };
 		270D6AB393E2AEDF7DF0B577F798CA23 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FF80FD8E1B437240C433446686B250 /* MJRefreshAutoGifFooter.m */; };
+		27AA1A2EB005A72E7E2E6F8BEC91380F /* siftButtons.plist in Resources */ = {isa = PBXBuildFile; fileRef = C405A3543DA0E477D5F29DB3BFD8AE39 /* siftButtons.plist */; };
 		2ABFB3A368A2B86A8942BCE6E6218613 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F9BE33DB8350FB916A1A1F73C0DC4C /* UITableView+FDTemplateLayoutCell.m */; };
 		2E06E069A80AD9AB082CCC010BAE52ED /* GlobalConfigurations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5251B3A3AE1D1E2E5A5BB5D04C66D /* GlobalConfigurations.m */; };
 		2FCC6483B17B6DA9BA1F117F9A913B80 /* Subject.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5FAC9AAFE9C05D6DF611D74D75BDE45 /* Subject.storyboard */; };
@@ -144,7 +144,6 @@
 		1713D99A254A056F26BEE9929A73FBD7 /* BDBWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningViewController.h; sourceTree = "<group>"; };
 		171FB61613F225B54B08699B03212101 /* MJRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeader.h; sourceTree = "<group>"; };
 		1849C165B1AF6F5FFCF2CCA56DEFAF23 /* BDBTableViewCell_Sift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBTableViewCell_Sift.h; sourceTree = "<group>"; };
-		18563AF01B422F52008C20A2 /* siftButtons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = siftButtons.plist; sourceTree = "<group>"; };
 		1A4B462A08487E5BE719B9F211948404 /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
 		1B3C0A353ED59EF26E7EAAC50FF5864B /* MJType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJType.h; sourceTree = "<group>"; };
 		1D51B8F568E82B2EB0AC987AAEDFDCC6 /* FLAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
@@ -282,6 +281,7 @@
 		BFC4662FB2377A744D8551A5B53B7DA8 /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
 		C24638204F12DEE2E3344CA9DADC0231 /* MJRefreshNormalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshNormalHeader.h; sourceTree = "<group>"; };
 		C34F1E4F6AEBDECB6D6CCE4E66D60553 /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		C405A3543DA0E477D5F29DB3BFD8AE39 /* siftButtons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = siftButtons.plist; sourceTree = "<group>"; };
 		CBE9309E00499F37DDA012FC306CAFF5 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
 		CCEC1326EFCEA7D5A8CE79E7F97C701A /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		D08C6EDF5D95D87271C169335A270194 /* MJRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshGifHeader.m; sourceTree = "<group>"; };
@@ -792,8 +792,8 @@
 				91500A1C3BA7478C9D933358964C1F1F /* Images.xcassets */,
 				B7B04137B1E339EA0125462123E89A74 /* Info.plist */,
 				905857EFF3C3BF9177BCA0EE5842187D /* Modules.plist */,
-				18563AF01B422F52008C20A2 /* siftButtons.plist */,
 				7A75646E09031EAA2342AEAC098595F9 /* main.m */,
+				C405A3543DA0E477D5F29DB3BFD8AE39 /* siftButtons.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1045,7 +1045,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18563AF11B422F52008C20A2 /* siftButtons.plist in Resources */,
 				52AB94CB0C459C34B5E73CAAB4541781 /* BDBNoticeTableViewCell.xib in Resources */,
 				DF3301C7CC4F060DEF417106988D45D2 /* BDBTableViewCell.xib in Resources */,
 				359A304C3E9C90BABEE0993EEE36904F /* BDBTableViewCell_Sift.xib in Resources */,
@@ -1061,6 +1060,7 @@
 				D717027938CB3129F0FDE000AAB9C733 /* global_loaddata_icon.gif in Resources */,
 				E191D9D9BC1347E887C68304BF1493CE /* global_refreshdata_icon.gif in Resources */,
 				B78B7C787217E4FD208A3E235E6198CC /* index_adv.gif in Resources */,
+				27AA1A2EB005A72E7E2E6F8BEC91380F /* siftButtons.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

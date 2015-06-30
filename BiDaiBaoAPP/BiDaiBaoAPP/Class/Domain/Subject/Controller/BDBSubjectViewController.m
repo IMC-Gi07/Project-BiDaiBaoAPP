@@ -29,7 +29,7 @@ typedef enum {
 
 @property(nonatomic,weak) UITableView *showDataTableView;
 
-@property(nonatomic,weak) UITableView *showSievingTableView;
+@property(nonatomic,weak) UIScrollView *sievingScrollView;
 
 @property(nonatomic,copy) NSArray *sievingButtonArray;
 
@@ -97,7 +97,9 @@ typedef enum {
     [super viewDidLoad];
     
     [self loadTopView];
-    [self loadShowDataTableView];
+    //[self loadShowDataTableView];
+    
+    [self loadSievingScrollView];
     
 }
 
@@ -236,10 +238,159 @@ typedef enum {
 
 }
 
-- (void)loadShowDataTableView{
+- (void)loadSievingScrollView{
+    
+    
+    //筛选页面
+    UIScrollView *sievingScroView = [[UIScrollView alloc] init];
+    
+    sievingScroView.scrollEnabled = YES;
+    
+    [self.view addSubview:sievingScroView];
+    
+    self.sievingScrollView = sievingScroView;
+    
+    sievingScroView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSString *constraintsVFL = @"H:|[sievingScroView]|";
+    
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"sievingScroView":sievingScroView}];
+    
+    [self.view addConstraints:hConstraints];
+    
+    constraintsVFL = @"V:[topView][sievingScroView]|";
+    
+    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"topView":_topView,@"sievingScroView":sievingScroView}];
+    
+    [self.view addConstraints:vConstraints];
+    
+    //筛选页面－》选择平台
+    UIScrollView *platformView = [[UIScrollView alloc] init];
+    
+    [sievingScroView addSubview:platformView];
+    
+    platformView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|[platformView(screenWidth)]";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"platformView":platformView}];
+    
+    [sievingScroView addConstraints:hConstraints];
+    
+    //筛选页面－》年化收益率
+    UIScrollView *profitView = [[UIScrollView alloc] init];
+    
+    profitView.backgroundColor = [UIColor blueColor];
+    
+    [sievingScroView addSubview:profitView];
+    
+    profitView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|[profitView(screenWidth)]|";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"profitView":profitView}];
+    
+    [sievingScroView addConstraints:hConstraints];
+    
+    //筛选页面－》投资期限
+    
+    UIScrollView *termView = [[UIScrollView alloc] init];
+    
+    termView.backgroundColor = [UIColor purpleColor];
+    
+    [sievingScroView addSubview:termView];
+    
+    termView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|[termView(screenWidth)]|";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"termView":termView}];
+    
+    [sievingScroView addConstraints:hConstraints];
+    
+    // 筛选页面－》投资进度
+    UIScrollView *progressView = [[UIScrollView alloc] init];
+    
+    progressView.backgroundColor = [UIColor grayColor];
+    
+    [sievingScroView addSubview:progressView];
+    
+    progressView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|[progressView(screenWidth)]|";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"progressView":progressView}];
+    
+    [sievingScroView addConstraints:hConstraints];
 
-    if(_currentPage == sujectHomePage){
+    
+    constraintsVFL = @"V:|[platformView][profitView(100)][termView(100)][progressView(100)]|";
+    
+    vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"platformView":platformView,@"profitView":profitView,@"termView":termView,@"progressView":progressView}];
+    
+    NSLayoutConstraint *heigtConstraintForPlatformView = [NSLayoutConstraint constraintWithItem:platformView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:65.0f];
+
+    [platformView addConstraint:heigtConstraintForPlatformView];
+    
+    [sievingScroView addConstraints:vConstraints];
+    
+    //筛选页面－》选择平台(选择平台)
+    
+    UILabel *platformLabel = [[UILabel alloc] init];
+    
+    platformLabel.text = @"选择平台:";
+    
+    [platformView addSubview:platformLabel];
+    
+    platformLabel.font  = [UIFont systemFontOfSize:15.0f];
+    
+    platformLabel.frame = CGRectMake(10, 10, 70, 15);
+    
+    //筛选页面－》选择平台(显示更多平台按钮)
+    
+    BDBButtonForSift *showMoreButton = [BDBButtonForSift showMoreButton];
+    
+    [platformView addSubview:showMoreButton];
+    
+    //筛选页面－》选择平台(显示被选择平台的名称)
+    
+    UILabel *selectedPlatformName = [[UILabel alloc] init];
+    
+    selectedPlatformName.text = @"人人贷";
+    
+    selectedPlatformName.textColor = UIColorWithRGB(12, 79, 125);
+    
+    [platformView addSubview:selectedPlatformName];
+    
+    selectedPlatformName.font  = [UIFont systemFontOfSize:12.0f];
+    
+    selectedPlatformName.frame = CGRectMake(SCREEN_WIDTH - 80, 10, 60, 15);
+    
+    
+    NSArray *buttonsArray = _sievingButtonArray[0];
+    
+    for (NSDictionary *buttonDict in buttonsArray) {
         
+        [buttonDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            
+            [self.sievingButtonInfos setValue:obj forKey:key];
+        }];
+        CGFloat platformButtonHorizontalMargin;
+        CGRect frame;
+        platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 60) / 3.0f;
+
+        frame = CGRectMake(15 + 60 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 30 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 65, 30);
+        
+        BDBButtonForSift *button = [BDBButtonForSift buttonWithTitle:_sievingButtonInfos.title  isSelected:_sievingButtonInfos.isSelected frame:frame];
+        
+        [platformView addSubview:button];
+
+    }
+
+}
+
+- (void)loadShowDataTableView{
+    
         UITableView *showDataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         
         showDataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -265,40 +416,7 @@ typedef enum {
         [self.view addConstraints:hConstrains];
         [self.view addConstraints:vConstrains];
         
-    }
-    else{
-    
-        UITableView *showSievingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        
-        showSievingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-        showSievingTableView.dataSource = self;
-        
-        showSievingTableView.delegate = self;
-        
-        [self.view addSubview:showSievingTableView];
-        
-        self.showSievingTableView = showSievingTableView;
-        
-        showSievingTableView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        NSString *hConstrainsVFL = @"|[showSievingTableView]|";
-        
-        NSString *vConstrainsVFL = @"V:[topView][showSievingTableView]-(50)-|";
-        
-        NSArray *hConstrains = [NSLayoutConstraint constraintsWithVisualFormat:hConstrainsVFL options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"showSievingTableView":showSievingTableView}];
-        
-        NSArray *vConstrains = [NSLayoutConstraint constraintsWithVisualFormat:vConstrainsVFL options:NSLayoutFormatAlignAllLeading metrics:nil views:@{@"showSievingTableView":showSievingTableView,@"topView":_topView}];
-        
-        [self.view addConstraints:hConstrains];
-        [self.view addConstraints:vConstrains];
-        
-        [self loadButtonOfBottom];
-        
-    }
-    
 
-    
 }
 
 - (void)loadButtonOfBottom{
@@ -426,14 +544,10 @@ typedef enum {
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     NSInteger numberOfSecionts;
-    if(_currentPage == sujectHomePage){
+
     
-        numberOfSecionts = KnumberOfSeciontsForHomePage;
-    }
-    else{
+    numberOfSecionts = KnumberOfSeciontsForSievingPage;
     
-        numberOfSecionts = KnumberOfSeciontsForSievingPage;
-    }
     return numberOfSecionts;
 }
 
@@ -442,21 +556,14 @@ typedef enum {
     
     NSInteger numberOfRows;
     
-    if(_currentPage == sujectHomePage){
     
-        numberOfRows = _sujectModelDatas.count;
-    }
-    else{
-    
-        numberOfRows = KnumberOfRowsForSievingPage;
-    }
-    
+    numberOfRows = _sujectModelDatas.count;
+
     return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if(_currentPage == sujectHomePage){
         
         BDBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentify"];
         
@@ -466,123 +573,123 @@ typedef enum {
         }
         
         return cell;
-        
-    }
-    else{
-        BDBTableViewCell_Sift *cell = [BDBTableViewCell_Sift cell];
-        
-        [cell createContentsAccordingSection:indexPath.section];
-        
-        if(indexPath.section == 0){
-            
-            [cell addSubview:_showMoreButton];
-            
-            [_showMoreButton handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-                if(_showMoreButton.isShowMores){
-                
-                    _showMoreButton.isShowMores = NO;
-                }
-                else{
-                
-                    _showMoreButton.isShowMores = YES;
-                }
-                
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }];
-        }
-        
-        NSArray *array = _sievingButtonArray[indexPath.section];
-        
-        BDBButtonForSift *button;
-        
-        if(array.count != 0){
-            
-            
-            for (NSDictionary *dic in array) {
-                
-                __weak typeof(self) thisInstance = self;
-                
-                [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    
-                    [thisInstance.sievingButtonInfos setValue:obj forKey:key];
-                }];
-                
-                CGFloat platformButtonHorizontalMargin;
-                CGRect frame;
-                
-                if(indexPath.section == 0){
-                    
-                    platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 60) / 3.0f;
-                    
-                    frame = CGRectMake(15 + 60 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 30 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 65, 30);
-                }
-                else{
-                    
-                    platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -3 * 80) / 2.0f;
-                    
-                    frame = CGRectMake(15 + 80 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 40 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 80, 30);
-                }
-                
-                button = [BDBButtonForSift buttonWithTitle:_sievingButtonInfos.title section:indexPath.section isSelected:_sievingButtonInfos.isSelected frame:frame];
-                
-                button.singleSelectForSiftBlock = ^(NSString *title,BOOL isSelected){
-                    
-                    NSMutableArray *tmpOriginalDatas = [_sievingButtonArray mutableCopy];
-                    
-                    NSMutableArray *tmpArray = [tmpOriginalDatas[indexPath.section] mutableCopy];
-                    
-                    for(NSInteger i = 0; i < tmpArray.count; i ++){
-                        
-                        NSMutableDictionary *tmpDict = [tmpArray[i] mutableCopy];
-                        
-                        if([tmpDict[@"title"] isEqualToString:title]){
-                            
-                            tmpDict[@"isSelected"] = [NSNumber numberWithBool:isSelected];
-                            
-                            [tmpArray replaceObjectAtIndex:i withObject:[tmpDict copy]];
-                            
-                            [tmpOriginalDatas replaceObjectAtIndex:indexPath.section withObject:tmpArray];
-                            
-                            _sievingButtonArray = [tmpOriginalDatas copy];
-                            
-                            break;
-                        }
-                    }
-                };
-                
+    
+//    else{
+//        BDBTableViewCell_Sift *cell = [BDBTableViewCell_Sift cell];
+//        
+//        [cell createContentsAccordingSection:indexPath.section];
+//        
+//        if(indexPath.section == 0){
+//            
+//            [cell addSubview:_showMoreButton];
+//            
+//            [_showMoreButton handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+//                if(_showMoreButton.isShowMores){
+//                
+//                    _showMoreButton.isShowMores = NO;
+//                }
+//                else{
+//                
+//                    _showMoreButton.isShowMores = YES;
+//                }
+//                
+//                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            }];
+//        }
+//        
+//        NSArray *array = _sievingButtonArray[indexPath.section];
+//        
+//        BDBButtonForSift *button;
+//        
+//        if(array.count != 0){
+//            
+//            
+//            for (NSDictionary *dic in array) {
+//                
+//                __weak typeof(self) thisInstance = self;
+//                
+//                [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//                    
+//                    [thisInstance.sievingButtonInfos setValue:obj forKey:key];
+//                }];
+//                
+//                CGFloat platformButtonHorizontalMargin;
+//                CGRect frame;
+//                
+//                if(indexPath.section == 0){
+//                    
+//                    platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 60) / 3.0f;
+//                    
+//                    frame = CGRectMake(15 + 60 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 30 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 65, 30);
+//                }
+//                else{
+//                    
+//                    platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -3 * 80) / 2.0f;
+//                    
+//                    frame = CGRectMake(15 + 80 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 40 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 80, 30);
+//                }
+//                
+//                button = [BDBButtonForSift buttonWithTitle:_sievingButtonInfos.title section:indexPath.section isSelected:_sievingButtonInfos.isSelected frame:frame];
+//                
+//                button.singleSelectForSiftBlock = ^(NSString *title,BOOL isSelected){
+//                    
+//                    NSMutableArray *tmpOriginalDatas = [_sievingButtonArray mutableCopy];
+//                    
+//                    NSMutableArray *tmpArray = [tmpOriginalDatas[indexPath.section] mutableCopy];
+//                    
+//                    for(NSInteger i = 0; i < tmpArray.count; i ++){
+//                        
+//                        NSMutableDictionary *tmpDict = [tmpArray[i] mutableCopy];
+//                        
+//                        if([tmpDict[@"title"] isEqualToString:title]){
+//                            
+//                            tmpDict[@"isSelected"] = [NSNumber numberWithBool:isSelected];
+//                            
+//                            [tmpArray replaceObjectAtIndex:i withObject:[tmpDict copy]];
+//                            
+//                            [tmpOriginalDatas replaceObjectAtIndex:indexPath.section withObject:tmpArray];
+//                            
+//                            _sievingButtonArray = [tmpOriginalDatas copy];
+//                            
+//                            break;
+//                        }
+//                    }
+//                };
+//                
+//
+//                [cell.scrollView addSubview:button];
+//            }
+//        }
+//        return cell;
+//    }
 
-                [cell.scrollView addSubview:button];
-            }
-        }
-        return cell;
-    }}
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CGFloat heightForRow;
     
-    if(_currentPage == sujectHomePage){
         
-        heightForRow = 150.0f;
-    }
-    else{
-        
-        if(indexPath.section == 0){
-            
-            if(_showMoreButton.isShowMores){
-                
-                heightForRow = 180.0f;
-            }
-            else{
-                
-                heightForRow = 130.0f;
-            }
-            
-        }
-        else{
-            heightForRow = 120.0f;
-        }
-    }
+    heightForRow = 150.0f;
+
+//    else{
+//        
+//        if(indexPath.section == 0){
+//            
+//            if(_showMoreButton.isShowMores){
+//                
+//                heightForRow = 180.0f;
+//            }
+//            else{
+//                
+//                heightForRow = 130.0f;
+//            }
+//            
+//        }
+//        else{
+//            heightForRow = 120.0f;
+//        }
+//    }
     return heightForRow;
 }
 

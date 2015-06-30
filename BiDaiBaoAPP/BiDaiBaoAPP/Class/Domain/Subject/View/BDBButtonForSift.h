@@ -26,6 +26,6 @@ typedef void (^UpdataButtonInfo)(NSString *,BOOL);
 
 + (BDBButtonForSift *)showMoreButton;
 
-+ (BDBButtonForSift *)buttonWithTitle: (NSString *)title section:(NSUInteger)aSection isSelected:(BOOL)selected frame: (CGRect)aFrame;
++ (BDBButtonForSift *)buttonWithTitle: (NSString *)title isSelected:(BOOL)selected frame: (CGRect)aFrame;
 
 @end

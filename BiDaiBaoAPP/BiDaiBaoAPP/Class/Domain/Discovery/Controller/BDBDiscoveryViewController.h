@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BDBDiscoveryViewController : UITableViewController
+@interface BDBDiscoveryViewController : UIViewController
 
 @end

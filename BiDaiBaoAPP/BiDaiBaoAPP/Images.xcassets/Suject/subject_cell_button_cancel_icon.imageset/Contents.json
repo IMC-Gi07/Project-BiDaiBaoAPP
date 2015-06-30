@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "subject_cell_button_cancel_icon.png"
     },
     {
       "idiom" : "iphone",

@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "index_notice_dot_gray.png"
     },
     {
       "idiom" : "iphone",

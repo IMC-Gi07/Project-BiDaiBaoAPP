@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BDBIndexResponseModel : NSObject
+@interface BDBIndexGuideMessageModel : NSObject
 
 /**
  *  返回状态(0:表示成功，1：表示失败)

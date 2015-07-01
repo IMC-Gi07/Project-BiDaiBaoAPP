@@ -12,6 +12,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *hideAndShowButton;
 @property (weak, nonatomic) IBOutlet UILabel *AmountRemainLabel;
+@property (weak, nonatomic) IBOutlet UILabel *BidNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *EarningsMaxLabel;
+@property (weak, nonatomic) IBOutlet UILabel *InvestorNumLabel;
 
 + (BDBParameterTableViewCell *)cell;
 

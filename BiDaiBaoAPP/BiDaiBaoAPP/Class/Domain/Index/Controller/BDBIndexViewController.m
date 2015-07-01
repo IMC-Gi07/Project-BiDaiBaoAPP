@@ -15,17 +15,23 @@
 #import "AFNetworking.h"
 #import "MJExtension.h"
 #import "GlobalConfigurations.h"
-#import "BDBIndexResponseModel.h"
+#import "BDBIndexGuideMessageModel.h"
+#import "ZXLLoadDataIndicatePage.h"
 
 
 
 @interface BDBIndexViewController ()
 
-@property(nonatomic,strong) BDBIndexResponseModel *indexModel;
+@property(nonatomic,strong) BDBIndexGuideMessageModel *indexModel;
+
+@property(nonatomic,strong) FLAnimatedImageView *earthGifImageView;
 
 @property(nonatomic,strong) UIImageView *herderImageView;
 
+
 @property (weak, nonatomic) IBOutlet UITableView *IndexTableView;
+
+@property(nonatomic,weak) ZXLLoadDataIndicatePage *loadDataIndicatePage;
 
 
 - (void)rightBarButtonClickedAction:(UIBarButtonItem *)buttonItem;
@@ -46,18 +52,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    //显示加载页面
+    //self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
+
+    
+    
     UIImage *rightBarButtonImage = [UIImageWithName(@"index_nav_right") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:rightBarButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonClickedAction:)];
 
     
     
+    NSString *earthRotationFilePath = [[NSBundle mainBundle] pathForResource:@"earth" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:earthRotationFilePath];
     
+    FLAnimatedImage *earthGifImage = [FLAnimatedImage animatedImageWithGIFData:data];
+    FLAnimatedImageView *earthGifImageView = [[FLAnimatedImageView alloc] init];
+    earthGifImageView.animatedImage = earthGifImage;
     
-    UIImage *headerImage = [UIImage imageNamed:@"index_adv"];
+    [self.IndexTableView.tableHeaderView addSubview:earthGifImageView];
     
-    self.herderImageView = [[UIImageView alloc] initWithImage:headerImage];
+    self.earthGifImageView = earthGifImageView;
+    
+//    [self.IndexTableView.tableHeaderView setHidden:YES];
+    
     self.herderImageView.bounds = CGRectMake(0, 0, 0, 250.0f);
-    self.IndexTableView.tableHeaderView = _herderImageView;
+
+    
+//    UIImage *headerImage = [UIImage imageNamed:@"earth_03"];
+//    
+//    self.herderImageView = [[UIImageView alloc] initWithImage:headerImage];
+//    self.herderImageView.bounds = CGRectMake(0, 0, 0, 250.0f);
+//    self.IndexTableView.tableHeaderView = _herderImageView;
     
     
     __weak typeof (self) thisInstance = self;
@@ -72,20 +98,24 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     //调用请求对象的解析器
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    //主机地址
-    NSString *url = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetRealTimeStatistics"];
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
-    dict[@"PlatFormID"] = @"-1";
     
-    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        BDBIndexResponseModel *indexResponseModel = [BDBIndexResponseModel objectWithKeyValues:responseObject];
+    //GetRealTimeStatistics主机地址
+    NSString *realTimeStatisticsUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetRealTimeStatistics"];
+    NSMutableDictionary *RealTimeStatisticsDict = [NSMutableDictionary dictionary];
+    RealTimeStatisticsDict[@"PlatFormID"] = @"-1";
+    
+    [manager POST:realTimeStatisticsUrl parameters:RealTimeStatisticsDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        BDBIndexGuideMessageModel *indexResponseModel = [BDBIndexGuideMessageModel objectWithKeyValues:responseObject];
         self.indexModel = indexResponseModel;
-//        NSLog(@"%@",self.indexModel.AmountRemain);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-    }];
+        [self.IndexTableView reloadData];
+//        NSLog(@"%@",self.indexModel.AmountRemain);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
+    
+    NSString *noticeUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetNotice"];
+//    NSMutableDictionary *noticeDict =
 
 }
 
@@ -117,6 +147,12 @@
 
     }else if (indexPath.row == 1) {
         BDBParameterTableViewCell *cell = [BDBParameterTableViewCell cell];
+        cell.AmountRemainLabel.text = _indexModel.AmountRemain;
+        cell.BidNumLabel.text = _indexModel.BidNum;
+        cell.EarningsMaxLabel.text = _indexModel.EarningsMax;
+        NSLog(@"%@",_indexModel.EarningsMax);
+        cell.InvestorNumLabel.text = _indexModel.InvestorNum;
+        NSLog(@"%@",_indexModel.AmountRemain);
         cell.userInteractionEnabled = NO;
 //        [cell.hideAndShowButton addTarget:self action:@selector(hideAndShow) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -215,7 +251,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat hight = 0;
     if (indexPath.row == 0) {
-        hight = 44;
+        hight = 30;
     }else if (indexPath.row == 1) {
         hight = 100;
     }else if (indexPath.row == 2) {

@@ -489,15 +489,6 @@
 			path = Back;
 			sourceTree = "<group>";
 		};
-		134749B6DBCCE38D8A53409F3D5B16C0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				116323A9E8CD08C58E0CFA216111D6C8 /* BDBSubjectViewController.h */,
-				E9837A0C1C213436DBB19DC553CDAB0C /* BDBSubjectViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		151AA3ED93781036D71E5873D98F5924 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +508,47 @@
 				EDF56FD69BBFD8BAA6D92A4B8F5BBC60 /* BDBNoticeResponseModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		134749B6DBCCE38D8A53409F3D5B16C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				116323A9E8CD08C58E0CFA216111D6C8 /* BDBSubjectViewController.h */,
+				E9837A0C1C213436DBB19DC553CDAB0C /* BDBSubjectViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A5029BE49A6065AD40B9F549FDCD23F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5256EC339561250E491DCED90E4596A9 /* BDBSiftButtonInfoModel.h */,
+				D21A2B10F602DE70203B6DD18EF00AC9 /* BDBSiftButtonInfoModel.m */,
+				E330ED647837D61F15C4A489D7107027 /* BDBSujectModel.h */,
+				8B174C51A1CC5C4896E5220D1B132666 /* BDBSujectModel.m */,
+				2453FEB9040DB0B1EA1610ADDD7F8CC4 /* BDBSujectRespondModel.h */,
+				467CA694E9EF2925811CB840328DD739 /* BDBSujectRespondModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BB78C81D5FCBE3B04C4DC1C4CB7B1F13 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D933BAE1E334231FCF8DACC2772DF54 /* BDBButtonForSift.h */,
+				5C653D922FB2A7FE07871286EACC81DB /* BDBButtonForSift.m */,
+				A640CABA5F864FF7FA21EAE6B4D5CCF3 /* BDBButtonForTopView.h */,
+				1E996E56673C2FFBC7EBFB765F7048DB /* BDBButtonForTopView.m */,
+				8449B5B32834EB6E72088090E4756A1A /* BDBTableViewCell.h */,
+				E4B3F9FA585AACD0946C19285379F675 /* BDBTableViewCell.m */,
+				007524197FF09AED5651D26F9264116B /* BDBTableViewCell.xib */,
+				1849C165B1AF6F5FFCF2CCA56DEFAF23 /* BDBTableViewCell_Sift.h */,
+				6CD7D5EECDE88578E69C112ABA25ED1F /* BDBTableViewCell_Sift.m */,
+				E491CF936F751A312EE4738C206F91B7 /* BDBTableViewCell_Sift.xib */,
+				2CB24E7A512D2CA877461EB99A8B7966 /* MOProgressView.h */,
+				AECAC3AD1712C68C49899C892E44846E /* MOProgressView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1C80F260670FEB8F92D9B3D8A599A4C8 /* Model */ = {
@@ -841,19 +873,6 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		A5029BE49A6065AD40B9F549FDCD23F5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5256EC339561250E491DCED90E4596A9 /* BDBSiftButtonInfoModel.h */,
-				D21A2B10F602DE70203B6DD18EF00AC9 /* BDBSiftButtonInfoModel.m */,
-				E330ED647837D61F15C4A489D7107027 /* BDBSujectModel.h */,
-				8B174C51A1CC5C4896E5220D1B132666 /* BDBSujectModel.m */,
-				2453FEB9040DB0B1EA1610ADDD7F8CC4 /* BDBSujectRespondModel.h */,
-				467CA694E9EF2925811CB840328DD739 /* BDBSujectRespondModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		A7038A15CC480EA6CB7003DF3D728A9E /* UITableView-FDTemplateLayoutCel */ = {
 			isa = PBXGroup;
 			children = (
@@ -946,25 +965,6 @@
 				6BDB744F3B04B41DEDCFBCAC8B633B28 /* Discovery.storyboard */,
 			);
 			path = Discovery;
-			sourceTree = "<group>";
-		};
-		BB78C81D5FCBE3B04C4DC1C4CB7B1F13 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				9D933BAE1E334231FCF8DACC2772DF54 /* BDBButtonForSift.h */,
-				5C653D922FB2A7FE07871286EACC81DB /* BDBButtonForSift.m */,
-				A640CABA5F864FF7FA21EAE6B4D5CCF3 /* BDBButtonForTopView.h */,
-				1E996E56673C2FFBC7EBFB765F7048DB /* BDBButtonForTopView.m */,
-				8449B5B32834EB6E72088090E4756A1A /* BDBTableViewCell.h */,
-				E4B3F9FA585AACD0946C19285379F675 /* BDBTableViewCell.m */,
-				007524197FF09AED5651D26F9264116B /* BDBTableViewCell.xib */,
-				1849C165B1AF6F5FFCF2CCA56DEFAF23 /* BDBTableViewCell_Sift.h */,
-				6CD7D5EECDE88578E69C112ABA25ED1F /* BDBTableViewCell_Sift.m */,
-				E491CF936F751A312EE4738C206F91B7 /* BDBTableViewCell_Sift.xib */,
-				2CB24E7A512D2CA877461EB99A8B7966 /* MOProgressView.h */,
-				AECAC3AD1712C68C49899C892E44846E /* MOProgressView.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C5FC1BB9419F3952C14CC592CB1352CD /* View */ = {

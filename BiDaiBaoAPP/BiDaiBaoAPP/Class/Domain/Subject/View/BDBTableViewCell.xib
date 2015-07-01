@@ -186,7 +186,7 @@
                         </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anj-h7-6mg">
-                        <rect key="frame" x="279" y="48" width="44" height="44"/>
+                        <rect key="frame" x="282" y="48" width="44" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="UfM-40-4gu"/>
                             <constraint firstAttribute="width" constant="44" id="e9x-sR-3mr"/>
@@ -250,7 +250,7 @@
                     <constraint firstItem="Aoj-ta-I2g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="vX1-v7-EbR"/>
                     <constraint firstItem="P7T-w7-gD3" firstAttribute="centerY" secondItem="WFU-Hm-KdK" secondAttribute="centerY" id="vYc-Af-5GS"/>
                     <constraint firstItem="1Ec-4G-bdo" firstAttribute="centerX" secondItem="xjo-9z-tzm" secondAttribute="centerX" constant="-5" id="vcc-0r-PM2"/>
-                    <constraint firstItem="AxI-bw-KMY" firstAttribute="leading" secondItem="anj-h7-6mg" secondAttribute="trailing" constant="8" id="xqs-VM-NHf"/>
+                    <constraint firstItem="AxI-bw-KMY" firstAttribute="leading" secondItem="anj-h7-6mg" secondAttribute="trailing" constant="5" id="xqs-VM-NHf"/>
                     <constraint firstAttribute="trailing" secondItem="6Sz-vq-q4h" secondAttribute="trailing" constant="10" id="yFi-7e-9EE"/>
                     <constraint firstItem="Weo-Mp-fjF" firstAttribute="centerY" secondItem="Bll-Hf-hE5" secondAttribute="centerY" id="yNF-RI-3UU"/>
                     <constraint firstItem="1Ec-4G-bdo" firstAttribute="centerY" secondItem="xjo-9z-tzm" secondAttribute="centerY" id="ySe-Fe-Isb"/>

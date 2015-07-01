@@ -10,13 +10,6 @@
 
 @interface BDBButtonForTopView()
 
-
-//判断按钮是否惦记
-@property(nonatomic,assign) BOOL isClicked;
-
-
-- (void)buttonClickedAcion:(BDBButtonForTopView *)button;
-
 @end
 
 @implementation BDBButtonForTopView
@@ -45,8 +38,6 @@
     
     button.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     
-    [button addTarget:button action:@selector(buttonClickedAcion:) forControlEvents:UIControlEventTouchUpInside];
-    
     button.isClicked = NO;
     
     
@@ -61,37 +52,25 @@
 
 
 
-#pragma mark - Button Clicked Methods
+#pragma mark - Setters And Getters Methods
 
-/**
- *  按钮的点击时间
- */
-- (void)buttonClickedAcion:(BDBButtonForTopView *)button{
+- (void)setIsClicked:(BOOL)isClicked{
 
-    if(![[button titleForState:UIControlStateNormal] isEqualToString:@"筛选"]){
-        
-        if(button.isClicked == NO){
+    _isClicked = isClicked;
+    
+    if(![[self titleForState:UIControlStateNormal] isEqualToString:@"筛选"]){
+    
+        if(_isClicked){
             
-            [button setImage:[UIImage imageNamed:@"subject_btnTopview_icon_down"] forState:UIControlStateNormal];
-            
-            button.isClicked = YES;
-            
+            [self setImage:[UIImage imageNamed:@"subject_btnTopview_icon_down"] forState:UIControlStateNormal];
         }
         else{
-            
-            [button setImage:[UIImage imageNamed:@"subject_btnTopview_icon_up"] forState:UIControlStateNormal];
-            
-            button.isClicked = NO;
-            
+        
+            [self setImage:[UIImage imageNamed:@"subject_btnTopview_icon_up"] forState:UIControlStateNormal];
         }
     }
-    else{
-        
-        
-    }
-    
-    [_delegate swithCurrentView:button];
 }
+
 
 #pragma mark - TitleRect ImageRect Methods
 
@@ -139,7 +118,7 @@
     
     if(![[self titleForState:UIControlStateNormal] isEqualToString:@"筛选"]){
         
-        imageRect = CGRectMake(contentRect.size.width / 2 + 20, contentRect.size.height / 2 - 4, 12, 8);
+        imageRect = CGRectMake(contentRect.size.width / 2 + 20, contentRect.size.height / 2 - 3, 10, 5);
     }
     else{
         

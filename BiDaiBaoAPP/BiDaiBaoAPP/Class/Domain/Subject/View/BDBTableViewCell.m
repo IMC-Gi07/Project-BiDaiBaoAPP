@@ -51,7 +51,9 @@
     
     CGFloat progressPercent = [model.ProgressPercent floatValue];
     
-    cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%g%%",progressPercent * 100];
+    progressPercent *= 100;
+    
+    cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%.0f%%",progressPercent];
     
     [cell.progressView setProgress:progressPercent];
     

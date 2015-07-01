@@ -15,15 +15,8 @@
 #import "BDBSujectRespondModel.h"
 #import "BDBSujectModel.h"
 
-NSInteger const KnumberOfRowsForSievingPage  = 1;
-NSInteger const KnumberOfSeciontsForSievingPage  = 4;
-NSInteger const KnumberOfSeciontsForHomePage  = 1;
 
-typedef enum {
-    sujectHomePage,sujectSievingPage
-}CurrentPage;
-
-@interface BDBSubjectViewController () <UITableViewDataSource,UITableViewDelegate,BDBButtonForTopViewDelegate>
+@interface BDBSubjectViewController () <UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,weak)UIView *topView;
 
@@ -33,19 +26,19 @@ typedef enum {
 
 @property(nonatomic,copy) NSArray *sievingButtonArray;
 
-@property(nonatomic,strong) UILabel *platformLabel;
-
 @property(nonatomic,weak) UIButton *sureButtonOfBottom;
 
 @property(nonatomic,weak) UIButton *resetButtonOfBottom;
 
-@property(nonatomic,strong) BDBSiftButtonInfoModel *sievingButtonInfos;
+@property(nonatomic,weak) UILabel *selectedPlatformName;
 
-@property(nonatomic,strong) BDBButtonForSift *showMoreButton;
+//@property(nonatomic,strong) BDBSiftButtonInfoModel *sievingButtonInfos;
 
 @property(nonatomic,strong) NSMutableArray *sujectModelDatas;
 
-@property(nonatomic,assign) CurrentPage currentPage;
+@property(nonatomic,weak) UIScrollView *platformView;
+
+@property(nonatomic,weak) NSLayoutConstraint *heigtConstraintForPlatformView;
 
 
 - (void)loadTopView;
@@ -57,6 +50,8 @@ typedef enum {
 - (void)loadBidsInf;
 
 - (void)loadButtonOfBottom;
+
+- (void)layoutSievingViewButtons:(NSInteger)number view:(UIView *)aView;
 
 @end
 
@@ -70,15 +65,11 @@ typedef enum {
     
         self.title = @"标的";
         
-        self.sievingButtonInfos = [[BDBSiftButtonInfoModel alloc] init];
-        
-        self.showMoreButton = [BDBButtonForSift showMoreButton];
+//        self.sievingButtonInfos = [[BDBSiftButtonInfoModel alloc] init];
         
         self.sujectModelDatas = [NSMutableArray array];
         
         self.automaticallyAdjustsScrollViewInsets = NO;
-        
-        self.currentPage = sujectSievingPage;
         
         [self loadBidsInf];
         
@@ -97,9 +88,9 @@ typedef enum {
     [super viewDidLoad];
     
     [self loadTopView];
-    //[self loadShowDataTableView];
+    [self loadShowDataTableView];
     
-    [self loadSievingScrollView];
+    //[self loadSievingScrollView];
     
 }
 
@@ -142,12 +133,12 @@ typedef enum {
         BDBSujectRespondModel *sujectREspondModel = [BDBSujectRespondModel objectWithKeyValues:responseObject];
         
         self.sujectModelDatas = [[_sujectModelDatas arrayByAddingObjectsFromArray:sujectREspondModel.BidList] mutableCopy];
-        
-        
+    
+        [_showDataTableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"%@",error);
+        ZXLLOG(@"%@",error);
     }];
     
 }
@@ -206,7 +197,6 @@ typedef enum {
 
     BDBButtonForTopView *buttonOfProfit = [BDBButtonForTopView buttonWithTitle:@"收益率" titleColor:UIColorWithRGB(93, 92, 97) image:[UIImage imageNamed:@"subject_btnTopview_icon_up"]];
     
-    buttonOfProfit.delegate = self;
     
     buttonOfProfit.frame = CGRectMake(0, 0, SCREEN_WIDTH / 4, 44);
     
@@ -214,15 +204,11 @@ typedef enum {
     
     BDBButtonForTopView *buttonOfProgress = [BDBButtonForTopView buttonWithTitle:@"进度" titleColor:UIColorWithRGB(93, 92, 97) image:[UIImage imageNamed:@"subject_btnTopview_icon_up"]];
     
-    buttonOfProgress.delegate = self;
-    
     buttonOfProgress.frame = CGRectMake(SCREEN_WIDTH / 4 * 1, 0, SCREEN_WIDTH / 4, 44);
     
     [topView addSubview:buttonOfProgress];
     
     BDBButtonForTopView *buttonOfTimeLimit = [BDBButtonForTopView buttonWithTitle:@"期限" titleColor:UIColorWithRGB(93, 92, 97) image:[UIImage imageNamed:@"subject_btnTopview_icon_up"]];
-    
-    buttonOfTimeLimit.delegate = self;
     
     buttonOfTimeLimit.frame = CGRectMake(SCREEN_WIDTH / 4 * 2, 0, SCREEN_WIDTH / 4, 44);
     
@@ -230,11 +216,125 @@ typedef enum {
     
     BDBButtonForTopView *buttonOfSift = [BDBButtonForTopView buttonWithTitle:@"筛选" titleColor:UIColorWithRGB(69 , 165, 225) image:[UIImage imageNamed:@"subject_btnTopview_icon_sift"]];
     
-    buttonOfSift.delegate = self;
+    __weak typeof (self) thisInstance = self;
+    
+    [buttonOfSift handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+        
+        
+        if(thisInstance.sievingScrollView == nil){
+            
+            buttonOfProfit.enabled = NO;
+            buttonOfProgress.enabled = NO;
+            buttonOfTimeLimit.enabled = NO;
+            
+            buttonOfProfit.isClicked = NO;
+            buttonOfProgress.isClicked = NO;
+            buttonOfTimeLimit.isClicked = NO;
+            
+            [buttonOfTimeLimit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+            [buttonOfProgress setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+            [buttonOfProfit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+            
+            [thisInstance loadButtonOfBottom];
+            [thisInstance loadSievingScrollView];
+            
+            
+            CATransition *transition = [CATransition animation];
+            
+            transition.type = kCATransitionPush;
+            
+            transition.duration = 0.2f;
+            
+            transition.subtype = kCATransitionFromBottom;
+            
+            [thisInstance.sievingScrollView.layer addAnimation:transition forKey:nil];
+            
+            [thisInstance.showDataTableView removeFromSuperview];
+
+        }
+        else{
+        
+            buttonOfProfit.enabled = YES;
+            buttonOfProgress.enabled = YES;
+            buttonOfTimeLimit.enabled = YES;
+            
+            [thisInstance loadShowDataTableView];
+            [thisInstance removeButtonsOfBottom];
+            [thisInstance.sievingScrollView removeFromSuperview];
+            CATransition *transition = [CATransition animation];
+            
+            transition.type = kCATransitionPush;
+            
+            transition.duration = 0.2f;
+            
+            transition.subtype = kCATransitionFromTop;
+            
+            [thisInstance.showDataTableView.layer addAnimation:transition forKey:nil];
+            
+            NSLog(@"%@,",thisInstance.sievingScrollView);
+            
+            
+        }
+
+        
+    }];
     
     buttonOfSift.frame = CGRectMake(SCREEN_WIDTH / 4 * 3, 0, SCREEN_WIDTH / 4, 44);
     
     [topView addSubview:buttonOfSift];
+    
+    [buttonOfTimeLimit handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+        
+        if(buttonOfTimeLimit.isClicked){
+            
+            buttonOfTimeLimit.isClicked = NO;
+        }
+        else{
+            
+            buttonOfTimeLimit.isClicked = YES;
+            
+        }
+        
+        [buttonOfTimeLimit setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
+        [buttonOfProgress setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+        [buttonOfProfit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+    }];
+    
+    [buttonOfProgress handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+        
+        if(buttonOfProgress.isClicked){
+            
+            buttonOfProgress.isClicked = NO;
+        }
+        else{
+            
+            buttonOfProgress.isClicked = YES;
+            
+        }
+        
+        [buttonOfProgress setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
+        [buttonOfTimeLimit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+        [buttonOfProfit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+    }];
+    [buttonOfProfit handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+        
+        if(buttonOfProfit.isClicked){
+            
+            buttonOfProfit.isClicked = NO;
+        }
+        else{
+            
+            buttonOfProfit.isClicked = YES;
+            
+        }
+        
+        [buttonOfProfit setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
+        [buttonOfTimeLimit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+        [buttonOfProgress setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+    }];
+    
+    
+
 
 }
 
@@ -242,32 +342,35 @@ typedef enum {
     
     
     //筛选页面
-    UIScrollView *sievingScroView = [[UIScrollView alloc] init];
+    UIScrollView *sievingScrollView = [[UIScrollView alloc] init];
     
-    sievingScroView.scrollEnabled = YES;
+    sievingScrollView.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:sievingScroView];
+    [self.view addSubview:sievingScrollView];
     
-    self.sievingScrollView = sievingScroView;
+    self.sievingScrollView = sievingScrollView;
     
-    sievingScroView.translatesAutoresizingMaskIntoConstraints = NO;
+    sievingScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSString *constraintsVFL = @"H:|[sievingScroView]|";
     
-    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"sievingScroView":sievingScroView}];
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"sievingScroView":sievingScrollView}];
     
     [self.view addConstraints:hConstraints];
     
-    constraintsVFL = @"V:[topView][sievingScroView]|";
+    constraintsVFL = @"V:[topView][sievingScroView]-50-|";
     
-    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"topView":_topView,@"sievingScroView":sievingScroView}];
+    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"topView":_topView,@"sievingScroView":sievingScrollView}];
     
     [self.view addConstraints:vConstraints];
+    
     
     //筛选页面－》选择平台
     UIScrollView *platformView = [[UIScrollView alloc] init];
     
-    [sievingScroView addSubview:platformView];
+    [sievingScrollView addSubview:platformView];
+    
+    self.platformView = platformView;
     
     platformView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -275,14 +378,28 @@ typedef enum {
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"platformView":platformView}];
     
-    [sievingScroView addConstraints:hConstraints];
+    [sievingScrollView addConstraints:hConstraints];
+    
+    //筛选页面－》选择平台(分割线)
+    
+    UIView *separator_0 = [[UIView alloc] init];
+    
+    separator_0.backgroundColor = UIColorWithRGB(204, 204, 204);
+    
+    [sievingScrollView addSubview:separator_0];
+    
+    separator_0.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|-[separator_0]-|";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_0":separator_0}];
+    
+    [sievingScrollView addConstraints:hConstraints];
     
     //筛选页面－》年化收益率
     UIScrollView *profitView = [[UIScrollView alloc] init];
     
-    profitView.backgroundColor = [UIColor blueColor];
-    
-    [sievingScroView addSubview:profitView];
+    [sievingScrollView addSubview:profitView];
     
     profitView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -290,15 +407,29 @@ typedef enum {
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"profitView":profitView}];
     
-    [sievingScroView addConstraints:hConstraints];
+    [sievingScrollView addConstraints:hConstraints];
+    
+    //筛选页面－》年化收益率(分割线)
+    
+    UIView *separator_1 = [[UIView alloc] init];
+    
+    separator_1.backgroundColor = UIColorWithRGB(204, 204, 204);
+    
+    [sievingScrollView addSubview:separator_1];
+    
+    separator_1.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|-[separator_1]-|";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_1":separator_1}];
+    
+    [sievingScrollView addConstraints:hConstraints];
     
     //筛选页面－》投资期限
     
     UIScrollView *termView = [[UIScrollView alloc] init];
     
-    termView.backgroundColor = [UIColor purpleColor];
-    
-    [sievingScroView addSubview:termView];
+    [sievingScrollView addSubview:termView];
     
     termView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -306,14 +437,28 @@ typedef enum {
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"termView":termView}];
     
-    [sievingScroView addConstraints:hConstraints];
+    [sievingScrollView addConstraints:hConstraints];
+    
+    //筛选页面－》年化收益率(分割线)
+    
+    UIView *separator_2 = [[UIView alloc] init];
+    
+    separator_2.backgroundColor = UIColorWithRGB(204, 204, 204);
+    
+    [sievingScrollView addSubview:separator_2];
+    
+    separator_2.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constraintsVFL = @"H:|-[separator_2]-|";
+    
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_2":separator_2}];
+    
+    [sievingScrollView addConstraints:hConstraints];
     
     // 筛选页面－》投资进度
     UIScrollView *progressView = [[UIScrollView alloc] init];
     
-    progressView.backgroundColor = [UIColor grayColor];
-    
-    [sievingScroView addSubview:progressView];
+    [sievingScrollView addSubview:progressView];
     
     progressView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -321,18 +466,20 @@ typedef enum {
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"progressView":progressView}];
     
-    [sievingScroView addConstraints:hConstraints];
+    [sievingScrollView addConstraints:hConstraints];
 
     
-    constraintsVFL = @"V:|[platformView][profitView(100)][termView(100)][progressView(100)]|";
+    constraintsVFL = @"V:|[platformView][separator_0(1)][profitView(65)][separator_1(1)][termView(105)][separator_2(1)][progressView(65)]|";
     
-    vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"platformView":platformView,@"profitView":profitView,@"termView":termView,@"progressView":progressView}];
+    vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"platformView":platformView,@"separator_0":separator_0,@"profitView":profitView,@"separator_1":separator_1,@"termView":termView,@"separator_2":separator_2,@"progressView":progressView}];
     
     NSLayoutConstraint *heigtConstraintForPlatformView = [NSLayoutConstraint constraintWithItem:platformView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:65.0f];
 
+    self.heigtConstraintForPlatformView = heigtConstraintForPlatformView;
+    
     [platformView addConstraint:heigtConstraintForPlatformView];
     
-    [sievingScroView addConstraints:vConstraints];
+    [sievingScrollView addConstraints:vConstraints];
     
     //筛选页面－》选择平台(选择平台)
     
@@ -350,72 +497,205 @@ typedef enum {
     
     BDBButtonForSift *showMoreButton = [BDBButtonForSift showMoreButton];
     
+    [showMoreButton handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+        if(showMoreButton.isShowMores){
+        
+            showMoreButton.isShowMores = NO;
+            [UIView animateWithDuration:0.5f animations:^{
+                heigtConstraintForPlatformView.constant = 65.0f;
+                
+                [platformView setNeedsLayout];
+                [platformView layoutIfNeeded];
+                [sievingScrollView setNeedsLayout];
+                [sievingScrollView layoutIfNeeded];
+
+            }];
+            
+        }
+        else{
+        
+            showMoreButton.isShowMores = YES;
+            [UIView animateWithDuration:0.5f animations:^{
+                heigtConstraintForPlatformView.constant = 150.0f;
+                
+                [platformView setNeedsLayout];
+                [platformView layoutIfNeeded];
+                [sievingScrollView setNeedsLayout];
+                [sievingScrollView layoutIfNeeded];
+            }];
+        }
+    }];
+    
     [platformView addSubview:showMoreButton];
     
     //筛选页面－》选择平台(显示被选择平台的名称)
     
     UILabel *selectedPlatformName = [[UILabel alloc] init];
     
-    selectedPlatformName.text = @"人人贷";
-    
     selectedPlatformName.textColor = UIColorWithRGB(12, 79, 125);
     
     [platformView addSubview:selectedPlatformName];
+    
+    self.selectedPlatformName = selectedPlatformName;
     
     selectedPlatformName.font  = [UIFont systemFontOfSize:12.0f];
     
     selectedPlatformName.frame = CGRectMake(SCREEN_WIDTH - 80, 10, 60, 15);
     
+    //筛选页面－》年化收益率(年化收益率)
     
-    NSArray *buttonsArray = _sievingButtonArray[0];
+    UILabel *profitLabel = [[UILabel alloc] init];
+    
+    profitLabel.text = @"年化收益率:";
+    
+    [profitView addSubview:profitLabel];
+    
+    profitLabel.font  = [UIFont systemFontOfSize:15.0f];
+    
+    profitLabel.frame = CGRectMake(10, 10, 80, 15);
+    
+    //筛选页面－》投资期限(投资期限)
+    
+    UILabel *termLabel = [[UILabel alloc] init];
+    
+    termLabel.text = @"投资期限:";
+    
+    [termView addSubview:termLabel];
+    
+    termLabel.font  = [UIFont systemFontOfSize:15.0f];
+    
+    termLabel.frame = CGRectMake(10, 10, 80, 15);
+    
+    //筛选页面－》投资期限(投资期限)
+    
+    UILabel *progressLabel = [[UILabel alloc] init];
+    
+    progressLabel.text = @"投资期限:";
+    
+    [progressView addSubview:progressLabel];
+    
+    progressLabel.font  = [UIFont systemFontOfSize:15.0f];
+    
+    progressLabel.frame = CGRectMake(10, 10, 80, 15);
+    
+    [self layoutSievingViewButtons:0 view:platformView];
+    [self layoutSievingViewButtons:1 view:profitView];
+    [self layoutSievingViewButtons:2 view:termView];
+    [self layoutSievingViewButtons:3 view:progressView];
+    
+    [_resetButtonOfBottom handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+       
+        for (id obj in sievingScrollView.subviews) {
+            
+            UIView *view = obj;
+            
+            for (id viewSubView in view.subviews) {
+                
+                if([viewSubView isKindOfClass:[BDBButtonForSift class]]){
+                    
+                    BDBButtonForSift *tmpButton = viewSubView;
+                    
+                    if(tmpButton.isSelected){
+                    
+                        tmpButton.isSelected = NO;
+                    }
+                }
+            }
+        }
+    }];
+    
+}
+
+- (void)layoutSievingViewButtons:(NSInteger)number view:(UIView  *) aView{
+
+    NSArray *buttonsArray = _sievingButtonArray[number];
+    
+    
+    BDBSiftButtonInfoModel *sievingButtonInfos = [[BDBSiftButtonInfoModel alloc] init];
+    
+    //__weak typeof(self) thisInstance = self;
     
     for (NSDictionary *buttonDict in buttonsArray) {
         
         [buttonDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             
-            [self.sievingButtonInfos setValue:obj forKey:key];
+            [sievingButtonInfos setValue:obj forKey:key];
         }];
         CGFloat platformButtonHorizontalMargin;
         CGRect frame;
-        platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 60) / 3.0f;
-
-        frame = CGRectMake(15 + 60 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 30 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 65, 30);
         
-        BDBButtonForSift *button = [BDBButtonForSift buttonWithTitle:_sievingButtonInfos.title  isSelected:_sievingButtonInfos.isSelected frame:frame];
+        if(number == 0){
+            platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 65) / 3.0f;
+            
+            frame = CGRectMake(15 + 65 * sievingButtonInfos.xPoint + platformButtonHorizontalMargin * sievingButtonInfos.xPoint, 30 + 30 * sievingButtonInfos.yPoint + 10 * sievingButtonInfos.yPoint, 65, 30);
+        }
+        else{
+            platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -3 * 90) / 2.0f;
+            
+            frame = CGRectMake(15 + 90 * sievingButtonInfos.xPoint + platformButtonHorizontalMargin * sievingButtonInfos.xPoint, 30 + 30 * sievingButtonInfos.yPoint + 10 * sievingButtonInfos.yPoint, 90, 30);
+            
+        }
         
-        [platformView addSubview:button];
-
+        BDBButtonForSift *button = [BDBButtonForSift buttonWithTitle:sievingButtonInfos.title  isSelected:sievingButtonInfos.isSelected frame:frame];
+        [button handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+            
+            if(!button.isSelected){
+                
+                for (id obj in aView.subviews) {
+                    if([obj isKindOfClass:[BDBButtonForSift class]]){
+                        
+                        BDBButtonForSift *btn = obj;
+                        
+                        if(btn.isSelected == YES){
+                        
+                            btn.isSelected = NO;
+                            break;
+                        }
+                    }
+                }
+                
+                button.isSelected = YES;
+            }
+            
+            if(number == 0){
+            
+                _selectedPlatformName.text = [button titleForState:UIControlStateNormal];
+                
+            }
+        }];
+        
+        [aView addSubview:button];
+        
     }
-
 }
 
 - (void)loadShowDataTableView{
     
-        UITableView *showDataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    UITableView *showDataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    
+    showDataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    showDataTableView.dataSource = self;
+    
+    showDataTableView.delegate = self;
         
-        showDataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-        showDataTableView.dataSource = self;
-        
-        showDataTableView.delegate = self;
-        
-        [self.view addSubview:showDataTableView];
-        
-        self.showDataTableView = showDataTableView;
-        
-        showDataTableView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        NSString *hConstrainsVFL = @"|[showDataTableView]|";
-        
-        NSString *vConstrainsVFL = @"V:[topView][showDataTableView]-(50)-|";
-        
-        NSArray *hConstrains = [NSLayoutConstraint constraintsWithVisualFormat:hConstrainsVFL options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"showDataTableView":showDataTableView}];
-        
-        NSArray *vConstrains = [NSLayoutConstraint constraintsWithVisualFormat:vConstrainsVFL options:NSLayoutFormatAlignAllLeading metrics:nil views:@{@"showDataTableView":showDataTableView,@"topView":_topView}];
-        
-        [self.view addConstraints:hConstrains];
-        [self.view addConstraints:vConstrains];
-        
+    [self.view addSubview:showDataTableView];
+    
+    self.showDataTableView = showDataTableView;
+    
+    showDataTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSString *hConstrainsVFL = @"|[showDataTableView]|";
+    
+    NSString *vConstrainsVFL = @"V:[topView][showDataTableView]-(50)-|";
+    
+    NSArray *hConstrains = [NSLayoutConstraint constraintsWithVisualFormat:hConstrainsVFL options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"showDataTableView":showDataTableView}];
+    
+    NSArray *vConstrains = [NSLayoutConstraint constraintsWithVisualFormat:vConstrainsVFL options:NSLayoutFormatAlignAllLeading metrics:nil views:@{@"showDataTableView":showDataTableView,@"topView":_topView}];
+    
+    [self.view addConstraints:hConstrains];
+    [self.view addConstraints:vConstrains];
+    
 
 }
 
@@ -446,14 +726,14 @@ typedef enum {
     resetButtonOfBottom.hidden = NO;
     
     
-    __weak typeof(self) thisInstance = self;
-    [resetButtonOfBottom handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-        
-        thisInstance.platformLabel.text = @"人人贷";
-        [thisInstance loadSievingButtonInfos];
-        [thisInstance.showDataTableView reloadData];
-        [thisInstance.showDataTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }];
+//    __weak typeof(self) thisInstance = self;
+//    [resetButtonOfBottom handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
+//        
+//        thisInstance.platformLabel.text = @"人人贷";
+//        [thisInstance loadSievingButtonInfos];
+//        [thisInstance.showDataTableView reloadData];
+//        [thisInstance.showDataTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    }];
     
     [self.view addSubview:resetButtonOfBottom];
     
@@ -483,10 +763,15 @@ typedef enum {
     
     [sureButtonOfBottom addConstraint:heightConstraintOfSureButtonOfBottom];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.tabBarController.tabBar.hidden = YES;
-    });
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+- (void)removeButtonsOfBottom{
+
+    [_sureButtonOfBottom removeFromSuperview];
+    [_resetButtonOfBottom removeFromSuperview];
     
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)showRefreshMessage{
@@ -537,29 +822,22 @@ typedef enum {
     for (NSLayoutConstraint *constrain in constrains) {
         if(constrain.firstItem == _showDataTableView && constrain.secondAttribute == NSLayoutAttributeBottom){
             constrain.constant = 0.0f;
+            
+            break;
         }
     }
 }
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSInteger numberOfSecionts;
-
     
-    numberOfSecionts = KnumberOfSeciontsForSievingPage;
-    
-    return numberOfSecionts;
+    return 1;
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    NSInteger numberOfRows;
-    
-    
-    numberOfRows = _sujectModelDatas.count;
 
-    return numberOfRows;
+    return _sujectModelDatas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -573,133 +851,49 @@ typedef enum {
         }
         
         return cell;
-    
-//    else{
-//        BDBTableViewCell_Sift *cell = [BDBTableViewCell_Sift cell];
-//        
-//        [cell createContentsAccordingSection:indexPath.section];
-//        
-//        if(indexPath.section == 0){
-//            
-//            [cell addSubview:_showMoreButton];
-//            
-//            [_showMoreButton handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-//                if(_showMoreButton.isShowMores){
-//                
-//                    _showMoreButton.isShowMores = NO;
-//                }
-//                else{
-//                
-//                    _showMoreButton.isShowMores = YES;
-//                }
-//                
-//                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//            }];
-//        }
-//        
-//        NSArray *array = _sievingButtonArray[indexPath.section];
-//        
-//        BDBButtonForSift *button;
-//        
-//        if(array.count != 0){
-//            
-//            
-//            for (NSDictionary *dic in array) {
-//                
-//                __weak typeof(self) thisInstance = self;
-//                
-//                [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//                    
-//                    [thisInstance.sievingButtonInfos setValue:obj forKey:key];
-//                }];
-//                
-//                CGFloat platformButtonHorizontalMargin;
-//                CGRect frame;
-//                
-//                if(indexPath.section == 0){
-//                    
-//                    platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 60) / 3.0f;
-//                    
-//                    frame = CGRectMake(15 + 60 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 30 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 65, 30);
-//                }
-//                else{
-//                    
-//                    platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -3 * 80) / 2.0f;
-//                    
-//                    frame = CGRectMake(15 + 80 * _sievingButtonInfos.xPoint + platformButtonHorizontalMargin * _sievingButtonInfos.xPoint, 40 + 30 * _sievingButtonInfos.yPoint + 10 * _sievingButtonInfos.yPoint, 80, 30);
-//                }
-//                
-//                button = [BDBButtonForSift buttonWithTitle:_sievingButtonInfos.title section:indexPath.section isSelected:_sievingButtonInfos.isSelected frame:frame];
-//                
-//                button.singleSelectForSiftBlock = ^(NSString *title,BOOL isSelected){
-//                    
-//                    NSMutableArray *tmpOriginalDatas = [_sievingButtonArray mutableCopy];
-//                    
-//                    NSMutableArray *tmpArray = [tmpOriginalDatas[indexPath.section] mutableCopy];
-//                    
-//                    for(NSInteger i = 0; i < tmpArray.count; i ++){
-//                        
-//                        NSMutableDictionary *tmpDict = [tmpArray[i] mutableCopy];
-//                        
-//                        if([tmpDict[@"title"] isEqualToString:title]){
-//                            
-//                            tmpDict[@"isSelected"] = [NSNumber numberWithBool:isSelected];
-//                            
-//                            [tmpArray replaceObjectAtIndex:i withObject:[tmpDict copy]];
-//                            
-//                            [tmpOriginalDatas replaceObjectAtIndex:indexPath.section withObject:tmpArray];
-//                            
-//                            _sievingButtonArray = [tmpOriginalDatas copy];
-//                            
-//                            break;
-//                        }
-//                    }
-//                };
-//                
-//
-//                [cell.scrollView addSubview:button];
-//            }
-//        }
-//        return cell;
-//    }
 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat heightForRow;
-    
-        
-    heightForRow = 150.0f;
 
-//    else{
-//        
-//        if(indexPath.section == 0){
-//            
-//            if(_showMoreButton.isShowMores){
-//                
-//                heightForRow = 180.0f;
-//            }
-//            else{
-//                
-//                heightForRow = 130.0f;
-//            }
-//            
-//        }
-//        else{
-//            heightForRow = 120.0f;
-//        }
-//    }
-    return heightForRow;
+    return 150;
 }
 
 
 #pragma  mark -BDBButtonForTopViewDelegate Methods
 
-- (void)swithCurrentView:(BDBButtonForTopView *)button{
+- (void)showMoreButtonActionClicked: (BDBButtonForSift *)button{
 
-
+    if(button.isShowMores){
+        
+        button.isShowMores = NO;
+        [UIView animateWithDuration:0.5f animations:^{
+            _heigtConstraintForPlatformView.constant = 65.0f;
+            
+            [button setNeedsLayout];
+            [button layoutIfNeeded];
+            [_sievingScrollView setNeedsLayout];
+            [_sievingScrollView layoutIfNeeded];
+            
+        }];
+        
+    }
+    else{
+        
+        button.isShowMores = YES;
+        [UIView animateWithDuration:0.5f animations:^{
+            _heigtConstraintForPlatformView.constant = 150.0f;
+            
+            [_platformView setNeedsLayout];
+            [_platformView layoutIfNeeded];
+            [_sievingScrollView setNeedsLayout];
+            [_sievingScrollView layoutIfNeeded];
+        }];
+    }
+    
 }
+
 
 
 @end

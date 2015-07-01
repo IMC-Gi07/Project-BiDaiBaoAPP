@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BDBDiscoveryViewController : UITableViewController
+@interface BDBDiscoveryViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @end

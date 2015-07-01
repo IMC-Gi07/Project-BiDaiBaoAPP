@@ -100,6 +100,7 @@
 		A4506A8319E5AE8ECBF8AE4090BFBAA1 /* BDBQuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435D6B9B0B399519E1701D1A7618E44 /* BDBQuestionTableViewCell.m */; };
 		A76A5E2235DFB0E16665A27FBCBE300B /* BDBSiftButtonInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D21A2B10F602DE70203B6DD18EF00AC9 /* BDBSiftButtonInfoModel.m */; };
 		A7F91F1FE755597312FCE4F0E87F6F55 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E0A1C67421FD03F7A5ADC46F39ED63 /* UIImage+MultiFormat.m */; };
+		A9BBFB551B43EFC7000C80DD /* BDBwarnigTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BBFB541B43EFC7000C80DD /* BDBwarnigTimeViewController.m */; };
 		A9C1309CECE7EABB87683F27206BB6D3 /* BDBQuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E594AC808087067AEC4C5BF6788F85A /* BDBQuestionTableViewCell.xib */; };
 		A9EED2254C7D61D2E501A1EB0F59DDD4 /* UIButton+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D290A838A9E2BE193ED98E0B803A2D90 /* UIButton+Extensions.m */; };
 		AAD49FC20D5C84322A3E7466E8DDF5B6 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5792FB0A7D8842E93AF9B7A9738734F /* ASValuePopUpView.m */; };
@@ -358,6 +359,8 @@
 		A640CABA5F864FF7FA21EAE6B4D5CCF3 /* BDBButtonForTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBButtonForTopView.h; sourceTree = "<group>"; };
 		A6D8AA492AA4E9298473FF6690DEBB34 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		A81A8F7C95585944B349215FE2B4891A /* MJRefreshBackGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackGifFooter.h; sourceTree = "<group>"; };
+		A9BBFB531B43EFA7000C80DD /* BDBwarnigTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBwarnigTimeViewController.h; sourceTree = "<group>"; };
+		A9BBFB541B43EFC7000C80DD /* BDBwarnigTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBwarnigTimeViewController.m; sourceTree = "<group>"; };
 		AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBCustomTableViewCellTwo.m; sourceTree = "<group>"; };
 		ACB7DF23FD20E39FE4A9CC57D1EDE4E9 /* BiDaiBaoAPPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BiDaiBaoAPPTests.m; sourceTree = "<group>"; };
 		AECAC3AD1712C68C49899C892E44846E /* MOProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOProgressView.m; sourceTree = "<group>"; };
@@ -912,6 +915,8 @@
 		9EB5153A55C896943744D3BDC8E5036E /* Contronller */ = {
 			isa = PBXGroup;
 			children = (
+				A9BBFB541B43EFC7000C80DD /* BDBwarnigTimeViewController.m */,
+				A9BBFB531B43EFA7000C80DD /* BDBwarnigTimeViewController.h */,
 				6E2F75C6385AB7E9F7DF8C9E93B65D73 /* BDBWarningAddViewController.h */,
 				4F3C0EB83BCC48AE8AB3AAA43BDC0F0B /* BDBWarningAddViewController.m */,
 				C7D4A6AB2830E17E4438D58612DCA3CC /* BDBWarningViewController.h */,
@@ -1314,6 +1319,7 @@
 				DF4036689D40E5DE3F5D849F8B11486F /* BDBCustomTableViewCell.m in Sources */,
 				3CCFF2FAD1D9664475F67BEDB4764C50 /* BDBCustomTableViewCellFive.m in Sources */,
 				052F2343A7162B3108E11461BC87C229 /* BDBCustomTableViewCellOne.m in Sources */,
+				A9BBFB551B43EFC7000C80DD /* BDBwarnigTimeViewController.m in Sources */,
 				07C6B195632EA6E092EC39303BD6D429 /* BDBCustomTableViewCellThree.m in Sources */,
 				563836A5B1211D4D27C10333274D35AC /* BDBCustomTableViewCellTwo.m in Sources */,
 				3B1B10A52EDD16325E846F5D6D2240B6 /* BDBDetailedMessageTableViewCell.m in Sources */,

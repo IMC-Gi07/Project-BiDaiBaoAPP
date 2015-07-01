@@ -10,7 +10,17 @@
 
 @interface BDBPlatFormIDModel : NSObject
 
-@property (nonatomic,copy) NSString *Msg;
+@property (nonatomic,copy) NSString *PlatFormID;
+
+@property (nonatomic,copy) NSString *PlatformName;
+
+@property (nonatomic,copy) NSString *WebSite;
+
+@property (nonatomic,copy) NSString *Deal;
+
+@property (nonatomic,copy) NSString *Popularity;
+
+@property (nonatomic,copy) NSString *Earnings;
 
 
 @end

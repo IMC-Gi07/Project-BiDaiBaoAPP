@@ -105,6 +105,21 @@ static const CGFloat MJDuration = 2.0;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetP2PList"];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+    parameters[@"Device"] = @"0";
+    parameters[@"Type"] = @"0";
+    
+    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+       // ZXLLOG(@"success response: %@",responseObject);
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ZXLLOG(@"error response: %@",error);
+    }];
 }
 
 
@@ -122,7 +137,7 @@ static const CGFloat MJDuration = 2.0;
     
     
     parameters[@"Action"] = @"0";
-    parameters[@"PlatFormID"] = @"0";
+    parameters[@"PlatFormID"] = @"723";
     parameters[@"Item"] = @"0";
     parameters[@"Comparison"] = @"0";
     parameters[@"ThresHold"] = [NSString stringWithFormat:@"%f",_thresHold];
@@ -215,7 +230,7 @@ static const CGFloat MJDuration = 2.0;
  *  点击确认按钮，触发请求传输事件
  */
 - (IBAction)confirmButtonClick:(UIButton *)sender {
-    
+    [self gainPlatFormID];
     [self warningAddLoadDatas];
     
 }

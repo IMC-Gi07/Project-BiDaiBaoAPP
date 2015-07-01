@@ -15,9 +15,6 @@
 - (instancetype)init {
     if (self = [super init]) {
         
-        
-      
-//        [self setImage:[UIImage imageNamed:@"waring_blackgroundButton"] forState:UIControlStateNormal];
         [self setBackgroundImage:[UIImage imageNamed:@"waring_blackgroundButton"] forState:UIControlStateNormal];
         self.translatesAutoresizingMaskIntoConstraints = NO;
         

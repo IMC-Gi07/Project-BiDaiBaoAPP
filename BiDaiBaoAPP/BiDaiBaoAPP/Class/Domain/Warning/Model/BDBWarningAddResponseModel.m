@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 moon. All rights reserved.
 //
 
-#import "BDB_Model.h"
+#import "BDBWarningAddResponseModel.h"
 
-@implementation BDB_Model
+@implementation BDBWarningAddResponseModel
 
 @end

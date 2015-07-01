@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -15,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_bg_blueBlock" translatesAutoresizingMaskIntoConstraints="NO" id="hUO-Dw-rsu">
-                        <rect key="frame" x="8" y="8" width="30" height="84"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_bg_blueBlock" translatesAutoresizingMaskIntoConstraints="NO" id="hUO-Dw-rsu">
+                        <rect key="frame" x="8" y="8" width="33" height="82"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="33" id="oUa-HY-qtO"/>
                         </constraints>
@@ -33,24 +32,24 @@
                             <action selector="deleteButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ibH-kC-nXL"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Inn-n0-Ydy">
-                        <rect key="frame" x="45" y="6" width="226" height="84"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Inn-n0-Ydy">
+                        <rect key="frame" x="48" y="8" width="220" height="82"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_icon_subtitle_home" translatesAutoresizingMaskIntoConstraints="NO" id="tZl-iC-sTe">
-                                <rect key="frame" x="144" y="60" width="15" height="15"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_icon_subtitle_home" translatesAutoresizingMaskIntoConstraints="NO" id="tZl-iC-sTe">
+                                <rect key="frame" x="142" y="58" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="7vz-1B-9hl"/>
                                     <constraint firstAttribute="width" constant="16" id="yIu-de-n1S"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="有利网" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNR-Cd-N9N">
-                                <rect key="frame" x="167" y="59" width="51" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有利网" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNR-Cd-N9N">
+                                <rect key="frame" x="166" y="58" width="45" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_icon_subtitle_clock" translatesAutoresizingMaskIntoConstraints="NO" id="ZNa-6l-RUN">
-                                <rect key="frame" x="31" y="59" width="16" height="15"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_icon_subtitle_clock" translatesAutoresizingMaskIntoConstraints="NO" id="ZNa-6l-RUN">
+                                <rect key="frame" x="31" y="58" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="0ez-5c-3y2"/>
                                     <constraint firstAttribute="width" constant="16" id="3H9-Ew-3T1"/>
@@ -64,14 +63,14 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="提前10分钟" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jy-Pt-XjM">
-                                <rect key="frame" x="55" y="56" width="77" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提前10分钟" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jy-Pt-XjM">
+                                <rect key="frame" x="55" y="58" width="77" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" 年化收益" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwa-sJ-dKb">
-                                <rect key="frame" x="30" y="18" width="90" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 年化收益" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwa-sJ-dKb">
+                                <rect key="frame" x="23" y="18" width="82" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="pvG-Sm-QP5"/>
                                     <constraint firstAttribute="width" constant="218" id="vkq-FA-f4L"/>
@@ -86,8 +85,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&gt;12%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TK5-Hx-2Hp">
-                                <rect key="frame" x="117" y="18" width="74" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;12%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TK5-Hx-2Hp">
+                                <rect key="frame" x="113" y="18" width="74" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Izd-xn-OQq"/>
                                     <constraint firstAttribute="width" constant="74" id="Qa0-Jl-b2h"/>
@@ -193,6 +192,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="PlateFormNameLable" destination="rNR-Cd-N9N" id="rWt-jW-8Mp"/>
+                <outlet property="ThresHoldLable" destination="TK5-Hx-2Hp" id="UhH-rW-rCS"/>
                 <outlet property="colorBlock" destination="hUO-Dw-rsu" id="f7k-JD-uJj"/>
                 <outlet property="deleteButton" destination="Bm9-iL-gBJ" id="eUc-vw-ovA"/>
             </connections>
@@ -200,10 +201,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cell_bg_blueBlock" width="104" height="300"/>
-        <image name="cell_btn_Ring" width="120" height="120"/>
-        <image name="cell_btn_delete" width="189" height="302"/>
-        <image name="cell_icon_subtitle_clock" width="40" height="40"/>
-        <image name="cell_icon_subtitle_home" width="40" height="40"/>
+        <image name="cell_bg_blueBlock" width="34" height="100"/>
+        <image name="cell_btn_Ring" width="40" height="40"/>
+        <image name="cell_btn_delete" width="63" height="100"/>
+        <image name="cell_icon_subtitle_clock" width="13" height="13"/>
+        <image name="cell_icon_subtitle_home" width="13" height="13"/>
     </resources>
 </document>

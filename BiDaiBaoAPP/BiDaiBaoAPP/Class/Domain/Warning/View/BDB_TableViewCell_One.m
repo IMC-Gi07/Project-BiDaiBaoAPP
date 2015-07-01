@@ -8,7 +8,7 @@
 
 #import "BDB_TableViewCell_One.h"
 #import "BDB_Cell_Button.h"
-#import "BDB_Model.h"
+#import "BDBWarningAddResponseModel.h"
 
 @implementation BDB_TableViewCell_One
 
@@ -30,10 +30,18 @@
     [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button2];
     button2.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
     BDB_Cell_Button *button3 = [[BDB_Cell_Button alloc] init];
+    [button3 setTitle:@"红岭创投" forState:UIControlStateNormal];
+    [button3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button3];
     button3.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
     BDB_Cell_Button *button4 = [[BDB_Cell_Button alloc] init];
+    [button4 setTitle:@"宜人贷" forState:UIControlStateNormal];
+    [button4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button4];
     button4.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -45,15 +53,24 @@
     
     //    实例化第一排button设置标题、字体、标题颜色
     BDB_Cell_Button *button5 = [[BDB_Cell_Button alloc] init];
+    [button5 setTitle:@"陆金所" forState:UIControlStateNormal];
+    [button5 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button5];
     button1.translatesAutoresizingMaskIntoConstraints = NO;
+    
     BDB_Cell_Button *button6 = [[BDB_Cell_Button alloc] init];
+    [button6 setTitle:@"爱投资" forState:UIControlStateNormal];
+    [button6 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button6];
     button2.translatesAutoresizingMaskIntoConstraints = NO;
     BDB_Cell_Button *button7 = [[BDB_Cell_Button alloc] init];
+    [button7 setTitle:@"新新贷" forState:UIControlStateNormal];
+    [button7 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button7];
     button3.translatesAutoresizingMaskIntoConstraints = NO;
     BDB_Cell_Button *button8 = [[BDB_Cell_Button alloc] init];
+    [button8 setTitle:@"易贷网" forState:UIControlStateNormal];
+    [button8 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self addSubview:button8];
     button4.translatesAutoresizingMaskIntoConstraints = NO;
     

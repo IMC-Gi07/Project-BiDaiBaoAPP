@@ -35,7 +35,6 @@
 		2FCC6483B17B6DA9BA1F117F9A913B80 /* Subject.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5FAC9AAFE9C05D6DF611D74D75BDE45 /* Subject.storyboard */; };
 		33155C98F3EBF31FB01B2C514DB6FBBD /* BDB_TableViewCell_Two.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9A1609D5C6A8002A22500FB98F956A /* BDB_TableViewCell_Two.m */; };
 		34190BEA7F8BECBC9626D4E589CE1273 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91500A1C3BA7478C9D933358964C1F1F /* Images.xcassets */; };
-		3462728BF89D5A59C3A9956FA86CDFF2 /* BDBwarnigTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F244D989A599CE0B6FE7A2ECAEC51B /* BDBwarnigTimeViewController.m */; };
 		359A304C3E9C90BABEE0993EEE36904F /* BDBTableViewCell_Sift.xib in Resources */ = {isa = PBXBuildFile; fileRef = E491CF936F751A312EE4738C206F91B7 /* BDBTableViewCell_Sift.xib */; };
 		365E4C91734230FE22B160C49362B6F0 /* UIBarButtonItem+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 084E6B40E7CAB5D41943A29654ACF650 /* UIBarButtonItem+Extensions.m */; };
 		36F3D5824305DED17647839D8D2CFB82 /* MJRefreshStateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAE224A6626D015D3A01D59029C7C /* MJRefreshStateHeader.m */; };
@@ -270,7 +269,6 @@
 		589C70751E96DB6173CAB8D25F989E31 /* MJRefreshBackNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackNormalFooter.h; sourceTree = "<group>"; };
 		58EDC0800368891ED1868635E2648A20 /* BDBSortTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSortTableViewCell.h; sourceTree = "<group>"; };
 		594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningModelOne.m; sourceTree = "<group>"; };
-		59F244D989A599CE0B6FE7A2ECAEC51B /* BDBwarnigTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBwarnigTimeViewController.m; sourceTree = "<group>"; };
 		5AE2AD39F78D54F2DEA9579A3F72D8BC /* BDBNoticeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeDetailViewController.m; sourceTree = "<group>"; };
 		5C653D922FB2A7FE07871286EACC81DB /* BDBButtonForSift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBButtonForSift.m; sourceTree = "<group>"; };
 		5C758731700485CC3CF3F6D12351B24D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -330,7 +328,6 @@
 		8B3E37CA18E6804163D72A02EC4687A4 /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
 		8B6092149D9176EC8170FF7B3E0051F3 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImagePrefetcher.h; sourceTree = "<group>"; };
 		8BA7F87FF350995712D87EB3B6FC64A9 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
-		8C31732980518F0712430A205DAB686A /* BDBwarnigTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBwarnigTimeViewController.h; sourceTree = "<group>"; };
 		8E5AC97E888A27BB54E4264D8F293AE5 /* BDBTableViewRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBTableViewRefreshHeader.m; sourceTree = "<group>"; };
 		905857EFF3C3BF9177BCA0EE5842187D /* Modules.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Modules.plist; sourceTree = "<group>"; };
 		90BA5879015E5916E5A1202CDCD05BE5 /* MJRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooter.h; sourceTree = "<group>"; };
@@ -919,8 +916,6 @@
 				4F3C0EB83BCC48AE8AB3AAA43BDC0F0B /* BDBWarningAddViewController.m */,
 				C7D4A6AB2830E17E4438D58612DCA3CC /* BDBWarningViewController.h */,
 				9416CB3FBE8A552F10E54BE8B8485167 /* BDBWarningViewController.m */,
-				8C31732980518F0712430A205DAB686A /* BDBwarnigTimeViewController.h */,
-				59F244D989A599CE0B6FE7A2ECAEC51B /* BDBwarnigTimeViewController.m */,
 			);
 			path = Contronller;
 			sourceTree = "<group>";
@@ -1360,7 +1355,6 @@
 				95FA735751EE5FE8916C52DD3A46AE34 /* BDB_Cell_Button.m in Sources */,
 				2EC55DCE1163ECFC77C6D4484B9D58A0 /* BDB_TableViewCell_One.m in Sources */,
 				33155C98F3EBF31FB01B2C514DB6FBBD /* BDB_TableViewCell_Two.m in Sources */,
-				3462728BF89D5A59C3A9956FA86CDFF2 /* BDBwarnigTimeViewController.m in Sources */,
 				BFF2034231B9C77758F35A71804464A1 /* FLAnimatedImage.m in Sources */,
 				910506E7CF76FD9BCBF309DBA8CD5C23 /* FLAnimatedImageView.m in Sources */,
 				2E06E069A80AD9AB082CCC010BAE52ED /* GlobalConfigurations.m in Sources */,

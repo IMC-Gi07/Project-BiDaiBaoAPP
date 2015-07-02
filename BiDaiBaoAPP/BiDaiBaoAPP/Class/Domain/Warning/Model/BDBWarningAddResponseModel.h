@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BDB_Model : NSObject
+@interface BDBWarningAddResponseModel : NSObject
 
 @property (nonatomic,copy) NSString *Msg;
 
-@property (nonatomic,assign)NSInteger Result;
+@property (nonatomic,assign)NSUInteger Result;
 
 
 @end

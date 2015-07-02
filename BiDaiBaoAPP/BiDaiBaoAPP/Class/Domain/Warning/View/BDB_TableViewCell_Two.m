@@ -23,7 +23,7 @@
    
     self.slider2.popUpViewArrowLength = 10;
     
-    UIImage *stetchLeftTrack= [UIImage imageNamed:@"slider_min_blackground.png"];
+    UIImage *stetchLeftTrack= [UIImage imageNamed:@"slider_min_blackground"];
     UIImage *stetchRightTrack = [UIImage imageNamed:@"slider_max_blackground.png"];
     //滑块图片
     UIImage *thumbImage = [UIImage imageNamed:@"slider_button.png"];
@@ -40,13 +40,16 @@
     
     
     
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
     
+}
+
+- (IBAction)change:(ASValueTrackingSlider *)sender {
+    [_delegate updateSliderValue:sender.value];
 }
 
 @end

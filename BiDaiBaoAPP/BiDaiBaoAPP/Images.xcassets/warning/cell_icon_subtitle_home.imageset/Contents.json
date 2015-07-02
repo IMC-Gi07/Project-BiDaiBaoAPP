@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "cell_icon_subtitle_home@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "cell_icon_subtitle_home.png"
+      "filename" : "cell_icon_subtitle_home@3x.png"
     }
   ],
   "info" : {

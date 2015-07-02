@@ -30,8 +30,8 @@
 		351718471B4386B800730020 /* BDBNoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718271B4386B800730020 /* BDBNoticeDetailViewController.m */; };
 		351718481B4386B800730020 /* BDBNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718291B4386B800730020 /* BDBNoticeViewController.m */; };
 		351718491B4386B800730020 /* Index.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3517182A1B4386B800730020 /* Index.storyboard */; };
-		3517184A1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517182D1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.m */; };
-		3517184B1B4386B800730020 /* BDBIndexGuideMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517182F1B4386B800730020 /* BDBIndexGuideMessageModel.m */; };
+		3517184A1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517182D1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.m */; };
+		3517184B1B4386B800730020 /* BDBIndexGuideMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517182F1B4386B800730020 /* BDBIndexGuideMessageResponseModel.m */; };
 		3517184C1B4386B800730020 /* BDBNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718311B4386B800730020 /* BDBNoticeModel.m */; };
 		3517184D1B4386B800730020 /* BDBNoticeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718331B4386B800730020 /* BDBNoticeResponseModel.m */; };
 		3517184E1B4386B800730020 /* BDBDetailedMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718361B4386B800730020 /* BDBDetailedMessageTableViewCell.m */; };
@@ -45,6 +45,8 @@
 		351718561B4386B800730020 /* BDBParameterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351718421B4386B800730020 /* BDBParameterTableViewCell.xib */; };
 		351718571B4386B800730020 /* BDBSortTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718441B4386B800730020 /* BDBSortTableViewCell.m */; };
 		351718581B4386B800730020 /* BDBSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351718451B4386B800730020 /* BDBSortTableViewCell.xib */; };
+		3517185B1B4390C300730020 /* BDBWebAnnouncementResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517185A1B4390C300730020 /* BDBWebAnnouncementResponseModel.m */; };
+		351718611B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 351718601B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.m */; };
 		359A304C3E9C90BABEE0993EEE36904F /* BDBTableViewCell_Sift.xib in Resources */ = {isa = PBXBuildFile; fileRef = E491CF936F751A312EE4738C206F91B7 /* BDBTableViewCell_Sift.xib */; };
 		365E4C91734230FE22B160C49362B6F0 /* UIBarButtonItem+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 084E6B40E7CAB5D41943A29654ACF650 /* UIBarButtonItem+Extensions.m */; };
 		36F3D5824305DED17647839D8D2CFB82 /* MJRefreshStateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAE224A6626D015D3A01D59029C7C /* MJRefreshStateHeader.m */; };
@@ -216,10 +218,10 @@
 		351718281B4386B800730020 /* BDBNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeViewController.h; sourceTree = "<group>"; };
 		351718291B4386B800730020 /* BDBNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeViewController.m; sourceTree = "<group>"; };
 		3517182A1B4386B800730020 /* Index.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Index.storyboard; sourceTree = "<group>"; };
-		3517182C1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexClassifyParticularMessageModel.h; sourceTree = "<group>"; };
-		3517182D1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBIndexClassifyParticularMessageModel.m; sourceTree = "<group>"; };
-		3517182E1B4386B800730020 /* BDBIndexGuideMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexGuideMessageModel.h; sourceTree = "<group>"; };
-		3517182F1B4386B800730020 /* BDBIndexGuideMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBIndexGuideMessageModel.m; sourceTree = "<group>"; };
+		3517182C1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexClassifyParticularMessageResponseModel.h; sourceTree = "<group>"; };
+		3517182D1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBIndexClassifyParticularMessageResponseModel.m; sourceTree = "<group>"; };
+		3517182E1B4386B800730020 /* BDBIndexGuideMessageResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexGuideMessageResponseModel.h; sourceTree = "<group>"; };
+		3517182F1B4386B800730020 /* BDBIndexGuideMessageResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBIndexGuideMessageResponseModel.m; sourceTree = "<group>"; };
 		351718301B4386B800730020 /* BDBNoticeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeModel.h; sourceTree = "<group>"; };
 		351718311B4386B800730020 /* BDBNoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeModel.m; sourceTree = "<group>"; };
 		351718321B4386B800730020 /* BDBNoticeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeResponseModel.h; sourceTree = "<group>"; };
@@ -241,6 +243,10 @@
 		351718431B4386B800730020 /* BDBSortTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSortTableViewCell.h; sourceTree = "<group>"; };
 		351718441B4386B800730020 /* BDBSortTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSortTableViewCell.m; sourceTree = "<group>"; };
 		351718451B4386B800730020 /* BDBSortTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBSortTableViewCell.xib; sourceTree = "<group>"; };
+		351718591B4390C300730020 /* BDBWebAnnouncementResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWebAnnouncementResponseModel.h; sourceTree = "<group>"; };
+		3517185A1B4390C300730020 /* BDBWebAnnouncementResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWebAnnouncementResponseModel.m; sourceTree = "<group>"; };
+		3517185F1B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexClassifyParticularMessageModel.h; sourceTree = "<group>"; };
+		351718601B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBIndexClassifyParticularMessageModel.m; sourceTree = "<group>"; };
 		3533F3B2D7DE2539BC7068E0FB73E6B2 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		35E0900B516D1FDD8B575C50A34C41D8 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJConst.h; sourceTree = "<group>"; };
 		36C2A4527B8A14DB3E121F30DF674D35 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
@@ -565,10 +571,14 @@
 		3517182B1B4386B800730020 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3517182C1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.h */,
-				3517182D1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.m */,
-				3517182E1B4386B800730020 /* BDBIndexGuideMessageModel.h */,
-				3517182F1B4386B800730020 /* BDBIndexGuideMessageModel.m */,
+				351718591B4390C300730020 /* BDBWebAnnouncementResponseModel.h */,
+				3517185A1B4390C300730020 /* BDBWebAnnouncementResponseModel.m */,
+				3517182E1B4386B800730020 /* BDBIndexGuideMessageResponseModel.h */,
+				3517182F1B4386B800730020 /* BDBIndexGuideMessageResponseModel.m */,
+				3517182C1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.h */,
+				3517182D1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.m */,
+				3517185F1B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.h */,
+				351718601B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.m */,
 				351718301B4386B800730020 /* BDBNoticeModel.h */,
 				351718311B4386B800730020 /* BDBNoticeModel.m */,
 				351718321B4386B800730020 /* BDBNoticeResponseModel.h */,
@@ -580,11 +590,11 @@
 		351718341B4386B800730020 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				351718381B4386B800730020 /* BDBIndexTableViewHeader.h */,
+				351718391B4386B800730020 /* BDBIndexTableViewHeader.m */,
 				351718351B4386B800730020 /* BDBDetailedMessageTableViewCell.h */,
 				351718361B4386B800730020 /* BDBDetailedMessageTableViewCell.m */,
 				351718371B4386B800730020 /* BDBDetailedMessageTableViewCell.xib */,
-				351718381B4386B800730020 /* BDBIndexTableViewHeader.h */,
-				351718391B4386B800730020 /* BDBIndexTableViewHeader.m */,
 				3517183A1B4386B800730020 /* BDBMessageTableViewCell.h */,
 				3517183B1B4386B800730020 /* BDBMessageTableViewCell.m */,
 				3517183C1B4386B800730020 /* BDBMessageTableViewCell.xib */,
@@ -860,9 +870,9 @@
 		9B89FD92C0DB20BBEB5DB4012BAB96C8 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				351718221B4386B800730020 /* Index */,
 				B9FDF9322D50D72C2534969D3F9596C1 /* Discovery */,
 				705D11BCB6A88FA1DBAB830D29B60D08 /* Feature */,
+				351718221B4386B800730020 /* Index */,
 				B420F955A4D149A0825D1F6A02B32E56 /* Subject */,
 				5BFAC6C1070DCE7E9DED66EE9A01F2F0 /* User */,
 				CD521E418912AD2DD45EC2C9E4B09BED /* Warning */,
@@ -1272,7 +1282,7 @@
 				44EA35BA3A44D12BDA65FA7A430A8E0B /* BDBSujectRespondModel.m in Sources */,
 				7DDEE407FC9F657CA1F5D57EB9750186 /* BDBTableViewCell.m in Sources */,
 				351718501B4386B800730020 /* BDBIndexTableViewHeader.m in Sources */,
-				3517184B1B4386B800730020 /* BDBIndexGuideMessageModel.m in Sources */,
+				3517184B1B4386B800730020 /* BDBIndexGuideMessageResponseModel.m in Sources */,
 				E27BF407DB19A1765640082BE68C7D73 /* BDBTableViewCell_Sift.m in Sources */,
 				D297785E07FCCB8E14CCBBA7199FA4F7 /* BDBTableViewRefreshFooter.m in Sources */,
 				8FC52EC724AB38796632E98FD1E26ECF /* BDBTableViewRefreshHeader.m in Sources */,
@@ -1282,6 +1292,7 @@
 				DD57EA4CDE9738AF49BB7A41A06AF6F6 /* BDB_Model.m in Sources */,
 				2EC55DCE1163ECFC77C6D4484B9D58A0 /* BDB_TableViewCell_One.m in Sources */,
 				33155C98F3EBF31FB01B2C514DB6FBBD /* BDB_TableViewCell_Two.m in Sources */,
+				3517185B1B4390C300730020 /* BDBWebAnnouncementResponseModel.m in Sources */,
 				BFF2034231B9C77758F35A71804464A1 /* FLAnimatedImage.m in Sources */,
 				910506E7CF76FD9BCBF309DBA8CD5C23 /* FLAnimatedImageView.m in Sources */,
 				2E06E069A80AD9AB082CCC010BAE52ED /* GlobalConfigurations.m in Sources */,
@@ -1320,6 +1331,7 @@
 				91B7FADDFBA0E9C4C4B4F7F715FF0750 /* SDWebImageDecoder.m in Sources */,
 				9E46A42EEC2EA8DB67D585E820A8C729 /* SDWebImageDownloader.m in Sources */,
 				73DC481DCDAD277D0E2474B0EEE035FF /* SDWebImageDownloaderOperation.m in Sources */,
+				351718611B43DCD700730020 /* BDBIndexClassifyParticularMessageModel.m in Sources */,
 				8B6D1BA525821D3650A6ECEA95B14AF5 /* SDWebImageManager.m in Sources */,
 				3517184D1B4386B800730020 /* BDBNoticeResponseModel.m in Sources */,
 				E72980A09863702E9CF5229DF0268F14 /* SDWebImagePrefetcher.m in Sources */,
@@ -1329,7 +1341,7 @@
 				F9FC7EA2863B39637E63003476BE0422 /* UIImage+GIF.m in Sources */,
 				A7F91F1FE755597312FCE4F0E87F6F55 /* UIImage+MultiFormat.m in Sources */,
 				79FE2FFF1E05D6CD90C4B438DF993435 /* UIImage+WebP.m in Sources */,
-				3517184A1B4386B800730020 /* BDBIndexClassifyParticularMessageModel.m in Sources */,
+				3517184A1B4386B800730020 /* BDBIndexClassifyParticularMessageResponseModel.m in Sources */,
 				0896884FA75919E360B155F4AAB7E3A2 /* UIImageView+HighlightedWebCache.m in Sources */,
 				78E92698CA50C23937EDD3EC1C417C6E /* UIImageView+WebCache.m in Sources */,
 				57732B24408E0C8885E27FB888A07024 /* UIScrollView+MJExtension.m in Sources */,
@@ -1421,6 +1433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$SRCROOT/BiDaiBaoAPP/BiDaiBao-Prefix.pch";
 				INFOPLIST_FILE = BiDaiBaoAPP/Info.plist;

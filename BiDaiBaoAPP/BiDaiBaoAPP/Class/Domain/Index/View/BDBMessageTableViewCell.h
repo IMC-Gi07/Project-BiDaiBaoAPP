@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BDBMessageTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 + (BDBMessageTableViewCell *)cell;
 

@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "cell_bg_orangeBlock@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "cell_bg_orangeBlock.png"
+      "filename" : "cell_bg_orangeBlock@3x.png"
     }
   ],
   "info" : {

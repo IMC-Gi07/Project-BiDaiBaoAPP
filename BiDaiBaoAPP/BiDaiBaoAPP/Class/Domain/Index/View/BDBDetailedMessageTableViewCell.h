@@ -10,7 +10,15 @@
 
 @interface BDBDetailedMessageTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ProgressPercentLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *TermLabel;
+@property (weak, nonatomic) IBOutlet UILabel *AmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *PlatformNameLabel;
+
+
+
+
 
 + (BDBDetailedMessageTableViewCell *)cell;
 

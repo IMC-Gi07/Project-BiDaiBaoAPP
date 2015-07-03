@@ -5,16 +5,26 @@
 //  Created by moon on 15/6/9.
 //  Copyright (c) 2015年 moon. All rights reserved.
 //
-
+#import "ZXLLoadDataIndicatePage.h"
 #import "BDBWarningAddViewController.h"
 #import "BDB_TableViewCell_One.h"
 #import "BDB_TableViewCell_Two.h"
-
 #import "MJDIYHeader.h"
 #import "MJDIYAutoFooter.h"
 #import "BDBWarningAddResponseModel.h"
 #import "MJExtension.h"
 #import "AFNetworking.h"
+#import "BDB_TableViewCell_Title.h"
+
+//<<-----warningTime------
+#import "BDBCustomTableViewCellOne.h"
+#import "BDBCustomTableViewCellTwo.h"
+#import "BDBCustomTableViewCellThree.h"
+#import "BDBWarningTimeResponseModel.h"
+//-----warningTime------>>
+
+
+
 static const CGFloat MJDuration = 2.0;
 
 /**
@@ -23,21 +33,46 @@ static const CGFloat MJDuration = 2.0;
 #define MJRandomData [NSString stringWithFormat:@"随机数据---%d", arc4random_uniform(1000000)]
 
 
-@interface BDBWarningAddViewController ()<UITableViewDelegate,UITableViewDataSource,BDB_TableViewCell_TwoDelegate>
+@interface BDBWarningAddViewController ()<UITableViewDelegate,UITableViewDataSource,BDB_TableViewCell_TwoDelegate,BDBCustomTableViewCellTwoDelegate>
+@property(nonatomic,weak) ZXLLoadDataIndicatePage *
+
+indicatePage;
+
 @property (weak, nonatomic) IBOutlet UIButton *packUp;
 
 @property (nonatomic, assign)NSInteger row;
 @property (nonatomic, assign)NSInteger rowrow;
 @property (nonatomic, assign)NSInteger rowNumber;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *WarningTableView;
 @property (strong, nonatomic) NSMutableArray *data;
 @property(nonatomic,strong)BDBWarningAddResponseModel *warningAddModel;
 
-@property (nonatomic,assign)CGFloat thresHold;
+@property (nonatomic,assign)NSInteger thresHold;
+
+
+@property (nonatomic,assign)BOOL IsSegmentedAlarm;
+
+@property (nonatomic,assign)BOOL changeButton;
+
+
+//<<-----warningTime------
+
+@property (nonatomic,assign) BOOL isFloded;
+
+@property (nonatomic,strong) NSMutableArray *cellButtonArray;
+
+@property (nonatomic,assign) BOOL isYearPicker;
+
+
+//-----warningTime------>>
+
+
+
 
 @end
 
 @implementation BDBWarningAddViewController
+
 
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -46,8 +81,12 @@ static const CGFloat MJDuration = 2.0;
         
         self.hidesBottomBarWhenPushed = YES;
         
-        self.rowNumber = 1;
+        
+        self.rowNumber = 2;
         self.rowrow = 1;
+        
+        self.IsSegmentedAlarm = NO;
+        self.changeButton = NO;
     }
     return self;
 }
@@ -63,9 +102,10 @@ static const CGFloat MJDuration = 2.0;
     }
     
     
-    [_tableView reloadData];
+    [_WarningTableView reloadData];
     self.rowrow ++;
 }
+
 
 
 - (void)loadNewData
@@ -78,25 +118,35 @@ static const CGFloat MJDuration = 2.0;
     // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MJDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-        [self.tableView reloadData];
+        [self.WarningTableView reloadData];
         
         // 拿到当前的下拉刷新控件，结束刷新状态
-        [self.tableView.header endRefreshing];
+        [self.WarningTableView.header endRefreshing];
     });
+    
+    
+    
+    
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+//    self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
     
     
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 
-    self.tableView.header = header;
+    self.WarningTableView.header = header;
     
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    self.WarningTableView.dataSource = self;
+    self.WarningTableView.delegate = self;
+    self.WarningTableView.bounces = NO;
+    
+    
+    self.isFloded = YES;
+    self.isYearPicker = YES;
 
     
 }
@@ -108,11 +158,17 @@ static const CGFloat MJDuration = 2.0;
     
     parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
     parameters[@"Device"] = @"0";
-    parameters[@"Type"] = @"0";
+    parameters[@"Type"] = @"1";
     
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        ZXLLOG(@"success response: %@",responseObject);
+//        NSArray *t = responseObject[@"P2PList"];
+//        NSDictionary *m = t[7];
+//        ZXLLOG(@"success/////////// response: %@",m[@"PlatformName"]);
+   
+      
         
-       // ZXLLOG(@"success response: %@",responseObject);
+        
         
         
         
@@ -123,9 +179,55 @@ static const CGFloat MJDuration = 2.0;
 }
 
 
+
+
+
+//<<---------Model-------------
+
 - (void)warningAddLoadDatas {
+    if (!_thresHold == 0) {
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmEarnings"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+        parameters[@"Device"] = @"0";
+        
+        parameters[@"UID"] = @"99999999999";
+        
+        parameters[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
+        
+        
+        parameters[@"Action"] = @"0";
+        parameters[@"PlatFormID"] = @"13";
+        parameters[@"Item"] = @"0";
+        parameters[@"Comparison"] = @"0";
+        parameters[@"ThresHold"] = [NSString stringWithFormat:@"%ld",(long)_thresHold];
+        parameters[@"Active"] = @"0";
+        
+        
+        [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+            
+            ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
+            BDBWarningAddResponseModel *warningAddResponseModel = [BDBWarningAddResponseModel objectWithKeyValues:responseObject];
+            self.warningAddModel = warningAddResponseModel;
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ZXLLOG(@"error response: %@",error);
+        }];
+    }else {
+        NSLog(@"请移动");
+    }
+
+}
+
+- (void)warningTimeLoadDatas{
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmEarnings"];
+    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
@@ -137,18 +239,14 @@ static const CGFloat MJDuration = 2.0;
     
     
     parameters[@"Action"] = @"0";
-    parameters[@"PlatFormID"] = @"723";
-    parameters[@"Item"] = @"0";
-    parameters[@"Comparison"] = @"0";
-    parameters[@"ThresHold"] = [NSString stringWithFormat:@"%f",_thresHold];
-
     
+ 
+    parameters[@"Active"] = @"0";
     
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
         
-        ZXLLOG(@"success response: %@",responseObject);
-        BDBWarningAddResponseModel *warningAddResponseModel = [BDBWarningAddResponseModel objectWithKeyValues:responseObject];
-        self.warningAddModel = warningAddResponseModel;
+        
         
         
         
@@ -156,26 +254,52 @@ static const CGFloat MJDuration = 2.0;
         ZXLLOG(@"error response: %@",error);
     }];
     
-
+    
 }
+
+
+
+
+//---------Model------------->>
     
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
+    NSUInteger warningSections;
+    if (_IsSegmentedAlarm == NO) {
+        warningSections = 1;
+    }else if (_IsSegmentedAlarm == YES){
+        warningSections = 3;
+    }
+    
+    return warningSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //self.rowNumber = 1;
+    
+    NSUInteger warningRow;
+    
+    if (_IsSegmentedAlarm == NO) {
+     
     return self.rowNumber;
+        
+    }else if (_IsSegmentedAlarm == YES){
+        return 1;
+    }
+    
+    return warningRow;
+    
 }
 
 
 //设置行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSUInteger rowNo2;
+    if (_IsSegmentedAlarm == NO) {
+     
     switch (indexPath.row) {
         case 0:
             self.row = 190;
@@ -184,40 +308,105 @@ static const CGFloat MJDuration = 2.0;
             self.row = 128;
             break;
        
+            break;
+
     }
     return self.row;
-    
+    }else if (_IsSegmentedAlarm == YES){
+        NSUInteger rowNo1 = indexPath.section;
+        
+        if(rowNo1 == 0){
+            return 52.0f;
+        }else if (rowNo1 == 1){
+            return 52.0f;
+        }else if(rowNo1 == 2){
+            return 135.0f;
+        }
+        return rowNo1;
+    }
+    return rowNo2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    if (_IsSegmentedAlarm == NO) {
+    
     
     //    id cell;
     NSUInteger rowOn = indexPath.row;
 //    根据行数判断return哪个自定义cell
+
     if (self.rowNumber == 1) {
         if (rowOn == 0) {
-        
             BDB_TableViewCell_Two *cell_two =  [[NSBundle mainBundle] loadNibNamed:@"BDB_TableViewCell_Two" owner:nil options:nil][0];
             cell_two.delegate = self;
             cell = cell_two;
+  
         }
     
     }else if (self.rowNumber == 2){
         if (rowOn == 0) {
             cell = [[NSBundle mainBundle] loadNibNamed:@"BDB_TableViewCell_One" owner:nil options:nil][0];
-        } else if (rowOn == 1){
             
+        } else if (rowOn == 1){
             BDB_TableViewCell_Two *cell_two =  [[NSBundle mainBundle] loadNibNamed:@"BDB_TableViewCell_Two" owner:nil options:nil][0];
             cell_two.delegate = self;
             cell = cell_two;
         }
-    
     }
-
+    }else if (_IsSegmentedAlarm == YES){
+        static NSString *cellID1 = @"cellId1";
+        static NSString *cellID2 = @"cellId2";
+        static NSString *cellID3 = @"cellId3";
+        
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId0"];
+        
+        NSUInteger rowNo = indexPath.section;
+        if(rowNo == 0){
+            BDBCustomTableViewCellOne *cell = [tableView dequeueReusableCellWithIdentifier:cellID1];
+            if (cell == nil) {
+                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellOne" owner:nil options:nil];
+                for (id currentObject in topLevelObjects) {
+                    if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+                        cell = (BDBCustomTableViewCellOne *)currentObject;
+                        // break;
+                    }
+                }
+            }
+            return cell;
+        }else if (rowNo == 1){
+            BDBCustomTableViewCellTwo *cell = [tableView dequeueReusableCellWithIdentifier:cellID2];
+            if (cell == nil) {
+                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellTwo" owner:nil options:nil];
+                for (id currentObject in topLevelObjects) {
+                    if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+                        cell = (BDBCustomTableViewCellTwo *)currentObject;
+                        // break;
+                    }
+                }
+            }
+            cell.delegate1 = self;
+            return cell;
+        }else if (rowNo == 2){
+            BDBCustomTableViewCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellID3];
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellThree" owner:nil options:nil];
+            cell = topLevelObjects[0];
+            if (_isYearPicker) {
+                cell.datePicker.datePickerMode = UIDatePickerModeDate;
+                
+            }else {
+                cell.datePicker.datePickerMode = UIDatePickerModeTime;
+            }
+            
+            return cell;
+        }
+        
+        
+        
+    }
     
     return cell;
 }
@@ -230,17 +419,99 @@ static const CGFloat MJDuration = 2.0;
  *  点击确认按钮，触发请求传输事件
  */
 - (IBAction)confirmButtonClick:(UIButton *)sender {
-    [self gainPlatFormID];
-    [self warningAddLoadDatas];
+    
+    
+    if (self.IsSegmentedAlarm == NO) {
+        [self warningAddLoadDatas];
+    }else if (self.IsSegmentedAlarm == YES){
+        
+        [self warningTimeLoadDatas];
+    }
+    
+//    [self gainPlatFormID];
+    
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+
+
+
+
 - (IBAction)warningTimeButton:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"warningAddTowariningTime" sender:self];
+    
+    
+    self.IsSegmentedAlarm = YES;
+    [sender setBackgroundImage:[UIImage imageNamed:@"waring_uisegmentedcontrol_right"] forState:UIControlStateNormal];
+    
+    [_WarningTableView reloadData];
+    
 }
 
--(void)updateSliderValue:(CGFloat)sliderValue{
+- (IBAction)warningAddButton:(UIButton *)sender {
+    
+    self.IsSegmentedAlarm = NO;
+    
+    [_WarningTableView reloadData];
+    
+}
+
+//<<-----warningTime------
+
+-(void)shrinkButtonClickedForChangingHeightOfRow:(UIButton *)sender {
+    
+    
+    self.isFloded = !_isFloded;
+    
+    [_WarningTableView reloadData];
+    
+    
+}
+
+
+-(void)changeYear_Month_Day_Picker:(UIButton *)sender {
+    
+    self.isYearPicker = YES;
+    [self.WarningTableView reloadData];
+    
+}
+-(void)changeHour_Minutes_Picker:(UIButton *)sender {
+    
+    self.isYearPicker = NO;
+    [self.WarningTableView reloadData];
+    
+}
+
+- (void)warningTimeloadDatas{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+    parameters[@"Device"] = @"0";
+    
+    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        ZXLLOG(@"success response: %@",responseObject);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ZXLLOG(@"error response: %@",error);
+    }];
+    
+}
+
+
+
+//-----warningTime------>>
+
+
+
+
+-(void)updateSliderValue:(NSInteger)sliderValue{
     self.thresHold = sliderValue;
-  //  ZXLLOG(@"-----------%f",sliderValue);
+   // ZXLLOG(@"-----------%ld",(long)sliderValue);
 }
 
 @end

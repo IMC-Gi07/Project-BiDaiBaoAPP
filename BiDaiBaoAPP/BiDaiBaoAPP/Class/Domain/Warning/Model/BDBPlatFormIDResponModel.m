@@ -7,7 +7,12 @@
 //
 
 #import "BDBPlatFormIDResponModel.h"
+#import "BDBPlatFormIDModel.h"
 
 @implementation BDBPlatFormIDResponModel
+
++ (NSDictionary *)objectClassInArrayOne {
+    return @{@"P2PList": [BDBPlatFormIDModel class]};
+}
 
 @end

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *colorBlock;
 @property (weak, nonatomic) id<BDBWarningTableViewCellDelegate>delegate;
 
+@property (weak, nonatomic) IBOutlet UIButton *delButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *PlateFormNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *ThresHoldLable;

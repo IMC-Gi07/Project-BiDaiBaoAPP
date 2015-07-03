@@ -13,15 +13,37 @@
 
 - (void)awakeFromNib {
     
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterPercentStyle];
-    [self.slider2 setNumberFormatter:formatter];
-    self.slider2.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:26];
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//    [formatter setNumberStyle:NSNumberFormatterPercentStyle];
+//    [self.slider2 setNumberFormatter:formatter];
+//    self.slider2.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:26];
+//    
+//   
+//    self.slider2.popUpViewAnimatedColors = @[[UIColor blueColor]];
+//   
+//    self.slider2.popUpViewArrowLength = 10;
+//    self.slider2.maximumValue = 25;
+   
     
-   
-    self.slider2.popUpViewAnimatedColors = @[[UIColor blueColor]];
-   
-    self.slider2.popUpViewArrowLength = 10;
+    
+    NSNumberFormatter *tempFormatter = [[NSNumberFormatter alloc] init];
+    [tempFormatter setPositiveSuffix:@"%"];
+    [tempFormatter setNegativeSuffix:@"%"];
+    
+
+    [self.slider2 setNumberFormatter:tempFormatter];
+    self.slider2.minimumValue = 0;
+    self.slider2.maximumValue = 25;
+    
+    self.slider2.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:26];
+    self.slider2.textColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    
+    UIColor *blue = [UIColor colorWithHue:0.58 saturation:0.75 brightness:1.0 alpha:1.0];
+
+    [self.slider2 setPopUpViewAnimatedColors:@[blue] withPositions:@[@0]];
+    
+    
+    
     
     UIImage *stetchLeftTrack= [UIImage imageNamed:@"slider_min_blackground"];
     UIImage *stetchRightTrack = [UIImage imageNamed:@"slider_max_blackground.png"];

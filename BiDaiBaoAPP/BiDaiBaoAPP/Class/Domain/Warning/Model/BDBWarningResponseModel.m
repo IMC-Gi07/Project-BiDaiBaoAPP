@@ -12,12 +12,10 @@
 
 @implementation BDBWarningResponseModel
 
-+ (NSDictionary *)objectClassInArrayOne {
-    return @{@"AlarmEarningsList": [BDBWarningModelOne class]};
++ (NSDictionary *)objectClassInArray{
+    return @{@"AlarmEarningsList":[BDBWarningModelOne class],@"AlarmRingList":[BDBWarningModelTwo class]};
 }
 
-+ (NSDictionary *)objectClassInArrayTwo {
-    return @{@"AlarmRingList": [BDBWarningModelTwo class]};
-}
+
 
 @end

@@ -26,12 +26,12 @@
 
 @property (nonatomic,copy) NSString *SlientSettingActive;
 
-@property (nonatomic,copy) NSString *AlarmEarningsNum;
+@property (nonatomic,assign) NSUInteger AlarmEarningsNum;
 
-@property (nonatomic,copy) NSMutableArray *AlarmEarningsList;
+@property (nonatomic,strong) NSMutableArray *AlarmEarningsList;
 
 @property (nonatomic,assign) NSUInteger AlarmRingNum;
 
-@property (nonatomic,copy) NSMutableArray *AlarmRingList;
+@property (nonatomic,strong) NSMutableArray *AlarmRingList;
 
 @end

@@ -11,7 +11,7 @@
 @class BDBWarningAddViewController;
 @protocol BDB_TableViewCell_TwoDelegate <NSObject>
 
-- (void)updateSliderValue:(CGFloat)sliderValue;
+- (void)updateSliderValue:(NSInteger)sliderValue;
 
 @end
 @interface BDB_TableViewCell_Two : UITableViewCell

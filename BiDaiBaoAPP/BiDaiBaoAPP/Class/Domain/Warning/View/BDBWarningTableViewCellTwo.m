@@ -1,14 +1,14 @@
 //
-//  BDBCustomTableViewCellFive.m
-//  warning_time
+//  BDBWarningTableViewCellTwo.m
+//  BiDaiBaoAPP
 //
-//  Created by mianshuai on 15/6/9.
-//  Copyright (c) 2015年 bdb. All rights reserved.
+//  Created by mianshuai on 15/7/2.
+//  Copyright (c) 2015年 zhang xianglu. All rights reserved.
 //
 
-#import "BDBCustomTableViewCellFive.h"
+#import "BDBWarningTableViewCellTwo.h"
 
-@implementation BDBCustomTableViewCellFive
+@implementation BDBWarningTableViewCellTwo
 
 - (void)awakeFromNib {
     // Initialization code

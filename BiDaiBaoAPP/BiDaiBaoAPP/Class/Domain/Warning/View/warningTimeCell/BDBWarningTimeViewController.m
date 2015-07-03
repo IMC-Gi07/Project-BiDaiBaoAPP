@@ -7,14 +7,12 @@
 //
 
 #import "BDBWarningTimeViewController.h"
-#import "BDBCustomTableViewCell.h"
 #import "BDBCustomTableViewCellOne.h"
 #import "BDBCustomTableViewCellTwo.h"
 #import "BDBCustomTableViewCellThree.h"
-#import "BDBCustomTableViewCellFive.h"
 
 
-@interface BDBWarningTimeViewController ()<UITableViewDelegate,UITableViewDataSource,BDBCustomTableViewCellDelegate,BDBCustomTableViewCellTwoDelegate>
+@interface BDBWarningTimeViewController ()<UITableViewDelegate,UITableViewDataSource,BDBCustomTableViewCellTwoDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -22,9 +20,9 @@
 
 @property (nonatomic,strong) NSMutableArray *cellButtonArray;
 
-@property (nonatomic,assign) NSIndexPath *indexPath_3;
-
-@property (nonatomic,assign) NSIndexPath *indexPath_4;
+//@property (nonatomic,assign) NSIndexPath *indexPath_3;
+//
+//@property (nonatomic,assign) NSIndexPath *indexPath_4;
 
 @property (nonatomic,assign) BOOL isYearPicker;
 
@@ -101,30 +99,6 @@
             cell.datePicker.datePickerMode = UIDatePickerModeTime;
         }
         
-        return cell;
-    }else if (rowNo == 3){
-        BDBCustomTableViewCell *cell = [[BDBCustomTableViewCell alloc] init];
-        
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCell" owner:nil options:nil];
-        cell = topLevelObjects[0];
-        
-        self.indexPath_3 = indexPath;
-        cell.delegate = self;
-        return cell;
-    }else if (rowNo == 4){
-        BDBCustomTableViewCellFive *cell = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellFive" owner:nil options:nil][0];
-        
-        UIButton *button_1 = (UIButton *)[cell viewWithTag:1003];
-        UIButton *button_2 = (UIButton *)[cell viewWithTag:1002];
-        UIButton *button_3 = (UIButton *)[cell viewWithTag:1001];
-        self.cellButtonArray = [NSMutableArray arrayWithObjects:button_1,button_2,button_3, nil];
-        if (_isFloded) {
-            for (UIButton *button in _cellButtonArray) {
-                [button setTitle:@"" forState: UIControlStateNormal];
-                button.alpha = 0;
-            }
-        }
-        self.indexPath_4 = indexPath;
         return cell;
     }
     

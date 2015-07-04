@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 Jamy. All rights reserved.
 //
 
-#import "BDBIndexResponseModel.h"
+#import "BDBIndexGuideMessageResponseModel.h"
 
-@implementation BDBIndexResponseModel
+@implementation BDBIndexGuideMessageResponseModel
 
 @end

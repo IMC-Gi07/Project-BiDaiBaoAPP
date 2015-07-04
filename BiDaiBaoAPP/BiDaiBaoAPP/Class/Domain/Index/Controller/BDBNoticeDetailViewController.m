@@ -27,19 +27,23 @@
 
 @implementation BDBNoticeDetailViewController
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super initWithCoder:aDecoder]) {
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+	self = [super initWithCoder:coder];
+	if (self) {
 		self.title = @"比贷宝";
+		self.hidesBottomBarWhenPushed = YES;
 	}
 	return self;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	[self initNoticeDetailWebView];
 	
-	self.navigationController.navigationBarHidden = YES;
+	//self.navigationController.navigationBarHidden = YES;
 	self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
 	
 	[self loadNoticeDetail];

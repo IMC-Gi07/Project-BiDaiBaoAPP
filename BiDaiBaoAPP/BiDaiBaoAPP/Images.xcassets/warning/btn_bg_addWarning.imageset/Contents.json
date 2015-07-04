@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "btn_bg_addWarning@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "btn_bg_addWarning.png"
+      "filename" : "btn_bg_addWarning@3x.png"
     }
   ],
   "info" : {

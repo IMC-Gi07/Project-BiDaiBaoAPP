@@ -34,9 +34,7 @@
 @property(nonatomic,assign) NSUInteger pageSize;
 
 
-@property(nonatomic,weak) ZXLLoadDataIndicatePage *
-
-indicatePage;
+@property(nonatomic,weak) ZXLLoadDataIndicatePage *indicatePage;
 
 /**
  *  用户点击的公告
@@ -83,7 +81,7 @@ indicatePage;
 	
 	[self initNoticeTableView];
 	
-	self.navigationController.navigationBarHidden = YES;
+	//self.navigationController.navigationBarHidden = YES;
 	self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
 	
 	[self refreshDatas];
@@ -113,7 +111,7 @@ indicatePage;
 		
 		//将更多的数据，追加到数组后面
 		[_noticeModels addObjectsFromArray:noticeResponseModel.NoticeList];
-		
+        NSLog(@"%@",_noticeModels);
 		//刷新完数据后，回收头部
 		[_noticeTableView.footer endRefreshing];
 		
@@ -146,7 +144,7 @@ indicatePage;
 		BDBNoticeResponseModel *noticeResponseModel = [BDBNoticeResponseModel objectWithKeyValues:responseObject];
 		
 		self.noticeModels = noticeResponseModel.NoticeList;
-		
+        //NSLog(@"_noticeModels:%@",_noticeModels);
 		if (_indicatePage) {
 			[_indicatePage hide];
 			self.navigationController.navigationBarHidden = NO;

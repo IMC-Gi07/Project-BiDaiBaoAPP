@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="KGk-i7-Jjw" customClass="BDBCustomTableViewCellThree">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="210"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRC-QS-yGd">
+                        <rect key="frame" x="8" y="208" width="354" height="1"/>
+                        <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="N4g-hC-hbW"/>
+                        </constraints>
+                    </view>
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKD-9l-OYv">
+                        <rect key="frame" x="8" y="14" width="354" height="180"/>
+                        <date key="date" timeIntervalSinceReferenceDate="455468160.298796">
+                            <!--2015-06-08 14:56:00 +0000-->
+                        </date>
+                        <locale key="locale" localeIdentifier="zh"/>
+                    </datePicker>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rRC-QS-yGd" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="7CJ-iD-jtG"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="rRC-QS-yGd" secondAttribute="bottom" constant="-8" id="Nfq-ed-BXJ"/>
+                    <constraint firstItem="rRC-QS-yGd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="O3L-2r-uOy"/>
+                    <constraint firstItem="rRC-QS-yGd" firstAttribute="top" secondItem="uKD-9l-OYv" secondAttribute="bottom" constant="8" id="VFm-9R-mvg"/>
+                    <constraint firstItem="uKD-9l-OYv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="WOO-pt-DvE"/>
+                    <constraint firstItem="uKD-9l-OYv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mAQ-hR-L6U"/>
+                    <constraint firstItem="uKD-9l-OYv" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zcv-V0-T18"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="datePicker" destination="uKD-9l-OYv" id="R0P-OI-5mR"/>
+            </connections>
+            <point key="canvasLocation" x="271" y="403"/>
+        </tableViewCell>
+    </objects>
+</document>

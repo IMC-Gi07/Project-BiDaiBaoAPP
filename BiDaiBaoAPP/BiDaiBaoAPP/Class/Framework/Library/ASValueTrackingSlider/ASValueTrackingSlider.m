@@ -157,6 +157,8 @@
 // when either the min/max value or number formatter changes, recalculate the popUpView width
 - (void)setMaximumValue:(float)maximumValue
 {
+    
+    
     [super setMaximumValue:maximumValue];
     _valueRange = self.maximumValue - self.minimumValue;
 }
@@ -218,6 +220,7 @@
     _popUpViewAlwaysOn = NO;
 
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [formatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     [formatter setMaximumFractionDigits:2];

@@ -11,7 +11,9 @@
 		005C40446E850E6D03F222702934519E /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = FF22E7A0581DA3BC6A675A6E02DEC4C6 /* MJProperty.m */; };
 		0212BB6C06C1DB049850012900765F8D /* BDBUserSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C3041B3468E5B34554E776203F3F31 /* BDBUserSettingViewController.xib */; };
 		04645CC50C09A20E739E222FA426D763 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62E43B995634DDD0832AC62BF17939 /* AFURLRequestSerialization.m */; };
+		052F2343A7162B3108E11461BC87C229 /* BDBCustomTableViewCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */; };
 		070ED694417E6B4198A48C6AD4EB88B1 /* BDBSujectP2PListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35D3AE8552DF1CEBC2ECE57D46EB22C /* BDBSujectP2PListModel.m */; };
+		07C6B195632EA6E092EC39303BD6D429 /* BDBCustomTableViewCellThree.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */; };
 		0896884FA75919E360B155F4AAB7E3A2 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2A2F313635A56DB974D28B8B869407 /* UIImageView+HighlightedWebCache.m */; };
 		091013159A47EF8E22433A416C17F028 /* MJRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C6EDF5D95D87271C169335A270194 /* MJRefreshGifHeader.m */; };
 		09D79C5697AD51864DA8B3F616230D4D /* BDBIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 424958E2EA738DB57FF413CF642993F7 /* BDBIndexViewController.m */; };
@@ -20,31 +22,36 @@
 		0CC05EE53793C2505CCD20417FDA5D37 /* BDBDetailedMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78F042655C236589CB9825BB9E9E8E4 /* BDBDetailedMessageTableViewCell.xib */; };
 		0D29839CBA3061343D3476EF470CEF37 /* BDBHotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7225575C2E5E680D33F7CDFD54BA2A52 /* BDBHotTopicsModel.m */; };
 		11E26B7506D25381A3BDCBF1CA5A4656 /* BDBNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E47A3788B1CDCBE92EDAEA6E0FDFFBF9 /* BDBNoticeModel.m */; };
+		11E8D10DDEDDECAF6E048D8E82F1927F /* BDBWarningModelOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */; };
 		13F8880D54257E264763C22CBAE34E2A /* MJRefreshBackNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A63DC67FD183641DBC0F7F6E5189615 /* MJRefreshBackNormalFooter.m */; };
 		14862C2870B10714E2F66F4B27E473E4 /* BDBUserProfitCompareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9654EEB30890E2BE9EC56A83EE760FB /* BDBUserProfitCompareViewController.xib */; };
 		18B1DA3F2D9C6FC1877E262B4EC5A0B8 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAFDF36132D2F0ECD6AB50E8C3B00BC /* IQTextView.m */; };
-		1A4E496CEBB9754F4F84D016FD6D38F9 /* BDBAskQuestionTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBD4CE4F829B8BF05A3C481BA995D7 /* BDBAskQuestionTypeViewController.m */; };
-		1C6879A0ABC27678C7100CB5B80B5BF1 /* BDBAskQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49430D21A49166D9B2002996DE8C7D9 /* BDBAskQuestionViewController.m */; };
 		1A2CC5E91127163CEE6B9B27D965C364 /* BDBSujectProfitCalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4286B127ECD0F85DD19EA3AA969ADF /* BDBSujectProfitCalculatorViewController.xib */; };
+		1A4E496CEBB9754F4F84D016FD6D38F9 /* BDBAskQuestionTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBD4CE4F829B8BF05A3C481BA995D7 /* BDBAskQuestionTypeViewController.m */; };
 		1A72ED5374A28423498DB2747AD3BF90 /* Warning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */; };
+		1C6879A0ABC27678C7100CB5B80B5BF1 /* BDBAskQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49430D21A49166D9B2002996DE8C7D9 /* BDBAskQuestionViewController.m */; };
+		1C6FEA4492585FABCF87D7C8CD6573A5 /* BDBWarningAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC7060DF8797A409B5086869B383DCE /* BDBWarningAddViewController.m */; };
 		1D15B0B864435FBDAA5B9586F8C7FAFD /* BDBQuestionTypeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F258144E7A4BDB82CFEF00F7921D104D /* BDBQuestionTypeListModel.m */; };
 		20B677575D97657AD147E8C59893A58F /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BDB744F3B04B41DEDCFBCAC8B633B28 /* Discovery.storyboard */; };
 		20DFCDE15D366C8921DF13877D8A10C0 /* BDBDetailReplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B33EF2C1A74733E7C4C3072411E46E /* BDBDetailReplyModel.m */; };
 		2183049BB2ECBEAFC0C35336227ABE37 /* BDBFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557BBE4609EB76BF0FA82A3FB2B0ACDC /* BDBFeatureViewController.m */; };
 		21D2EA514C2E862EB1B5FDFC1F0E3B34 /* BDBSortTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA265B28E6BB4AA2F919E4EDFD5BE0F /* BDBSortTableViewCell.m */; };
+		224C9A111D31D1A86295CB4BFB19D2AE /* BDBWarningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 758A21AB1D4C47C4071CB398F821D17F /* BDBWarningTableViewCell.m */; };
 		26379EE8F0ECB899D2D3AE276AD6125A /* IQBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5DA2A7FE04EC3D9E60D3B2A0DFD99 /* IQBarButtonItem.m */; };
 		2685E8A3A339528CBF0259E3BCF32E68 /* BDBIndexClassifyParticularMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F4FDA695A1623B12262958A1991AA4 /* BDBIndexClassifyParticularMessageResponseModel.m */; };
 		270D6AB393E2AEDF7DF0B577F798CA23 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FF80FD8E1B437240C433446686B250 /* MJRefreshAutoGifFooter.m */; };
 		2772D7EA0272721A1E15FA7503D5CD50 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A29A11E00A7FB25CC5006BD7CBB1F040 /* IQToolbar.m */; };
 		2785991E46D20578DA2262842BA59261 /* BDBRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 412C6E7EDBEBC2F06E1F87757FAD8C0D /* BDBRegisterViewController.m */; };
-		27AA1A2EB005A72E7E2E6F8BEC91380F /* siftButtons.plist in Resources */ = {isa = PBXBuildFile; fileRef = C405A3543DA0E477D5F29DB3BFD8AE39 /* siftButtons.plist */; };
+		286CB862D40CDF734842B2503F7F472A /* BDBCustomTableViewCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */; };
 		2913B9C1320F2342F505BEADFAC6B109 /* BDBHotTopicsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 599345B7FF24AE91CF97909F1764B9F6 /* BDBHotTopicsResponseModel.m */; };
 		2ABFB3A368A2B86A8942BCE6E6218613 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F9BE33DB8350FB916A1A1F73C0DC4C /* UITableView+FDTemplateLayoutCell.m */; };
 		2AE2CB55292E25C28A0CA0E181031E1B /* BDBGetQuestionTypeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0AFF1D8DAAA4760FD65122E7609BED /* BDBGetQuestionTypeListModel.m */; };
 		2E06E069A80AD9AB082CCC010BAE52ED /* GlobalConfigurations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5251B3A3AE1D1E2E5A5BB5D04C66D /* GlobalConfigurations.m */; };
+		2EC55DCE1163ECFC77C6D4484B9D58A0 /* BDB_TableViewCell_One.m in Sources */ = {isa = PBXBuildFile; fileRef = BB15B72621B112451D2D1DA0CEBA5DCC /* BDB_TableViewCell_One.m */; };
 		2FCC6483B17B6DA9BA1F117F9A913B80 /* Subject.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5FAC9AAFE9C05D6DF611D74D75BDE45 /* Subject.storyboard */; };
 		30C2878C72A39DB5A22DE0C07B73CE0B /* BDBIndexClassifyParticularMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D9FA5508212EC6B2ABA3BAA3B267F9 /* BDBIndexClassifyParticularMessageModel.m */; };
 		3287394E5FFDF5128442FCBB6B93C3A6 /* BDBUserModifyInformationResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7A7C8D0D111A3981A4130D3585AE8D /* BDBUserModifyInformationResponseModel.m */; };
+		33155C98F3EBF31FB01B2C514DB6FBBD /* BDB_TableViewCell_Two.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9A1609D5C6A8002A22500FB98F956A /* BDB_TableViewCell_Two.m */; };
 		332F957C805C93D08FF9C2F636631F92 /* BDBDetailReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAD16F439F9AFEC8F583F3EEE15AF6C /* BDBDetailReplyTableViewCell.m */; };
 		34190BEA7F8BECBC9626D4E589CE1273 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91500A1C3BA7478C9D933358964C1F1F /* Images.xcassets */; };
 		359A304C3E9C90BABEE0993EEE36904F /* BDBTableViewCell_Sift.xib in Resources */ = {isa = PBXBuildFile; fileRef = E491CF936F751A312EE4738C206F91B7 /* BDBTableViewCell_Sift.xib */; };
@@ -56,6 +63,7 @@
 		3B1B10A52EDD16325E846F5D6D2240B6 /* BDBDetailedMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E67923BA6569926449692269E05D3E4 /* BDBDetailedMessageTableViewCell.m */; };
 		3B3A5904F7ED9BAC86E28F51E378267F /* BDBDetailQuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD76346417760EBB277FF987C1A1B2 /* BDBDetailQuestionTableViewCell.m */; };
 		3BA8504AEC8DAA5486DF496934DD5593 /* BDBUserQAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B555DBA454BFEA4BBAA5E0F5727C5DCB /* BDBUserQAViewController.m */; };
+		3CE90320A9CDC31747A4CBA952A1C6BA /* BDB_TableViewCell_Two.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94402B6EC4D8CED471E34C4AF5447CEE /* BDB_TableViewCell_Two.xib */; };
 		3F122C7CF6A113D9A7B9380DDEB8A1F8 /* BDBTableViewCellCoustom.m in Sources */ = {isa = PBXBuildFile; fileRef = B2928F04EC8841DF33FE478BF260D6D5 /* BDBTableViewCellCoustom.m */; };
 		4209025A4C776F39C62DFD6537E8B77A /* BDBUserPrestigeCalculatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E917E4DA0B4B2F5FF662BD511456FE8A /* BDBUserPrestigeCalculatorController.m */; };
 		43D932F561C4865C6C664FEC8435152B /* BDBSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4656C152E8655B118DD8ACE78B687F /* BDBSearchViewController.m */; };
@@ -66,13 +74,16 @@
 		481F56CD8EE25DF4244CADB5BDF5B985 /* ZXLNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA047772BD946CC0C18C67C2302EEEB /* ZXLNavigationBar.m */; };
 		4A2DC4C0E4E0411FAF9A5A33D161698C /* BDBImformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE99AC1CDFB989215306DD6AD7D255A /* BDBImformationCell.m */; };
 		4AB7E89E1C9FDE08DD009301F0E67766 /* BDBMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F783E2526122F4B3818FE0E02F7C917 /* BDBMessageTableViewCell.m */; };
+		4AF13CE39EFD2E07EF0466CFA51092ED /* BDBWarningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B36722EE282613E372446BACF959EB55 /* BDBWarningTableViewCell.xib */; };
 		4BA70273671341957912B9C401656745 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 851284B459504DC27D0A163C6842F124 /* IQNSArray+Sort.m */; };
 		4BC8559965F37D578D277FA420EE9796 /* BDBDetailReplyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F07B94A88483496F14FB5B3B3B81 /* BDBDetailReplyResponseModel.m */; };
 		4D17430E1B14632A92E2AFC5AD4AB739 /* MJRefreshNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD609E8B9CD172EC865C0ECF01DC287 /* MJRefreshNormalHeader.m */; };
 		4D84E5EB466AF586D64D33FB27BAA183 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9AB88235624B21DB4F73992B8D67B /* AFURLSessionManager.m */; };
+		4D8CAEEE7A2557475CE745CD391FAF5F /* BDB_TableViewCell_Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 360519AA9D00C75AC788F1BCF8BB94C8 /* BDB_TableViewCell_Title.m */; };
 		4E83BD9CB49641E101F0A936E6DEF1ED /* BDBUserPrestigeCalculatorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6876F55874526B73101A9FB77AE16F25 /* BDBUserPrestigeCalculatorController.xib */; };
 		5039811A52693CD9E141B0EE1F580CD9 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0554E3B7C98E3C31D2C20AC40B5982F3 /* User.storyboard */; };
 		52AB94CB0C459C34B5E73CAAB4541781 /* BDBNoticeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D25E5FA58B1096F6CCAF2ABF655C0E /* BDBNoticeTableViewCell.xib */; };
+		563836A5B1211D4D27C10333274D35AC /* BDBCustomTableViewCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */; };
 		56577938A55D29AE422F6D0ADA846D4C /* BDBGetQuestionTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED05BD5A4D972E51640826D828DF99 /* BDBGetQuestionTypeModel.m */; };
 		56B8024D5F7FD7C4E02214BB436564D6 /* BDBButtonForTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E996E56673C2FFBC7EBFB765F7048DB /* BDBButtonForTopView.m */; };
 		57732B24408E0C8885E27FB888A07024 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A989A525290F9E2E1FA7BD66BFF22 /* UIScrollView+MJExtension.m */; };
@@ -93,15 +104,18 @@
 		662C854A5893EF42A221B02C4AEEF4BE /* BDBUserAssistantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34467598A85D7C672F4DA2D460E531B5 /* BDBUserAssistantViewController.m */; };
 		67752513498D0AD97A1F530F057C1DED /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = E6801B4CB4C91A886A0150DC8A3FFF5D /* MJRefreshConst.m */; };
 		67BF45D279B8A928432024A675FEF49A /* Feature.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E84105BEC7AB37D84BE2A6543AD0D57A /* Feature.storyboard */; };
+		67F929C98BAD45D556878C4E4839FD19 /* BDBWarningTableViewCellTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C811D40A906CF63505AD3D11274FA1 /* BDBWarningTableViewCellTwo.xib */; };
 		687FD34AE91583A683A6CA7777E2F371 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEA37BAC2946E4DA4A17A66DAAE57D5 /* NSData+ImageContentType.m */; };
 		68BB45A90CEBB39886E728C1D33EE5B4 /* BDBMyColletDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97451C70FC4E4C60FF1CE2CAACD7B728 /* BDBMyColletDateModel.m */; };
 		6C3CB53697FE4E4AEBA621A933AC0F2C /* BDB_TableViewCell_One.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8242EEEBE2FA758DDC7D359973D45A4F /* BDB_TableViewCell_One.xib */; };
 		6C8E4DC6B9FB1D2292F55FE786FF918F /* BDBSujectProfitCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE71FD054498833765BBAA56278A9D0 /* BDBSujectProfitCalculatorViewController.m */; };
 		6FE1C3EC3F87C20984EF56013BCAA6B3 /* MJType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B7860194B60DE5F744D54566CB270 /* MJType.m */; };
+		713A5AD6BA47613E9EC0706BCC0FCD83 /* BDBWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F342EC0EF3870E16A8CE8B5A05298CA /* BDBWarningViewController.m */; };
 		7146B7C46286CD3F230C6EA73CEBD4A9 /* BDBMyCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8276520B671CACE54946370CEEB562 /* BDBMyCollectViewController.m */; };
 		72DF59FCB61305F868D770D038A72ABF /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ECBBE0E4529B19020906DE366473EF /* MJRefreshBackStateFooter.m */; };
 		73DC481DCDAD277D0E2474B0EEE035FF /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 279209EB8D9CF525B115B5C40CAED454 /* SDWebImageDownloaderOperation.m */; };
 		743CC81415E7C3DAD7B700E5F09ADD87 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B31158FE6DE50E63B039E5DAEBA9B779 /* NSObject+MJCoding.m */; };
+		756470DAF4E5A46FD30094225C5F48A2 /* BDBCustomTableViewCellThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */; };
 		757247BED13D25BB1E2F4B9A8C962009 /* BDBDiscoveryAdvPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AB30ED2A97D05E64CF4C8762C5B95C /* BDBDiscoveryAdvPicModel.m */; };
 		77DC39F1D26AB8DAB7E49BE0D251F464 /* BDBImformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2659CF66F1ADEECEEF0B0F21AFF1B82F /* BDBImformationCell.xib */; };
 		78CEBAC38C4B0F18F261933F4EC2EBDD /* BDBUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C650E460881B7C841C855022840A55D /* BDBUserTableViewCell.m */; };
@@ -109,6 +123,7 @@
 		7927BC8CF808B217B8A0AABDBB2C5A5E /* MJRefreshAutoNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6795098006EADBE5A994227128247564 /* MJRefreshAutoNormalFooter.m */; };
 		796992E4F68378FE5A21FF0E7BFA5953 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AB33E26F2C7F9D2EBFEF591DC72A1A /* UIView+MJExtension.m */; };
 		7984EC56BC1F34B4DC836519133F6535 /* BDBSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9837A0C1C213436DBB19DC553CDAB0C /* BDBSubjectViewController.m */; };
+		79B8FA227D00DF76B1879562EF2605EF /* MJDIYHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 828672D434889C490043A39D713A3739 /* MJDIYHeader.m */; };
 		79FE2FFF1E05D6CD90C4B438DF993435 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE9949B7DC174A175C09502D79CBA7 /* UIImage+WebP.m */; };
 		7A54AD1604BB2C4EB9947F2E75C3FB4F /* BDBTableViewCellCoustom.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6645F01D9060927EF6CF9DFC5946F6D /* BDBTableViewCellCoustom.xib */; };
 		7D1068CDE7E1F48851CF603335E6111B /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F500553C00205BABB437C9085A1DF66 /* SDImageCache.m */; };
@@ -124,9 +139,11 @@
 		84FC1DEAFA34CEF87D586F37235ED184 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF943F530A3143A17B2C9F00D6A5AB /* NSString+MJExtension.m */; };
 		877B569E60E40C7BC302F2BCC2CD597E /* BDBDebitAndCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0D51AB75695ABB6BFC28186DF30248 /* BDBDebitAndCreditViewController.m */; };
 		8819D0FD4AA5D78A1CDD9F3A7FB7B685 /* BDBUserCPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F90B139C896C98B06ADCEE8D9AF20F /* BDBUserCPIViewController.m */; };
+		88A00A06AD1951812C49915BDB97DFA9 /* BDBWarningTimeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */; };
 		89C91F00A1F0D8C4438C60C1F171A759 /* IQKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F027E0D38026395F00659C80BA741417 /* IQKeyboardManager.m */; };
 		89DC9E312CC7E91ADAA3108EB44684E9 /* BDBUserQAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF607CC9F3DFCE1302EB249105966A00 /* BDBUserQAViewController.xib */; };
 		8A9DE174C50C21871C834E967277A41D /* BDBQuestionTypeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9970828242F7C891CCB219558BEB19 /* BDBQuestionTypeButton.m */; };
+		8AA1F1C0FE164B26DD3CC58A61B5F379 /* MJDIYAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 324DBF7A60CA73633DC7BD39890C75E5 /* MJDIYAutoFooter.m */; };
 		8B6D1BA525821D3650A6ECEA95B14AF5 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD171FE76C7DC56B8CB4CFC37DFAF3D /* SDWebImageManager.m */; };
 		8BA6694ECF98D6ED65D1C0262BA89431 /* BDBUserAssitantCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FBD7314BF85BF29430CCA9DEDA499E /* BDBUserAssitantCellModel.m */; };
 		8CEAA0AB728E19D2AE39D10C197775FC /* BDBDetailQuestionAndReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E9A8FF0A3EEB32EC0719FB23B63E34 /* BDBDetailQuestionAndReplyViewController.m */; };
@@ -136,10 +153,11 @@
 		910506E7CF76FD9BCBF309DBA8CD5C23 /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A13496FC61E2C7CC31D7A8645B65E36 /* FLAnimatedImageView.m */; };
 		9124ED7F94BCB55628D014AA0A8BFEE3 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 885B5B1F1DB4F24EA5696BF42D5529AF /* AFHTTPRequestOperationManager.m */; };
 		91B7FADDFBA0E9C4C4B4F7F715FF0750 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F11E80D44DF90F8A9646B1A6AE7F155 /* SDWebImageDecoder.m */; };
-		97005B382EE5462B98B6B5B9B3EDE560 /* index_top_adv.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5F52D5BE44B994C84C9A03BC36926B17 /* index_top_adv.gif */; };
 		95FA735751EE5FE8916C52DD3A46AE34 /* BDB_Cell_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 126D6181DC3184A3494B43B032BA803F /* BDB_Cell_Button.m */; };
+		97005B382EE5462B98B6B5B9B3EDE560 /* index_top_adv.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5F52D5BE44B994C84C9A03BC36926B17 /* index_top_adv.gif */; };
 		9756B93B2420E2571210D801B6E9F052 /* BDBSubjectFilterContronller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF1723C0932D615D86AF350AA01161 /* BDBSubjectFilterContronller.m */; };
 		99215B46CA299E25A87D001168214820 /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8588E027B0B271751BFE750B71E4EFB4 /* MJRefreshHeader.m */; };
+		998D660D434C83FC362027D2A5D15DE4 /* BDBWarningResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */; };
 		99BAA1783406ACFA86EEEEAFDE9F6A62 /* BDBMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5446F255B9AD46D4561BD300379F0C22 /* BDBMessageTableViewCell.xib */; };
 		9B4562413ACB7E187438FA76F1916273 /* IQSegmentedNextPrevious.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0D281B5756143E10D5422233F6A723 /* IQSegmentedNextPrevious.m */; };
 		9E14CC09F3CB7414B39D0B5E59C7E5E8 /* BDBMyCollectViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9255F247E82C5DA4A8E11B12ECF8636D /* BDBMyCollectViewModel.m */; };
@@ -156,27 +174,27 @@
 		AAD49FC20D5C84322A3E7466E8DDF5B6 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5792FB0A7D8842E93AF9B7A9738734F /* ASValuePopUpView.m */; };
 		ABF5B3C18628A9A96F043349DF346BB2 /* BDBQuestionTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE55BF3A5EB9684C4E99E122AA2F69E9 /* BDBQuestionTypeModel.m */; };
 		ACE0D0081A99A8DC113171B1D003D201 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 619DCFC07ABD3A16A41A8732F4CC7B5E /* MJConst.m */; };
+		AD4D2A1EE96E241D30D6AFD5E034BBA8 /* BDBWarningAddResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */; };
+		AFEFC0780A1A06B0D49ED6EF982887A8 /* BDBSubjectFilterContronller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC18D7A446EA8BD4856155E754A69FD /* BDBSubjectFilterContronller.xib */; };
 		B04978081C791BAEF87CC1BBE692FC51 /* BDBWebAnnouncementResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02932D7D97FAF6BD53D07EAAF7D4746A /* BDBWebAnnouncementResponseModel.m */; };
 		B0EB264CA95FD54E8EA3D6983DAA5CE9 /* BDBRegisterResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6705C952087C19C642F30078D5D3DCF /* BDBRegisterResponseModel.m */; };
-		AFEFC0780A1A06B0D49ED6EF982887A8 /* BDBSubjectFilterContronller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC18D7A446EA8BD4856155E754A69FD /* BDBSubjectFilterContronller.xib */; };
 		B0FE4B02CDEFA1E44AEEF8D700507C09 /* MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4225464962B69BF9DB7694E76F3B92A6 /* MJRefreshFooter.m */; };
 		B297DA342B046B91862BD0BD3635A13A /* ZXLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D55D818C8B6B5DBFAD045B686EE7A /* ZXLNavigationController.m */; };
 		B3185A35373C495BC8442CCC237D5A0E /* BDBUserDalegateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812D79804EFD32835876EA130D439FFF /* BDBUserDalegateViewController.m */; };
 		B3BD967B5F25301288FFB575C26CEF83 /* BDBCreditorsRightsTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F72D4CDF50C037F286E8A985CA5C9 /* BDBCreditorsRightsTransferViewController.m */; };
 		B4257E7D9A6DE567371E9D14FDD0E62E /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CBD2AC2AC026405FD65A2E9854BA22 /* NSObject+MJProperty.m */; };
+		B4E876AFD6521C8BB0E1BEBC931657E5 /* BDBWarningTableViewCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CA65CF8429D319DBACD19D19AD423D /* BDBWarningTableViewCellTwo.m */; };
 		B518567810B00456D872476830FD6BDC /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CE47ACB657630AD39E91AE58AD87FE /* IQUIWindow+Hierarchy.m */; };
-		B7E8D5368DF06FFCBC00BAF52B968922 /* ZXLDataRequestNoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60883D9D7DBFC581165DA89817EEE878 /* ZXLDataRequestNoResultView.m */; };
-		BC410D5B7860E2BAFD78E0AD3FCB0960 /* BDBUserProfitCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853BD4A11C859A540A360899F24514C8 /* BDBUserProfitCalculatorViewController.m */; };
 		B71711D17DA6306DE79364CD98E3148C /* BDBSujectP2PListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DFF8A58751B51EF8C2EBA20B3DC9D0 /* BDBSujectP2PListResponseModel.m */; };
-		B78B7C787217E4FD208A3E235E6198CC /* index_adv.gif in Resources */ = {isa = PBXBuildFile; fileRef = 14120A4CFBB5074D76B437F7704D8E10 /* index_adv.gif */; };
-		B83204B213D463FCE5EA77396DA0ED63 /* BDBCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D6905079A008B1C553B4364593E1DF /* BDBCustomTableViewCell.xib */; };
-		BAEA3D1367EB2559192C064B68116380 /* BDBCustomTableViewCellFive.m in Sources */ = {isa = PBXBuildFile; fileRef = 49034DA5DF20E5CEDA2406131C328DB6 /* BDBCustomTableViewCellFive.m */; };
-		BE56AC10FB57AF35DAB09143BBA8FD9A /* BDBCustomTableViewCellOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADEFD75D58FF79B4F78B8DC8AD89C0C7 /* BDBCustomTableViewCellOne.xib */; };
+		B7E8D5368DF06FFCBC00BAF52B968922 /* ZXLDataRequestNoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60883D9D7DBFC581165DA89817EEE878 /* ZXLDataRequestNoResultView.m */; };
+		B8732BF7C2F6E83CA99F2EFF659B7B84 /* BDBWarningTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */; };
+		BC410D5B7860E2BAFD78E0AD3FCB0960 /* BDBUserProfitCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853BD4A11C859A540A360899F24514C8 /* BDBUserProfitCalculatorViewController.m */; };
 		BE7F0B6A6843051D8C571CDA89ACD42E /* Modules.plist in Resources */ = {isa = PBXBuildFile; fileRef = 905857EFF3C3BF9177BCA0EE5842187D /* Modules.plist */; };
 		BF2A98DB3D92A53F4E8E9925096F69DB /* IQTitleBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D390126C08C86C72055DF7612EA3B8 /* IQTitleBarButtonItem.m */; };
 		BFF2034231B9C77758F35A71804464A1 /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D51B8F568E82B2EB0AC987AAEDFDCC6 /* FLAnimatedImage.m */; };
 		C1A688A8DE9A53DCD84CEF7818D4C555 /* BDBScrollViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 574064254B46EB91343117E4C4774383 /* BDBScrollViewCell.xib */; };
 		C46DA94D5B9ABEEEE7BB0DCDAF841E7C /* BDBRiskControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB8A839064A8880DD2AB20DEC6AA150 /* BDBRiskControlViewController.m */; };
+		C4E5BC771D17E4731C6D06751F0F8369 /* BDBWarningModelTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */; };
 		C59246B774E6F43462576A97CA38E1BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7138A2F1797156F835D68F676690D0 /* AppDelegate.m */; };
 		C5C87E5E66D92E7B61FE159F559ED5B3 /* BDBOperationModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6B371DC30D0D3BC256E012311FC33A /* BDBOperationModeViewController.m */; };
 		C7A82A2FEB7979E3D0D9A4D9A11C96C2 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1A50365AC6B88EFC5E84B18968F93D /* IQUIView+IQKeyboardToolbar.m */; };
@@ -211,6 +229,7 @@
 		E27BF407DB19A1765640082BE68C7D73 /* BDBTableViewCell_Sift.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7D5EECDE88578E69C112ABA25ED1F /* BDBTableViewCell_Sift.m */; };
 		E3E8CB63D8E263A23910C5071B871420 /* BDBDiscoveryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCAB5048284600DBA7704BA27243959 /* BDBDiscoveryModel.m */; };
 		E5721E2EDEF4DDE9590DED2A9ED3D790 /* BDBSortTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1607C7C3C347EFF7AE5FFDCC1FF0DD35 /* BDBSortTableViewCell.xib */; };
+		E6CECB96B2E9F3B992BDFB3CA2D38149 /* BDBCustomTableViewCellTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */; };
 		E72980A09863702E9CF5229DF0268F14 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A6EDC2202169F42CD3DB3FEC673EEE /* SDWebImagePrefetcher.m */; };
 		E7724EED52A8FF112D7F95CB2D3AC4E7 /* BDBUserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D0E8597B8B1A0CB23A99865D39F59 /* BDBUserInfoViewController.xib */; };
 		EA21B66EE83AD504BE87EF5AC2A85A97 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 242C159DA3039297B91DA169649E6603 /* AFURLConnectionOperation.m */; };
@@ -221,13 +240,16 @@
 		EF1FF6AAD4EC96D9B8C201AD56111B9D /* BDBUserReturnResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FAD228C2EC61D3AAFF50E1C5E55D03 /* BDBUserReturnResponseModel.m */; };
 		F0578E74D60AB14CCC3C7F03FF9B87E8 /* BDBSujectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B174C51A1CC5C4896E5220D1B132666 /* BDBSujectModel.m */; };
 		F26C989370781C64E79221E34F9319B1 /* BDBNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D93F68BE6017D6E31C50875D2E6CB8 /* BDBNoticeViewController.m */; };
+		F33FD3481A2EF69C06A7B35F98F6F4FD /* BDBPlatFormIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */; };
 		F8541D02F4F2135490CE929181101E0D /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3533F3B2D7DE2539BC7068E0FB73E6B2 /* AFHTTPSessionManager.m */; };
 		F87EC80AC35646AC05A29EEFC42F82D1 /* BDBIndexGuideMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A64175EC56F4BB4C238B469ED1BBA3E /* BDBIndexGuideMessageResponseModel.m */; };
 		F89DC035F12B6FD66506683F0CE829B3 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 13754AD5F89131DD34AA935A81BDA667 /* UIButton+WebCache.m */; };
 		F93A10C84C5C1BBCC0E723E9DCCDA342 /* MJRefreshBackGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4279D59FEDF5B0C7707929F5864525C9 /* MJRefreshBackGifFooter.m */; };
+		F9D937D6919CA4DC4A7F7A2345A21B1F /* BDB_TableViewCell_Title.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1C54DC8B3502884CAB9923670590C4A /* BDB_TableViewCell_Title.xib */; };
 		F9FC7EA2863B39637E63003476BE0422 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D312841A4449BEBA1E68E64652E5D53 /* UIImage+GIF.m */; };
 		FA3B0144282C7EABFE67A0523B3473C7 /* BDBDetailReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE06596AEEDF4CADAB2EBB0C239CC7B2 /* BDBDetailReplyTableViewCell.xib */; };
 		FA50DE66629C175703AA5762228B1EE0 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE9309E00499F37DDA012FC306CAFF5 /* MJFoundation.m */; };
+		FC0B6A36C3E0BCFE6A960789744DF52D /* BDBPlatFormIDResponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */; };
 		FCDB63A730A733108E1EC947275A7558 /* BDBUserWarningSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1075DD99C20AF2740D4F5057B668F8BD /* BDBUserWarningSettingViewController.xib */; };
 		FE69CEDB576AB949FE8AA59BEF49F94B /* BDBDiscoveryDetailNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ECA96215C36A73E499BBEB6C211334 /* BDBDiscoveryDetailNewsViewController.m */; };
 /* End PBXBuildFile section */
@@ -254,9 +276,12 @@
 		0554E3B7C98E3C31D2C20AC40B5982F3 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		05700A41E9AF421AC284DC26891DB9AD /* BDBUserCPIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBUserCPIViewController.xib; sourceTree = "<group>"; };
 		05D390126C08C86C72055DF7612EA3B8 /* IQTitleBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTitleBarButtonItem.m; sourceTree = "<group>"; };
+		06100C7DA567CE92562576B3EC515919 /* BDBWarningModelTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningModelTwo.h; sourceTree = "<group>"; };
 		06410F98556B65BA1889328242D034F0 /* UIButton+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Extensions.h"; sourceTree = "<group>"; };
 		064DB313ABFD8266CA65EE15D5929FA1 /* ZXLLoadDataIndicatePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLLoadDataIndicatePage.h; sourceTree = "<group>"; };
 		06D25E5FA58B1096F6CCAF2ABF655C0E /* BDBNoticeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBNoticeTableViewCell.xib; sourceTree = "<group>"; };
+		0740950FE73BE4B02F26F2E5D4659B65 /* BDBCustomTableViewCellTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBCustomTableViewCellTwo.h; sourceTree = "<group>"; };
+		07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningTimeViewController.m; sourceTree = "<group>"; };
 		084E6B40E7CAB5D41943A29654ACF650 /* UIBarButtonItem+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extensions.m"; sourceTree = "<group>"; };
 		08DDDB449EEF453DB8FF7BE4B4A1B22A /* global_refreshdata_icon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = global_refreshdata_icon.gif; sourceTree = "<group>"; };
 		0B0A6D831469F5944DAADD3FB99AA0C1 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
@@ -272,12 +297,13 @@
 		116323A9E8CD08C58E0CFA216111D6C8 /* BDBSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSubjectViewController.h; sourceTree = "<group>"; };
 		11CE47ACB657630AD39E91AE58AD87FE /* IQUIWindow+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIWindow+Hierarchy.m"; sourceTree = "<group>"; };
 		123AA694F907A7123A41FA2CDB6AFC7E /* IQKeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManager.h; sourceTree = "<group>"; };
+		126D6181DC3184A3494B43B032BA803F /* BDB_Cell_Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDB_Cell_Button.m; sourceTree = "<group>"; };
 		13754AD5F89131DD34AA935A81BDA667 /* UIButton+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
 		1607C7C3C347EFF7AE5FFDCC1FF0DD35 /* BDBSortTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBSortTableViewCell.xib; sourceTree = "<group>"; };
+		1713D99A254A056F26BEE9929A73FBD7 /* BDBWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningViewController.h; sourceTree = "<group>"; };
 		171FB61613F225B54B08699B03212101 /* MJRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeader.h; sourceTree = "<group>"; };
 		17C98776FF39278364D14B155ADD3BE1 /* BDBDetailReplyResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDetailReplyResponseModel.h; sourceTree = "<group>"; };
 		1849C165B1AF6F5FFCF2CCA56DEFAF23 /* BDBTableViewCell_Sift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBTableViewCell_Sift.h; sourceTree = "<group>"; };
-		1881FC765391E9AEE6A017B09102A6E8 /* BDB_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDB_Model.h; sourceTree = "<group>"; };
 		193F72D81E0EECA16133221D2D319E8D /* BDBSujectP2PListResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSujectP2PListResponseModel.h; sourceTree = "<group>"; };
 		1A4B462A08487E5BE719B9F211948404 /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
 		1B05870E4C8015F90634F5D8843D301E /* BDBHotTopicsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBHotTopicsMainViewController.h; sourceTree = "<group>"; };
@@ -294,12 +320,12 @@
 		1E996E56673C2FFBC7EBFB765F7048DB /* BDBButtonForTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBButtonForTopView.m; sourceTree = "<group>"; };
 		1F0AFB43D1DD8DE9E9BBD716D4EB39A9 /* BDBDetailQuestionAndReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDetailQuestionAndReplyViewController.h; sourceTree = "<group>"; };
 		1F7A7C8D0D111A3981A4130D3585AE8D /* BDBUserModifyInformationResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserModifyInformationResponseModel.m; sourceTree = "<group>"; };
-		20D5393FEE6C2CDC9B907E9049928B14 /* BDBCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBCustomTableViewCell.h; sourceTree = "<group>"; };
 		20FA9DD040319DA21E03002100F60752 /* BDBSujectP2PListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSujectP2PListModel.h; sourceTree = "<group>"; };
 		212BE1AE65E72E5DB5977BD82B7AE031 /* BDBMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBMessageTableViewCell.h; sourceTree = "<group>"; };
 		21496C7B3EE39518BD924D838AF95B65 /* BDBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBBaseViewController.m; sourceTree = "<group>"; };
 		21AB30ED2A97D05E64CF4C8762C5B95C /* BDBDiscoveryAdvPicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBDiscoveryAdvPicModel.m; sourceTree = "<group>"; };
 		22CBD2AC2AC026405FD65A2E9854BA22 /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		238A91C3DEF4B736F224802F8BA5F6F4 /* BDBCustomTableViewCellOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBCustomTableViewCellOne.h; sourceTree = "<group>"; };
 		242C159DA3039297B91DA169649E6603 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
 		2453FEB9040DB0B1EA1610ADDD7F8CC4 /* BDBSujectRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSujectRespondModel.h; sourceTree = "<group>"; };
 		247736CB29FF2CCCA520E888A08D9B4C /* BDBNoticeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeTableViewCell.h; sourceTree = "<group>"; };
@@ -309,11 +335,15 @@
 		2659CF66F1ADEECEEF0B0F21AFF1B82F /* BDBImformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBImformationCell.xib; sourceTree = "<group>"; };
 		265E9B472A5A98A920F37E98068799A2 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		26C3041B3468E5B34554E776203F3F31 /* BDBUserSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBUserSettingViewController.xib; sourceTree = "<group>"; };
+		26C811D40A906CF63505AD3D11274FA1 /* BDBWarningTableViewCellTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBWarningTableViewCellTwo.xib; sourceTree = "<group>"; };
 		279209EB8D9CF525B115B5C40CAED454 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
 		289BBE3B7A42146A95CC1A83D9BE7DA2 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
+		28D43EB63A0CD36280B873AEDCE4E29D /* BDBCustomTableViewCellThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBCustomTableViewCellThree.h; sourceTree = "<group>"; };
+		28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBCustomTableViewCellTwo.xib; sourceTree = "<group>"; };
 		28F5DDC5E5E543B46780E73696AD4879 /* SDWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageOperation.h; sourceTree = "<group>"; };
 		29DE157400054518685633D6A0E1D194 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		2A0B7860194B60DE5F744D54566CB270 /* MJType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJType.m; sourceTree = "<group>"; };
+		2A61BF45F7C85195A2B8D31BD1C67627 /* BDBWarningAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningAddViewController.h; sourceTree = "<group>"; };
 		2A63DC67FD183641DBC0F7F6E5189615 /* MJRefreshBackNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackNormalFooter.m; sourceTree = "<group>"; };
 		2AA047772BD946CC0C18C67C2302EEEB /* ZXLNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLNavigationBar.m; sourceTree = "<group>"; };
 		2BE6597AF73E6C36770DFA8EACE3B463 /* BDBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBBaseViewController.h; sourceTree = "<group>"; };
@@ -321,11 +351,11 @@
 		2CC74320ABF8327D9D30183AE46FC69B /* BDBNoticeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeResponseModel.h; sourceTree = "<group>"; };
 		2E6BD23288DD2B89D50FC3768F16A8C6 /* BDBQuestionTypeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTypeButton.h; sourceTree = "<group>"; };
 		2EB94DC9BF1CB16BE71D5B1D716620DA /* BDBIndexGuideMessageResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexGuideMessageResponseModel.h; sourceTree = "<group>"; };
-		2E3F54F955C2C6E02793CDFB30A8C681 /* BDBCustomTableViewCellFive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBCustomTableViewCellFive.h; sourceTree = "<group>"; };
 		2EE71FD054498833765BBAA56278A9D0 /* BDBSujectProfitCalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSujectProfitCalculatorViewController.m; sourceTree = "<group>"; };
 		2F11E80D44DF90F8A9646B1A6AE7F155 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
 		2F500553C00205BABB437C9085A1DF66 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
 		308933619455827D307DA93E51E76B0C /* BDBIndexClassifyParticularMessageResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexClassifyParticularMessageResponseModel.h; sourceTree = "<group>"; };
+		324DBF7A60CA73633DC7BD39890C75E5 /* MJDIYAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYAutoFooter.m; sourceTree = "<group>"; };
 		32B265A69E2E78EE3AE5C427338298EA /* MJRefreshAutoNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoNormalFooter.h; sourceTree = "<group>"; };
 		33729E35D2878EF09B9A9AC424343127 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
 		33E0A1C67421FD03F7A5ADC46F39ED63 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MultiFormat.m"; sourceTree = "<group>"; };
@@ -335,6 +365,7 @@
 		34F71E9064FB614EDD9F0C71F9646CBE /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		3533F3B2D7DE2539BC7068E0FB73E6B2 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		35E0900B516D1FDD8B575C50A34C41D8 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJConst.h; sourceTree = "<group>"; };
+		360519AA9D00C75AC788F1BCF8BB94C8 /* BDB_TableViewCell_Title.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDB_TableViewCell_Title.m; sourceTree = "<group>"; };
 		367E19A784D1661B4E0412896FEEFA89 /* BDBCreditorsRightsTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBCreditorsRightsTransferViewController.h; sourceTree = "<group>"; };
 		36A1429DE6E565397FF8AD59E94061E9 /* BDBCustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBCustomTextField.m; sourceTree = "<group>"; };
 		36C2A4527B8A14DB3E121F30DF674D35 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
@@ -373,10 +404,10 @@
 		4C7138A2F1797156F835D68F676690D0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4DCAB5048284600DBA7704BA27243959 /* BDBDiscoveryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBDiscoveryModel.m; sourceTree = "<group>"; };
 		4E9E98BC4F45663F709D2648B2A4255A /* BDBTableViewCellCoustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBTableViewCellCoustom.h; sourceTree = "<group>"; };
+		4EAF1723C0932D615D86AF350AA01161 /* BDBSubjectFilterContronller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSubjectFilterContronller.m; sourceTree = "<group>"; };
 		4EB0CA59B45031C822E8145163D7B0EE /* BDBForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBForgetPasswordViewController.m; sourceTree = "<group>"; };
 		4EBAF7C48DE59D6DE349B0B7C706B5ED /* BDBSecurityAssuranceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSecurityAssuranceViewController.m; sourceTree = "<group>"; };
 		4F0CBC54213445D69068D563C6017E6E /* BDBUserAssistantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserAssistantViewController.h; sourceTree = "<group>"; };
-		4EAF1723C0932D615D86AF350AA01161 /* BDBSubjectFilterContronller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSubjectFilterContronller.m; sourceTree = "<group>"; };
 		4F2A8F1F3D6F89F00EFA1132FFE467F8 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
 		5256EC339561250E491DCED90E4596A9 /* BDBSiftButtonInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSiftButtonInfoModel.h; sourceTree = "<group>"; };
 		52B01A900B59695C512E5E2FCB52BAC1 /* BDBDetailQuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDetailQuestionTableViewCell.h; sourceTree = "<group>"; };
@@ -385,12 +416,14 @@
 		54381E783CB44EF3A1DB426EC1C40D06 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
 		5446F255B9AD46D4561BD300379F0C22 /* BDBMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBMessageTableViewCell.xib; sourceTree = "<group>"; };
 		54AB33E26F2C7F9D2EBFEF591DC72A1A /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningAddResponseModel.m; sourceTree = "<group>"; };
 		5504DDDC97F0D64934869034F0364BE4 /* IQToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToolbar.h; sourceTree = "<group>"; };
 		557BBE4609EB76BF0FA82A3FB2B0ACDC /* BDBFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBFeatureViewController.m; sourceTree = "<group>"; };
 		574064254B46EB91343117E4C4774383 /* BDBScrollViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBScrollViewCell.xib; sourceTree = "<group>"; };
 		58755A82BE54B7D82DD62AAA2332C9A8 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		589C70751E96DB6173CAB8D25F989E31 /* MJRefreshBackNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackNormalFooter.h; sourceTree = "<group>"; };
 		58EDC0800368891ED1868635E2648A20 /* BDBSortTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSortTableViewCell.h; sourceTree = "<group>"; };
+		594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningModelOne.m; sourceTree = "<group>"; };
 		599345B7FF24AE91CF97909F1764B9F6 /* BDBHotTopicsResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBHotTopicsResponseModel.m; sourceTree = "<group>"; };
 		59D9FA5508212EC6B2ABA3BAA3B267F9 /* BDBIndexClassifyParticularMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBIndexClassifyParticularMessageModel.m; sourceTree = "<group>"; };
 		5A580180A22E07EB5B85765F1F6A4146 /* BDBUserProfitCalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBUserProfitCalculatorViewController.xib; sourceTree = "<group>"; };
@@ -415,6 +448,7 @@
 		626F08E66B70A9461F8F9491F0A733B4 /* BiDaiBaoAPPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BiDaiBaoAPPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658D0E8597B8B1A0CB23A99865D39F59 /* BDBUserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBUserInfoViewController.xib; sourceTree = "<group>"; };
 		65F2038BBBE28F710FB18369073A93D2 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
+		669E5EE49317385F675A3E5094E62090 /* BDBWarningAddResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningAddResponseModel.h; sourceTree = "<group>"; };
 		66FF80FD8E1B437240C433446686B250 /* MJRefreshAutoGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoGifFooter.m; sourceTree = "<group>"; };
 		6746CB1DE0C5E834CADD1AA383CCB2DB /* BDBUserAssitantCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserAssitantCellModel.h; sourceTree = "<group>"; };
 		6795098006EADBE5A994227128247564 /* MJRefreshAutoNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoNormalFooter.m; sourceTree = "<group>"; };
@@ -444,32 +478,35 @@
 		72F90B139C896C98B06ADCEE8D9AF20F /* BDBUserCPIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserCPIViewController.m; sourceTree = "<group>"; };
 		74953176C23CB1B638403AB190ED692E /* BDBDebitAndCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDebitAndCreditViewController.h; sourceTree = "<group>"; };
 		749FBB4EB961774925C3095301CA8FB2 /* BDBRookieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBRookieViewController.m; sourceTree = "<group>"; };
+		758A21AB1D4C47C4071CB398F821D17F /* BDBWarningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningTableViewCell.m; sourceTree = "<group>"; };
 		761CA7FF5EB0368DF65170BC0B514085 /* BDBDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDiscoveryViewController.h; sourceTree = "<group>"; };
 		77D13B49D0848C7328B7529731F31955 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
-		7A3ED0EF862CD422D448D071AAD30333 /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIViewController+Additions.m"; sourceTree = "<group>"; };
-		7A75646E09031EAA2342AEAC098595F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7A88B785FA57A1850DEBE250DD8F463C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		7AE2FD1467D796007DFB6BDB92B35166 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
-		7BFAB9E37B6DC6812D232259269EFA5D /* BDBUserRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserRegisterViewController.h; sourceTree = "<group>"; };
-		7C650E460881B7C841C855022840A55D /* BDBUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserTableViewCell.m; sourceTree = "<group>"; };
-		7CC7DFCDB2EE4B2146A4C29B523A96FE /* BDBAskQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBAskQuestionViewController.h; sourceTree = "<group>"; };
 		79DFF8A58751B51EF8C2EBA20B3DC9D0 /* BDBSujectP2PListResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSujectP2PListResponseModel.m; sourceTree = "<group>"; };
+		7A3ED0EF862CD422D448D071AAD30333 /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIViewController+Additions.m"; sourceTree = "<group>"; };
+		7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBCustomTableViewCellOne.m; sourceTree = "<group>"; };
 		7A75646E09031EAA2342AEAC098595F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A88B785FA57A1850DEBE250DD8F463C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		7AE2FD1467D796007DFB6BDB92B35166 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
 		7BC9D2B13450BB40AF99ED6A6C43A630 /* BDBSujectProfitCalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSujectProfitCalculatorViewController.h; sourceTree = "<group>"; };
+		7BFAB9E37B6DC6812D232259269EFA5D /* BDBUserRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserRegisterViewController.h; sourceTree = "<group>"; };
+		7C650E460881B7C841C855022840A55D /* BDBUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserTableViewCell.m; sourceTree = "<group>"; };
+		7CC7DFCDB2EE4B2146A4C29B523A96FE /* BDBAskQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBAskQuestionViewController.h; sourceTree = "<group>"; };
 		7DA265B28E6BB4AA2F919E4EDFD5BE0F /* BDBSortTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSortTableViewCell.m; sourceTree = "<group>"; };
 		7E594AC808087067AEC4C5BF6788F85A /* BDBQuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBQuestionTableViewCell.xib; sourceTree = "<group>"; };
 		7EEA37BAC2946E4DA4A17A66DAAE57D5 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
+		7F342EC0EF3870E16A8CE8B5A05298CA /* BDBWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningViewController.m; sourceTree = "<group>"; };
 		7F649359BCDE16B7ED8D3B63425ECF07 /* BDBQuestionTypeGapButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTypeGapButton.h; sourceTree = "<group>"; };
 		812ADB69C38CA8CC7D7731237CB45EA6 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		812D79804EFD32835876EA130D439FFF /* BDBUserDalegateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserDalegateViewController.m; sourceTree = "<group>"; };
 		81A255897C60EC680AB5533AA0615FB6 /* BDBQuestionTypeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTypeListModel.h; sourceTree = "<group>"; };
 		81E946722A4628E96F9EC9334C8C556A /* BDBUserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserSettingViewController.h; sourceTree = "<group>"; };
 		81F6896E4FFE708444A225BFC0D0C46E /* MJRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshComponent.h; sourceTree = "<group>"; };
+		8242EEEBE2FA758DDC7D359973D45A4F /* BDB_TableViewCell_One.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDB_TableViewCell_One.xib; sourceTree = "<group>"; };
+		828672D434889C490043A39D713A3739 /* MJDIYHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYHeader.m; sourceTree = "<group>"; };
 		82D93F68BE6017D6E31C50875D2E6CB8 /* BDBNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeViewController.m; sourceTree = "<group>"; };
 		8435D6B9B0B399519E1701D1A7618E44 /* BDBQuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTableViewCell.m; sourceTree = "<group>"; };
 		8449B5B32834EB6E72088090E4756A1A /* BDBTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBTableViewCell.h; sourceTree = "<group>"; };
+		845E90011FF0D8E0816F55F20A53DE17 /* BDBWarningResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningResponseModel.h; sourceTree = "<group>"; };
 		848C57C1DFFAC14BD3D7B53DF33599C3 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
 		851284B459504DC27D0A163C6842F124 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		853BD4A11C859A540A360899F24514C8 /* BDBUserProfitCalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserProfitCalculatorViewController.m; sourceTree = "<group>"; };
@@ -491,9 +528,12 @@
 		90BCB8351274C7A2B9B672132CC05573 /* BDBUserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserSettingViewController.m; sourceTree = "<group>"; };
 		91500A1C3BA7478C9D933358964C1F1F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		91C84AE82BE8D7904FED8E770ADC6315 /* BDBUserDalegateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserDalegateViewController.h; sourceTree = "<group>"; };
+		91F7ADB7FD305B70DDB5297017BF771A /* MJDIYAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDIYAutoFooter.h; sourceTree = "<group>"; };
 		9255F247E82C5DA4A8E11B12ECF8636D /* BDBMyCollectViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBMyCollectViewModel.m; sourceTree = "<group>"; };
+		92EA692ADC9A39A59E1140BD5FF197CA /* MJDIYHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDIYHeader.h; sourceTree = "<group>"; };
 		92F9B36D7084CEFB54514A70FDF30A58 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		93463BD2A76132A665E9A0E7DEE43D11 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		94402B6EC4D8CED471E34C4AF5447CEE /* BDB_TableViewCell_Two.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDB_TableViewCell_Two.xib; sourceTree = "<group>"; };
 		948CF2B13D4F031C969203ADDAF1B9CF /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		953DC162328BD413452C6430F4F4EC50 /* BDBDetailReplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDetailReplyModel.h; sourceTree = "<group>"; };
 		961B01E6A7E73D42A7155BF12E1E354B /* BDBSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSearchViewController.h; sourceTree = "<group>"; };
@@ -523,9 +563,12 @@
 		9EC422DF4B7BFC569E29C0D602CB1C13 /* BDBRegisterResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBRegisterResponseModel.h; sourceTree = "<group>"; };
 		9F5E916E96FC352A068CD797712E136E /* IQSegmentedNextPrevious.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQSegmentedNextPrevious.h; sourceTree = "<group>"; };
 		A0B33EF2C1A74733E7C4C3072411E46E /* BDBDetailReplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBDetailReplyModel.m; sourceTree = "<group>"; };
+		A1C54DC8B3502884CAB9923670590C4A /* BDB_TableViewCell_Title.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDB_TableViewCell_Title.xib; sourceTree = "<group>"; };
+		A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBCustomTableViewCellThree.xib; sourceTree = "<group>"; };
 		A29A11E00A7FB25CC5006BD7CBB1F040 /* IQToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToolbar.m; sourceTree = "<group>"; };
 		A3FED543D590C1F1DDA0D476A917E171 /* BDBForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBForgetPasswordViewController.h; sourceTree = "<group>"; };
 		A43BDFDCDFEBE98C9A4D8DDC46ED9D06 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
+		A43D2F1679062AE486443F2E7E708CC4 /* BDBWarningTableViewCellTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningTableViewCellTwo.h; sourceTree = "<group>"; };
 		A5C5FDC5E6779E87D00E841DE2C053ED /* BDBQuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTableViewCell.h; sourceTree = "<group>"; };
 		A640CABA5F864FF7FA21EAE6B4D5CCF3 /* BDBButtonForTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBButtonForTopView.h; sourceTree = "<group>"; };
 		A6645F01D9060927EF6CF9DFC5946F6D /* BDBTableViewCellCoustom.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBTableViewCellCoustom.xib; sourceTree = "<group>"; };
@@ -537,15 +580,20 @@
 		A89C335A6153CC4FC4B526E100EF0D3D /* BDBMyColletDateBidListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBMyColletDateBidListModel.h; sourceTree = "<group>"; };
 		A8DD92609E11B09ED1BC46D17C24D7DB /* BDBInfoOfLawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBInfoOfLawViewController.h; sourceTree = "<group>"; };
 		A9654EEB30890E2BE9EC56A83EE760FB /* BDBUserProfitCompareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBUserProfitCompareViewController.xib; sourceTree = "<group>"; };
+		AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBCustomTableViewCellTwo.m; sourceTree = "<group>"; };
 		ABE99AC1CDFB989215306DD6AD7D255A /* BDBImformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBImformationCell.m; sourceTree = "<group>"; };
 		ACB7DF23FD20E39FE4A9CC57D1EDE4E9 /* BiDaiBaoAPPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BiDaiBaoAPPTests.m; sourceTree = "<group>"; };
 		ADCBEE1B5B68D50AD7B3A40D6BB7486F /* BDBHotTopicsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBHotTopicsMainViewController.m; sourceTree = "<group>"; };
 		AE0D281B5756143E10D5422233F6A723 /* IQSegmentedNextPrevious.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQSegmentedNextPrevious.m; sourceTree = "<group>"; };
+		AEC7060DF8797A409B5086869B383DCE /* BDBWarningAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningAddViewController.m; sourceTree = "<group>"; };
 		AECAC3AD1712C68C49899C892E44846E /* MOProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOProgressView.m; sourceTree = "<group>"; };
 		B2928F04EC8841DF33FE478BF260D6D5 /* BDBTableViewCellCoustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBTableViewCellCoustom.m; sourceTree = "<group>"; };
 		B31158FE6DE50E63B039E5DAEBA9B779 /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		B35D3AE8552DF1CEBC2ECE57D46EB22C /* BDBSujectP2PListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSujectP2PListModel.m; sourceTree = "<group>"; };
+		B36722EE282613E372446BACF959EB55 /* BDBWarningTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBWarningTableViewCell.xib; sourceTree = "<group>"; };
 		B555DBA454BFEA4BBAA5E0F5727C5DCB /* BDBUserQAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserQAViewController.m; sourceTree = "<group>"; };
 		B57471AAA0994E6F0A77D4D5C6F90F2F /* BDBUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserViewController.h; sourceTree = "<group>"; };
+		B664A10A4DB0AC3C6B875AD42F8D8BA5 /* BDBWarningTimeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningTimeResponseModel.h; sourceTree = "<group>"; };
 		B68624F2DB985914C7843E0AF19A4013 /* BDBImformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBImformationCell.h; sourceTree = "<group>"; };
 		B7629F46202C5082CB69F4C7591F530A /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
 		B7B04137B1E339EA0125462123E89A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -555,31 +603,29 @@
 		B936131B13719AB286A3900CD3A1D001 /* BDBHotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBHotTopicsModel.h; sourceTree = "<group>"; };
 		B94EAB194BCF052C484AAC676A94FDF0 /* BDBIndexClassifyParticularMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBIndexClassifyParticularMessageModel.h; sourceTree = "<group>"; };
 		BA0D51AB75695ABB6BFC28186DF30248 /* BDBDebitAndCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBDebitAndCreditViewController.m; sourceTree = "<group>"; };
-		BF0F66211DEDC6A4C95FC802BD8CEDD2 /* BDBAskQuestionTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBAskQuestionTypeViewController.h; sourceTree = "<group>"; };
-		B35D3AE8552DF1CEBC2ECE57D46EB22C /* BDBSujectP2PListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBSujectP2PListModel.m; sourceTree = "<group>"; };
-		B36722EE282613E372446BACF959EB55 /* BDBWarningTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBWarningTableViewCell.xib; sourceTree = "<group>"; };
-		B7629F46202C5082CB69F4C7591F530A /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
-		B7B04137B1E339EA0125462123E89A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8CD8ED3A152962D4C2F5D1799A5300C /* BDBCustomTableViewCellTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBCustomTableViewCellTwo.xib; sourceTree = "<group>"; };
 		BB15B72621B112451D2D1DA0CEBA5DCC /* BDB_TableViewCell_One.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDB_TableViewCell_One.m; sourceTree = "<group>"; };
 		BD18E444C14E7E2B7AD850875EF55118 /* BDBSubjectFilterContronller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSubjectFilterContronller.h; sourceTree = "<group>"; };
+		BF0F66211DEDC6A4C95FC802BD8CEDD2 /* BDBAskQuestionTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBAskQuestionTypeViewController.h; sourceTree = "<group>"; };
 		BF9C2E0D4F4376CFA2897FE59465A3E9 /* BDBDetailedMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDetailedMessageTableViewCell.h; sourceTree = "<group>"; };
 		BFC4662FB2377A744D8551A5B53B7DA8 /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		C00C534C4D5C3365E5357B69E3F1164F /* BDBPlatFormIDResponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBPlatFormIDResponModel.h; sourceTree = "<group>"; };
 		C194D19E84AC663B19F095A09D6FC11F /* BDBMyColletDateBidListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBMyColletDateBidListModel.m; sourceTree = "<group>"; };
+		C1C8B78887010BDE4CE67D8E64FD7981 /* BDBWarningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningTableViewCell.h; sourceTree = "<group>"; };
 		C24638204F12DEE2E3344CA9DADC0231 /* MJRefreshNormalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshNormalHeader.h; sourceTree = "<group>"; };
 		C2F30974012997796096A8D746929158 /* BDBInvestmentGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBInvestmentGuideViewController.m; sourceTree = "<group>"; };
 		C34F1E4F6AEBDECB6D6CCE4E66D60553 /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
-		C405A3543DA0E477D5F29DB3BFD8AE39 /* siftButtons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = siftButtons.plist; sourceTree = "<group>"; };
 		C55EDF7354F639A21122A695E5EBC153 /* BDBRookieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBRookieViewController.h; sourceTree = "<group>"; };
 		C6A002135675F3B4E16BD9F92AE5628F /* BDBDetailQuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBDetailQuestionTableViewCell.xib; sourceTree = "<group>"; };
 		C6FAD228C2EC61D3AAFF50E1C5E55D03 /* BDBUserReturnResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserReturnResponseModel.m; sourceTree = "<group>"; };
+		C7CA65CF8429D319DBACD19D19AD423D /* BDBWarningTableViewCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningTableViewCellTwo.m; sourceTree = "<group>"; };
 		C8749239B94BA02CB7D5CAF4721F0120 /* BDBDiscoveryDetailNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBDiscoveryDetailNewsViewController.h; sourceTree = "<group>"; };
-		C94D7CC88AD9CCBD6224619B0FDD0830 /* BDBCustomTableViewCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBCustomTableViewCellTwo.m; sourceTree = "<group>"; };
 		C9D31197FFE89416C4B61A511A952BC3 /* BDB_TableViewCell_Two.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDB_TableViewCell_Two.h; sourceTree = "<group>"; };
+		CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBPlatFormIDResponModel.m; sourceTree = "<group>"; };
 		CBE9309E00499F37DDA012FC306CAFF5 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
 		CCEC1326EFCEA7D5A8CE79E7F97C701A /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		CE06596AEEDF4CADAB2EBB0C239CC7B2 /* BDBDetailReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBDetailReplyTableViewCell.xib; sourceTree = "<group>"; };
 		CE55BF3A5EB9684C4E99E122AA2F69E9 /* BDBQuestionTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTypeModel.m; sourceTree = "<group>"; };
+		CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningModelTwo.m; sourceTree = "<group>"; };
 		CFB8A839064A8880DD2AB20DEC6AA150 /* BDBRiskControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBRiskControlViewController.m; sourceTree = "<group>"; };
 		CFD20469AA1100DA61C25EA3ECF61AFB /* BDBWebAnnouncementResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWebAnnouncementResponseModel.h; sourceTree = "<group>"; };
 		D07F57CD9E6EE0899AE8AEF69C619C57 /* BDBUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserViewController.m; sourceTree = "<group>"; };
@@ -591,16 +637,18 @@
 		D3A68008F2462924B66C5F342BEB19CB /* IQUIWindow+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIWindow+Hierarchy.h"; sourceTree = "<group>"; };
 		D3B4D40CDCB85D89641AA1404892189E /* BDBNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeViewController.h; sourceTree = "<group>"; };
 		D3F4BAFFE0311BED0007A9B547FD7E35 /* ZXLDataRequestNoResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLDataRequestNoResultView.h; sourceTree = "<group>"; };
+		D5379177FB172C08886ECFE164CD4297 /* BDBWarningTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningTimeViewController.h; sourceTree = "<group>"; };
 		D5792FB0A7D8842E93AF9B7A9738734F /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		D5FAC9AAFE9C05D6DF611D74D75BDE45 /* Subject.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subject.storyboard; sourceTree = "<group>"; };
 		D6705C952087C19C642F30078D5D3DCF /* BDBRegisterResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBRegisterResponseModel.m; sourceTree = "<group>"; };
 		D8BE96F9DE5A72710FC4ED9B7A88944B /* BDBUserProfitCompareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserProfitCompareViewController.h; sourceTree = "<group>"; };
 		D8D497DF779D3758244FE4F3AF73D0A0 /* filterButtons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = filterButtons.plist; sourceTree = "<group>"; };
-		D8D6905079A008B1C553B4364593E1DF /* BDBCustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBCustomTableViewCell.xib; sourceTree = "<group>"; };
 		D923ADC0682D260F850D7C9066AE0850 /* SDWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManager.h; sourceTree = "<group>"; };
 		D9513F7DDFA2E834D391D7FDFE4AF2F7 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
+		D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBPlatFormIDModel.m; sourceTree = "<group>"; };
 		D97B5E09EE1959D43BA44A5880CD6348 /* BDBQuestionTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBQuestionTypeModel.h; sourceTree = "<group>"; };
 		D9A82BC832FD34D55C56BA005EF49116 /* BDBParameterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBParameterTableViewCell.xib; sourceTree = "<group>"; };
+		DAB75196B8A49B24FC09CB8F580B989B /* BDBPlatFormIDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBPlatFormIDModel.h; sourceTree = "<group>"; };
 		DB738C8C0F4229D6BB189B7B6189667E /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extensions.m"; sourceTree = "<group>"; };
 		DBC6BBE6E79175E482034E4AF1E77048 /* BiDaiBao-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BiDaiBao-Prefix.pch"; sourceTree = "<group>"; };
 		DC23E667E0EBC257171BD16A9DD2495F /* BDBNoticeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBNoticeDetailViewController.h; sourceTree = "<group>"; };
@@ -610,12 +658,11 @@
 		DF607CC9F3DFCE1302EB249105966A00 /* BDBUserQAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBUserQAViewController.xib; sourceTree = "<group>"; };
 		DF8276520B671CACE54946370CEEB562 /* BDBMyCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBMyCollectViewController.m; sourceTree = "<group>"; };
 		DF94B8DD185B2113800FBAA4A6E8BBC5 /* BDBQuestionTypeGapButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTypeGapButton.m; sourceTree = "<group>"; };
+		E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Warning.storyboard; sourceTree = "<group>"; };
 		E0B20F1391C6B213B75256EE736B2767 /* BDBUserWarningSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserWarningSettingViewController.m; sourceTree = "<group>"; };
 		E1620C6615FD69559F935720BB2B081F /* IQUITextFieldView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUITextFieldView+Additions.m"; sourceTree = "<group>"; };
 		E223FDD86A7D4CB8D2623ABC8D69EFC3 /* BDBGetQuestionTypeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBGetQuestionTypeListModel.h; sourceTree = "<group>"; };
 		E266D5BA87C71B08E57328ED7BDFCA2F /* BDBUserReturnResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserReturnResponseModel.h; sourceTree = "<group>"; };
-		DE4DA87E2C8290DE1BC2F59619B9A58B /* BDBWarningTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningTimeViewController.h; sourceTree = "<group>"; };
-		E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Warning.storyboard; sourceTree = "<group>"; };
 		E330ED647837D61F15C4A489D7107027 /* BDBSujectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSujectModel.h; sourceTree = "<group>"; };
 		E46124F68E0A90AAD35BCED162673BAB /* BDBUserRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBUserRegisterViewController.m; sourceTree = "<group>"; };
 		E47A3788B1CDCBE92EDAEA6E0FDFFBF9 /* BDBNoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeModel.m; sourceTree = "<group>"; };
@@ -635,9 +682,12 @@
 		EA61798C113B0C865908CC421A39BD9F /* BDBUserQAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserQAViewController.h; sourceTree = "<group>"; };
 		EAA5DFF4F6AD49DF6C8B32211F7879A3 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
 		ED1557075CA601F8BBAF3642937507EC /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		ED80C239AABF82D17099FC612967CCFC /* BDBWarningModelOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBWarningModelOne.h; sourceTree = "<group>"; };
 		EDF56FD69BBFD8BAA6D92A4B8F5BBC60 /* BDBNoticeResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBNoticeResponseModel.m; sourceTree = "<group>"; };
+		EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDBCustomTableViewCellOne.xib; sourceTree = "<group>"; };
 		EE9A30DFB2C34BDC0A8ED4C15EFC89A3 /* ZXLLoadDataIndicatePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLLoadDataIndicatePage.m; sourceTree = "<group>"; };
 		EEE341D1E609B90A5B30635B7CCEEAB7 /* BDBUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserInfoViewController.h; sourceTree = "<group>"; };
+		EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningTimeResponseModel.m; sourceTree = "<group>"; };
 		EFBC7220B2F8326C16A0B4AB8AC3A570 /* BDBHotTopicIntroductionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBHotTopicIntroductionCell.m; sourceTree = "<group>"; };
 		F0049DE8A7D78FF6942C6A81B1F7031F /* BDBUserCPIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserCPIViewController.h; sourceTree = "<group>"; };
 		F027E0D38026395F00659C80BA741417 /* IQKeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardManager.m; sourceTree = "<group>"; };
@@ -646,19 +696,25 @@
 		F258144E7A4BDB82CFEF00F7921D104D /* BDBQuestionTypeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBQuestionTypeListModel.m; sourceTree = "<group>"; };
 		F36A700B70DD4DD0630A09C70B9B5EA5 /* BDBSecurityAssuranceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBSecurityAssuranceViewController.h; sourceTree = "<group>"; };
 		F3A42BF9FD80F71A8DDC87A55B60B68D /* IQKeyboardReturnKeyHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardReturnKeyHandler.m; sourceTree = "<group>"; };
+		F4046ED92FD8D9950A1E319761010D8D /* BDB_TableViewCell_One.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDB_TableViewCell_One.h; sourceTree = "<group>"; };
 		F49430D21A49166D9B2002996DE8C7D9 /* BDBAskQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBAskQuestionViewController.m; sourceTree = "<group>"; };
 		F4BD76346417760EBB277FF987C1A1B2 /* BDBDetailQuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBDetailQuestionTableViewCell.m; sourceTree = "<group>"; };
 		F4E74A90006B22638A10D7A31AD3FFBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F569396E684C7A2E2CB84D16024AE9B6 /* MJRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshGifHeader.h; sourceTree = "<group>"; };
 		F61AC825E920BF5C1D40ABA846E69E01 /* BDBUserModifyInformationResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBUserModifyInformationResponseModel.h; sourceTree = "<group>"; };
 		F784303F7FE321BF44A223AD744EC249 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBCustomTableViewCellThree.m; sourceTree = "<group>"; };
+		F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBWarningResponseModel.m; sourceTree = "<group>"; };
 		F8ECBBE0E4529B19020906DE366473EF /* MJRefreshBackStateFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackStateFooter.m; sourceTree = "<group>"; };
+		F95BF43B0AD96819C037ABA84D84AD1D /* BDB_TableViewCell_Title.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDB_TableViewCell_Title.h; sourceTree = "<group>"; };
 		FA6B313183354EDAE3755FFA652133F5 /* MJRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshComponent.m; sourceTree = "<group>"; };
 		FA8E014E80A613057E06399CD9151093 /* FLAnimatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImage.h; sourceTree = "<group>"; };
+		FB21B3A58A74751C4D39CB889FDEDB48 /* BDB_Cell_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDB_Cell_Button.h; sourceTree = "<group>"; };
 		FB79FE2CBBE44756D11F6DD50AAFFC7B /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
 		FBD171FE76C7DC56B8CB4CFC37DFAF3D /* SDWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageManager.m; sourceTree = "<group>"; };
 		FCAD16F439F9AFEC8F583F3EEE15AF6C /* BDBDetailReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBDetailReplyTableViewCell.m; sourceTree = "<group>"; };
 		FD6B371DC30D0D3BC256E012311FC33A /* BDBOperationModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBOperationModeViewController.m; sourceTree = "<group>"; };
+		FE9A1609D5C6A8002A22500FB98F956A /* BDB_TableViewCell_Two.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDB_TableViewCell_Two.m; sourceTree = "<group>"; };
 		FF22E7A0581DA3BC6A675A6E02DEC4C6 /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -817,15 +873,6 @@
 				7BC9D2B13450BB40AF99ED6A6C43A630 /* BDBSujectProfitCalculatorViewController.h */,
 				2EE71FD054498833765BBAA56278A9D0 /* BDBSujectProfitCalculatorViewController.m */,
 				3B4286B127ECD0F85DD19EA3AA969ADF /* BDBSujectProfitCalculatorViewController.xib */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		151AA3ED93781036D71E5873D98F5924 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				116323A9E8CD08C58E0CFA216111D6C8 /* BDBSubjectViewController.h */,
-				E9837A0C1C213436DBB19DC553CDAB0C /* BDBSubjectViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1251,6 +1298,7 @@
 				CFF3C5F5ED93629CDBCE71889DED73E9 /* Index */,
 				B420F955A4D149A0825D1F6A02B32E56 /* Subject */,
 				5BFAC6C1070DCE7E9DED66EE9A01F2F0 /* User */,
+				CD521E418912AD2DD45EC2C9E4B09BED /* Warning */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1461,17 +1509,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		CD521E418912AD2DD45EC2C9E4B09BED /* Warning */ = {
-			isa = PBXGroup;
-			children = (
-				B4C21909142FC80D477917AFAC2F48A2 /* Controller */,
-				89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */,
-				D49FF62A38FE37F0E7C8270E62EB9FCF /* View */,
-				E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */,
-			);
-			path = Warning;
-			sourceTree = "<group>";
-		};
 		CFF3C5F5ED93629CDBCE71889DED73E9 /* Index */ = {
 			isa = PBXGroup;
 			children = (
@@ -1490,6 +1527,96 @@
 				ACB7DF23FD20E39FE4A9CC57D1EDE4E9 /* BiDaiBaoAPPTests.m */,
 			);
 			path = BiDaiBaoAPPTests;
+			sourceTree = "<group>";
+		};
+		CD521E418912AD2DD45EC2C9E4B09BED /* Warning */ = {
+			isa = PBXGroup;
+			children = (
+				B4C21909142FC80D477917AFAC2F48A2 /* Controller */,
+				89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */,
+				D49FF62A38FE37F0E7C8270E62EB9FCF /* View */,
+				E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */,
+			);
+			path = Warning;
+			sourceTree = "<group>";
+		};
+		B4C21909142FC80D477917AFAC2F48A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2A61BF45F7C85195A2B8D31BD1C67627 /* BDBWarningAddViewController.h */,
+				AEC7060DF8797A409B5086869B383DCE /* BDBWarningAddViewController.m */,
+				1713D99A254A056F26BEE9929A73FBD7 /* BDBWarningViewController.h */,
+				7F342EC0EF3870E16A8CE8B5A05298CA /* BDBWarningViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAB75196B8A49B24FC09CB8F580B989B /* BDBPlatFormIDModel.h */,
+				D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */,
+				C00C534C4D5C3365E5357B69E3F1164F /* BDBPlatFormIDResponModel.h */,
+				CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */,
+				669E5EE49317385F675A3E5094E62090 /* BDBWarningAddResponseModel.h */,
+				54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */,
+				ED80C239AABF82D17099FC612967CCFC /* BDBWarningModelOne.h */,
+				594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */,
+				06100C7DA567CE92562576B3EC515919 /* BDBWarningModelTwo.h */,
+				CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */,
+				845E90011FF0D8E0816F55F20A53DE17 /* BDBWarningResponseModel.h */,
+				F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */,
+				B664A10A4DB0AC3C6B875AD42F8D8BA5 /* BDBWarningTimeResponseModel.h */,
+				EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D49FF62A38FE37F0E7C8270E62EB9FCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A735122E12A077005E3AD3E695061FC /* warningTimeCell */,
+				C1C8B78887010BDE4CE67D8E64FD7981 /* BDBWarningTableViewCell.h */,
+				758A21AB1D4C47C4071CB398F821D17F /* BDBWarningTableViewCell.m */,
+				B36722EE282613E372446BACF959EB55 /* BDBWarningTableViewCell.xib */,
+				A43D2F1679062AE486443F2E7E708CC4 /* BDBWarningTableViewCellTwo.h */,
+				C7CA65CF8429D319DBACD19D19AD423D /* BDBWarningTableViewCellTwo.m */,
+				26C811D40A906CF63505AD3D11274FA1 /* BDBWarningTableViewCellTwo.xib */,
+				FB21B3A58A74751C4D39CB889FDEDB48 /* BDB_Cell_Button.h */,
+				126D6181DC3184A3494B43B032BA803F /* BDB_Cell_Button.m */,
+				F4046ED92FD8D9950A1E319761010D8D /* BDB_TableViewCell_One.h */,
+				BB15B72621B112451D2D1DA0CEBA5DCC /* BDB_TableViewCell_One.m */,
+				8242EEEBE2FA758DDC7D359973D45A4F /* BDB_TableViewCell_One.xib */,
+				F95BF43B0AD96819C037ABA84D84AD1D /* BDB_TableViewCell_Title.h */,
+				360519AA9D00C75AC788F1BCF8BB94C8 /* BDB_TableViewCell_Title.m */,
+				A1C54DC8B3502884CAB9923670590C4A /* BDB_TableViewCell_Title.xib */,
+				C9D31197FFE89416C4B61A511A952BC3 /* BDB_TableViewCell_Two.h */,
+				FE9A1609D5C6A8002A22500FB98F956A /* BDB_TableViewCell_Two.m */,
+				94402B6EC4D8CED471E34C4AF5447CEE /* BDB_TableViewCell_Two.xib */,
+				91F7ADB7FD305B70DDB5297017BF771A /* MJDIYAutoFooter.h */,
+				324DBF7A60CA73633DC7BD39890C75E5 /* MJDIYAutoFooter.m */,
+				92EA692ADC9A39A59E1140BD5FF197CA /* MJDIYHeader.h */,
+				828672D434889C490043A39D713A3739 /* MJDIYHeader.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A735122E12A077005E3AD3E695061FC /* warningTimeCell */ = {
+			isa = PBXGroup;
+			children = (
+				238A91C3DEF4B736F224802F8BA5F6F4 /* BDBCustomTableViewCellOne.h */,
+				7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */,
+				EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */,
+				28D43EB63A0CD36280B873AEDCE4E29D /* BDBCustomTableViewCellThree.h */,
+				F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */,
+				A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */,
+				0740950FE73BE4B02F26F2E5D4659B65 /* BDBCustomTableViewCellTwo.h */,
+				AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */,
+				28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */,
+				D5379177FB172C08886ECFE164CD4297 /* BDBWarningTimeViewController.h */,
+				07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */,
+			);
+			path = warningTimeCell;
 			sourceTree = "<group>";
 		};
 		DB365FA6DE7E3E09CCCB7DDCF2B77BF2 /* Categories */ = {
@@ -1644,6 +1771,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BDFDBD73C06DF6D63850415CCA9C81B /* BDBCollectionCell.xib in Resources */,
+				286CB862D40CDF734842B2503F7F472A /* BDBCustomTableViewCellOne.xib in Resources */,
+				756470DAF4E5A46FD30094225C5F48A2 /* BDBCustomTableViewCellThree.xib in Resources */,
+				E6CECB96B2E9F3B992BDFB3CA2D38149 /* BDBCustomTableViewCellTwo.xib in Resources */,
 				845AA2BDDC986114EDB8E83EA772E658 /* BDBDetailQuestionTableViewCell.xib in Resources */,
 				FA3B0144282C7EABFE67A0523B3473C7 /* BDBDetailReplyTableViewCell.xib in Resources */,
 				0CC05EE53793C2505CCD20417FDA5D37 /* BDBDetailedMessageTableViewCell.xib in Resources */,
@@ -1671,6 +1801,11 @@
 				0212BB6C06C1DB049850012900765F8D /* BDBUserSettingViewController.xib in Resources */,
 				CFA0D5CF65E4B8491D316E6F8EF962EC /* BDBUserTableViewCell.xib in Resources */,
 				FCDB63A730A733108E1EC947275A7558 /* BDBUserWarningSettingViewController.xib in Resources */,
+				4AF13CE39EFD2E07EF0466CFA51092ED /* BDBWarningTableViewCell.xib in Resources */,
+				67F929C98BAD45D556878C4E4839FD19 /* BDBWarningTableViewCellTwo.xib in Resources */,
+				6C3CB53697FE4E4AEBA621A933AC0F2C /* BDB_TableViewCell_One.xib in Resources */,
+				F9D937D6919CA4DC4A7F7A2345A21B1F /* BDB_TableViewCell_Title.xib in Resources */,
+				3CE90320A9CDC31747A4CBA952A1C6BA /* BDB_TableViewCell_Two.xib in Resources */,
 				20B677575D97657AD147E8C59893A58F /* Discovery.storyboard in Resources */,
 				67BF45D279B8A928432024A675FEF49A /* Feature.storyboard in Resources */,
 				D454943208D1F3F9A0ABD755D4BA1073 /* IQKeyboardManager.bundle in Resources */,
@@ -1685,8 +1820,6 @@
 				D717027938CB3129F0FDE000AAB9C733 /* global_loaddata_icon.gif in Resources */,
 				E191D9D9BC1347E887C68304BF1493CE /* global_refreshdata_icon.gif in Resources */,
 				97005B382EE5462B98B6B5B9B3EDE560 /* index_top_adv.gif in Resources */,
-				27AA1A2EB005A72E7E2E6F8BEC91380F /* siftButtons.plist in Resources */,
-				B78B7C787217E4FD208A3E235E6198CC /* index_adv.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1723,6 +1856,9 @@
 				56B8024D5F7FD7C4E02214BB436564D6 /* BDBButtonForTopView.m in Sources */,
 				38B196E12D31796B62F456F6FDC22562 /* BDBCollectionCell.m in Sources */,
 				B3BD967B5F25301288FFB575C26CEF83 /* BDBCreditorsRightsTransferViewController.m in Sources */,
+				052F2343A7162B3108E11461BC87C229 /* BDBCustomTableViewCellOne.m in Sources */,
+				07C6B195632EA6E092EC39303BD6D429 /* BDBCustomTableViewCellThree.m in Sources */,
+				563836A5B1211D4D27C10333274D35AC /* BDBCustomTableViewCellTwo.m in Sources */,
 				D47DA11A098F889AD930386B5279D9C1 /* BDBCustomTextField.m in Sources */,
 				877B569E60E40C7BC302F2BCC2CD597E /* BDBDebitAndCreditViewController.m in Sources */,
 				8CEAA0AB728E19D2AE39D10C197775FC /* BDBDetailQuestionAndReplyViewController.m in Sources */,
@@ -1764,6 +1900,8 @@
 				F26C989370781C64E79221E34F9319B1 /* BDBNoticeViewController.m in Sources */,
 				C5C87E5E66D92E7B61FE159F559ED5B3 /* BDBOperationModeViewController.m in Sources */,
 				662C7CDD186E993418DEA0341255E3C0 /* BDBParameterTableViewCell.m in Sources */,
+				F33FD3481A2EF69C06A7B35F98F6F4FD /* BDBPlatFormIDModel.m in Sources */,
+				FC0B6A36C3E0BCFE6A960789744DF52D /* BDBPlatFormIDResponModel.m in Sources */,
 				09E333A5543EDECB9440B0175D133006 /* BDBQuestionContentCell.m in Sources */,
 				A4506A8319E5AE8ECBF8AE4090BFBAA1 /* BDBQuestionTableViewCell.m in Sources */,
 				8A9DE174C50C21871C834E967277A41D /* BDBQuestionTypeButton.m in Sources */,
@@ -1808,7 +1946,21 @@
 				78CEBAC38C4B0F18F261933F4EC2EBDD /* BDBUserTableViewCell.m in Sources */,
 				DC2DDC99CF5BE5BC50D9ABC73BC5F3E4 /* BDBUserViewController.m in Sources */,
 				CF5A38312694B97B95D9869272E39266 /* BDBUserWarningSettingViewController.m in Sources */,
+				AD4D2A1EE96E241D30D6AFD5E034BBA8 /* BDBWarningAddResponseModel.m in Sources */,
+				1C6FEA4492585FABCF87D7C8CD6573A5 /* BDBWarningAddViewController.m in Sources */,
+				11E8D10DDEDDECAF6E048D8E82F1927F /* BDBWarningModelOne.m in Sources */,
+				C4E5BC771D17E4731C6D06751F0F8369 /* BDBWarningModelTwo.m in Sources */,
+				998D660D434C83FC362027D2A5D15DE4 /* BDBWarningResponseModel.m in Sources */,
+				224C9A111D31D1A86295CB4BFB19D2AE /* BDBWarningTableViewCell.m in Sources */,
+				B4E876AFD6521C8BB0E1BEBC931657E5 /* BDBWarningTableViewCellTwo.m in Sources */,
+				88A00A06AD1951812C49915BDB97DFA9 /* BDBWarningTimeResponseModel.m in Sources */,
+				B8732BF7C2F6E83CA99F2EFF659B7B84 /* BDBWarningTimeViewController.m in Sources */,
+				713A5AD6BA47613E9EC0706BCC0FCD83 /* BDBWarningViewController.m in Sources */,
 				B04978081C791BAEF87CC1BBE692FC51 /* BDBWebAnnouncementResponseModel.m in Sources */,
+				95FA735751EE5FE8916C52DD3A46AE34 /* BDB_Cell_Button.m in Sources */,
+				2EC55DCE1163ECFC77C6D4484B9D58A0 /* BDB_TableViewCell_One.m in Sources */,
+				4D8CAEEE7A2557475CE745CD391FAF5F /* BDB_TableViewCell_Title.m in Sources */,
+				33155C98F3EBF31FB01B2C514DB6FBBD /* BDB_TableViewCell_Two.m in Sources */,
 				BFF2034231B9C77758F35A71804464A1 /* FLAnimatedImage.m in Sources */,
 				910506E7CF76FD9BCBF309DBA8CD5C23 /* FLAnimatedImageView.m in Sources */,
 				2E06E069A80AD9AB082CCC010BAE52ED /* GlobalConfigurations.m in Sources */,
@@ -1826,6 +1978,8 @@
 				A84A733AB1D9254303B704CBBBA60CEA /* IQUIViewController+Additions.m in Sources */,
 				B518567810B00456D872476830FD6BDC /* IQUIWindow+Hierarchy.m in Sources */,
 				ACE0D0081A99A8DC113171B1D003D201 /* MJConst.m in Sources */,
+				8AA1F1C0FE164B26DD3CC58A61B5F379 /* MJDIYAutoFooter.m in Sources */,
+				79B8FA227D00DF76B1879562EF2605EF /* MJDIYHeader.m in Sources */,
 				FA50DE66629C175703AA5762228B1EE0 /* MJFoundation.m in Sources */,
 				005C40446E850E6D03F222702934519E /* MJProperty.m in Sources */,
 				DE035F7330D6B1F828E2D69F2902AB25 /* MJRefreshAutoFooter.m in Sources */,

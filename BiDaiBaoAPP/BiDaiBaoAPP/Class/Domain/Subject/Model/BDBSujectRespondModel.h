@@ -18,6 +18,6 @@
 
 @property(nonatomic,copy) NSString *BidListNum;
 
-@property(nonatomic,copy) NSArray *BidList;
+@property(nonatomic,strong) NSMutableArray *BidList;
 
 @end

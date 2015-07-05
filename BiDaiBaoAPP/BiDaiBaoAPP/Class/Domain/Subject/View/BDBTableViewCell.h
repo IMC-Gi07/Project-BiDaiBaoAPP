@@ -8,22 +8,30 @@
 
 #import <UIKit/UIKit.h>
 #import "BDBSujectModel.h"
+
+typedef void (^UpdateCollectButtonSelected)(BOOL);
+typedef void (^UpdateCellisRefresh)(BOOL);
+typedef void (^UpdateCellModel)(BDBSujectModel *);
+
 @interface BDBTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *BidNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *collectButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *PlatformNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *loanButton;
+@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *AnnualEarningsLabel;
+@property(nonatomic,assign) BOOL isRrefreshing;
 
-@property (weak, nonatomic) IBOutlet UILabel *TermLabel;
+@property(nonatomic,strong) BDBSujectModel *model;
 
-@property (weak, nonatomic) IBOutlet UILabel *AmountLabel;
+@property(nonatomic,copy)UpdateCollectButtonSelected updateCollectButtonSelected;
 
-@property (weak, nonatomic) IBOutlet UILabel *ProgressPercentLabel;
+@property(nonatomic,copy)UpdateCellisRefresh updateCellisRefresh;
 
+@property(nonatomic,copy) UpdateCellModel updateCellModel;
 
++ (BDBTableViewCell *)cell;
 
-+ (BDBTableViewCell *)cellWithModel:(BDBSujectModel *) model;
+- (void)depoySubViewWithModel: (BDBSujectModel *) model controller:(UIViewController *)viewController indexPath: (NSIndexPath *)aIndexPath;
 
 @end

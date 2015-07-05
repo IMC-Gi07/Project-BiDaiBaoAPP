@@ -10,11 +10,6 @@
 
 @interface BDBButtonForSift ()
 
-
-
-
-- (void)swithIsSelected;
-
 @end
 
 @implementation BDBButtonForSift

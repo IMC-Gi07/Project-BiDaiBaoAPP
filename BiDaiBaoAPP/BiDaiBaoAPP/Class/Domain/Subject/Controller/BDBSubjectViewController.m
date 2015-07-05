@@ -1,8 +1,8 @@
 //
 //  BDBSubjectViewController.m
-//  BiDaiBao(比贷宝)
+//  BiDaiBaoAPP
 //
-//  Created by zhang xianglu on 15/6/6.
+//  Created by Imcore.olddog.cn on 15/7/1.
 //  Copyright (c) 2015年 zhang xianglu. All rights reserved.
 //
 
@@ -14,17 +14,20 @@
 #import "BDBButtonForSift.h"
 #import "BDBSujectRespondModel.h"
 #import "BDBSujectModel.h"
+#import "ZXLLoadDataIndicatePage.h"
+#import "BDBSubjectFilterContronller.h"
+#import "BDBSujectProfitCalculatorViewController.h"
 
+typedef enum{
+    pullUpRefresh,dropDownRefresh} RefreshWays;
 
 @interface BDBSubjectViewController () <UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,weak)UIView *topView;
-
 @property(nonatomic,weak) UITableView *showDataTableView;
 
-@property(nonatomic,weak) UIScrollView *sievingScrollView;
+@property(nonatomic,weak) UIScrollView *filterScrollView;
 
-@property(nonatomic,copy) NSArray *sievingButtonArray;
+@property(nonatomic,copy) NSArray *filterButtonArray;
 
 @property(nonatomic,weak) UIButton *sureButtonOfBottom;
 
@@ -32,27 +35,48 @@
 
 @property(nonatomic,weak) UILabel *selectedPlatformName;
 
-//@property(nonatomic,strong) BDBSiftButtonInfoModel *sievingButtonInfos;
+@property(nonatomic,weak) UIView *showBidInfoCountView;
+
+@property(nonatomic,weak) UILabel *bidCountLabel;
+
+@property(nonatomic,weak) ZXLLoadDataIndicatePage *indicatePage;
+
+@property(nonatomic,strong) NSMutableDictionary *filterCondition;
+
+@property(nonatomic,weak) NSLayoutConstraint *heigtConstraintForPlatformView;
+
+@property(nonatomic,strong) NSMutableDictionary *isCollectedDict;
+
+@property(nonatomic,strong) NSMutableDictionary *isRefreshingDict;
+
+@property(nonatomic,copy) NSString *pageIndex;
+
+@property(nonatomic,copy) NSString *pageSize;
 
 @property(nonatomic,strong) NSMutableArray *sujectModelDatas;
 
-@property(nonatomic,weak) UIScrollView *platformView;
-
-@property(nonatomic,weak) NSLayoutConstraint *heigtConstraintForPlatformView;
+@property(nonatomic,strong) BDBSujectRespondModel *sujectRespondModel;
 
 
 - (void)loadTopView;
 
 - (void)loadShowDataTableView;
 
-- (void)loadSievingButtonInfos;
+- (void)loadFilterScrollView;
 
-- (void)loadBidsInf;
+- (void)loadFilterButtonInfos;
+
+- (void)loadBidsInfWithRefreshWay: (RefreshWays)refreshWay;
 
 - (void)loadButtonOfBottom;
 
-- (void)layoutSievingViewButtons:(NSInteger)number view:(UIView *)aView;
+- (void)layoutFilterViewButtons:(NSInteger)number view:(UIView *)aView;
 
+- (void)showBidInfoCount;
+
+- (void)hiddenBidInfoCount;
+
+- (void)topViewButtonClicked:(BDBButtonForTopView *)button;
 @end
 
 @implementation BDBSubjectViewController
@@ -60,21 +84,35 @@
 #pragma mark - Initial Methods
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
-
-    if(self = [super initWithCoder:aDecoder]){
     
+    if(self = [super initWithCoder:aDecoder]){
+        
         self.title = @"标的";
         
-//        self.sievingButtonInfos = [[BDBSiftButtonInfoModel alloc] init];
+        self.filterCondition = [NSMutableDictionary dictionary];
+        
+        self.isCollectedDict = [NSMutableDictionary dictionary];
+        
+        self.isRefreshingDict = [NSMutableDictionary dictionary];
         
         self.sujectModelDatas = [NSMutableArray array];
         
+        _filterCondition[@"平台"] = @"";
+        
+        _filterCondition[@"收益率"] = @"";
+        
+        _filterCondition[@"期限"] = @"";
+        
+        _filterCondition[@"进度"] = @"";
+        
         self.automaticallyAdjustsScrollViewInsets = NO;
         
-        [self loadBidsInf];
+        self.pageIndex = @"1";
         
-        [self loadSievingButtonInfos];
-
+        self.pageSize = @"10";
+        
+        [self loadFilterButtonInfos];
+        
         
     }
     
@@ -86,12 +124,12 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     [self loadTopView];
     [self loadShowDataTableView];
     
-    //[self loadSievingScrollView];
+    self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
     
+    [self loadBidsInfWithRefreshWay:pullUpRefresh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,62 +137,118 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
 
-#pragma mark - LoadDatas  Methods
-
-- (void)loadSievingButtonInfos{
-
-    self.sievingButtonArray = [NSArray arrayWithContentsOfFile:FilePathInBundleWithNameAndType(@"siftButtons",@"plist")];
+    [super viewWillAppear:animated];
+    
+    if(_filterScrollView == nil){
+        
+        self.tabBarController.tabBar.hidden = NO;
+    }
+    else{
+    
+        self.tabBarController.tabBar.hidden = YES;
+    }
+    
     
 }
 
-- (void)loadBidsInf{
+#pragma mark - LoadDatas  Methods
 
+/**
+ *  加载筛选界面按钮数据
+ */
+
+- (void)loadFilterButtonInfos{
+    
+    self.filterButtonArray = [NSArray arrayWithContentsOfFile:FilePathInBundleWithNameAndType(@"filterButtons",@"plist")];
+    
+}
+
+
+/**
+ * 通过刷新的方式，刷新表格
+ */
+- (void)loadBidsInfWithRefreshWay: (RefreshWays)refreshWay{
+    
+    if(refreshWay == pullUpRefresh){
+        
+        self.pageIndex = @"1";
+        
+    }
+    if(refreshWay == dropDownRefresh){
+        
+        NSInteger pageIndex = [_pageIndex integerValue];
+        
+        pageIndex ++;
+        
+        self.pageIndex = [NSString stringWithFormat:@"%li",(long)pageIndex];
+    }
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    NSString *serviceHTTP = @"http://117.25.155.115:8082";
-    
-    NSString *requestURL = [serviceHTTP stringByAppendingPathComponent:@"GetWorthyBids"];
+    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids"];
     
     NSMutableDictionary *parametersDict = [NSMutableDictionary dictionary];
     
-    parametersDict[@"Machine_id"] = [UIDevice currentDevice].identifierForVendor.UUIDString;
+    parametersDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
     
     parametersDict[@"Device"] = @"0";
     
-    parametersDict[@"PageInDex"] = @"1";
+    parametersDict[@"PageInDex"] = _pageIndex;
     
-    parametersDict[@"PageSize"] = @"5";
+    parametersDict[@"PageSize"] = _pageSize;
     
-    parametersDict[@"Count"] = @"0";
+    parametersDict[@"Count"] = @"1";
+    
     
     [manager POST:requestURL parameters:parametersDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         
-        BDBSujectRespondModel *sujectREspondModel = [BDBSujectRespondModel objectWithKeyValues:responseObject];
+        self.sujectRespondModel = [BDBSujectRespondModel objectWithKeyValues:responseObject];
         
-        self.sujectModelDatas = [[_sujectModelDatas arrayByAddingObjectsFromArray:sujectREspondModel.BidList] mutableCopy];
-    
-        [_showDataTableView reloadData];
+        if(refreshWay == pullUpRefresh){
+            
+            self.sujectModelDatas = _sujectRespondModel.BidList;
+            
+            [self refreshBidInfoCount];
+        }
+        
+        if(refreshWay == dropDownRefresh){
+            
+            [_sujectModelDatas addObjectsFromArray:_sujectRespondModel.BidList];
+            
+            [self hiddenBidInfoCount];
+            
+        }
+        
+        if(self.indicatePage != nil){
+            
+            [UIView transitionFromView:_indicatePage toView:_showDataTableView duration:0.2f options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
+        }
+        
+        [self.showDataTableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         ZXLLOG(@"%@",error);
     }];
     
+    
 }
 
-#pragma mark - Add SubViews Methods
+
+#pragma mark - Load SubViews Methods
 
 /**
  *  为顶部的UIView添加SubViews
  */
 - (void)loadTopView{
-
-    UIView *topView = [[UIView alloc] init];
-        
-    [self.view addSubview:topView];
     
-    self.topView = topView;
+    UIView *topView = [[UIView alloc] init];
+    
+    topView.tag = 100;
+    
+    [self.view addSubview:topView];
     
     topView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -194,9 +288,11 @@
     [topView addConstraints:vConstrainsTopViewBackgroundImage];
     
     //topView按钮
-
+    
     BDBButtonForTopView *buttonOfProfit = [BDBButtonForTopView buttonWithTitle:@"收益率" titleColor:UIColorWithRGB(93, 92, 97) image:[UIImage imageNamed:@"subject_btnTopview_icon_up"]];
     
+    
+    [buttonOfProfit addTarget:self action:@selector(sortSujectModelDatasWith:) forControlEvents:UIControlEventTouchUpInside];
     
     buttonOfProfit.frame = CGRectMake(0, 0, SCREEN_WIDTH / 4, 44);
     
@@ -204,11 +300,15 @@
     
     BDBButtonForTopView *buttonOfProgress = [BDBButtonForTopView buttonWithTitle:@"进度" titleColor:UIColorWithRGB(93, 92, 97) image:[UIImage imageNamed:@"subject_btnTopview_icon_up"]];
     
+    [buttonOfProgress addTarget:self action:@selector(sortSujectModelDatasWith:) forControlEvents:UIControlEventTouchUpInside];
+    
     buttonOfProgress.frame = CGRectMake(SCREEN_WIDTH / 4 * 1, 0, SCREEN_WIDTH / 4, 44);
     
     [topView addSubview:buttonOfProgress];
     
     BDBButtonForTopView *buttonOfTimeLimit = [BDBButtonForTopView buttonWithTitle:@"期限" titleColor:UIColorWithRGB(93, 92, 97) image:[UIImage imageNamed:@"subject_btnTopview_icon_up"]];
+    
+    [buttonOfTimeLimit addTarget:self action:@selector(sortSujectModelDatasWith:) forControlEvents:UIControlEventTouchUpInside];
     
     buttonOfTimeLimit.frame = CGRectMake(SCREEN_WIDTH / 4 * 2, 0, SCREEN_WIDTH / 4, 44);
     
@@ -220,147 +320,75 @@
     
     [buttonOfSift handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
         
-        
-        if(thisInstance.sievingScrollView == nil){
+        if(thisInstance.filterScrollView == nil){
             
-            buttonOfProfit.enabled = NO;
-            buttonOfProgress.enabled = NO;
-            buttonOfTimeLimit.enabled = NO;
-            
-            buttonOfProfit.isClicked = NO;
-            buttonOfProgress.isClicked = NO;
-            buttonOfTimeLimit.isClicked = NO;
-            
-            [buttonOfTimeLimit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-            [buttonOfProgress setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-            [buttonOfProfit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-            
-            [thisInstance loadButtonOfBottom];
-            [thisInstance loadSievingScrollView];
-            
-            
-            CATransition *transition = [CATransition animation];
-            
-            transition.type = kCATransitionPush;
-            
-            transition.duration = 0.2f;
-            
-            transition.subtype = kCATransitionFromBottom;
-            
-            [thisInstance.sievingScrollView.layer addAnimation:transition forKey:nil];
-            
-            [thisInstance.showDataTableView removeFromSuperview];
-
+            thisInstance.tabBarController.tabBar.hidden = YES;
+            for (id obj in topView.subviews) {
+                if([obj isKindOfClass:[BDBButtonForTopView class]]){
+                    
+                    BDBButtonForTopView *btn = obj;
+                    
+                    btn.isClicked = NO;
+                    if(![[btn titleForState:UIControlStateNormal] isEqualToString:@"筛选"]){
+                        
+                        [btn setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+                    }
+                    
+                    
+                }
+            }
+            [thisInstance loadFilterScrollView];
         }
         else{
-        
-            buttonOfProfit.enabled = YES;
-            buttonOfProgress.enabled = YES;
-            buttonOfTimeLimit.enabled = YES;
             
-            [thisInstance loadShowDataTableView];
-            [thisInstance removeButtonsOfBottom];
-            [thisInstance.sievingScrollView removeFromSuperview];
-            CATransition *transition = [CATransition animation];
+            thisInstance.tabBarController.tabBar.hidden = NO;
+            [UIView transitionFromView:thisInstance.filterScrollView toView:thisInstance.showDataTableView duration:1.0f options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
             
-            transition.type = kCATransitionPush;
-            
-            transition.duration = 0.2f;
-            
-            transition.subtype = kCATransitionFromTop;
-            
-            [thisInstance.showDataTableView.layer addAnimation:transition forKey:nil];
-            
-            NSLog(@"%@,",thisInstance.sievingScrollView);
-            
+            [thisInstance.sureButtonOfBottom removeFromSuperview];
+            [thisInstance.resetButtonOfBottom removeFromSuperview];
             
         }
-
-        
     }];
     
     buttonOfSift.frame = CGRectMake(SCREEN_WIDTH / 4 * 3, 0, SCREEN_WIDTH / 4, 44);
     
     [topView addSubview:buttonOfSift];
     
-    [buttonOfTimeLimit handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-        
-        if(buttonOfTimeLimit.isClicked){
-            
-            buttonOfTimeLimit.isClicked = NO;
-        }
-        else{
-            
-            buttonOfTimeLimit.isClicked = YES;
-            
-        }
-        
-        [buttonOfTimeLimit setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
-        [buttonOfProgress setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-        [buttonOfProfit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-    }];
-    
-    [buttonOfProgress handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-        
-        if(buttonOfProgress.isClicked){
-            
-            buttonOfProgress.isClicked = NO;
-        }
-        else{
-            
-            buttonOfProgress.isClicked = YES;
-            
-        }
-        
-        [buttonOfProgress setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
-        [buttonOfTimeLimit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-        [buttonOfProfit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-    }];
-    [buttonOfProfit handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-        
-        if(buttonOfProfit.isClicked){
-            
-            buttonOfProfit.isClicked = NO;
-        }
-        else{
-            
-            buttonOfProfit.isClicked = YES;
-            
-        }
-        
-        [buttonOfProfit setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
-        [buttonOfTimeLimit setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-        [buttonOfProgress setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
-    }];
-    
-    
-
-
 }
 
-- (void)loadSievingScrollView{
+- (void)loadFilterScrollView{
     
     
     //筛选页面
-    UIScrollView *sievingScrollView = [[UIScrollView alloc] init];
+    UIScrollView *filterScrollView = [[UIScrollView alloc] init];
     
-    sievingScrollView.backgroundColor = [UIColor whiteColor];
+    filterScrollView.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:sievingScrollView];
+    CATransition *transition_in = [[CATransition alloc] init];
     
-    self.sievingScrollView = sievingScrollView;
+    transition_in.type = kCATransitionMoveIn;
     
-    sievingScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    transition_in.subtype = kCATransitionFromBottom;
     
-    NSString *constraintsVFL = @"H:|[sievingScroView]|";
+    [filterScrollView.layer addAnimation:transition_in forKey:nil];
     
-    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"sievingScroView":sievingScrollView}];
+    [self.view addSubview:filterScrollView];
+    
+    self.filterScrollView = filterScrollView;
+    
+    filterScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSString *constraintsVFL = @"H:|[filterScrollView]|";
+    
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"filterScrollView":filterScrollView}];
     
     [self.view addConstraints:hConstraints];
     
-    constraintsVFL = @"V:[topView][sievingScroView]-50-|";
+    constraintsVFL = @"V:[topView][filterScrollView]-50-|";
     
-    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"topView":_topView,@"sievingScroView":sievingScrollView}];
+    UIView *topView = [self.view viewWithTag:100];
+    
+    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"topView":topView,@"filterScrollView":filterScrollView}];
     
     [self.view addConstraints:vConstraints];
     
@@ -368,9 +396,9 @@
     //筛选页面－》选择平台
     UIScrollView *platformView = [[UIScrollView alloc] init];
     
-    [sievingScrollView addSubview:platformView];
+    platformView.tag = 200;
     
-    self.platformView = platformView;
+    [filterScrollView addSubview:platformView];
     
     platformView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -378,7 +406,7 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"platformView":platformView}];
     
-    [sievingScrollView addConstraints:hConstraints];
+    [filterScrollView addConstraints:hConstraints];
     
     //筛选页面－》选择平台(分割线)
     
@@ -386,7 +414,7 @@
     
     separator_0.backgroundColor = UIColorWithRGB(204, 204, 204);
     
-    [sievingScrollView addSubview:separator_0];
+    [filterScrollView addSubview:separator_0];
     
     separator_0.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -394,12 +422,12 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_0":separator_0}];
     
-    [sievingScrollView addConstraints:hConstraints];
+    [filterScrollView addConstraints:hConstraints];
     
     //筛选页面－》年化收益率
     UIScrollView *profitView = [[UIScrollView alloc] init];
     
-    [sievingScrollView addSubview:profitView];
+    [filterScrollView addSubview:profitView];
     
     profitView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -407,7 +435,7 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"profitView":profitView}];
     
-    [sievingScrollView addConstraints:hConstraints];
+    [filterScrollView addConstraints:hConstraints];
     
     //筛选页面－》年化收益率(分割线)
     
@@ -415,7 +443,7 @@
     
     separator_1.backgroundColor = UIColorWithRGB(204, 204, 204);
     
-    [sievingScrollView addSubview:separator_1];
+    [filterScrollView addSubview:separator_1];
     
     separator_1.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -423,13 +451,13 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_1":separator_1}];
     
-    [sievingScrollView addConstraints:hConstraints];
+    [filterScrollView addConstraints:hConstraints];
     
     //筛选页面－》投资期限
     
     UIScrollView *termView = [[UIScrollView alloc] init];
     
-    [sievingScrollView addSubview:termView];
+    [filterScrollView addSubview:termView];
     
     termView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -437,7 +465,7 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"termView":termView}];
     
-    [sievingScrollView addConstraints:hConstraints];
+    [filterScrollView addConstraints:hConstraints];
     
     //筛选页面－》年化收益率(分割线)
     
@@ -445,7 +473,7 @@
     
     separator_2.backgroundColor = UIColorWithRGB(204, 204, 204);
     
-    [sievingScrollView addSubview:separator_2];
+    [filterScrollView addSubview:separator_2];
     
     separator_2.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -453,12 +481,12 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_2":separator_2}];
     
-    [sievingScrollView addConstraints:hConstraints];
+    [filterScrollView addConstraints:hConstraints];
     
     // 筛选页面－》投资进度
     UIScrollView *progressView = [[UIScrollView alloc] init];
     
-    [sievingScrollView addSubview:progressView];
+    [filterScrollView addSubview:progressView];
     
     progressView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -466,26 +494,29 @@
     
     hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"progressView":progressView}];
     
-    [sievingScrollView addConstraints:hConstraints];
-
+    [filterScrollView addConstraints:hConstraints];
+    
     
     constraintsVFL = @"V:|[platformView][separator_0(1)][profitView(65)][separator_1(1)][termView(105)][separator_2(1)][progressView(65)]|";
     
     vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"platformView":platformView,@"separator_0":separator_0,@"profitView":profitView,@"separator_1":separator_1,@"termView":termView,@"separator_2":separator_2,@"progressView":progressView}];
     
     NSLayoutConstraint *heigtConstraintForPlatformView = [NSLayoutConstraint constraintWithItem:platformView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:65.0f];
-
+    
     self.heigtConstraintForPlatformView = heigtConstraintForPlatformView;
     
     [platformView addConstraint:heigtConstraintForPlatformView];
     
-    [sievingScrollView addConstraints:vConstraints];
+    [filterScrollView addConstraints:vConstraints];
+    
+    filterScrollView.hidden = NO;
     
     //筛选页面－》选择平台(选择平台)
     
     UILabel *platformLabel = [[UILabel alloc] init];
     
     platformLabel.text = @"选择平台:";
+    
     
     [platformView addSubview:platformLabel];
     
@@ -497,34 +528,7 @@
     
     BDBButtonForSift *showMoreButton = [BDBButtonForSift showMoreButton];
     
-    [showMoreButton handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-        if(showMoreButton.isShowMores){
-        
-            showMoreButton.isShowMores = NO;
-            [UIView animateWithDuration:0.5f animations:^{
-                heigtConstraintForPlatformView.constant = 65.0f;
-                
-                [platformView setNeedsLayout];
-                [platformView layoutIfNeeded];
-                [sievingScrollView setNeedsLayout];
-                [sievingScrollView layoutIfNeeded];
-
-            }];
-            
-        }
-        else{
-        
-            showMoreButton.isShowMores = YES;
-            [UIView animateWithDuration:0.5f animations:^{
-                heigtConstraintForPlatformView.constant = 150.0f;
-                
-                [platformView setNeedsLayout];
-                [platformView layoutIfNeeded];
-                [sievingScrollView setNeedsLayout];
-                [sievingScrollView layoutIfNeeded];
-            }];
-        }
-    }];
+    [showMoreButton addTarget:self action:@selector(showMoreButtonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [platformView addSubview:showMoreButton];
     
@@ -570,7 +574,7 @@
     
     UILabel *progressLabel = [[UILabel alloc] init];
     
-    progressLabel.text = @"投资期限:";
+    progressLabel.text = @"投标进度:";
     
     [progressView addSubview:progressLabel];
     
@@ -578,42 +582,23 @@
     
     progressLabel.frame = CGRectMake(10, 10, 80, 15);
     
-    [self layoutSievingViewButtons:0 view:platformView];
-    [self layoutSievingViewButtons:1 view:profitView];
-    [self layoutSievingViewButtons:2 view:termView];
-    [self layoutSievingViewButtons:3 view:progressView];
+    [self layoutFilterViewButtons:0 view:platformView];
+    [self layoutFilterViewButtons:1 view:profitView];
+    [self layoutFilterViewButtons:2 view:termView];
+    [self layoutFilterViewButtons:3 view:progressView];
     
-    [_resetButtonOfBottom handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-       
-        for (id obj in sievingScrollView.subviews) {
-            
-            UIView *view = obj;
-            
-            for (id viewSubView in view.subviews) {
-                
-                if([viewSubView isKindOfClass:[BDBButtonForSift class]]){
-                    
-                    BDBButtonForSift *tmpButton = viewSubView;
-                    
-                    if(tmpButton.isSelected){
-                    
-                        tmpButton.isSelected = NO;
-                    }
-                }
-            }
-        }
-    }];
+    [self loadButtonOfBottom];
+    
     
 }
 
-- (void)layoutSievingViewButtons:(NSInteger)number view:(UIView  *) aView{
-
-    NSArray *buttonsArray = _sievingButtonArray[number];
+- (void)layoutFilterViewButtons:(NSInteger)number view:(UIView *) aView{
+    
+    
+    NSArray *buttonsArray = _filterButtonArray[number];
     
     
     BDBSiftButtonInfoModel *sievingButtonInfos = [[BDBSiftButtonInfoModel alloc] init];
-    
-    //__weak typeof(self) thisInstance = self;
     
     for (NSDictionary *buttonDict in buttonsArray) {
         
@@ -637,6 +622,8 @@
         }
         
         BDBButtonForSift *button = [BDBButtonForSift buttonWithTitle:sievingButtonInfos.title  isSelected:sievingButtonInfos.isSelected frame:frame];
+        
+        __weak typeof(self) thisInstance = self;
         [button handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
             
             if(!button.isSelected){
@@ -647,7 +634,7 @@
                         BDBButtonForSift *btn = obj;
                         
                         if(btn.isSelected == YES){
-                        
+                            
                             btn.isSelected = NO;
                             break;
                         }
@@ -658,12 +645,28 @@
             }
             
             if(number == 0){
-            
-                _selectedPlatformName.text = [button titleForState:UIControlStateNormal];
                 
+                thisInstance.selectedPlatformName.text = [button titleForState:UIControlStateNormal];
+            }
+            
+            switch (number) {
+                case 0:
+                    thisInstance.filterCondition[@"平台"] = [button titleForState:UIControlStateNormal];
+                    
+                    break;
+                case 1:
+                    thisInstance.filterCondition[@"收益率"] = [button titleForState:UIControlStateNormal];
+                    break;
+                case 2:
+                    thisInstance.filterCondition[@"期限"] = [button titleForState:UIControlStateNormal];
+                    break;
+                case 3:
+                    thisInstance.filterCondition[@"进度"] = [button titleForState:UIControlStateNormal];
+                    break;
+                default:
+                    break;
             }
         }];
-        
         [aView addSubview:button];
         
     }
@@ -675,10 +678,16 @@
     
     showDataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    showDataTableView.backgroundColor = UIColorWithRGB(231, 231, 231);
+    
     showDataTableView.dataSource = self;
     
     showDataTableView.delegate = self;
-        
+    
+    [showDataTableView registerNib:[UINib nibWithNibName:@"BDBTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cellIdentify"];
+    
+    showDataTableView.estimatedRowHeight = 100.0f;
+    
     [self.view addSubview:showDataTableView];
     
     self.showDataTableView = showDataTableView;
@@ -691,29 +700,49 @@
     
     NSArray *hConstrains = [NSLayoutConstraint constraintsWithVisualFormat:hConstrainsVFL options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"showDataTableView":showDataTableView}];
     
-    NSArray *vConstrains = [NSLayoutConstraint constraintsWithVisualFormat:vConstrainsVFL options:NSLayoutFormatAlignAllLeading metrics:nil views:@{@"showDataTableView":showDataTableView,@"topView":_topView}];
+    UIView *topView = [self.view viewWithTag:100];
+    
+    NSArray *vConstrains = [NSLayoutConstraint constraintsWithVisualFormat:vConstrainsVFL options:NSLayoutFormatAlignAllLeading metrics:nil views:@{@"showDataTableView":showDataTableView,@"topView":topView}];
     
     [self.view addConstraints:hConstrains];
     [self.view addConstraints:vConstrains];
     
-
+    
+    __weak typeof(self) thisInstance = self;
+    showDataTableView.header = [BDBTableViewRefreshHeader headerWithRefreshingBlock:^{
+        
+        [thisInstance loadBidsInfWithRefreshWay:pullUpRefresh];
+        
+        [thisInstance.showDataTableView.header endRefreshing];
+        
+    }];
+    showDataTableView.footer = [BDBTableViewRefreshFooter footerWithRefreshingBlock:^{
+        
+        [thisInstance loadBidsInfWithRefreshWay:dropDownRefresh];
+        
+        [showDataTableView.footer endRefreshing];
+        
+    }];
+    
+    [self showBidInfoCount];
 }
 
 - (void)loadButtonOfBottom{
     
     UIButton *sureButtonOfBottom = [UIButton buttonWithType:UIButtonTypeSystem];
-
+    
     [sureButtonOfBottom setTitle:@"确认" forState:UIControlStateNormal];
     
     [sureButtonOfBottom setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    sureButtonOfBottom.hidden = NO;
-    
     sureButtonOfBottom.backgroundColor = UIColorWithRGB(228, 93, 99);
+    
+    [sureButtonOfBottom addTarget:self action:@selector(sureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:sureButtonOfBottom];
     
     self.sureButtonOfBottom = sureButtonOfBottom;
+    
     
     UIButton *resetButtonOfBottom = [UIButton buttonWithType:UIButtonTypeSystem];
     
@@ -723,17 +752,8 @@
     
     resetButtonOfBottom.backgroundColor = UIColorWithRGB(228, 93, 99);
     
-    resetButtonOfBottom.hidden = NO;
+    [resetButtonOfBottom  addTarget:self action:@selector(resetButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-//    __weak typeof(self) thisInstance = self;
-//    [resetButtonOfBottom handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
-//        
-//        thisInstance.platformLabel.text = @"人人贷";
-//        [thisInstance loadSievingButtonInfos];
-//        [thisInstance.showDataTableView reloadData];
-//        [thisInstance.showDataTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//    }];
     
     [self.view addSubview:resetButtonOfBottom];
     
@@ -753,7 +773,7 @@
     NSLayoutConstraint *bottomConstraintOfSureButtonOfBottom = [NSLayoutConstraint constraintWithItem:sureButtonOfBottom attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
     
     NSLayoutConstraint *heightConstrainsOfResetButtonOfBottom = [NSLayoutConstraint constraintWithItem:resetButtonOfBottom attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:sureButtonOfBottom attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.0f];
-
+    
     
     [self.view addConstraint:bottomConstraintOfSureButtonOfBottom];
     
@@ -763,41 +783,34 @@
     
     [sureButtonOfBottom addConstraint:heightConstraintOfSureButtonOfBottom];
     
-    self.tabBarController.tabBar.hidden = YES;
 }
 
-- (void)removeButtonsOfBottom{
 
-    [_sureButtonOfBottom removeFromSuperview];
-    [_resetButtonOfBottom removeFromSuperview];
+- (void)showBidInfoCount{
     
-    self.tabBarController.tabBar.hidden = NO;
-}
-
-- (void)showRefreshMessage{
+    UIView *bidInfoCountView = [[UIView alloc] init];
     
-    UIView *refreshView = [[UIView alloc] init];
+    bidInfoCountView.backgroundColor = UIColorWithRGB(230, 99, 99);
     
-    refreshView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:bidInfoCountView];
     
-    [self.view addSubview:refreshView];
+    self.showBidInfoCountView = bidInfoCountView;
     
-    refreshView.translatesAutoresizingMaskIntoConstraints = NO;
+    bidInfoCountView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSString *hConstrainsVFL = @"|[refreshView]|";
+    NSString *constrainsVFL = @"H:|[bidInfoCountView]|";
     
-    NSArray *hConstrains = [NSLayoutConstraint constraintsWithVisualFormat:hConstrainsVFL options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"refreshView":refreshView}];
+    NSArray *hConstrains = [NSLayoutConstraint constraintsWithVisualFormat:constrainsVFL options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"bidInfoCountView":bidInfoCountView}];
     
-    NSLayoutConstraint *refreshViewTopConstrain = [NSLayoutConstraint constraintWithItem:refreshView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
+    UIView *topView = [self.view viewWithTag:100];
     
-    NSLayoutConstraint *refreshViewHeight = [NSLayoutConstraint constraintWithItem:refreshView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:30.0f];
+    NSLayoutConstraint *bidInfoCountViewTopConstrain = [NSLayoutConstraint constraintWithItem:bidInfoCountView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:topView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
     
-    [self.view addConstraint:refreshViewTopConstrain];
+    NSLayoutConstraint *bidInfoCountViewHeight = [NSLayoutConstraint constraintWithItem:bidInfoCountView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:30.0f];
+    
+    [self.view addConstraint:bidInfoCountViewTopConstrain];
     [self.view addConstraints:hConstrains];
-    [refreshView addConstraint:refreshViewHeight];
-    
-    
-    
+    [bidInfoCountView addConstraint:bidInfoCountViewHeight];
     
     NSArray *constrains = self.view.constraints;
     
@@ -809,72 +822,377 @@
         }
     }
     
-    [self performSelector:@selector(removeVIewofMessage:) withObject:refreshView afterDelay:2];
+    
+    UILabel *bidCountLabel = [[UILabel alloc] init];
+    
+    bidCountLabel.text = [NSString stringWithFormat:@"比贷宝为您挖掘了%@种新产品",_sujectRespondModel.BidCount];
+    
+    bidCountLabel.textColor = [UIColor whiteColor];
+    
+    bidCountLabel.font = [UIFont systemFontOfSize:12.0f];
+    
+    [bidInfoCountView addSubview:bidCountLabel];
+    
+    self.bidCountLabel = bidCountLabel;
+    
+    bidCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    constrainsVFL = @"V:|[bidCountLabel]|";
+    
+    NSArray *vConstrains = [NSLayoutConstraint constraintsWithVisualFormat:constrainsVFL options:0 metrics:nil views:@{@"bidCountLabel":bidCountLabel}];
+    
+    [bidInfoCountView addConstraints:vConstrains];
+    
+    NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:bidCountLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:bidInfoCountView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0];
+    
+    [bidInfoCountView addConstraint:centerXConstraint];
+    
+    NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:bidCountLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:bidInfoCountView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0];
+    
+    [bidInfoCountView addConstraint:centerYConstraint];
+    
     
 }
 
-- (void)removeVIewofMessage:(UIView *) view{
+- (void)refreshBidInfoCount{
+    _bidCountLabel.text = [NSString stringWithFormat:@"比贷宝为您挖掘了%@种新产品",_sujectRespondModel.BidCount];
+}
+
+- (void)hiddenBidInfoCount{
     
-    [view removeFromSuperview];
+    [_showBidInfoCountView removeFromSuperview];
     
     NSArray *constrains = self.view.constraints;
     
     for (NSLayoutConstraint *constrain in constrains) {
         if(constrain.firstItem == _showDataTableView && constrain.secondAttribute == NSLayoutAttributeBottom){
-            constrain.constant = 0.0f;
+            [UIView animateWithDuration:0.2f animations:^{
+                constrain.constant = 0.0f;
+                
+                [self.view setNeedsLayout];
+                [self.view layoutIfNeeded];
+            }];
             
             break;
         }
     }
-}
-
-#pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 1;
 }
 
+#pragma mark - ScrollView Delegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if(scrollView.contentOffset.y <= 0){
+        if( _showBidInfoCountView == nil){
+            [self showBidInfoCount];
+        }
+        else{
+            
+            [self refreshBidInfoCount];
+        }
+        
+    }
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    if(scrollView.contentOffset.y > 0){
+        
+        [self hiddenBidInfoCount];
+    }
+    
+}
+
+#pragma mark - TableView Delegate And DataSource Methods
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-
+    
     return _sujectModelDatas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
+    BDBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentify"forIndexPath:indexPath];
+    
+    BDBSujectModel *model = _sujectModelDatas[indexPath.row];
+    
+    [cell depoySubViewWithModel:model controller:self indexPath:indexPath];
+    
+    __weak typeof(self) thisInstance = self;
+    cell.updateCollectButtonSelected = ^(BOOL selected){
         
-        BDBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentify"];
+        thisInstance.isCollectedDict[indexPath] = [NSNumber numberWithBool:selected];
         
-        if(cell == nil){
-            
-            cell = [BDBTableViewCell cellWithModel:_sujectModelDatas[indexPath.row]];
-        }
+    };
+    
+    cell.updateCellisRefresh = ^(BOOL isRefreshing){
         
-        return cell;
-
+        
+        thisInstance.isRefreshingDict[indexPath] = [NSNumber numberWithBool:isRefreshing];
+    };
+    
+    cell.updateCellModel = ^(BDBSujectModel *model){
+        
+        [thisInstance.sujectModelDatas replaceObjectAtIndex:indexPath.row withObject:model];
+        
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
+    };
+    
+    cell.collectButton.selected = [self.isCollectedDict[indexPath] boolValue];
+    cell.isRrefreshing = [self.isRefreshingDict[indexPath] boolValue];
+    
+    return cell;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-
+    
     return 150;
 }
 
+#pragma mark -Upadate SetBidsStore
 
-#pragma  mark -BDBButtonForTopViewDelegate Methods
 
-- (void)showMoreButtonActionClicked: (BDBButtonForSift *)button{
+- (void)upDateBidStore: (NSString *)action platformID: (NSString *)aPlatforID{
 
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetBidsStore"];
+    
+    NSMutableDictionary *parameterDict = [NSMutableDictionary dictionary];
+    
+    parameterDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
+    parameterDict[@"Device"] = @"0";
+    parameterDict[@"UID"] = @"55555555555";
+    parameterDict[@"PSW"] = @"5B1B68A9ABF4D2CD155C81A9225FD158";
+    parameterDict[@"Action"] = action;
+    parameterDict[@"ID"] = aPlatforID;
+    parameterDict[@"UserType"] = @"0";
+    
+    [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        
+        ZXLLOG(@"%@",responseObject[@"Result"]);
+        
+    } failure:nil];
+}
+
+
+#pragma mark -TopView Button  Methods
+
+- (void)sortSujectModelDatasWith:(BDBButtonForTopView *)button{
+    
+    NSString *sortType = [button titleForState:UIControlStateNormal];
+    
+    [self topViewButtonClicked:button];
+    
+    NSComparisonResult comparisonResult;
+    
+    if (button.isClicked) {
+        comparisonResult = NSOrderedDescending;
+    }
+    else{
+        
+        comparisonResult = NSOrderedAscending;
+        
+    }
+    
+    if([sortType isEqualToString:@"收益率"]){
+        
+        [self sortSujectModelDatasWithProfit:comparisonResult];
+        
+    }
+    if([sortType  isEqualToString:@"进度"]){
+        
+        [self sortSujectModelDatasWithProgress:comparisonResult];
+    }
+    if([sortType isEqualToString:@"期限"]){
+        
+        [self sortSujectModelDatasWithTerm:comparisonResult];
+    }
+}
+
+/**
+ *  根据收益率进行排序
+ */
+
+- (void)sortSujectModelDatasWithProfit:(NSComparisonResult)comparisonResult{
+    
+    
+    __weak typeof(self) thisInstance = self;
+    if(comparisonResult == NSOrderedAscending){
+        NSArray *tmpArray = [thisInstance.sujectModelDatas sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            BDBSujectModel *model1 = obj1;
+            BDBSujectModel *model2 = obj2;
+            
+            CGFloat profit1 = [model1.AnnualEarnings floatValue];
+            
+            CGFloat profit2 = [model2.AnnualEarnings floatValue];
+            if(profit1 > profit2){
+                
+                return NSOrderedDescending;
+            }
+            else{
+                
+                return NSOrderedAscending;
+            }
+        }];
+        
+        
+        self.sujectModelDatas = [tmpArray mutableCopy];
+        [_showDataTableView reloadData];
+    }
+    
+    if(comparisonResult == NSOrderedDescending){
+        
+        NSArray *tmpArray = [thisInstance.sujectModelDatas sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            BDBSujectModel *model1 = obj1;
+            BDBSujectModel *model2 = obj2;
+            
+            CGFloat profit1 = [model1.AnnualEarnings floatValue];
+            
+            CGFloat profit2 = [model2.AnnualEarnings floatValue];
+            if(profit1 > profit2){
+                
+                return NSOrderedAscending;
+            }
+            else{
+                
+                return NSOrderedDescending;
+            }
+        }];
+        self.sujectModelDatas = [tmpArray mutableCopy];
+        [_showDataTableView reloadData];
+        
+    }
+}
+
+/**
+ * 根据进度进行排序
+ */
+- (void)sortSujectModelDatasWithProgress:(NSComparisonResult)comparisonResult{
+    __weak typeof(self) thisInstance = self;
+    if(comparisonResult == NSOrderedAscending){
+        NSArray *tmpArray = [thisInstance.sujectModelDatas sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            BDBSujectModel *model1 = obj1;
+            BDBSujectModel *model2 = obj2;
+            
+            CGFloat profit1 = [model1.ProgressPercent floatValue];
+            
+            CGFloat profit2 = [model2.ProgressPercent floatValue];
+            if(profit1 > profit2){
+                
+                return NSOrderedDescending;
+            }
+            else{
+                
+                return NSOrderedAscending;
+            }
+        }];
+        
+        
+        self.sujectModelDatas = [tmpArray mutableCopy];
+        [_showDataTableView reloadData];
+    }
+    
+    if(comparisonResult == NSOrderedDescending){
+        
+        NSArray *tmpArray = [thisInstance.sujectModelDatas sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            BDBSujectModel *model1 = obj1;
+            BDBSujectModel *model2 = obj2;
+            
+            CGFloat profit1 = [model1.ProgressPercent floatValue];
+            
+            CGFloat profit2 = [model2.ProgressPercent floatValue];
+            if(profit1 > profit2){
+                
+                return NSOrderedAscending;
+            }
+            else{
+                
+                return NSOrderedDescending;
+            }
+        }];
+        self.sujectModelDatas = [tmpArray mutableCopy];
+        [_showDataTableView reloadData];
+        
+    }
+}
+
+/**
+ *  根据期限进行排序
+ */
+
+- (void)sortSujectModelDatasWithTerm:(NSComparisonResult)comparisonResult{
+    __weak typeof(self) thisInstance = self;
+    if(comparisonResult == NSOrderedAscending){
+        NSArray *tmpArray = [thisInstance.sujectModelDatas sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            BDBSujectModel *model1 = obj1;
+            BDBSujectModel *model2 = obj2;
+            
+            CGFloat profit1 = [model1.Term floatValue];
+            
+            CGFloat profit2 = [model2.Term floatValue];
+            if(profit1 > profit2){
+                
+                return NSOrderedDescending;
+            }
+            else{
+                
+                return NSOrderedAscending;
+            }
+        }];
+        
+        
+        self.sujectModelDatas = [tmpArray mutableCopy];
+        [_showDataTableView reloadData];
+    }
+    
+    if(comparisonResult == NSOrderedDescending){
+        
+        NSArray *tmpArray = [thisInstance.sujectModelDatas sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            BDBSujectModel *model1 = obj1;
+            BDBSujectModel *model2 = obj2;
+            
+            CGFloat profit1 = [model1.Term floatValue];
+            
+            CGFloat profit2 = [model2.Term floatValue];
+            if(profit1 > profit2){
+                
+                return NSOrderedAscending;
+            }
+            else{
+                
+                return NSOrderedDescending;
+            }
+        }];
+        self.sujectModelDatas = [tmpArray mutableCopy];
+        [_showDataTableView reloadData];
+        
+    }
+}
+
+
+/**
+ *  显示更多平台
+ */
+- (void)showMoreButtonClickedAction: (BDBButtonForSift *)button{
+    
+    UIView *platformView = [_filterScrollView viewWithTag:100];
+    
     if(button.isShowMores){
         
         button.isShowMores = NO;
         [UIView animateWithDuration:0.5f animations:^{
             _heigtConstraintForPlatformView.constant = 65.0f;
             
-            [button setNeedsLayout];
-            [button layoutIfNeeded];
-            [_sievingScrollView setNeedsLayout];
-            [_sievingScrollView layoutIfNeeded];
+            [platformView setNeedsLayout];
+            [platformView layoutIfNeeded];
+            [_filterScrollView setNeedsLayout];
+            [_filterScrollView layoutIfNeeded];
             
         }];
         
@@ -885,15 +1203,102 @@
         [UIView animateWithDuration:0.5f animations:^{
             _heigtConstraintForPlatformView.constant = 150.0f;
             
-            [_platformView setNeedsLayout];
-            [_platformView layoutIfNeeded];
-            [_sievingScrollView setNeedsLayout];
-            [_sievingScrollView layoutIfNeeded];
+            [platformView setNeedsLayout];
+            [platformView layoutIfNeeded];
+            [_filterScrollView setNeedsLayout];
+            [_filterScrollView layoutIfNeeded];
         }];
     }
     
 }
 
 
+/**
+ *  顶部按钮的点击事件
+ */
+- (void)topViewButtonClicked:(BDBButtonForTopView *)button{
+    
+    
+    UIView *topView  = [self.view viewWithTag:100];
+    
+    for (id obj in topView.subviews) {
+        if([obj isKindOfClass:[BDBButtonForTopView class]]){
+            
+            BDBButtonForTopView *btn = obj;
+            
+            if(![[btn titleForState:UIControlStateNormal] isEqualToString:@"筛选"]){
+                [btn setTitleColor:UIColorWithRGB(136, 136, 136) forState:UIControlStateNormal];
+                
+            }
+        }
+    }
+    
+    [button setTitleColor:UIColorWithRGB(74, 168, 232) forState:UIControlStateNormal];
+    
+    if(button.isClicked){
+        
+        button.isClicked = NO;
+    }
+    else{
+        
+        button.isClicked = YES;
+        
+    }
+    
+    if(_filterScrollView != nil){
+        
+        self.tabBarController.tabBar.hidden = NO;
+        
+        [_filterScrollView removeFromSuperview];
+        
+        [_sureButtonOfBottom removeFromSuperview];
+        
+        [_resetButtonOfBottom removeFromSuperview];
+    }
+    
+    
+}
+
+- (void)sureButtonClicked:(UIButton *)button{
+    
+    BDBSubjectFilterContronller *filterController = [[BDBSubjectFilterContronller alloc] init];
+    
+    filterController.filterCondition = _filterCondition;
+    
+    [self.navigationController pushViewController:filterController animated:YES];
+}
+
+
+- (void)resetButtonClicked:(UIButton *)button{
+    
+    _filterCondition[@"平台"] = @"";
+    
+    _filterCondition[@"收益率"] = @"";
+    
+    _filterCondition[@"期限"] = @"";
+    
+    _filterCondition[@"进度"] = @"";
+    
+    for (id obj in _filterScrollView.subviews) {
+        
+        UIView *view = obj;
+        
+        for (id viewSubView in view.subviews) {
+            
+            if([viewSubView isKindOfClass:[BDBButtonForSift class]]){
+                
+                BDBButtonForSift *tmpButton = viewSubView;
+                
+                if(tmpButton.isSelected){
+                    
+                    tmpButton.isSelected = NO;
+                    
+                    break;
+                }
+            }
+        }
+    }
+    
+}
 
 @end

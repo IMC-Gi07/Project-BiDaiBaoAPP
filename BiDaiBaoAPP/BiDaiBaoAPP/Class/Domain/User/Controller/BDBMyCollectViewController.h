@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BDBTableViewCellCoustom.h"
+
 
 @interface BDBMyCollectViewController : UIViewController
 

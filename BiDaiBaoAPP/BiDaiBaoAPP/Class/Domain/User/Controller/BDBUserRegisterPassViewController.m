@@ -16,6 +16,13 @@
 @end
 
 @implementation BDBUserRegisterPassViewController
+/**
+ *  初始化按钮
+ *
+ *  @param aDecoder aDecoder description
+ *
+ *  @return return value description
+ */
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]) {
         self.title = @"注册";
@@ -49,12 +56,31 @@
              NSLog(@"请求成功%@",responseObject[@"Result"]);
              NSLog(@"加密后密码%@",MD5passWord);
              NSLog(@"responseObject:%@",responseObject);
+             if ([responseObject[@"Result"] isEqualToString:@"0"]) {
+                 
+                 UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+                 
+                 tishiLabel.text = @"恭喜你注册成功";
+                 tishiLabel.textColor = [UIColor whiteColor];
+                 tishiLabel.backgroundColor = [UIColor grayColor];
+                 tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
+                 tishiLabel.textAlignment = NSTextAlignmentCenter;
+                 
+                 //[self.view addSubview:tishiLabel];
+                 [[UIApplication sharedApplication].keyWindow addSubview:tishiLabel];
+                 
+                 [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:1];
+                 
+                 
+                 
+                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1]animated:YES];
+             }
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"%@",error);
          }];
          
-//         [self.navigationController popToRootViewControllerAnimated:YES];
+         
          
      }
     
@@ -62,7 +88,14 @@
     
 }
 
-//MD5
+-(void)removetishi:(UILabel *)laber{
+    
+    [laber removeFromSuperview];
+    
+}
+
+
+//MD5加密方法
 - (NSString *)md5HexDigest:(NSString*)password
 {
     const char *original_str = [password UTF8String];
@@ -86,11 +119,8 @@
     _passWordTextField.delegate = self;
     NSString *str = _number;
     NSString *xingxingStr =  [str stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];
-    
-    
     _UserWordLabel.text = xingxingStr;
-    
-    //NSLog(@"输出label%@",str);
+
 
 
 }

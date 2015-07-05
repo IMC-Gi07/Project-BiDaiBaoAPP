@@ -112,16 +112,20 @@
 
 
 - (IBAction)dagouButton:(UIButton *)sender {
-
+    
 
     //得到正常状态下的图片
     if([sender imageForState:UIControlStateNormal] == nil){
-    
         [sender  setImage:[UIImage imageNamed:@"dagou"] forState:UIControlStateNormal];
+        if (_RegisterTextField.text.length > 10) {
+            self.NextButton.enabled = YES;
+        }
+        
     }
     else{
     
         [sender setImage:nil forState:UIControlStateNormal];
+        self.NextButton.enabled = NO;
     }
     
     
@@ -176,7 +180,6 @@
 */
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [_RegisterTextField resignFirstResponder];
-    
 }
 
 
@@ -200,23 +203,30 @@
     }else{
         _RegisterUserLabel.text = [str stringByAppendingString:string];
     }
-    
-    if (_RegisterTextField.text.length <= 10 ) {
+    if (_RegisterTextField.text.length <= 9) {
         self.NextButton.enabled = NO;
+    }
+    if (_RegisterTextField.text.length >9 && [self.selectButton imageForState:UIControlStateNormal]!= nil) {
+        self.NextButton.enabled = YES;
     }
     
     return YES;
     
     
+    
+    
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    if (_RegisterTextField.text.length > 10  ) {
-        self.NextButton.enabled = YES;
-    }
-    
-}
+//- (void)textFieldDidEndEditing:(UITextField *)textField{
+//    
+//    if (_RegisterTextField.text.length > 10 && [self.selectButton imageForState:UIControlStateNormal]   != nil ) {
+//        self.NextButton.enabled = YES;
+//        NSLog(@"进来了没有啊啊");
+//    }
+//    
+//    
+//    
+//}
 
 
 

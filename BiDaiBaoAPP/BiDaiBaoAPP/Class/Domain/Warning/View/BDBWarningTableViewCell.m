@@ -35,6 +35,15 @@
 - (IBAction)deleteButtonClicked:(UIButton *)sender {
 
     [self.delButton setImage:[UIImage imageNamed:@"cell_btn_delete_Highlighted"] forState:UIControlStateNormal];
+//    [self.delButton setImage:[UIImage imageNamed:@"cell_btn_delete_Highlighted"] forState:UIControlStateNormal];
+    
+    
+    
+//    [sender setBackgroundImage:[UIImage imageNamed:@"waring_uisegmentedcontrol_right"] forState:UIControlStateNormal];
+//    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    
+    
     [_delegate deleteButtonClickedAction:sender];
 
 }

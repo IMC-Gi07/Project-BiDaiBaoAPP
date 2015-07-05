@@ -14,6 +14,15 @@
     // Initialization code
 }
 
+
+- (IBAction)delButtonAction:(UIButton *)sender {
+    
+    [sender setImage:[UIImage imageNamed:@"cell_btn_delete_Highlighted"] forState:UIControlStateNormal];
+    
+    [_delegate_2 delete_2ButtonClickedAction:sender];
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

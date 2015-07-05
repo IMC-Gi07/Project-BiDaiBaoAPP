@@ -198,6 +198,8 @@
                     <connections>
                         <outlet property="WarningTableView" destination="NgJ-fk-SRB" id="Iqc-1b-GcB"/>
                         <outlet property="packUp" destination="B5f-Ol-nfa" id="w3k-BD-OQm"/>
+                        <outlet property="warningAddButton" destination="nYo-Ot-NWq" id="Hfl-Ow-n9P"/>
+                        <outlet property="warningTimeButton" destination="7In-fz-3uW" id="Vnh-UC-WWJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvS-G6-rND" sceneMemberID="firstResponder"/>

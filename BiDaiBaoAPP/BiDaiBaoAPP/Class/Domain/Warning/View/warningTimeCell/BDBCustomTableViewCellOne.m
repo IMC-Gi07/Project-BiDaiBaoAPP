@@ -13,6 +13,11 @@
 - (void)awakeFromNib {
     // Initialization code
 }
+- (IBAction)TitleTextFieldAction:(UITextField *)sender {
+    [_delegate transferTitleText:sender];
+    self.input = sender.text;
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -757,6 +757,24 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		7A735122E12A077005E3AD3E695061FC /* warningTimeCell */ = {
+			isa = PBXGroup;
+			children = (
+				238A91C3DEF4B736F224802F8BA5F6F4 /* BDBCustomTableViewCellOne.h */,
+				7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */,
+				EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */,
+				28D43EB63A0CD36280B873AEDCE4E29D /* BDBCustomTableViewCellThree.h */,
+				F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */,
+				A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */,
+				0740950FE73BE4B02F26F2E5D4659B65 /* BDBCustomTableViewCellTwo.h */,
+				AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */,
+				28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */,
+				D5379177FB172C08886ECFE164CD4297 /* BDBWarningTimeViewController.h */,
+				07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */,
+			);
+			path = warningTimeCell;
+			sourceTree = "<group>";
+		};
 		7CB310EB99925F85C32D25F5D2D83165 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -805,6 +823,27 @@
 				3BDF943F530A3143A17B2C9F00D6A5AB /* NSString+MJExtension.m */,
 			);
 			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAB75196B8A49B24FC09CB8F580B989B /* BDBPlatFormIDModel.h */,
+				D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */,
+				C00C534C4D5C3365E5357B69E3F1164F /* BDBPlatFormIDResponModel.h */,
+				CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */,
+				669E5EE49317385F675A3E5094E62090 /* BDBWarningAddResponseModel.h */,
+				54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */,
+				ED80C239AABF82D17099FC612967CCFC /* BDBWarningModelOne.h */,
+				594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */,
+				06100C7DA567CE92562576B3EC515919 /* BDBWarningModelTwo.h */,
+				CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */,
+				845E90011FF0D8E0816F55F20A53DE17 /* BDBWarningResponseModel.h */,
+				F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */,
+				B664A10A4DB0AC3C6B875AD42F8D8BA5 /* BDBWarningTimeResponseModel.h */,
+				EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8FEABDCF00D9B28AF3F317DA304F880D /* AFNetworking */ = {
@@ -864,6 +903,17 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		9EB5153A55C896943744D3BDC8E5036E /* Contronller */ = {
+			isa = PBXGroup;
+			children = (
+				6E2F75C6385AB7E9F7DF8C9E93B65D73 /* BDBWarningAddViewController.h */,
+				4F3C0EB83BCC48AE8AB3AAA43BDC0F0B /* BDBWarningAddViewController.m */,
+				C7D4A6AB2830E17E4438D58612DCA3CC /* BDBWarningViewController.h */,
+				9416CB3FBE8A552F10E54BE8B8485167 /* BDBWarningViewController.m */,
+			);
+			path = Contronller;
+			sourceTree = "<group>";
+		};
 		A5029BE49A6065AD40B9F549FDCD23F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -897,96 +947,6 @@
 				3CCAAE224A6626D015D3A01D59029C7C /* MJRefreshStateHeader.m */,
 			);
 			path = Header;
-			sourceTree = "<group>";
-		};
-		CD521E418912AD2DD45EC2C9E4B09BED /* Warning */ = {
-			isa = PBXGroup;
-			children = (
-				9EB5153A55C896943744D3BDC8E5036E /* Contronller */,
-				89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */,
-				D49FF62A38FE37F0E7C8270E62EB9FCF /* View */,
-				E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */,
-			);
-			path = Warning;
-			sourceTree = "<group>";
-		};
-		9EB5153A55C896943744D3BDC8E5036E /* Contronller */ = {
-			isa = PBXGroup;
-			children = (
-				6E2F75C6385AB7E9F7DF8C9E93B65D73 /* BDBWarningAddViewController.h */,
-				4F3C0EB83BCC48AE8AB3AAA43BDC0F0B /* BDBWarningAddViewController.m */,
-				C7D4A6AB2830E17E4438D58612DCA3CC /* BDBWarningViewController.h */,
-				9416CB3FBE8A552F10E54BE8B8485167 /* BDBWarningViewController.m */,
-			);
-			path = Contronller;
-			sourceTree = "<group>";
-		};
-		89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				DAB75196B8A49B24FC09CB8F580B989B /* BDBPlatFormIDModel.h */,
-				D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */,
-				C00C534C4D5C3365E5357B69E3F1164F /* BDBPlatFormIDResponModel.h */,
-				CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */,
-				669E5EE49317385F675A3E5094E62090 /* BDBWarningAddResponseModel.h */,
-				54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */,
-				ED80C239AABF82D17099FC612967CCFC /* BDBWarningModelOne.h */,
-				594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */,
-				06100C7DA567CE92562576B3EC515919 /* BDBWarningModelTwo.h */,
-				CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */,
-				845E90011FF0D8E0816F55F20A53DE17 /* BDBWarningResponseModel.h */,
-				F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */,
-				B664A10A4DB0AC3C6B875AD42F8D8BA5 /* BDBWarningTimeResponseModel.h */,
-				EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		D49FF62A38FE37F0E7C8270E62EB9FCF /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7A735122E12A077005E3AD3E695061FC /* warningTimeCell */,
-				C1C8B78887010BDE4CE67D8E64FD7981 /* BDBWarningTableViewCell.h */,
-				758A21AB1D4C47C4071CB398F821D17F /* BDBWarningTableViewCell.m */,
-				B36722EE282613E372446BACF959EB55 /* BDBWarningTableViewCell.xib */,
-				A43D2F1679062AE486443F2E7E708CC4 /* BDBWarningTableViewCellTwo.h */,
-				C7CA65CF8429D319DBACD19D19AD423D /* BDBWarningTableViewCellTwo.m */,
-				26C811D40A906CF63505AD3D11274FA1 /* BDBWarningTableViewCellTwo.xib */,
-				FB21B3A58A74751C4D39CB889FDEDB48 /* BDB_Cell_Button.h */,
-				126D6181DC3184A3494B43B032BA803F /* BDB_Cell_Button.m */,
-				F4046ED92FD8D9950A1E319761010D8D /* BDB_TableViewCell_One.h */,
-				BB15B72621B112451D2D1DA0CEBA5DCC /* BDB_TableViewCell_One.m */,
-				8242EEEBE2FA758DDC7D359973D45A4F /* BDB_TableViewCell_One.xib */,
-				F95BF43B0AD96819C037ABA84D84AD1D /* BDB_TableViewCell_Title.h */,
-				360519AA9D00C75AC788F1BCF8BB94C8 /* BDB_TableViewCell_Title.m */,
-				A1C54DC8B3502884CAB9923670590C4A /* BDB_TableViewCell_Title.xib */,
-				C9D31197FFE89416C4B61A511A952BC3 /* BDB_TableViewCell_Two.h */,
-				FE9A1609D5C6A8002A22500FB98F956A /* BDB_TableViewCell_Two.m */,
-				94402B6EC4D8CED471E34C4AF5447CEE /* BDB_TableViewCell_Two.xib */,
-				91F7ADB7FD305B70DDB5297017BF771A /* MJDIYAutoFooter.h */,
-				324DBF7A60CA73633DC7BD39890C75E5 /* MJDIYAutoFooter.m */,
-				92EA692ADC9A39A59E1140BD5FF197CA /* MJDIYHeader.h */,
-				828672D434889C490043A39D713A3739 /* MJDIYHeader.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		7A735122E12A077005E3AD3E695061FC /* warningTimeCell */ = {
-			isa = PBXGroup;
-			children = (
-				238A91C3DEF4B736F224802F8BA5F6F4 /* BDBCustomTableViewCellOne.h */,
-				7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */,
-				EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */,
-				28D43EB63A0CD36280B873AEDCE4E29D /* BDBCustomTableViewCellThree.h */,
-				F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */,
-				A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */,
-				0740950FE73BE4B02F26F2E5D4659B65 /* BDBCustomTableViewCellTwo.h */,
-				AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */,
-				28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */,
-				D5379177FB172C08886ECFE164CD4297 /* BDBWarningTimeViewController.h */,
-				07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */,
-			);
-			path = warningTimeCell;
 			sourceTree = "<group>";
 		};
 		A98C14463B19A756B45794ECF686AE9E /* Custom */ = {
@@ -1096,6 +1056,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CD521E418912AD2DD45EC2C9E4B09BED /* Warning */ = {
+			isa = PBXGroup;
+			children = (
+				9EB5153A55C896943744D3BDC8E5036E /* Contronller */,
+				89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */,
+				D49FF62A38FE37F0E7C8270E62EB9FCF /* View */,
+				E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */,
+			);
+			path = Warning;
+			sourceTree = "<group>";
+		};
 		CFF3C5F5ED93629CDBCE71889DED73E9 /* Index */ = {
 			isa = PBXGroup;
 			children = (
@@ -1114,6 +1085,35 @@
 				ACB7DF23FD20E39FE4A9CC57D1EDE4E9 /* BiDaiBaoAPPTests.m */,
 			);
 			path = BiDaiBaoAPPTests;
+			sourceTree = "<group>";
+		};
+		D49FF62A38FE37F0E7C8270E62EB9FCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A735122E12A077005E3AD3E695061FC /* warningTimeCell */,
+				C1C8B78887010BDE4CE67D8E64FD7981 /* BDBWarningTableViewCell.h */,
+				758A21AB1D4C47C4071CB398F821D17F /* BDBWarningTableViewCell.m */,
+				B36722EE282613E372446BACF959EB55 /* BDBWarningTableViewCell.xib */,
+				A43D2F1679062AE486443F2E7E708CC4 /* BDBWarningTableViewCellTwo.h */,
+				C7CA65CF8429D319DBACD19D19AD423D /* BDBWarningTableViewCellTwo.m */,
+				26C811D40A906CF63505AD3D11274FA1 /* BDBWarningTableViewCellTwo.xib */,
+				FB21B3A58A74751C4D39CB889FDEDB48 /* BDB_Cell_Button.h */,
+				126D6181DC3184A3494B43B032BA803F /* BDB_Cell_Button.m */,
+				F4046ED92FD8D9950A1E319761010D8D /* BDB_TableViewCell_One.h */,
+				BB15B72621B112451D2D1DA0CEBA5DCC /* BDB_TableViewCell_One.m */,
+				8242EEEBE2FA758DDC7D359973D45A4F /* BDB_TableViewCell_One.xib */,
+				F95BF43B0AD96819C037ABA84D84AD1D /* BDB_TableViewCell_Title.h */,
+				360519AA9D00C75AC788F1BCF8BB94C8 /* BDB_TableViewCell_Title.m */,
+				A1C54DC8B3502884CAB9923670590C4A /* BDB_TableViewCell_Title.xib */,
+				C9D31197FFE89416C4B61A511A952BC3 /* BDB_TableViewCell_Two.h */,
+				FE9A1609D5C6A8002A22500FB98F956A /* BDB_TableViewCell_Two.m */,
+				94402B6EC4D8CED471E34C4AF5447CEE /* BDB_TableViewCell_Two.xib */,
+				91F7ADB7FD305B70DDB5297017BF771A /* MJDIYAutoFooter.h */,
+				324DBF7A60CA73633DC7BD39890C75E5 /* MJDIYAutoFooter.m */,
+				92EA692ADC9A39A59E1140BD5FF197CA /* MJDIYHeader.h */,
+				828672D434889C490043A39D713A3739 /* MJDIYHeader.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E5E5C98BAF74E4A5C967F0F24A37F017 /* Controller */ = {

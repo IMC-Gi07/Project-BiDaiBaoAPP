@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ThresHoldLable;
 
 
-
 @end
 @protocol BDBWarningTableViewCellDelegate <NSObject>
 

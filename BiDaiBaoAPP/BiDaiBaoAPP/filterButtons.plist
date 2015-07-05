@@ -7,7 +7,7 @@
 			<key>title</key>
 			<string>人人贷</string>
 			<key>isSelected</key>
-			<true/>
+			<false/>
 			<key>xPoint</key>
 			<integer>0</integer>
 			<key>yPoint</key>
@@ -127,7 +127,7 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>15%</string>
+			<string>&gt;15%</string>
 			<key>isSelected</key>
 			<false/>
 			<key>xPoint</key>

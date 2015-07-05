@@ -1,5 +1,5 @@
 //
-//  BDBSubjectViewController.h
+//  BDBSubjectSievingContronller.h
 //  BiDaiBaoAPP
 //
 //  Created by Imcore.olddog.cn on 15/7/1.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BDBSubjectViewController : UIViewController
+@interface BDBSubjectFilterContronller : UIViewController
+
+@property(nonatomic,strong)NSMutableDictionary *filterCondition;
 
 @end

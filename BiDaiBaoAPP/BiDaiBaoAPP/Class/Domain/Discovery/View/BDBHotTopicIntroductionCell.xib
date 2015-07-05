@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="BDBHotTopicIntroductionCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hotTopics_introductionCell_img" translatesAutoresizingMaskIntoConstraints="NO" id="6zB-f3-JVe">
+                        <rect key="frame" x="8" y="20" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="8KZ-KC-MGw"/>
+                            <constraint firstAttribute="width" constant="80" id="rJf-Dl-8Wk"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热门话题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-Do-XEG">
+                        <rect key="frame" x="96" y="20" width="142" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="142" id="0R7-Sq-Und"/>
+                            <constraint firstAttribute="height" constant="34" id="Ho6-87-7Se"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P2P安全吗？人人聚财、新联、鑫合..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfI-s5-8Ah">
+                        <rect key="frame" x="96" y="62" width="216" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="eFX-iF-Tu4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="sfI-s5-8Ah" firstAttribute="top" secondItem="dTG-Do-XEG" secondAttribute="bottom" constant="8" id="9Kk-zv-MHX"/>
+                    <constraint firstAttribute="centerY" secondItem="6zB-f3-JVe" secondAttribute="centerY" id="MLU-zL-ECQ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="sfI-s5-8Ah" secondAttribute="trailing" id="bdh-cs-Gva"/>
+                    <constraint firstItem="6zB-f3-JVe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="p25-tY-LFn"/>
+                    <constraint firstItem="dTG-Do-XEG" firstAttribute="leading" secondItem="6zB-f3-JVe" secondAttribute="trailing" constant="8" id="p5g-b4-rfU"/>
+                    <constraint firstItem="sfI-s5-8Ah" firstAttribute="leading" secondItem="6zB-f3-JVe" secondAttribute="trailing" constant="8" id="qPp-Oa-C6f"/>
+                    <constraint firstItem="dTG-Do-XEG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="vgk-TP-XGS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="introductionCellTitle" destination="dTG-Do-XEG" id="fy1-Kv-DWg"/>
+                <outlet property="introductionLeadingImageView" destination="6zB-f3-JVe" id="nIw-Os-Zi3"/>
+            </connections>
+            <point key="canvasLocation" x="328" y="266"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="hotTopics_introductionCell_img" width="74" height="74"/>
+    </resources>
+</document>

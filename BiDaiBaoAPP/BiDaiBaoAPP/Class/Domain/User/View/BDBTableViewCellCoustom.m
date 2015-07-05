@@ -20,4 +20,17 @@
     // Configure the view for the selected state
 }
 
+- (void)deployPropertyWithModel:(BDBMyColletDateBidListModel *)model{
+
+    _TermLabel.text = model.Term;
+    
+    _PlatformNameLabel.text = model.PlatformName;
+    
+    _BidNameLabel.text = model.BidName;
+    
+    _AnnualEarningsLabel.text = model.AnnualEarnings;
+    
+    _AmountLabel.text = model.Amount;
+}
+
 @end

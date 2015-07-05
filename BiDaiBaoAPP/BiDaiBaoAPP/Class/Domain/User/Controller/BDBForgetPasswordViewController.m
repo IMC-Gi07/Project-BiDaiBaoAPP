@@ -15,26 +15,78 @@
 @end
 
 @implementation BDBForgetPasswordViewController
-- (IBAction)ForgetButton:(UIButton *)sender {
+
+/**
+ *  类的初始化
+ */
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
     
+    if (self = [super initWithCoder:aDecoder]) {
+        self.title = @"找回密码";
+    }
+    
+    return self;
+    
+}
+
+/**
+ *  确认按钮
+ */
+- (IBAction)ForgetButton:(UIButton *)sender {
+    /**
+     *  如果输入为空提示"请输入手机号或者邮箱"
+     */
     if (_ForgetPasswordUser.text.length == 0) {
         
         UILabel *forgetLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
-        
         forgetLabel.text = @"请输入手机号或邮箱";
         forgetLabel.textColor = [UIColor whiteColor];
         forgetLabel.backgroundColor = [UIColor grayColor];
         forgetLabel.font = [UIFont fontWithName:@"Arial" size:15];
         forgetLabel.textAlignment = NSTextAlignmentCenter;
-        
-        
         [self.view addSubview:forgetLabel];
-        
+        /**
+         * 提示"请输入手机号或邮箱后一秒将提示移除"
+         */
         [self performSelector:@selector(removeForgetLabel:) withObject:forgetLabel afterDelay:1];
         
     }
+    /**
+     *  输入两次的结果一次,运行代码
+     */
+    else if ([_ForgetPasswordUser.text isEqualToString:_Forgetpasswordagain.text]){
+        
+        AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
+        
+        NSString *requesturl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetUserPassword"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"UID"] = _ForgetPasswordUser.text;
+        parameters[@"UserType"] = @"0";
+        parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+        parameters[@"Device"] = @"0";
+        
+        [manger POST:requesturl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"请求是否成功%@",responseObject[@"Result"]);
+            NSLog(@"修改密码输出%@",responseObject[@"Msg"]);
+            NSLog(@"修改密码邮箱%@",responseObject[@"EMail"]);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"错误信息:%@",error);
+        }];
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 }
-
+/**
+ *  移除提示方法
+ *
+ *  @param label 提示视图
+ */
 -(void)removeForgetLabel:(UILabel *)label{
 
     [label removeFromSuperview];
@@ -57,13 +109,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+/**
+ *  缩键盘
+ *
+ *  @param touches 键盘外的地方
+ *  @param event   键盘外的地方
+ */
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [_ForgetPasswordUser resignFirstResponder];
     [_Forgetpasswordagain resignFirstResponder];
 }
-
+/**
+ *  缩键盘
+ *
+ *  @param textField 键盘外的地方
+ *
+ *  @return 键盘外的地方
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
     [_ForgetPasswordUser resignFirstResponder];
     [_Forgetpasswordagain resignFirstResponder];
     return YES;

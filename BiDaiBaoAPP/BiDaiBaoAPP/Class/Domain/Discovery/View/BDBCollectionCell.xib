@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BDBCollectionCell"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="360" id="KGk-i7-Jjw" customClass="BDBCollectionCell">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="360"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fq5-7u-62C">
+                        <rect key="frame" x="10" y="10" width="99" height="108"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="PHw-IE-xIH"/>
+                            <constraint firstAttribute="width" constant="100" id="siD-Qx-AC8"/>
+                            <constraint firstAttribute="width" constant="80" id="wfR-3A-Fkg"/>
+                        </constraints>
+                        <state key="normal" image="discovery_funcBtn_1_1.png"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="PHw-IE-xIH"/>
+                                <exclude reference="siD-Qx-AC8"/>
+                                <exclude reference="wfR-3A-Fkg"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <action selector="hotTopicsButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RP2-cp-0Wz"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhz-dL-dvy">
+                        <rect key="frame" x="213" y="10" width="99" height="108"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="discovery_funcBtn_1_3.png"/>
+                        <connections>
+                            <action selector="investmentGuideButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MQz-R1-xpm"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8MB-r6-8E7">
+                        <rect key="frame" x="10" y="126" width="99" height="107"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="Kbk-3X-ghg"/>
+                            <constraint firstAttribute="width" constant="100" id="PAe-Y6-qy0"/>
+                            <constraint firstAttribute="width" constant="80" id="kXe-dx-jf3"/>
+                        </constraints>
+                        <state key="normal" image="discovery_funcBtn_2_1.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Kbk-3X-ghg"/>
+                                <exclude reference="PAe-Y6-qy0"/>
+                                <exclude reference="kXe-dx-jf3"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <action selector="securityAssuranceButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EA5-fg-xAu"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BC-Eo-oss">
+                        <rect key="frame" x="213" y="126" width="99" height="107"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="discovery_funcBtn_2_3.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="debitAndCreditButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2io-04-qvy"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kv5-da-k8n">
+                        <rect key="frame" x="10" y="241" width="99" height="108"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Bqq-Ml-a68"/>
+                            <constraint firstAttribute="height" constant="80" id="TaR-6R-Prv"/>
+                            <constraint firstAttribute="width" constant="100" id="v64-uT-9BP"/>
+                        </constraints>
+                        <state key="normal" image="discovery_funcBtn_3_1.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Bqq-Ml-a68"/>
+                                <exclude reference="TaR-6R-Prv"/>
+                                <exclude reference="v64-uT-9BP"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <action selector="riskControlButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VuL-nX-D3n"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01O-zw-oyS">
+                        <rect key="frame" x="112" y="241" width="98" height="108"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="discovery_funcBtn_3_2.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="infoOfLawButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4xB-9q-ZGj"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2W1-jo-boh">
+                        <rect key="frame" x="213" y="241" width="99" height="108"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="discovery_funcBtn_3_3.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="creditorsRightsTransferButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iWZ-LD-zqX"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-hu-7Jy">
+                        <rect key="frame" x="112" y="126" width="98" height="107"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="discovery_funcBtn_2_2.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="operationModeButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9VP-dm-5Or"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXK-Ic-QOz">
+                        <rect key="frame" x="112" y="10" width="98" height="108"/>
+                        <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="discovery_funcBtn_1_2.png"/>
+                        <connections>
+                            <action selector="rookieButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lHz-bt-F7A"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2W1-jo-boh" firstAttribute="top" secondItem="0BC-Eo-oss" secondAttribute="bottom" constant="8" id="0LW-JT-Xas"/>
+                    <constraint firstItem="8MB-r6-8E7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2Ui-hI-lMY"/>
+                    <constraint firstAttribute="centerX" secondItem="aXK-Ic-QOz" secondAttribute="centerX" id="304-Sh-CM1"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="Fq5-7u-62C" secondAttribute="width" id="48z-LG-OU6"/>
+                    <constraint firstItem="aXK-Ic-QOz" firstAttribute="leading" secondItem="Fq5-7u-62C" secondAttribute="trailing" constant="3" id="4Ej-It-fhl"/>
+                    <constraint firstItem="qhz-dL-dvy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="6lY-0A-vPm"/>
+                    <constraint firstAttribute="trailing" secondItem="0BC-Eo-oss" secondAttribute="trailing" constant="10" id="8ld-dt-vQt"/>
+                    <constraint firstItem="Fq5-7u-62C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="9tz-tm-8V2"/>
+                    <constraint firstItem="qhz-dL-dvy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="BL2-hA-GPt"/>
+                    <constraint firstItem="qhz-dL-dvy" firstAttribute="leading" secondItem="aXK-Ic-QOz" secondAttribute="trailing" constant="3" id="COs-ae-gd7"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="0BC-Eo-oss" secondAttribute="width" id="ClM-0h-eVW"/>
+                    <constraint firstItem="0BC-Eo-oss" firstAttribute="leading" secondItem="oCC-hu-7Jy" secondAttribute="trailing" constant="3" id="Dee-gX-SXQ"/>
+                    <constraint firstItem="Fq5-7u-62C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Gy0-ny-PMf"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="qhz-dL-dvy" secondAttribute="width" id="HJg-RW-ePT"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="aXK-Ic-QOz" secondAttribute="width" id="Ha7-kJ-PcB"/>
+                    <constraint firstItem="aXK-Ic-QOz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="I6X-34-0wq"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="top" secondItem="8MB-r6-8E7" secondAttribute="bottom" constant="8" id="IAO-us-ih0"/>
+                    <constraint firstItem="Fq5-7u-62C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="IFt-bQ-UB0"/>
+                    <constraint firstItem="2W1-jo-boh" firstAttribute="leading" secondItem="01O-zw-oyS" secondAttribute="trailing" constant="3" id="IjQ-eM-KzR"/>
+                    <constraint firstItem="aXK-Ic-QOz" firstAttribute="top" secondItem="Fq5-7u-62C" secondAttribute="top" id="KRP-7G-Jil"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="Fq5-7u-62C" secondAttribute="height" id="KTU-vx-G3m"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="oCC-hu-7Jy" secondAttribute="width" id="KjW-ec-FWO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="qhz-dL-dvy" secondAttribute="bottom" id="L99-ta-gvQ"/>
+                    <constraint firstItem="Fq5-7u-62C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="LBe-Ok-xUe"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="01O-zw-oyS" secondAttribute="height" id="LhA-1D-tfr"/>
+                    <constraint firstItem="Fq5-7u-62C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Nl2-uc-2Q4"/>
+                    <constraint firstAttribute="centerX" secondItem="oCC-hu-7Jy" secondAttribute="centerX" id="PDL-Mk-Nsa"/>
+                    <constraint firstItem="Fq5-7u-62C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Q80-a5-oM6"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="8MB-r6-8E7" secondAttribute="height" id="Qle-R2-s2c"/>
+                    <constraint firstItem="01O-zw-oyS" firstAttribute="top" secondItem="oCC-hu-7Jy" secondAttribute="bottom" constant="8" id="T11-JX-9fn"/>
+                    <constraint firstAttribute="trailing" secondItem="qhz-dL-dvy" secondAttribute="trailing" constant="10" id="TTE-nx-O0c"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="8MB-r6-8E7" secondAttribute="width" id="U1l-65-gTf"/>
+                    <constraint firstItem="01O-zw-oyS" firstAttribute="leading" secondItem="Kv5-da-k8n" secondAttribute="trailing" constant="3" id="V04-M1-aBR"/>
+                    <constraint firstItem="qhz-dL-dvy" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="VS7-xh-fIM"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="0BC-Eo-oss" secondAttribute="height" id="W4C-o2-IDg"/>
+                    <constraint firstItem="8MB-r6-8E7" firstAttribute="top" secondItem="Fq5-7u-62C" secondAttribute="bottom" constant="8" id="W9U-9Z-y6S"/>
+                    <constraint firstAttribute="bottom" secondItem="01O-zw-oyS" secondAttribute="bottom" constant="10" id="WXy-lT-yGF"/>
+                    <constraint firstAttribute="centerX" secondItem="aXK-Ic-QOz" secondAttribute="centerX" id="XOV-P5-JXi"/>
+                    <constraint firstItem="aXK-Ic-QOz" firstAttribute="width" secondItem="Fq5-7u-62C" secondAttribute="width" id="co0-xV-PJJ"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="2W1-jo-boh" secondAttribute="height" id="deL-zl-Aoj"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="oCC-hu-7Jy" secondAttribute="height" id="evV-jY-rD2"/>
+                    <constraint firstAttribute="bottom" secondItem="Kv5-da-k8n" secondAttribute="bottom" constant="10" id="f1b-iL-BJ2"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="fNb-71-lEs"/>
+                    <constraint firstAttribute="bottom" secondItem="2W1-jo-boh" secondAttribute="bottom" constant="10" id="fn4-Fk-vbF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Fq5-7u-62C" secondAttribute="bottom" id="jNZ-Qu-Hjp"/>
+                    <constraint firstItem="0BC-Eo-oss" firstAttribute="top" secondItem="qhz-dL-dvy" secondAttribute="bottom" constant="8" id="jUf-4T-kaf"/>
+                    <constraint firstItem="aXK-Ic-QOz" firstAttribute="width" secondItem="qhz-dL-dvy" secondAttribute="width" id="mGb-zf-FuI"/>
+                    <constraint firstItem="oCC-hu-7Jy" firstAttribute="leading" secondItem="8MB-r6-8E7" secondAttribute="trailing" constant="3" id="mpM-mE-Eja"/>
+                    <constraint firstAttribute="centerX" secondItem="01O-zw-oyS" secondAttribute="centerX" id="nE3-wu-QuT"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="qhz-dL-dvy" secondAttribute="height" id="rdB-6D-ldC"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="height" secondItem="aXK-Ic-QOz" secondAttribute="height" id="tMZ-gP-Lei"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="01O-zw-oyS" secondAttribute="width" id="u0e-ex-MOy"/>
+                    <constraint firstAttribute="trailing" secondItem="2W1-jo-boh" secondAttribute="trailing" constant="10" id="uAc-ga-BuE"/>
+                    <constraint firstItem="Kv5-da-k8n" firstAttribute="width" secondItem="2W1-jo-boh" secondAttribute="width" id="uwO-2Z-FcD"/>
+                    <constraint firstItem="aXK-Ic-QOz" firstAttribute="bottom" secondItem="Fq5-7u-62C" secondAttribute="bottom" id="wag-7T-Vck"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Gy0-ny-PMf"/>
+                        <exclude reference="LBe-Ok-xUe"/>
+                        <exclude reference="Nl2-uc-2Q4"/>
+                        <exclude reference="Q80-a5-oM6"/>
+                        <exclude reference="jNZ-Qu-Hjp"/>
+                        <exclude reference="304-Sh-CM1"/>
+                        <exclude reference="KRP-7G-Jil"/>
+                        <exclude reference="XOV-P5-JXi"/>
+                        <exclude reference="co0-xV-PJJ"/>
+                        <exclude reference="mGb-zf-FuI"/>
+                        <exclude reference="wag-7T-Vck"/>
+                        <exclude reference="PDL-Mk-Nsa"/>
+                        <exclude reference="BL2-hA-GPt"/>
+                        <exclude reference="L99-ta-gvQ"/>
+                        <exclude reference="VS7-xh-fIM"/>
+                        <exclude reference="nE3-wu-QuT"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+            <point key="canvasLocation" x="386" y="315"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="discovery_funcBtn_1_1.png" width="379" height="310"/>
+        <image name="discovery_funcBtn_1_2.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_1_3.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_2_1.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_2_2.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_2_3.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_3_1.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_3_2.png" width="382" height="420"/>
+        <image name="discovery_funcBtn_3_3.png" width="382" height="420"/>
+    </resources>
+</document>

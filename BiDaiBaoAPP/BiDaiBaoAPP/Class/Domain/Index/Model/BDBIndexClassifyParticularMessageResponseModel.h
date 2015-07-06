@@ -37,7 +37,7 @@
  *  标的列表
  */
 
-@property(nonatomic,strong) NSMutableArray *BidList;
+@property(nonatomic,copy) NSArray *BidList;
 
 
 

@@ -34,9 +34,7 @@
 @property(nonatomic,assign) NSUInteger pageSize;
 
 
-@property(nonatomic,weak) ZXLLoadDataIndicatePage *
-
-indicatePage;
+@property(nonatomic,weak) ZXLLoadDataIndicatePage *indicatePage;
 
 /**
  *  用户点击的公告
@@ -83,7 +81,7 @@ indicatePage;
 	
 	[self initNoticeTableView];
 	
-	self.navigationController.navigationBarHidden = YES;
+	//self.navigationController.navigationBarHidden = YES;
 	self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
 	
 	[self refreshDatas];
@@ -187,7 +185,9 @@ indicatePage;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
 	return _noticeModels.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

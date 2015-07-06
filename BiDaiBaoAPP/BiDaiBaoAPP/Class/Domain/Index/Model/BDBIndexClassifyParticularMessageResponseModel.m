@@ -13,7 +13,7 @@
 
 + (NSDictionary *)objectClassInArray {
     
-    return @{@"NoticeList": [BDBIndexClassifyParticularMessageModel class]};
+    return @{@"BidList": [BDBIndexClassifyParticularMessageModel class]};
 }
 
 @end

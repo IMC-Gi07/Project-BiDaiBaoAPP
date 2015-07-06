@@ -11,13 +11,26 @@
 @implementation BDBQuestionTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    titleLabel.numberOfLines = 0;
+    titleLabel.textColor = UIColorWithRGB(83,83,83);
+
+    [_bgroundView addSubview:titleLabel];
+    self.titleLabel = titleLabel;
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSString *visualFormat = @"H:|-(19)-[titleLabel]-(18)-|";
+    NSArray *titleLabelConstraints = [NSLayoutConstraint constraintsWithVisualFormat:visualFormat options:0 metrics:nil views:@{@"titleLabel": titleLabel}];
+    [titleLabel.superview addConstraints:titleLabelConstraints];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+
 }
 
 @end

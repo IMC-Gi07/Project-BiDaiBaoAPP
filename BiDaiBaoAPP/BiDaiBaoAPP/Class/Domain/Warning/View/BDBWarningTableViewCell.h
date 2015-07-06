@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 @protocol BDBWarningTableViewCellDelegate;
 
+
 @interface BDBWarningTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *colorBlock;
 @property (weak, nonatomic) id<BDBWarningTableViewCellDelegate>delegate;
+
+@property (weak, nonatomic) IBOutlet UIButton *delButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *PlateFormNameLable;
+@property (weak, nonatomic) IBOutlet UILabel *ThresHoldLable;
+
 
 @end
 @protocol BDBWarningTableViewCellDelegate <NSObject>

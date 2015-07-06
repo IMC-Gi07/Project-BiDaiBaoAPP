@@ -15,15 +15,16 @@
 - (instancetype)init {
     if (self = [super init]) {
         
+        [self setBackgroundImage:[UIImage imageNamed:@"tabbar_icon_user_highlighted"] forState:UIControlStateNormal];
+        [self setBackgroundImage:[UIImage imageNamed:@"waring_blackgroundButton"] forState:UIControlStateSelected];
+
         
-      
-//        [self setImage:[UIImage imageNamed:@"waring_blackgroundButton"] forState:UIControlStateNormal];
-        [self setBackgroundImage:[UIImage imageNamed:@"waring_blackgroundButton"] forState:UIControlStateNormal];
+        
+        
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        
         NSLayoutConstraint *heightConstranint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:30];
         
-
+        [_delegate PlatFormIDButtonClickedAction:self.tag];
         
         self.selected = YES;
         [self addConstraint:heightConstranint];

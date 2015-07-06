@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="KGk-i7-Jjw" customClass="BDBScrollViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DU3-Sl-x8z">
+                        <rect key="frame" x="0.0" y="0.0" width="412" height="200"/>
+                        <color key="backgroundColor" red="1" green="0.91282410629999999" blue="0.61097714940000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </scrollView>
+                    <pageControl opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="Q78-Sw-WkN">
+                        <rect key="frame" x="178" y="171" width="55" height="37"/>
+                        <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </pageControl>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DU3-Sl-x8z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1Ih-2q-qg0"/>
+                    <constraint firstItem="DU3-Sl-x8z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5NI-1n-ARN"/>
+                    <constraint firstAttribute="trailing" secondItem="DU3-Sl-x8z" secondAttribute="trailing" id="WP1-IO-ZL3"/>
+                    <constraint firstAttribute="centerX" secondItem="Q78-Sw-WkN" secondAttribute="centerX" id="ebk-Kk-gk2"/>
+                    <constraint firstAttribute="bottom" secondItem="DU3-Sl-x8z" secondAttribute="bottom" id="fU2-CV-Jd2"/>
+                    <constraint firstItem="DU3-Sl-x8z" firstAttribute="bottom" secondItem="Q78-Sw-WkN" secondAttribute="top" constant="37" id="nlX-Uh-hMJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Q78-Sw-WkN" secondAttribute="bottom" constant="-8" id="uH0-Zr-e7k"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="nlX-Uh-hMJ"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="pageControl" destination="Q78-Sw-WkN" id="X1h-jS-8Qz"/>
+                <outlet property="scrollView" destination="DU3-Sl-x8z" id="c9B-0D-QlN"/>
+            </connections>
+            <point key="canvasLocation" x="-99" y="245"/>
+        </tableViewCell>
+    </objects>
+</document>

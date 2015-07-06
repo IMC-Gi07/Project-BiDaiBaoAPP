@@ -8,17 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-
-@class BDBButtonForTopView;
-@protocol BDBButtonForTopViewDelegate
-
-- (void)swithCurrentView: (BDBButtonForTopView *)button;
-
-@end
-
 @interface BDBButtonForTopView : UIButton
 
-@property(nonatomic,weak) id<BDBButtonForTopViewDelegate>delegate;
+//判断按钮是否惦记
+@property(nonatomic,assign) BOOL isClicked;
 
 
 /**

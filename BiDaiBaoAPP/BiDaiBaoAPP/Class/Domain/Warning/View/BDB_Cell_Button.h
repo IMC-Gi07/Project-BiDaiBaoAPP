@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol BDB_Cell_ButtonDelegate;
 
 @interface BDB_Cell_Button : UIButton
+
+@property (weak, nonatomic) id<BDB_Cell_ButtonDelegate>delegate;
+
+@end
+
+@protocol BDB_Cell_ButtonDelegate <NSObject>
+
+- (void)PlatFormIDButtonClickedAction:(NSInteger)buttonValue;
 
 @end

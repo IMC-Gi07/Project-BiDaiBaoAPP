@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BDBQuestionTypeListModel.h"
+
 
 @interface BDBQuestionTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *bgroundView;
 
-@property (nonatomic,weak) UILabel *TypeIDLabel;
 
-@property (nonatomic,weak) UILabel *TypeNameLabel;
+@property (nonatomic,weak) UILabel *titleLabel;
 
 @end

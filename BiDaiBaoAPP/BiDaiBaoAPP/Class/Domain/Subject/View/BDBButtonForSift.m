@@ -10,11 +10,6 @@
 
 @interface BDBButtonForSift ()
 
-
-
-
-- (void)swithIsSelected;
-
 @end
 
 @implementation BDBButtonForSift
@@ -42,25 +37,9 @@
     
     button.isSelected = selected;
     
-    [button addTarget:button action:@selector(swithIsSelected) forControlEvents:UIControlEventTouchUpInside];
-    
     button.frame = aFrame;
     
     return button;
-}
-
-- (void)swithIsSelected{
-
-    if(_isSelected){
-        
-        self.isSelected = NO;
-    }
-    else{
-    
-        self.isSelected = YES;
-    }
-    
-    _singleSelectForSiftBlock([self titleForState:UIControlStateNormal],_isSelected);
 }
 
 
@@ -80,10 +59,6 @@
         [self setBackgroundImage:[UIImage imageNamed:@"subject_cell_sift_btn_platform_img"] forState:UIControlStateNormal];
     }
     
-    if(_updataButtonInfo != nil){
-    
-        _updataButtonInfo([self titleForState:UIControlStateNormal],_isSelected);
-    }
 }
 
 - (void)setIsShowMores:(BOOL)isShowMores{

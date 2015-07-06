@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ASValueTrackingSlider.h"
+@class BDBWarningAddViewController;
+@protocol BDB_TableViewCell_TwoDelegate <NSObject>
 
+- (void)updateSliderValue:(NSInteger)sliderValue;
+
+@end
 @interface BDB_TableViewCell_Two : UITableViewCell
 @property (weak, nonatomic) IBOutlet ASValueTrackingSlider *slider2;
-
+@property (weak,nonatomic) id<BDB_TableViewCell_TwoDelegate>delegate;
 @end

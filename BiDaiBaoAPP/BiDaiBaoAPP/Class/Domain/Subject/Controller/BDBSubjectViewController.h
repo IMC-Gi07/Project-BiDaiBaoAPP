@@ -1,8 +1,8 @@
 //
 //  BDBSubjectViewController.h
-//  BiDaiBao(比贷宝)
+//  BiDaiBaoAPP
 //
-//  Created by zhang xianglu on 15/6/6.
+//  Created by Imcore.olddog.cn on 15/7/1.
 //  Copyright (c) 2015年 zhang xianglu. All rights reserved.
 //
 

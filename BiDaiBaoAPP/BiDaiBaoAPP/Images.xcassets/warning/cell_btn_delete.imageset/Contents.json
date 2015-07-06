@@ -6,13 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "cell_btn_delete@2x.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "cell_btn_delete@3x.png"
+      "filename" : "cell_btn_delete.png"
     }
   ],
   "info" : {

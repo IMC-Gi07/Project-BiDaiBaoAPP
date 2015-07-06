@@ -20,15 +20,17 @@
 #import "BDBIndexClassifyParticularMessageModel.h"
 
 
+
+
 @interface BDBIndexViewController ()
 
 @property(nonatomic,strong) NSMutableArray *indexPaths;
 
-@property(nonatomic,strong) BDBIndexClassifyParticularMessageResponseModel *indexClassifyParticularMessageResponseModel;
+@property(nonatomic,strong) NSMutableArray  *indexClassifyParticularMessageModels;
 
 @property(nonatomic,strong) BDBIndexGuideMessageResponseModel *indexModel;
 
-@property(nonatomic,strong) NSMutableArray *AnnouncementModel;
+@property(nonatomic,strong) BDBNoticeModel *noticeModel;
 
 @property(nonatomic,strong) NSMutableArray *ParticularModel;
 
@@ -39,12 +41,7 @@
 /**
  *	表格头部视图
  */
-@property(nonatomic,weak) BDBIndexTableViewHeader *indexTableViewHeader;
-
-/**
- 公告页数
- */
-@property(nonatomic,assign) NSUInteger pageIndex;
+@property(nonatomic,strong) BDBIndexTableViewHeader *indexTableViewHeader;
 
 /**
  每页显示数量
@@ -56,6 +53,13 @@
 //用于判断点击到了那个View的手势
 @property(nonatomic,assign) NSUInteger judge;
 
+/**
+ *  记录公告所处的cell位置
+ */
+@property(nonatomic,strong) NSIndexPath *noticeCellIndexPath;
+
+
+
 - (void)rightBarButtonClickedAction:(UIBarButtonItem *)buttonItem;
 
 /**
@@ -63,27 +67,38 @@
  */
 - (void)initIndexTableView;
 
+/**
+ *  根据状态刷新标的
+ */
+- (void)refreshWorthyBids;
+/**
+ *  刷新标的数据
+ */
+- (void)refreshWorthyBidsWithMinAnnualEarnimgs:(NSString *)minAnnualEarnimgs maxAnnualEarnimgs:(NSString *)maxAnnualEarnimgs;
+
+/**
+ *	根据状态追加更多标的数据
+ */
+- (void)appendWorthyBids;
+/**
+ *  追加更多标的数据
+ */
+- (void)appendWorthyBidsWithMinAnnualEarnimgs:(NSString *)minAnnualEarnimgs maxAnnualEarnimgs:(NSString *)maxAnnualEarnimgs;
+
+
+/**
+ *  切换选项背景
+ */
+- (void)rgyView:(BDBSortTableViewCell *)sortTableViewCell changedByJude:(NSUInteger)jude;
+
+
+
 //加载公告引导信息
 - (void)loadNoticeGuideMessage;
 
 //加载公告信息
 - (void)loadNoticeMessage;
-
-//加载标的详细信息
-- (void)loadBidMessage;
-
-//加载红色标的详细信息
-- (void)loadRedBidMessage;
-
-//加载绿色标的的详细信息
-- (void)loadGreenBidMessage;
-
-//加载蓝色标的的详细信息
-- (void)loadBlueBidMessage;
-
-//下拉刷新
-- (void)downRefresh;
-
+ 
 
 
 @end
@@ -95,65 +110,44 @@
     if (self) {
         self.title = @"比贷宝";
         self.pageSize = 10;
-        
+        self.judge = 0;
         self.indexPaths = [NSMutableArray array];
-//        self.AnnouncementModel = [NSMutableArray array];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadBidMessage];
+	
+	UIImage *rightBarButtonImage = [UIImageWithName(@"index_nav_right") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:rightBarButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonClickedAction:)];
+	
+	//初始化表视图
+	[self initIndexTableView];
+	
+	//刷新标的列表信息
+	[self refreshWorthyBids];
+   
+   	//加载公告信息
     [self loadNoticeMessage];
+	
     [self loadNoticeGuideMessage];
-    [self initIndexTableView];
+   
     //显示加载页面
     self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
 
-    
-    UIImage *rightBarButtonImage = [UIImageWithName(@"index_nav_right") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:rightBarButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonClickedAction:)];
-
-    self.IndexTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    /**
-     *  设置页眉的
-     */
-    
-    
-//    [self.IndexTableView.tableHeaderView setHidden:YES];
-    
-
-    
-//    UIImage *headerImage = [UIImage imageNamed:@"earth_03"];
-//    
-//    self.herderImageView = [[UIImageView alloc] initWithImage:headerImage];
-//    self.herderImageView.bounds = CGRectMake(0, 0, 0, 250.0f);
-//    self.IndexTableView.tableHeaderView = _herderImageView;
-    
-    
-    __weak typeof (self) thisInstance = self;
-    self.IndexTableView.header = [BDBTableViewRefreshHeader headerWithRefreshingBlock:^{
-        [thisInstance downRefresh];
-        [thisInstance.IndexTableView.header endRefreshing];
-    }];
-    
-    self.IndexTableView.footer = [BDBTableViewRefreshFooter footerWithRefreshingBlock:^{
-        [thisInstance.IndexTableView.footer endRefreshing];
-    }];
 }
 
+
+#pragma mark - Private Methods
 - (void)loadNoticeGuideMessage {
     //创建一个请求对象
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    //调用请求对象的解析器
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    
     
     //GetRealTimeStatistics主机地址
     NSString *realTimeStatisticsUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetRealTimeStatistics"];
     NSMutableDictionary *realTimeStatisticsDict = [NSMutableDictionary dictionary];
+	
     realTimeStatisticsDict[@"PlatFormID"] = @"-1";
     realTimeStatisticsDict[@"Device"] = @"0";
     realTimeStatisticsDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
@@ -161,220 +155,244 @@
     [manager POST:realTimeStatisticsUrl parameters:realTimeStatisticsDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BDBIndexGuideMessageResponseModel *indexResponseModel = [BDBIndexGuideMessageResponseModel objectWithKeyValues:responseObject];
         self.indexModel = indexResponseModel;
+		
         [self.IndexTableView reloadData];
-        //        NSLog(@"%@",self.indexModel.AmountRemain);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
 
 }
 
 - (void)loadNoticeMessage {
-    //刷新数据时，页数改为1。
-    self.pageIndex = 1;
-    //偏好设置读取数据
-    NSUserDefaults *userDfaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *UID = [userDfaults objectForKey:@"UID"];
-    NSString *PSW = [userDfaults objectForKey:@"PSW"];
-    //    NSLog(@"UID:%@",UID);
-    
     //创建一个请求对象
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    //调用请求对象的解析器
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
     
     //GetNotice主机地址
     NSString *noticeUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetNotice"];
-    NSMutableDictionary *noticeDict = [NSMutableDictionary dictionary];
-    if (UID) {
-        noticeDict[@"UID"] = UID;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	
+	NSUserDefaults *userDfaults = [NSUserDefaults standardUserDefaults];
+	
+	NSString *UID = [userDfaults objectForKey:@"UID"];
+    if (UID && ![UID isEqualToString:@""]) {
+        parameters[@"UID"] = UID;
     }
     
-    if (PSW) {
-        noticeDict[@"PSW"] = PSW;
+	NSString *PSW = [userDfaults objectForKey:@"PSW"];
+    if (PSW && ![PSW isEqualToString:@""]) {
+        parameters[@"PSW"] = PSW;
     }
-    noticeDict[@"UserType"] = @"0";
-    noticeDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    noticeDict[@"Device"] = @"0";
-    noticeDict[@"PageIndex"] = [NSString stringWithFormat:@"%lu",_pageIndex];
-    noticeDict[@"PageSize"] = [NSString stringWithFormat:@"%lu",_pageSize];
+	
+    parameters[@"UserType"] = @"0";
+    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+    parameters[@"Device"] = @"0";
+    parameters[@"PageIndex"] = @1;
+    parameters[@"PageSize"] = @1;
     
-    [manager POST:noticeUrl parameters:noticeDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [manager POST:noticeUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BDBWebAnnouncementResponseModel *announcementResponseModel = [BDBWebAnnouncementResponseModel objectWithKeyValues:responseObject];
-        self.AnnouncementModel = announcementResponseModel.NoticeList;
-//        NSLog(@"%@",announcementResponseModel);
-        [self.IndexTableView reloadData];
-//        NSLog(@"_AnnouncementModel:%@",announcementResponseModel.NoticeList);
+        self.noticeModel = [announcementResponseModel.NoticeList lastObject];
+
+		[self.IndexTableView reloadRowsAtIndexPaths:@[_noticeCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
 
 }
 
-- (void)loadBidMessage {
-    self.PageInDex ++;
-    //创建一个请求对象
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    //调用请求对象的解析器
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    //GetWorthyBids_Filter主机地址
-    NSString *bidUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
-    
-    NSMutableDictionary *bidDict = [NSMutableDictionary dictionary];
-    bidDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    bidDict[@"Device"] = @"0";
-    bidDict[@"PageInDex"] = [NSString stringWithFormat:@"%lu",_PageInDex];
-    bidDict[@"PageSize"] = [NSString stringWithFormat:@"%lu",_pageSize];
-    bidDict[@"Count"] = @"1";
-    bidDict[@"ProgressPercent_Max"] = @"1";
-    
-    [manager POST:bidUrl parameters:bidDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        self.indexClassifyParticularMessageResponseModel = [BDBIndexClassifyParticularMessageResponseModel objectWithKeyValues:responseObject];
-        self.ParticularModel = _indexClassifyParticularMessageResponseModel.BidList;
-        
-        //        NSLog(@"%@",indexClassifyParticularMessageResponseModel);
-        if (_loadDataIndicatePage) {
-            [_loadDataIndicatePage hide];
-        }else {
-            [_IndexTableView.header endRefreshing];
-        }
-        
-        [self.IndexTableView reloadRowsAtIndexPaths:_indexPaths withRowAnimation:UITableViewRowAnimationNone];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
+- (void)refreshWorthyBidsWithMinAnnualEarnimgs:(NSString *)minAnnualEarnimgs maxAnnualEarnimgs:(NSString *)maxAnnualEarnimgs {
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
+	//GetNotice主机地址
+	NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
+	
+	//请求参数
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	
+	//偏好设置读取数据
+	NSUserDefaults *userDfaults = [NSUserDefaults standardUserDefaults];
+	NSString *UID = [userDfaults objectForKey:@"UID"];
+	if (UID && ![@"" isEqualToString:UID]) {
+		parameters[@"UID"] = UID;
+	}
+	
+	NSString *PSW = [userDfaults objectForKey:@"PSW"];
+	if (PSW && ![@"" isEqualToString:PSW]) {
+		parameters[@"PWS"] = PSW;
+	}
+	
+	parameters[@"UserType"] = @0;
+	parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	parameters[@"Device"] = @0;
+	parameters[@"PageIndex"] = @(_PageInDex);
+	parameters[@"PageSize"] = @(_pageSize);
+	
+	parameters[@"AnnualEarnings_Min"] = minAnnualEarnimgs;
+	parameters[@"AnnualEarnings_Max"] = maxAnnualEarnimgs;
+	
+	parameters[@"Count"] = @0;
+	
+	//发送请求
+	[manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+		BDBIndexClassifyParticularMessageResponseModel *indexClassifyParticularMessageResponseModel = [BDBIndexClassifyParticularMessageResponseModel objectWithKeyValues:responseObject];
+		
+		self.indexClassifyParticularMessageModels = [indexClassifyParticularMessageResponseModel.BidList mutableCopy];
+		 
+		//如果是下拉刷新
+		if (_IndexTableView.header.isRefreshing) {
+			[_IndexTableView.header endRefreshing];
+		}
+		
+		if (self.loadDataIndicatePage) {
+			[_loadDataIndicatePage hide];
+		}
+		
+		[_IndexTableView reloadData];
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
 }
 
-- (void)loadRedBidMessage {
+
+- (void)refreshWorthyBids{
     self.PageInDex = 1;
-    
-    //创建一个请求对象
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    //调用请求对象的解析器
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    //GetWorthyBids_Filter主机地址
-    NSString *bidUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
-    
-    NSMutableDictionary *bidDict = [NSMutableDictionary dictionary];
-    bidDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    bidDict[@"Device"] = @"0";
-    bidDict[@"PageInDex"] = [NSString stringWithFormat:@"%lu",_PageInDex];
-    bidDict[@"PageSize"] = [NSString stringWithFormat:@"%lu",_pageSize];
-    bidDict[@"Count"] = @"1";
-//    bidDict[@"AnnualEarnings_Min"] = @"15";
-    
-    [manager POST:bidUrl parameters:bidDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        self.indexClassifyParticularMessageResponseModel = [BDBIndexClassifyParticularMessageResponseModel objectWithKeyValues:responseObject];
-        self.ParticularModel = _indexClassifyParticularMessageResponseModel.BidList;
-//        NSLog(@"%@",indexClassifyParticularMessageResponseModel);
-        
-        [self.IndexTableView reloadRowsAtIndexPaths:_indexPaths withRowAnimation:UITableViewRowAnimationNone];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
-
+	
+	switch (_judge) {
+		case 0:{
+			[self refreshWorthyBidsWithMinAnnualEarnimgs:@"0.15" maxAnnualEarnimgs:@"1.00"];
+			break;
+		}
+		case 1:{
+			[self refreshWorthyBidsWithMinAnnualEarnimgs:@"0.12" maxAnnualEarnimgs:@"0.15"];
+			break;
+		}
+		case 2:{
+			[self refreshWorthyBidsWithMinAnnualEarnimgs:@"0.00" maxAnnualEarnimgs:@"0.15"];
+			break;
+		}
+		default:
+			break;
+	}
 }
 
-- (void)loadGreenBidMessage {
-    self.PageInDex = 1;
-    
-    //创建一个请求对象
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    //调用请求对象的解析器
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    //GetWorthyBids_Filter主机地址
-    NSString *bidUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
-    
-    NSMutableDictionary *bidDict = [NSMutableDictionary dictionary];
-    bidDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    bidDict[@"Device"] = @"0";
-    bidDict[@"PageInDex"] = [NSString stringWithFormat:@"%lu",_PageInDex];
-    bidDict[@"PageSize"] = [NSString stringWithFormat:@"%lu",_pageSize];
-    bidDict[@"Count"] = @"1";
-//    bidDict[@"AnnualEarnings_Min"] = @"15";
-
-    
-    [manager POST:bidUrl parameters:bidDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        self.indexClassifyParticularMessageResponseModel = [BDBIndexClassifyParticularMessageResponseModel objectWithKeyValues:responseObject];
-        self.ParticularModel = _indexClassifyParticularMessageResponseModel.BidList;
-        //        NSLog(@"%@",indexClassifyParticularMessageResponseModel);
-        
-        [self.IndexTableView reloadRowsAtIndexPaths:_indexPaths withRowAnimation:UITableViewRowAnimationNone];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
-
+- (void)appendWorthyBidsWithMinAnnualEarnimgs:(NSString *)minAnnualEarnimgs maxAnnualEarnimgs:(NSString *)maxAnnualEarnimgs {
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	
+	//GetNotice主机地址
+	NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
+	
+	//请求参数
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	
+	//偏好设置读取数据
+	NSUserDefaults *userDfaults = [NSUserDefaults standardUserDefaults];
+	NSString *UID = [userDfaults objectForKey:@"UID"];
+	if (UID && ![@"" isEqualToString:UID]) {
+		parameters[@"UID"] = UID;
+	}
+	
+	NSString *PSW = [userDfaults objectForKey:@"PSW"];
+	if (PSW && ![@"" isEqualToString:PSW]) {
+		parameters[@"PWS"] = PSW;
+	}
+	
+	parameters[@"UserType"] = @0;
+	parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	parameters[@"Device"] = @0;
+	parameters[@"PageIndex"] = @(_PageInDex);
+	parameters[@"PageSize"] = @(_pageSize);
+	
+	parameters[@"AnnualEarnings_Min"] = minAnnualEarnimgs;
+	parameters[@"AnnualEarnings_Max"] = maxAnnualEarnimgs;
+	
+	parameters[@"Count"] = @0;
+	
+	//发送请求
+	[manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+		BDBIndexClassifyParticularMessageResponseModel *indexClassifyParticularMessageResponseModel = [BDBIndexClassifyParticularMessageResponseModel objectWithKeyValues:responseObject];
+		
+		[self.indexClassifyParticularMessageModels addObjectsFromArray:indexClassifyParticularMessageResponseModel.BidList];
+		
+		if (_IndexTableView.footer.isRefreshing) {
+			[_IndexTableView.footer endRefreshing];
+		}
+		
+		[_IndexTableView reloadData];
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
 }
 
-- (void)loadBlueBidMessage {
-    self.PageInDex = 1;
-
-    //创建一个请求对象
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    //调用请求对象的解析器
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    //GetWorthyBids_Filter主机地址
-    NSString *bidUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
-    
-    NSMutableDictionary *bidDict = [NSMutableDictionary dictionary];
-    bidDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    bidDict[@"Device"] = @"0";
-    bidDict[@"PageInDex"] = [NSString stringWithFormat:@"%lu",_PageInDex];
-    bidDict[@"PageSize"] = [NSString stringWithFormat:@"%lu",_pageSize];
-    bidDict[@"Count"] = @"1";
-//    bidDict[@"AnnualEarnings_Max"] = @"12";
-    
-    [manager POST:bidUrl parameters:bidDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-         self.indexClassifyParticularMessageResponseModel = [BDBIndexClassifyParticularMessageResponseModel objectWithKeyValues:responseObject];
-        self.ParticularModel = _indexClassifyParticularMessageResponseModel.BidList;
-//        NSLog(@"%@",self.ParticularModel);
-//        NSLog(@"%@",indexClassifyParticularMessageResponseModel);
-        
-        [self.IndexTableView reloadRowsAtIndexPaths:_indexPaths withRowAnimation:UITableViewRowAnimationNone];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
-
+- (void)appendWorthyBids {
+	self.PageInDex ++;
+	switch (_judge) {
+		case 0:{
+			[self appendWorthyBidsWithMinAnnualEarnimgs:@"0.15" maxAnnualEarnimgs:@"1.00"];
+			break;
+		}
+		case 1:{
+			[self appendWorthyBidsWithMinAnnualEarnimgs:@"0.12" maxAnnualEarnimgs:@"0.15"];
+			break;
+		}
+		case 2:{
+			[self appendWorthyBidsWithMinAnnualEarnimgs:@"0.00" maxAnnualEarnimgs:@"0.15"];
+			break;
+		}
+		default:
+			break;
+	}
 }
 
-- (void)downRefresh {
-    self.PageInDex = 1;
-    if (_judge == 0) {
-        [self loadRedBidMessage];
-    }else if (_judge == 1) {
-        [self loadGreenBidMessage];
-    }else if (_judge == 2) {
-        [self loadBlueBidMessage];
-    }
-
-}
 
 - (void)initIndexTableView {
     //indexTableView tableViewHeader
     BDBIndexTableViewHeader *indexTableViewHeader = [[BDBIndexTableViewHeader alloc] init];
-    
-    self.indexTableViewHeader = indexTableViewHeader;
-    
+	self.indexTableViewHeader = indexTableViewHeader;
+
     //根据约束，实际计算Frame(适用于只能设定frame的地方)
     CGSize indexTableViewHeaderFitSize = [_indexTableViewHeader systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     
     //tableViewHead的高度设定，只能用Frame方式
-    _indexTableViewHeader.height = indexTableViewHeaderFitSize.height;
-    
-    _IndexTableView.tableHeaderView = _indexTableViewHeader;
+	_indexTableViewHeader.height = indexTableViewHeaderFitSize.height;
+	
+	//表格头部视图设置之前，尺寸要先确认
+	_IndexTableView.tableHeaderView = _indexTableViewHeader;
+	
+	self.IndexTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	
+	__weak typeof (self) thisInstance = self;
+	self.IndexTableView.header = [BDBTableViewRefreshHeader headerWithRefreshingBlock:^{
+		[thisInstance refreshWorthyBids];
+	}];
+	
+	self.IndexTableView.footer = [BDBTableViewRefreshFooter footerWithRefreshingBlock:^{
+		[thisInstance appendWorthyBids];
+	}];
 }
 
-
-
+- (void)rgyView:(BDBSortTableViewCell *)sortTableViewCell changedByJude:(NSUInteger)jude {
+	switch (jude) {
+		case 0:{
+			sortTableViewCell.redView.backgroundColor = UIColorWithRGB(194, 45, 52);
+			sortTableViewCell.blueView.backgroundColor = UIColorWithRGB(64, 132, 249);
+			sortTableViewCell.greenView.backgroundColor = UIColorWithRGB(86, 205, 82);			
+			break;
+		}
+		case 1:{
+			sortTableViewCell.greenView.backgroundColor = UIColorWithRGB(67, 158, 49);
+			sortTableViewCell.blueView.backgroundColor = UIColorWithRGB(64, 132, 249);
+			sortTableViewCell.redView.backgroundColor = UIColorWithRGB(224, 63, 74);
+			break;
+		}
+		case 2:{
+			sortTableViewCell.blueView.backgroundColor = UIColorWithRGB(40, 96, 172);
+			sortTableViewCell.redView.backgroundColor = UIColorWithRGB(224, 63, 74);
+			sortTableViewCell.greenView.backgroundColor = UIColorWithRGB(86, 205, 82);
+			break;
+		}
+			
+  		default:
+			break;
+	}
+}
 
 - (void)rightBarButtonClickedAction:(UIBarButtonItem *)buttonItem {
     [self performSegueWithIdentifier:@"ToNoticeViewControllerSegue" sender:self];
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -386,8 +404,8 @@
     NSUInteger sectionCellRowNum;
     if (section == 0) {
         sectionCellRowNum = 3;
-    }else {
-        sectionCellRowNum = 10;
+    }else if(section == 1){
+        sectionCellRowNum = _indexClassifyParticularMessageModels.count;
     }
     return sectionCellRowNum;
 }
@@ -397,17 +415,16 @@
     
     
     if (indexPath.section == 0 && indexPath.row == 0) {
+		//记录公告Cell的位置
+		self.noticeCellIndexPath = indexPath;
+		
         BDBMessageTableViewCell *cell = [BDBMessageTableViewCell cell];
-        
-        BDBNoticeModel *noticeModel = _AnnouncementModel[indexPath.row];
-        
-
-        cell.titleLabel.text = noticeModel.Title;
-        
+	
+        cell.titleLabel.text = _noticeModel.Title;
         
         cell.userInteractionEnabled = NO;
+		
         return cell;
-
     }else if (indexPath.section == 0 && indexPath.row == 1) {
         BDBParameterTableViewCell *cell = [BDBParameterTableViewCell cell];
         cell.AmountRemainLabel.text = _indexModel.AmountRemain;
@@ -454,6 +471,8 @@
         
         UITapGestureRecognizer *blueViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeBlueMessage:)];
         [cell.blueView addGestureRecognizer:blueViewTapGestureRecognizer];
+		
+		[self rgyView:cell changedByJude:_judge];
         
         return cell;
     }
@@ -467,85 +486,57 @@
             //设置红点上的数字
             cell.numberLabel.text = [NSString stringWithFormat:@"%ld",indexPath.row + 1];
             
-//            NSMutableAttributedString *percentNumber = [[NSMutableAttributedString alloc] initWithString:@"25%"];
-//            
-//            [percentNumber addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(2, 1)];
+            BDBIndexClassifyParticularMessageModel *indexClassifyParticularMessageModel = _indexClassifyParticularMessageModels[indexPath.row];
+
+            cell.AmountLabel.text = [NSString stringWithFormat:@"%.2f",[indexClassifyParticularMessageModel.Amount floatValue] * 0.0001];
+
+            cell.TermLabel.text = indexClassifyParticularMessageModel.Term;
+
+            cell.PlatformNameLabel.text = indexClassifyParticularMessageModel.PlatformName;
             
-            BDBIndexClassifyParticularMessageModel *indexClassifyParticularMessageModel = [[BDBIndexClassifyParticularMessageModel alloc] init];
-            indexClassifyParticularMessageModel.Amount = _ParticularModel[indexPath.row][@"Amount"];
-//            NSLog(@"%@",_ParticularModel);
-            cell.AmountLabel.text = [NSString stringWithFormat:@"%.2f",[_ParticularModel[indexPath.row][@"Amount"] floatValue] * 0.0001];
-//            NSLog(@"aaa:%@",cell.AmountLabel.text );
-            cell.TermLabel.text = _ParticularModel[indexPath.row][@"Term"];;
-//            NSLog(@"ccc:%@",cell.TermLabel.text);
-            cell.PlatformNameLabel.text = _ParticularModel[indexPath.row][@"PlatformName"];
-            
-            cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%.0f",[_ParticularModel[indexPath.row][@"ProgressPercent"] floatValue] * 100];
-        }
-         
-         [self.indexPaths addObject:indexPath];
-         return cell;
+            cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%.0f",[indexClassifyParticularMessageModel.ProgressPercent floatValue] * 100];
+			
+		}
+
+		return cell;
      }
     return nil;
 }
 
 - (void)hideAndShow {
-    
-    NSLog(@"被点击了...");
-    if (self.indexTableViewHeader.height == 300.0f) {
-        
-    }else if (self.indexTableViewHeader.height == 0) {
-
-    }
+	_IndexTableView.tableHeaderView = (_IndexTableView.tableHeaderView)? nil : _indexTableViewHeader;
 }
+
+
 
 
 
 #pragma mark - GestureRecognizer
 - (void)changeRedMessage: (UIGestureRecognizer *)gesture {
-    
-    [self loadRedBidMessage];
-    
-    BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
-    
-    
-    cell.redView.backgroundColor = UIColorWithRGB(194, 45, 52);
-    
-    
-    cell.blueView.backgroundColor = UIColorWithRGB(64, 132, 249);
-    
-    cell.greenView.backgroundColor = UIColorWithRGB(86, 205, 82);
-
     self.judge = 0;
+	
+	[self refreshWorthyBids];
+	
+    BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
+    [self rgyView:cell changedByJude:_judge];
 }
 
 - (void)changeGreenMessage: (UIGestureRecognizer *)gesture {
-    
-    [self loadGreenBidMessage];
+    self.judge = 1;
+	
+	[self refreshWorthyBids];
     
     BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
-    cell.greenView.backgroundColor = UIColorWithRGB(67, 158, 49);
-    
-    cell.blueView.backgroundColor = UIColorWithRGB(64, 132, 249);
-
-    cell.redView.backgroundColor = UIColorWithRGB(224, 63, 74);
-    
-    self.judge = 1;
-
+	[self rgyView:cell changedByJude:_judge];
 }
 
 - (void)changeBlueMessage: (UIGestureRecognizer *)gesture {
-    [self loadBlueBidMessage];
+    self.judge = 2;
+	
+	[self refreshWorthyBids];
     
     BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
-    cell.blueView.backgroundColor = UIColorWithRGB(40, 96, 172);
-    
-    cell.redView.backgroundColor = UIColorWithRGB(224, 63, 74);
-    
-    cell.greenView.backgroundColor = UIColorWithRGB(86, 205, 82);
-    
-    self.judge = 2;
-
+    [self rgyView:cell changedByJude:_judge];
 }
 
 

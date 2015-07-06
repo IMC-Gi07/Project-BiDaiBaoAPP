@@ -11,7 +11,7 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
 - (IBAction)deleteButtonClicked:(UIButton *)sender;
 - (IBAction)ringButtonClicked:(UIButton *)sender;
 
@@ -34,7 +34,16 @@
 //删除
 - (IBAction)deleteButtonClicked:(UIButton *)sender {
 
-    [self.deleteButton setImage:[UIImage imageNamed:@"cell_btn_delete_Highlighted"] forState:UIControlStateNormal];
+    [self.delButton setImage:[UIImage imageNamed:@"cell_btn_delete_Highlighted"] forState:UIControlStateNormal];
+//    [self.delButton setImage:[UIImage imageNamed:@"cell_btn_delete_Highlighted"] forState:UIControlStateNormal];
+    
+    
+    
+//    [sender setBackgroundImage:[UIImage imageNamed:@"waring_uisegmentedcontrol_right"] forState:UIControlStateNormal];
+//    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    
+    
     [_delegate deleteButtonClickedAction:sender];
 
 }

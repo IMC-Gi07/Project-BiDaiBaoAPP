@@ -28,7 +28,7 @@
 /**
  *  公告列表
  */
-@property(nonatomic,strong) NSMutableArray *NoticeList;
+@property(nonatomic,copy) NSArray *NoticeList;
 
 
 @end

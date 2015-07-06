@@ -1182,6 +1182,24 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		7A735122E12A077005E3AD3E695061FC /* warningTimeCell */ = {
+			isa = PBXGroup;
+			children = (
+				238A91C3DEF4B736F224802F8BA5F6F4 /* BDBCustomTableViewCellOne.h */,
+				7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */,
+				EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */,
+				28D43EB63A0CD36280B873AEDCE4E29D /* BDBCustomTableViewCellThree.h */,
+				F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */,
+				A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */,
+				0740950FE73BE4B02F26F2E5D4659B65 /* BDBCustomTableViewCellTwo.h */,
+				AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */,
+				28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */,
+				D5379177FB172C08886ECFE164CD4297 /* BDBWarningTimeViewController.h */,
+				07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */,
+			);
+			path = warningTimeCell;
+			sourceTree = "<group>";
+		};
 		7CB310EB99925F85C32D25F5D2D83165 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1244,6 +1262,27 @@
 				3BDF943F530A3143A17B2C9F00D6A5AB /* NSString+MJExtension.m */,
 			);
 			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAB75196B8A49B24FC09CB8F580B989B /* BDBPlatFormIDModel.h */,
+				D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */,
+				C00C534C4D5C3365E5357B69E3F1164F /* BDBPlatFormIDResponModel.h */,
+				CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */,
+				669E5EE49317385F675A3E5094E62090 /* BDBWarningAddResponseModel.h */,
+				54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */,
+				ED80C239AABF82D17099FC612967CCFC /* BDBWarningModelOne.h */,
+				594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */,
+				06100C7DA567CE92562576B3EC515919 /* BDBWarningModelTwo.h */,
+				CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */,
+				845E90011FF0D8E0816F55F20A53DE17 /* BDBWarningResponseModel.h */,
+				F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */,
+				B664A10A4DB0AC3C6B875AD42F8D8BA5 /* BDBWarningTimeResponseModel.h */,
+				EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8FEABDCF00D9B28AF3F317DA304F880D /* AFNetworking */ = {
@@ -1404,6 +1443,17 @@
 			path = Subject;
 			sourceTree = "<group>";
 		};
+		B4C21909142FC80D477917AFAC2F48A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2A61BF45F7C85195A2B8D31BD1C67627 /* BDBWarningAddViewController.h */,
+				AEC7060DF8797A409B5086869B383DCE /* BDBWarningAddViewController.m */,
+				1713D99A254A056F26BEE9929A73FBD7 /* BDBWarningViewController.h */,
+				7F342EC0EF3870E16A8CE8B5A05298CA /* BDBWarningViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		B620634F883064463472B0D718FCD859 = {
 			isa = PBXGroup;
 			children = (
@@ -1509,6 +1559,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CD521E418912AD2DD45EC2C9E4B09BED /* Warning */ = {
+			isa = PBXGroup;
+			children = (
+				B4C21909142FC80D477917AFAC2F48A2 /* Controller */,
+				89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */,
+				D49FF62A38FE37F0E7C8270E62EB9FCF /* View */,
+				E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */,
+			);
+			path = Warning;
+			sourceTree = "<group>";
+		};
 		CFF3C5F5ED93629CDBCE71889DED73E9 /* Index */ = {
 			isa = PBXGroup;
 			children = (
@@ -1527,49 +1588,6 @@
 				ACB7DF23FD20E39FE4A9CC57D1EDE4E9 /* BiDaiBaoAPPTests.m */,
 			);
 			path = BiDaiBaoAPPTests;
-			sourceTree = "<group>";
-		};
-		CD521E418912AD2DD45EC2C9E4B09BED /* Warning */ = {
-			isa = PBXGroup;
-			children = (
-				B4C21909142FC80D477917AFAC2F48A2 /* Controller */,
-				89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */,
-				D49FF62A38FE37F0E7C8270E62EB9FCF /* View */,
-				E02912BAEF1AA9CF117DC76D535B4410 /* Warning.storyboard */,
-			);
-			path = Warning;
-			sourceTree = "<group>";
-		};
-		B4C21909142FC80D477917AFAC2F48A2 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2A61BF45F7C85195A2B8D31BD1C67627 /* BDBWarningAddViewController.h */,
-				AEC7060DF8797A409B5086869B383DCE /* BDBWarningAddViewController.m */,
-				1713D99A254A056F26BEE9929A73FBD7 /* BDBWarningViewController.h */,
-				7F342EC0EF3870E16A8CE8B5A05298CA /* BDBWarningViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		89D1DDA78408DC96504EA08D0DB9A3B5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				DAB75196B8A49B24FC09CB8F580B989B /* BDBPlatFormIDModel.h */,
-				D95859E719FF2597CFE1750D05B0BFEA /* BDBPlatFormIDModel.m */,
-				C00C534C4D5C3365E5357B69E3F1164F /* BDBPlatFormIDResponModel.h */,
-				CA138870ADCA6AD649662F1598F20107 /* BDBPlatFormIDResponModel.m */,
-				669E5EE49317385F675A3E5094E62090 /* BDBWarningAddResponseModel.h */,
-				54BB3CBA59055EA5098DFEB568289191 /* BDBWarningAddResponseModel.m */,
-				ED80C239AABF82D17099FC612967CCFC /* BDBWarningModelOne.h */,
-				594A3D92437F77897CA9FA23DAA447A8 /* BDBWarningModelOne.m */,
-				06100C7DA567CE92562576B3EC515919 /* BDBWarningModelTwo.h */,
-				CED48A682955685A1D0159E8169EC0C2 /* BDBWarningModelTwo.m */,
-				845E90011FF0D8E0816F55F20A53DE17 /* BDBWarningResponseModel.h */,
-				F8CA6A119EAA5B19AA4B88EB0C4FAA7B /* BDBWarningResponseModel.m */,
-				B664A10A4DB0AC3C6B875AD42F8D8BA5 /* BDBWarningTimeResponseModel.h */,
-				EF796CCCAEBCFA5A879FE226D2F8F740 /* BDBWarningTimeResponseModel.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		D49FF62A38FE37F0E7C8270E62EB9FCF /* View */ = {
@@ -1599,24 +1617,6 @@
 				828672D434889C490043A39D713A3739 /* MJDIYHeader.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7A735122E12A077005E3AD3E695061FC /* warningTimeCell */ = {
-			isa = PBXGroup;
-			children = (
-				238A91C3DEF4B736F224802F8BA5F6F4 /* BDBCustomTableViewCellOne.h */,
-				7A49CE9DA5A34047C039C0F6F29309D4 /* BDBCustomTableViewCellOne.m */,
-				EE0B1CABD6C0895CB355B81D0ED05943 /* BDBCustomTableViewCellOne.xib */,
-				28D43EB63A0CD36280B873AEDCE4E29D /* BDBCustomTableViewCellThree.h */,
-				F7EE5F68E3CF70BE1B2C14DC6873A85E /* BDBCustomTableViewCellThree.m */,
-				A1DCD0AC312D92C2395B9EA668261D6D /* BDBCustomTableViewCellThree.xib */,
-				0740950FE73BE4B02F26F2E5D4659B65 /* BDBCustomTableViewCellTwo.h */,
-				AABFE8560B825E77D1A9597DAC1F853F /* BDBCustomTableViewCellTwo.m */,
-				28E11E3EACDDB8EDA7A8DD760740A660 /* BDBCustomTableViewCellTwo.xib */,
-				D5379177FB172C08886ECFE164CD4297 /* BDBWarningTimeViewController.h */,
-				07F378779BC31580E978D648FE56F84E /* BDBWarningTimeViewController.m */,
-			);
-			path = warningTimeCell;
 			sourceTree = "<group>";
 		};
 		DB365FA6DE7E3E09CCCB7DDCF2B77BF2 /* Categories */ = {
@@ -2058,11 +2058,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiamen Banker Software Technology Co., Ltd. (U86Z86SHNW)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$SRCROOT/BiDaiBaoAPP/BiDaiBao-Prefix.pch";
 				INFOPLIST_FILE = BiDaiBaoAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2107,12 +2107,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiamen Banker Software Technology Co., Ltd. (U86Z86SHNW)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$SRCROOT/BiDaiBaoAPP/BiDaiBao-Prefix.pch";
 				INFOPLIST_FILE = BiDaiBaoAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

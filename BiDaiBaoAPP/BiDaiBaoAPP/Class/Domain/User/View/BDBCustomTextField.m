@@ -19,21 +19,21 @@
 
 - (CGRect)textRectForBounds:(CGRect)bounds{
 
-    CGRect textRect = CGRectMake(70, 0, 100, 100);
+    CGRect textRect = CGRectMake(70, 0, bounds.size.width - 150,bounds.size.height);
     
     self.textRect = textRect;
     return textRect;
 }
-
+//
 - (CGRect)placeholderRectForBounds:(CGRect)bounds{
     
-    return _textRect;
+    return CGRectMake(70, 0, bounds.size.width,bounds.size.height);
 
 }
-
+//
 - (CGRect)editingRectForBounds:(CGRect)bounds{
 
-    return _textRect;
+    return CGRectMake(70, 0, bounds.size.width - 150,bounds.size.height);
 }
 
 
@@ -44,9 +44,6 @@
     return leftViewRect;
 }
 
-- (CGRect)clearButtonRectForBounds:(CGRect)bounds{
-    return CGRectMake(bounds.size.width - 150, 10, 20, 20);
-}
 - (CGRect)rightViewRectForBounds:(CGRect)bounds{
 
     return CGRectMake(bounds.size.width - 70,10, 50, 25);

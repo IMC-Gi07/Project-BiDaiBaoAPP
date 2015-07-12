@@ -9,6 +9,7 @@
 #import "BDBUserInfoViewController.h"
 
 #import "BDBCustomTextField.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface BDBUserInfoViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -16,6 +17,8 @@
 
 
 @property(nonatomic,weak) BDBCustomTextField *nameTextField;
+@property(nonatomic,weak) BDBCustomTextField *emialTextField;
+@property(nonatomic,weak) BDBCustomTextField *passwordTextField;
 
 @property(nonatomic,weak) UIImageView *currentHeadImageView;
 
@@ -49,7 +52,7 @@
     
     [self.view addGestureRecognizer:tapGesture];
     [self subViewOfTopArea];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -275,6 +278,8 @@
     
     [self.view addSubview:emailTextField];
     
+    self.emialTextField = emailTextField;
+    
     emailTextField.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSArray *hContraintsForEmailTextField = [NSLayoutConstraint constraintsWithVisualFormat:@"|[emailTextField]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"emailTextField":emailTextField}];
@@ -334,6 +339,8 @@
     
     [self.view addSubview:passwordTextField];
     
+    self.passwordTextField = passwordTextField;
+    
     passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSArray *hContraintsForPasswordTextField = [NSLayoutConstraint constraintsWithVisualFormat:@"|[passwordTextField]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"passwordTextField":passwordTextField}];
@@ -370,49 +377,102 @@
     [alertSheet showInView:self.view];
     
 }
-
+//立即修改按钮事件
 - (void)modifyUserInformations: (UIButton *)button{
-
-
-    [self loadSetUserInf:button.tag];
-    
+  
+        [self loadSetUserInf:button.tag];
+  
 }
 
 - (void)loadSetUserInf: (NSUInteger)buttonTag{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingString:@"SetUserInf"];
+    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetUserInf"];
     
     NSMutableDictionary *parameterDict = [NSMutableDictionary dictionary];
     
-    parameterDict[@"UID"] = @"55555555555";
+    parameterDict[@"UID"] = defaultsUID;
     
     parameterDict[@"UserType"] = @"0";
     
-    parameterDict[@"PSW"] = @"0";
+    parameterDict[@"PSW"] = defaultsPSW;
     
     parameterDict[@"Machine_id"] = @"0";
     
     parameterDict[@"Device"] = @"0";
     
     if (buttonTag == 100) {
-        parameterDict[@"NiName"] = @"";
-        
-        NSLog(@"NiName");
+        if (_nameTextField.text.length != 0) {
+            parameterDict[@"NiName"] = _nameTextField.text;
+        }
     }
     if(buttonTag == 101){
-    
-        parameterDict[@"EM ail"] = @"";
-        NSLog(@"EM ail");
+        if (_emialTextField.text.length != 0) {
+            parameterDict[@"EM ail"] = _emialTextField.text;
+            
+        }
 
     }
     if(buttonTag == 102){
-    
-        parameterDict[@"NewPSW"] = @"";
-        NSLog(@"NewPSW");
+        
+        if (_passwordTextField.text.length != 0 && defaultsPSW != nil) {
+            NSString *passWord = _passwordTextField.text;
+            NSString *resultStr = [[self md5HexDigest:passWord]uppercaseString];
+            parameterDict[@"NewPSW"] = resultStr;
+        }
     }
+   [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       if ([responseObject[@"Result"] isEqualToString:@"0"]) {
+           UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+           
+           tishiLabel.text = @"修改成功";
+           tishiLabel.textColor = [UIColor whiteColor];
+           tishiLabel.backgroundColor = [UIColor grayColor];
+           tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
+           tishiLabel.textAlignment = NSTextAlignmentCenter;
+           
+           [self.view addSubview:tishiLabel];
+           
+           [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
+           
+           [_passwordTextField setText:@""];
+           [_emialTextField setText:@""];
+           [_nameTextField setText:@""];
+           
+       }
+   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       NSLog(@"error%@",error);
+   }];
 }
+
+-(void)removetishi:(UILabel *)laber{
+    
+    [laber removeFromSuperview];
+    
+}
+
+//MD5加密方法
+- (NSString *)md5HexDigest:(NSString*)password
+{
+    const char *original_str = [password UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(original_str, strlen(original_str), result);
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++)
+    {
+        [hash appendFormat:@"%02X", result[i]];
+    }
+    NSString *mdfiveString = [hash lowercaseString];
+    
+    NSLog(@"Encryption Result = %@",mdfiveString);
+    return mdfiveString;
+}
+
 
 #pragma mark - UIActionSheet Delegate Methods;
 
@@ -474,6 +534,8 @@
     UIImage *headerImage = info[UIImagePickerControllerOriginalImage];
     
     self.currentHeadImageView.image = headerImage;
+    
+    //self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.height);
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     

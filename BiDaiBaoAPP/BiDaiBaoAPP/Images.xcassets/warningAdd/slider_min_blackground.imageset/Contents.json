@@ -6,9 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "slider_min_blackground@2x.png"
     },
     {
+      "scale" : "3x",
+      "idiom" : "universal",
+      "filename" : "slider_min_blackground@3x.png",
       "resizing" : {
         "mode" : "9-part",
         "center" : {
@@ -17,15 +21,12 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 18,
+          "left" : 20,
           "top" : 17,
           "right" : 20,
-          "left" : 20
+          "bottom" : 18
         }
-      },
-      "idiom" : "universal",
-      "filename" : "1.png",
-      "scale" : "3x"
+      }
     }
   ],
   "info" : {

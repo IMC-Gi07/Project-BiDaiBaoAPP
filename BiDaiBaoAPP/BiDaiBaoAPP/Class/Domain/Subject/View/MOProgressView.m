@@ -18,7 +18,8 @@
         
         UIImage *backgroundImage = [[UIImage imageNamed:@"subject_cell_progress_track_img"] resizableImageWithCapInsets:insets];        
         
-        UIImage *foregroundImage = [[UIImage imageNamed:@"subject_cell_progress_img"] resizableImageWithCapInsets:insets];       
+        UIImage *foregroundImage = [[UIImage imageNamed:@"subject_cell_progress_img"]
+        resizableImageWithCapInsets:insets];
         
         _trackView = [[UIImageView alloc] init];
         _trackView.image = backgroundImage;
@@ -37,10 +38,12 @@
 
 - (void)layoutSubviews{
     _trackView.frame = self.bounds;
-    _progressbgView.frame = self.bounds;
+    _progressView.frame = self.bounds;
     
     CGSize size = self.frame.size;
-    _progressView.frame = CGRectMake(0, 0, size.width * _progress, size.height);
+    
+    _progressbgView.frame = CGRectMake(0, 0, size.width * _progress, size.height);
+
     
 }
 
@@ -52,8 +55,13 @@
     }
     _progress = progress;
     CGSize size = self.frame.size;
-    _progressView.frame = CGRectMake(0, 0, size.width * progress, size.height);
+    
+    _progressbgView.width = 0.0f;
 
+    [UIView animateWithDuration:1.0f animations:^{
+        _progressbgView.width = size.width * _progress;
+    }];
+    
 }
 
 /*

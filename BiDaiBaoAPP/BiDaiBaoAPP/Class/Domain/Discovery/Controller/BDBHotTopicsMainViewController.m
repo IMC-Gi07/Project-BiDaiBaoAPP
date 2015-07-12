@@ -77,14 +77,30 @@
     [self refreshDatas];
     [_tableView registerNib:[UINib nibWithNibName:@"BDBQuestionContentCell" bundle:nil]  forCellReuseIdentifier:@"questionContentCell"];
     
+    
+    ZXLLOG(@"x-x-x-xx-x-x-x-x-x-x-x-x-x-x-x-x-x-%@",[self transformDataFormat:@"2015/7/7 7:07:07"]);
 }
 
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource Methods
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return 120.0f;
+    CGFloat height;
+    if (indexPath.row == 0) {
+        return 120.0f;
+    }else {
+        return 110.0f;
+//        [_tableView fd_heightForCellWithIdentifier:@"questionContentCell" configuration:^(BDBQuestionContentCell *cell) {
+//
+//            BDBHotTopicsModel *model = _questionListModels[indexPath.row - 1];
+//            cell.title.text = [self cutText:model.Title];
+//            cell.firstReply.text = [self cutText:model.FirstReply];
+//            cell.askUser.text = model.AskUser;
+//            cell.askTime.text = model.AskTime;
+//        }];
+        
+    }
+    return height;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -101,10 +117,12 @@
     if (indexPath.row > 0) {
         BDBHotTopicsModel *model = _questionListModels[indexPath.row - 1];
         BDBQuestionContentCell *questionContentCell = [_tableView dequeueReusableCellWithIdentifier:@"questionContentCell" forIndexPath:indexPath];
-        questionContentCell.title.text = model.Title;
-        questionContentCell.firstReply.text = model.FirstReply;
-        questionContentCell.askUser.text = model.AskUser;
-        questionContentCell.askTime.text = model.AskTime;
+        questionContentCell.title.text = [self cutText:model.Title];
+        questionContentCell.firstReply.text = [self cutText:model.FirstReply];        questionContentCell.askUser.text = model.AskUser;
+        NSString *askTime = model.AskTime;
+        NSString *simpleTime = [self transformDataFormat:askTime];
+        ZXLLOG(@"-x-x-x-xx-x-x-x-x-x-x-x-x-x--x-x-xx-x--x--%@,%@",simpleTime,model.AskTime);
+        questionContentCell.askTime.text = simpleTime;
         questionContentCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return questionContentCell;
     }
@@ -132,21 +150,6 @@
 }
 
 
-#pragma mark - Privite Methods
-- (void)generateQuestionButton {
-    UIButton *questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    questionBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    [questionBtn setImage:[UIImage imageNamed:@"hotTopics_questionBtn_img"] forState:UIControlStateNormal];
-    [self.view addSubview:questionBtn];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:70];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:70];
-    [questionBtn addConstraints:@[width,height]];
-    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-10];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-10];
-    [self.view addConstraints:@[trailing,bottom]];
-    
-    [questionBtn addTarget:self action:@selector(questionButtonClickedAction) forControlEvents:UIControlEventTouchUpInside];
-}
 
 #pragma mark - Getting Datas Methods
 
@@ -248,4 +251,57 @@
     }
 }
 
+#pragma mark - Privite Methods
+- (void)generateQuestionButton {
+    UIButton *questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    questionBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    [questionBtn setImage:[UIImage imageNamed:@"hotTopics_questionBtn_img"] forState:UIControlStateNormal];
+    [self.view addSubview:questionBtn];
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:70];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:70];
+    [questionBtn addConstraints:@[width,height]];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-10];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:questionBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-10];
+    [self.view addConstraints:@[trailing,bottom]];
+    
+    [questionBtn addTarget:self action:@selector(questionButtonClickedAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (NSString *)transformDataFormat:(NSString *)askTime {
+    NSDateFormatter *dateFomatter = [[NSDateFormatter alloc] init];
+    [dateFomatter setDateFormat:@"yyyy-MM-d HH:mm:ss"];
+    NSDate *askDate = [dateFomatter dateFromString:askTime];
+    NSTimeInterval timeInterval = [askDate timeIntervalSinceNow];
+    if (timeInterval < 0) {
+        timeInterval = -timeInterval;
+    }
+    NSString *simpleTime = @"";
+    //NSInteger year = timeInterval / (60*60*24*365);
+    NSInteger month = timeInterval / (60*60*24*30);
+    NSInteger day = timeInterval / (60*60*24);
+    NSInteger hour = timeInterval / (60*60);
+    NSInteger minute = timeInterval / 60;
+    if (month > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li月前",(long)month];
+    }else if (day > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li天前",(long)day];
+    }else if (hour > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li小时前",(long)hour];
+    }else if (minute > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li分钟前",(long)minute];
+    }else if (timeInterval > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li秒前",(long)timeInterval];
+    }
+    return simpleTime;
+}
+
+- (NSString *)cutText:(NSString *)text {
+    NSString *afterCut = @"";
+    if (text.length > 43) {
+        afterCut = [text substringToIndex:43];
+    }else {
+        afterCut = text;
+    }
+    return afterCut;
+}
 @end

@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "slider_max_blackground@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "slider_max_blackground-3.png"
+      "filename" : "slider_max_blackground@3x.png"
     }
   ],
   "info" : {

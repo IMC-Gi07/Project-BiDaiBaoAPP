@@ -12,19 +12,7 @@
 @implementation BDB_TableViewCell_Two
 
 - (void)awakeFromNib {
-    
-//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-//    [formatter setNumberStyle:NSNumberFormatterPercentStyle];
-//    [self.slider2 setNumberFormatter:formatter];
-//    self.slider2.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:26];
-//    
-//   
-//    self.slider2.popUpViewAnimatedColors = @[[UIColor blueColor]];
-//   
-//    self.slider2.popUpViewArrowLength = 10;
-//    self.slider2.maximumValue = 25;
-   
-    
+
     
     NSNumberFormatter *tempFormatter = [[NSNumberFormatter alloc] init];
     [tempFormatter setPositiveSuffix:@"%"];
@@ -32,7 +20,7 @@
     
 
     [self.slider2 setNumberFormatter:tempFormatter];
-    self.slider2.minimumValue = 0;
+    self.slider2.minimumValue = 1;
     self.slider2.maximumValue = 25;
     
     self.slider2.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:26];

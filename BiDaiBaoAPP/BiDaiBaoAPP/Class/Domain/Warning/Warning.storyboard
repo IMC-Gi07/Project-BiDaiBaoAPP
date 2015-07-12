@@ -67,7 +67,7 @@
                     <connections>
                         <outlet property="addWarningButton" destination="gK5-IU-PWM" id="wcV-h0-Kqq"/>
                         <outlet property="warningListTableView" destination="9WU-Aa-3y8" id="swG-XR-Y70"/>
-                        <segue destination="Su5-za-dpN" kind="show" identifier="towarningAddViewControllerSegue" id="okL-47-Z7i"/>
+                        <segue destination="Su5-za-dpN" kind="show" identifier="towarningAddViewControllerSegue" id="2QO-Wh-nAc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -97,7 +97,7 @@
         <!--添加预警-->
         <scene sceneID="JbH-sh-H19">
             <objects>
-                <viewController id="Su5-za-dpN" customClass="BDBWarningAddViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Su5-za-dpN" customClass="BDBWarningAddViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s7b-oR-7Tn"/>
                         <viewControllerLayoutGuide type="bottom" id="w4y-aS-Nbt"/>
@@ -106,45 +106,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5f-Ol-nfa">
-                                <rect key="frame" x="236" y="133" width="84" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="N10-uq-f3q"/>
-                                    <constraint firstAttribute="width" constant="84" id="nvl-TT-ij3"/>
-                                </constraints>
-                                <state key="normal" image="warningAdd_navgationButton">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="packup:" destination="Su5-za-dpN" eventType="touchUpInside" id="6Cb-NC-WhR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1a-FF-3uc">
-                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
-                                <color key="backgroundColor" red="0.86274509799999999" green="0.2666666667" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="Qtz-cR-1HP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="确认">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonClick:" destination="Su5-za-dpN" eventType="touchUpInside" id="YeC-QD-Had"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NgJ-fk-SRB">
-                                <rect key="frame" x="0.0" y="191" width="320" height="324"/>
+                                <rect key="frame" x="0.0" y="133" width="320" height="382"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    选择平台:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0h-XI-Bpj">
-                                <rect key="frame" x="0.0" y="133" width="220" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMj-2W-0f9">
                                 <rect key="frame" x="46" y="84" width="228" height="41"/>
                                 <subviews>
@@ -173,6 +139,21 @@
                                     <constraint firstAttribute="height" constant="41" id="z3H-Q7-tYc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1a-FF-3uc">
+                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                                <color key="backgroundColor" red="0.86274509799999999" green="0.2666666667" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Qtz-cR-1HP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="确认">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonClick:" destination="Su5-za-dpN" eventType="touchUpInside" id="YeC-QD-Had"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -180,37 +161,30 @@
                             <constraint firstItem="O1a-FF-3uc" firstAttribute="leading" secondItem="nLk-mK-BM9" secondAttribute="leadingMargin" constant="-16" id="64N-lo-zYw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O1a-FF-3uc" secondAttribute="trailing" constant="-16" id="8dn-2a-YqA"/>
                             <constraint firstItem="NgJ-fk-SRB" firstAttribute="leading" secondItem="nLk-mK-BM9" secondAttribute="leadingMargin" constant="-16" id="Aj1-01-vkg"/>
-                            <constraint firstItem="j0h-XI-Bpj" firstAttribute="leading" secondItem="nLk-mK-BM9" secondAttribute="leadingMargin" constant="-16" id="BmG-dE-993"/>
-                            <constraint firstItem="B5f-Ol-nfa" firstAttribute="leading" secondItem="j0h-XI-Bpj" secondAttribute="trailing" constant="16" id="LYn-dt-3iQ"/>
-                            <constraint firstItem="j0h-XI-Bpj" firstAttribute="top" secondItem="EMj-2W-0f9" secondAttribute="bottom" constant="8" id="MnU-b2-vCK"/>
                             <constraint firstItem="w4y-aS-Nbt" firstAttribute="top" secondItem="O1a-FF-3uc" secondAttribute="bottom" id="Myo-FJ-ass"/>
                             <constraint firstAttribute="centerX" secondItem="EMj-2W-0f9" secondAttribute="centerX" id="VX1-gX-eFg"/>
-                            <constraint firstItem="j0h-XI-Bpj" firstAttribute="top" secondItem="B5f-Ol-nfa" secondAttribute="top" id="ZUE-PB-SRr"/>
                             <constraint firstItem="O1a-FF-3uc" firstAttribute="top" secondItem="NgJ-fk-SRB" secondAttribute="bottom" constant="8" id="bgo-Ab-HJA"/>
-                            <constraint firstItem="NgJ-fk-SRB" firstAttribute="top" secondItem="B5f-Ol-nfa" secondAttribute="bottom" constant="8" id="cLj-D8-31D"/>
-                            <constraint firstItem="j0h-XI-Bpj" firstAttribute="height" secondItem="B5f-Ol-nfa" secondAttribute="height" id="hO4-ep-wKO"/>
+                            <constraint firstItem="NgJ-fk-SRB" firstAttribute="top" secondItem="EMj-2W-0f9" secondAttribute="bottom" constant="8" id="evO-9O-F3H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NgJ-fk-SRB" secondAttribute="trailing" constant="-16" id="kqI-lz-jIY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="B5f-Ol-nfa" secondAttribute="trailing" constant="-16" id="tmB-ij-ED9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="添加预警" id="r6Y-oH-Le9"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="WarningTableView" destination="NgJ-fk-SRB" id="Iqc-1b-GcB"/>
-                        <outlet property="packUp" destination="B5f-Ol-nfa" id="w3k-BD-OQm"/>
+                        <outlet property="theSureButton" destination="O1a-FF-3uc" id="HtC-hK-igr"/>
                         <outlet property="warningAddButton" destination="nYo-Ot-NWq" id="Hfl-Ow-n9P"/>
                         <outlet property="warningTimeButton" destination="7In-fz-3uW" id="Vnh-UC-WWJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvS-G6-rND" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="3"/>
+            <point key="canvasLocation" x="1199" y="17"/>
         </scene>
     </scenes>
     <resources>
         <image name="btn_bg_addWarning" width="284" height="60"/>
         <image name="waringAdd_uisegmentedcontrol_left" width="150" height="46"/>
         <image name="waringAdd_uisegmentedcontrol_right" width="150" height="46"/>
-        <image name="warningAdd_navgationButton" width="21" height="12"/>
     </resources>
 </document>

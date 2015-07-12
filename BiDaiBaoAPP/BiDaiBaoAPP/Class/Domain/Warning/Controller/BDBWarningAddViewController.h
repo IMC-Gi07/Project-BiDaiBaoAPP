@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MJRefresh.h"
 
+
+
 @interface BDBWarningAddViewController : UIViewController
 
+@property(nonatomic,strong)NSMutableDictionary *filterCondition;
 
 @end
 

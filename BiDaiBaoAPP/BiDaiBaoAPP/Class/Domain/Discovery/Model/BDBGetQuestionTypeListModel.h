@@ -18,7 +18,7 @@
 @property(nonatomic,copy) NSString *TypeName;
 
 //是否显示 0：不显示 1：显示
-@property(nonatomic,assign) NSInteger *Visible;
+@property(nonatomic,assign) NSInteger Visible;
 
 
 @end

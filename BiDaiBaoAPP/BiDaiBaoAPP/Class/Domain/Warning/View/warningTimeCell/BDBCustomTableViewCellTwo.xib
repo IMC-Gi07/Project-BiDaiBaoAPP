@@ -74,6 +74,10 @@
                     <constraint firstAttribute="centerY" secondItem="xv2-jW-Sd4" secondAttribute="centerY" id="x8P-yN-BMs"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="minutesBtnText" destination="Hh8-fF-mBT" id="KKF-Ed-Vs2"/>
+                <outlet property="yearBtnText" destination="8GA-dy-SzY" id="hVP-98-U3l"/>
+            </connections>
             <point key="canvasLocation" x="174.5" y="331"/>
         </tableViewCell>
     </objects>

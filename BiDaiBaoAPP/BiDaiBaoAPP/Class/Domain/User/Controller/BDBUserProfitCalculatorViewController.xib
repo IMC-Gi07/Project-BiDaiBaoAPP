@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BDBUserProfitCalculatorViewController">
             <connections>
+                <outlet property="InterestRateOfYearTextField" destination="iKP-6q-g7B" id="Njn-Jh-ZdB"/>
+                <outlet property="investmentMoneyTextField" destination="BLX-Uc-cex" id="8HR-LU-AoE"/>
+                <outlet property="moneyOfEveryMonthLabel" destination="Lcw-n8-Bw2" id="Ckd-v2-vmh"/>
+                <outlet property="termTextField" destination="Y3D-qK-qL7" id="PXe-GH-yKU"/>
                 <outlet property="topBlueView" destination="Vde-2y-rVT" id="LcU-QJ-yAg"/>
+                <outlet property="totalInterestLabel" destination="BZS-vq-mrm" id="i9d-oo-xS7"/>
+                <outlet property="totalMoneyLabel" destination="bFI-5a-b1z" id="x51-Pv-duo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -111,7 +117,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G6o-vU-24U">
-                    <rect key="frame" x="0.0" y="264" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="264" width="320" height="45"/>
                     <subviews>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ha-Wj-QQw">
                             <rect key="frame" x="0.0" y="43" width="320" height="1"/>
@@ -120,8 +126,8 @@
                                 <constraint firstAttribute="height" constant="1" id="KKo-ct-yk5"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="投资金额:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDZ-hx-8qU">
-                            <rect key="frame" x="20" y="13" width="65" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="投资金额:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDZ-hx-8qU">
+                            <rect key="frame" x="20" y="13" width="65" height="19"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="a9G-TK-ZSS"/>
                                 <constraint firstAttribute="width" constant="65" id="utu-fY-MkN"/>
@@ -130,17 +136,17 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pW5-ei-OeN">
-                            <rect key="frame" x="285" y="13" width="15" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pW5-ei-OeN">
+                            <rect key="frame" x="285" y="13" width="15" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLX-Uc-cex">
-                            <rect key="frame" x="242" y="15" width="33" height="17"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLX-Uc-cex">
+                            <rect key="frame" x="95" y="13" width="180" height="17"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,10 +154,11 @@
                         <constraint firstAttribute="centerY" secondItem="IDZ-hx-8qU" secondAttribute="centerY" constant="0.5" id="8Zo-w0-X1j"/>
                         <constraint firstAttribute="trailing" secondItem="9ha-Wj-QQw" secondAttribute="trailing" id="COt-Ay-rtn"/>
                         <constraint firstAttribute="bottom" secondItem="9ha-Wj-QQw" secondAttribute="bottom" id="KsT-wk-WF3"/>
-                        <constraint firstAttribute="centerY" secondItem="BLX-Uc-cex" secondAttribute="centerY" constant="-1" id="MxV-Xd-AbU"/>
+                        <constraint firstAttribute="centerY" secondItem="BLX-Uc-cex" secondAttribute="centerY" id="MxV-Xd-AbU"/>
                         <constraint firstAttribute="height" constant="44" id="YPb-KU-bF0"/>
                         <constraint firstItem="pW5-ei-OeN" firstAttribute="leading" secondItem="BLX-Uc-cex" secondAttribute="trailing" constant="10" id="agT-N7-1ZR"/>
                         <constraint firstAttribute="centerY" secondItem="pW5-ei-OeN" secondAttribute="centerY" id="fn5-TE-Ggs"/>
+                        <constraint firstItem="BLX-Uc-cex" firstAttribute="leading" secondItem="IDZ-hx-8qU" secondAttribute="trailing" constant="10" id="lTf-Qe-YvX"/>
                         <constraint firstItem="IDZ-hx-8qU" firstAttribute="leading" secondItem="G6o-vU-24U" secondAttribute="leading" constant="20" id="uOM-uz-1xU"/>
                         <constraint firstItem="9ha-Wj-QQw" firstAttribute="leading" secondItem="G6o-vU-24U" secondAttribute="leading" id="ypn-lb-vHM"/>
                         <constraint firstAttribute="trailing" secondItem="pW5-ei-OeN" secondAttribute="trailing" constant="20" id="zfE-DA-TIS"/>
@@ -183,11 +190,11 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iKP-6q-g7B">
-                            <rect key="frame" x="242" y="15" width="33" height="17"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iKP-6q-g7B">
+                            <rect key="frame" x="85" y="15" width="190" height="17"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -199,6 +206,7 @@
                         <constraint firstAttribute="bottom" secondItem="NsO-On-SyV" secondAttribute="bottom" id="PoS-a1-G79"/>
                         <constraint firstItem="WAy-UI-KtG" firstAttribute="leading" secondItem="iKP-6q-g7B" secondAttribute="trailing" constant="10" id="RpQ-vm-nic"/>
                         <constraint firstAttribute="centerY" secondItem="BOg-59-WoN" secondAttribute="centerY" constant="0.5" id="V9s-Rp-M9B"/>
+                        <constraint firstItem="iKP-6q-g7B" firstAttribute="leading" secondItem="BOg-59-WoN" secondAttribute="trailing" id="abi-jh-vpd"/>
                         <constraint firstAttribute="centerY" secondItem="WAy-UI-KtG" secondAttribute="centerY" id="g58-Jz-c3a"/>
                         <constraint firstItem="NsO-On-SyV" firstAttribute="leading" secondItem="WHE-s8-UHJ" secondAttribute="leading" id="usE-Q0-fca"/>
                         <constraint firstAttribute="trailing" secondItem="WAy-UI-KtG" secondAttribute="trailing" constant="20" id="vW0-CU-hmO"/>
@@ -216,14 +224,20 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="借款天数:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Umu-dj-9va">
-                            <rect key="frame" x="20" y="13" width="110" height="18"/>
+                            <rect key="frame" x="20" y="13" width="65" height="18"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="65" id="G0Q-pv-daJ"/>
                                 <constraint firstAttribute="width" constant="110" id="VdY-By-0gC"/>
                                 <constraint firstAttribute="height" constant="18" id="o3o-QO-eZB"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="VdY-By-0gC"/>
+                                </mask>
+                            </variation>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-EF-nWw">
                             <rect key="frame" x="285" y="13" width="15" height="18"/>
@@ -231,15 +245,20 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y3D-qK-qL7">
-                            <rect key="frame" x="247" y="14" width="28" height="17"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y3D-qK-qL7">
+                            <rect key="frame" x="85" y="14" width="190" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="Wcr-Zo-zMX"/>
                                 <constraint firstAttribute="width" constant="28" id="ZA4-R1-p9i"/>
                             </constraints>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="ZA4-R1-p9i"/>
+                                </mask>
+                            </variation>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -255,6 +274,7 @@
                         <constraint firstAttribute="bottom" secondItem="Kay-vc-FKZ" secondAttribute="bottom" id="iyC-2J-DFU"/>
                         <constraint firstItem="Umu-dj-9va" firstAttribute="leading" secondItem="mwg-Rs-RS1" secondAttribute="leading" constant="20" id="mZ2-qT-OFM"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="rTa-Tc-ZXD"/>
+                        <constraint firstItem="Y3D-qK-qL7" firstAttribute="leading" secondItem="Umu-dj-9va" secondAttribute="trailing" id="yeB-mF-DAQ"/>
                     </constraints>
                 </view>
             </subviews>
@@ -279,6 +299,7 @@
                     <exclude reference="n8z-Gz-HuP"/>
                 </mask>
             </variation>
+            <point key="canvasLocation" x="267" y="256"/>
         </view>
     </objects>
 </document>

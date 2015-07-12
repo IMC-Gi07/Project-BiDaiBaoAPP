@@ -25,6 +25,7 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *MsgNum;
 
+@property (weak, nonatomic) IBOutlet UIButton *userViewButton;
 
 - (void)cellOfSettingClickedAction: (UIGestureRecognizer *)gesture;
 
@@ -45,6 +46,29 @@
  *
  *  @param sender 按钮
  */
+- (IBAction)myMeassage:(UITapGestureRecognizer *)sender {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"PSW"] == nil) {
+        UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+        dengruLabel.text = @"您还没有登录呢！";
+        dengruLabel.textColor = [UIColor whiteColor];
+        dengruLabel.backgroundColor = [UIColor grayColor];
+        dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        dengruLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:dengruLabel];
+        [self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:2];
+    }
+    else{
+        [self performSegueWithIdentifier:@"BDBMyMeassageViewController" sender:sender];
+    }
+    
+    
+    
+    
+    
+}
 - (IBAction)myCollectView:(UITapGestureRecognizer *)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"PSW"] == nil) {
@@ -60,14 +84,7 @@
     }
     else {
         [self performSegueWithIdentifier:@"BDBMyCollectViewController" sender:sender];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *defaultsStoreNum = [defaults objectForKey:@"StoreNum"];
-        NSString *defaultsMsgNum = [defaults objectForKey:@"MsgNum"];
-        if (defaultsMsgNum != nil && defaultsStoreNum != nil) {
-            _StoreNum.text = defaultsStoreNum;
-            _MsgNum.text = defaultsMsgNum;
-        }
-
+        
     }
 //    CATransition *transition = [CATransition animation];
 //    transition.type = @"rippleEffect";
@@ -98,6 +115,8 @@
 //    transition.type = @"rippleEffect";
 //    transition.duration = 0.5f;
 //    [[UIApplication sharedApplication].keyWindow.layer addAnimation:transition forKey:nil];
+   
+    
 }
 
 
@@ -106,7 +125,39 @@
      *  是否隐藏navigationController
      */
     self.navigationController.navigationBarHidden = YES;
+    
+    
+}
 
+-(void)viewDidAppear:(BOOL)animated{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *defaultsStoreNum = [defaults objectForKey:@"StoreNum"];
+        NSString *defaultsMsgNum = [defaults objectForKey:@"MsgNum"];
+    NSString *defaultsNiName = [defaults objectForKey:@"NiName"];
+    
+        NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    
+    
+        if (defaultsUID == nil) {
+            _StoreNum.text = @"0";
+            _MsgNum.text = @"0";
+            [_userViewButton setTitle:@"立即登录" forState:UIControlStateNormal];
+            _userViewButton.enabled = YES;
+        }
+        else if(defaultsUID !=nil && [defaultsNiName  isEqualToString:@""]){
+            _StoreNum.text = defaultsStoreNum;
+            _MsgNum.text = defaultsMsgNum;
+            [_userViewButton setTitle:defaultsUID forState:UIControlStateNormal];
+            _userViewButton.enabled = NO;
+            
+        }
+        else if (defaultsUID != nil && defaultsNiName !=nil){
+            _StoreNum.text = defaultsStoreNum;
+            _MsgNum.text = defaultsMsgNum;
+            [_userViewButton setTitle:defaultsNiName forState:UIControlStateNormal];
+            _userViewButton.enabled = NO;
+        
+        }
 }
 
 - (void)viewDidLoad {
@@ -114,10 +165,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     _userTableview.delegate =self;
     _userTableview.dataSource =self;
-    /**
-     *  //读取保存的数据
-     */
-        
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,16 +189,70 @@
 
 - (void)cellOfInfoClickedAction:(UIGestureRecognizer *)gesture{
     
-    BDBUserInfoViewController *infoViewController = [[BDBUserInfoViewController alloc] init];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+    if (defaultsPSW == nil) {
+        UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+        
+        tishiLabel.text = @"未登录";
+        tishiLabel.textColor = [UIColor whiteColor];
+        tishiLabel.backgroundColor = [UIColor grayColor];
+        tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        tishiLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [self.view addSubview:tishiLabel];
+        
+        [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
+        
+    }
     
-    [self.navigationController pushViewController:infoViewController animated:YES];
+    else{
+        BDBUserInfoViewController *infoViewController = [[BDBUserInfoViewController alloc] init];
+        
+        [self.navigationController pushViewController:infoViewController animated:YES];
+    }
+
+    
+
+}
+
+-(void)removetishi:(UILabel *)laber{
+    
+    [laber removeFromSuperview];
+    
 }
 
 - (void)cellOfQAClickedAction:(UIGestureRecognizer *)gesture{
     
-    BDBUserQAViewController *qaViewController = [[BDBUserQAViewController alloc] init];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+    if (defaultsPSW == nil) {
+        UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+        
+        tishiLabel.text = @"未登录";
+        tishiLabel.textColor = [UIColor whiteColor];
+        tishiLabel.backgroundColor = [UIColor grayColor];
+        tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        tishiLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [self.view addSubview:tishiLabel];
+        
+        [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
+        
+    }
+        else{
+        
+            BDBUserQAViewController *qaViewController = [[BDBUserQAViewController alloc] init];
+            
+            [self.navigationController pushViewController:qaViewController animated:YES];
+        
+        }
     
-    [self.navigationController pushViewController:qaViewController animated:YES];
+    
+    
+    
+    
+    
 }
 
 - (void)cellOfAssistantClickedAction:(UIGestureRecognizer *)gesture{

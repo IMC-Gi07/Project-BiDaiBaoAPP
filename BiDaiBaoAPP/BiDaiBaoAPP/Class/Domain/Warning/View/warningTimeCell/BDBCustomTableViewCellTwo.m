@@ -7,12 +7,21 @@
 //
 
 #import "BDBCustomTableViewCellTwo.h"
+#import "BDBCustomTableViewCellThree.h"
+
+@interface BDBCustomTableViewCellTwo()
+
+@end
 
 
 @implementation BDBCustomTableViewCellTwo
 
+
+
+
 - (void)awakeFromNib {
     // Initialization code
+    
 }
 
 
@@ -23,8 +32,11 @@
     
 }
 
+
+
 - (IBAction)calendarButtom:(UIButton *)sender {
     [_delegate1 changeYear_Month_Day_Picker:sender];
+    
 
 }
 

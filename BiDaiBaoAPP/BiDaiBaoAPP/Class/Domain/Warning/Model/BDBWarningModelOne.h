@@ -22,4 +22,9 @@
 
 @property(nonatomic,copy) NSString *Active;
 
+/**
+ *  自添加属性，记录平台名称
+ */
+@property(nonatomic,copy) NSString *PlatformName;
+
 @end

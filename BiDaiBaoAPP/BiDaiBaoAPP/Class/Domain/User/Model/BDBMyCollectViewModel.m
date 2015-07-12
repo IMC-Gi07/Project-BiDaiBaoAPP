@@ -12,4 +12,9 @@
 @implementation BDBMyCollectViewModel
 
 
++ (NSDictionary *)objectClassInArray{
+
+    return @{@"BidList":[BDBMyColletDateBidListModel class]};
+}
+
 @end

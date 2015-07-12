@@ -10,10 +10,15 @@
 #import "BDBTableViewCellCoustom.h"
 #import "BDBMyColletDateModel.h"
 #import "BDBMyColletDateBidListModel.h"
+#import "BDBUserProfitCalculatorViewController.h"
 
 
+typedef enum{
 
-@interface BDBMyCollectViewController () <UITableViewDelegate,UITableViewDataSource>
+    notSoldOut,isSoldOut
+}CollectionSoldOut;
+
+@interface BDBMyCollectViewController () <UITableViewDelegate,UITableViewDataSource,buttonSelectd>
 
 
 @property (weak, nonatomic) IBOutlet UITableView *collectTableView;
@@ -21,6 +26,14 @@
 //用来承接给第二个model
 @property(nonatomic,strong) NSMutableArray *noticeModels;
 @property(nonatomic,assign) NSUInteger PageInDex;
+//纪录cell的选中状态
+@property (nonatomic,strong) NSMutableDictionary *selectedCellIndexPaths;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *collectionSegmented;
+
+//是否售罄
+@property(nonatomic,assign) CollectionSoldOut collectionSoldOut;
+
 
 //请求数据
 -(void)RequestDate;
@@ -36,9 +49,15 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     
     if (self = [super initWithCoder:aDecoder]) {
-        self.title = @"我的收藏";
-        [self RequestDate];
         
+        self.title = @"我的收藏";
+        self.selectedCellIndexPaths = [NSMutableDictionary dictionary];
+        
+        self.noticeModels = [NSMutableArray array];
+        
+        self.collectionSoldOut = notSoldOut;
+        
+        [self RequestDate];
         
     }
     
@@ -51,49 +70,19 @@
     /**
      *    用户请求收藏的数据
      **/
-    _PageInDex = 1;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *defaultsUID = [defaults objectForKey:@"UID"];
-    NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+    self.PageInDex = 1;
     
-    AFHTTPRequestOperationManager *GetBidsStoreManager = [AFHTTPRequestOperationManager manager];
+    NSString *soldout;
     
-    NSString *GetBidsStoreUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetBidsStore"];
+    if(_collectionSoldOut == notSoldOut){
     
-    NSMutableDictionary *GetBidsStoreParameters = [NSMutableDictionary dictionary];
-    GetBidsStoreParameters[@"UID"] = defaultsUID;
-    GetBidsStoreParameters[@"PSW"] = defaultsPSW;
-    GetBidsStoreParameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    GetBidsStoreParameters[@"Device"] = @"0";
-    GetBidsStoreParameters[@"PageInDex"] = [NSString stringWithFormat:@"%lu",_PageInDex];;
-    GetBidsStoreParameters[@"PageSize"] = @"10";
-    GetBidsStoreParameters[@"Count"] = @"1";
-    GetBidsStoreParameters[@"SoldOut"] = @"0";
+        soldout = @"0";
+    }
+    else{
     
+        soldout = @"1";
+    }
     
-    [GetBidsStoreManager POST:GetBidsStoreUrl parameters:GetBidsStoreParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"获取到的字典%@",responseObject);
-        /**
-         *  将字典转换为模型
-         */
-        BDBMyColletDateModel *MyColletDateModel = [BDBMyColletDateModel objectWithKeyValues:responseObject];
-        self.noticeModels = MyColletDateModel.BidList;
-        
-        
-        [_collectTableView.header endRefreshing];
-        
-        [_collectTableView reloadData];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-    
-
-
-
-}
-//下一页数据
--(void)RequestNextPageIndex{
-    _PageInDex ++;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultsUID = [defaults objectForKey:@"UID"];
     NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
@@ -110,11 +99,59 @@
     GetBidsStoreParameters[@"PageInDex"] = [NSString stringWithFormat:@"%lu",(unsigned long)_PageInDex];;
     GetBidsStoreParameters[@"PageSize"] = @"10";
     GetBidsStoreParameters[@"Count"] = @"1";
-    GetBidsStoreParameters[@"SoldOut"] = @"0";
-    
+    GetBidsStoreParameters[@"SoldOut"] = soldout;
     
     [GetBidsStoreManager POST:GetBidsStoreUrl parameters:GetBidsStoreParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"获取到的字典%@",responseObject);
+        /**
+         *  将字典转换为模型
+         */
+        BDBMyColletDateModel *MyColletDateModel = [BDBMyColletDateModel objectWithKeyValues:responseObject];
+        self.noticeModels = MyColletDateModel.BidList;
+        
+        [_collectTableView reloadData];
+        [_collectTableView.header endRefreshing];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+
+
+
+}
+//下一页数据
+-(void)RequestNextPageIndex{
+    
+    NSString *soldout;
+    
+    if(_collectionSoldOut == notSoldOut){
+        
+        soldout = @"0";
+    }
+    else{
+        
+        soldout = @"1";
+    }
+    self.PageInDex ++;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+    
+    AFHTTPRequestOperationManager *GetBidsStoreManager = [AFHTTPRequestOperationManager manager];
+    
+    NSString *GetBidsStoreUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetBidsStore"];
+    
+    NSMutableDictionary *GetBidsStoreParameters = [NSMutableDictionary dictionary];
+    GetBidsStoreParameters[@"UID"] = defaultsUID;
+    GetBidsStoreParameters[@"PSW"] = defaultsPSW;
+    GetBidsStoreParameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+    GetBidsStoreParameters[@"Device"] = @"0";
+    GetBidsStoreParameters[@"PageInDex"] = [NSString stringWithFormat:@"%lu",(unsigned long)_PageInDex];;
+    GetBidsStoreParameters[@"PageSize"] = @"10";
+    GetBidsStoreParameters[@"Count"] = @"1";
+    GetBidsStoreParameters[@"SoldOut"] = soldout;
+    
+    [GetBidsStoreManager POST:GetBidsStoreUrl parameters:GetBidsStoreParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         /**
          *  将字典转换为模型
          */
@@ -135,8 +172,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    self.navigationController.navigationBarHidden = NO;
     
+    self.navigationController.navigationBarHidden = NO;
     
 }
 
@@ -145,16 +182,32 @@
     _collectTableView.delegate = self;
     _collectTableView.dataSource = self;
     self.collectTableView.rowHeight = 180;
-    
     //隐藏tableview的头
     self.automaticallyAdjustsScrollViewInsets = NO;
     //[self RequestDate];
     [self RefreshHeaderAndFoot];
+    
+    [_collectionSegmented addTarget:self action:@selector(switchSoudOutState:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)switchSoudOutState:(UISegmentedControl *)segment{
+
+    if(segment.selectedSegmentIndex == 0){
+    
+        self.collectionSoldOut = notSoldOut;
+    }
+    else{
+    
+        self.collectionSoldOut = isSoldOut;
+    }
+    
+    [self RequestDate];
 }
 
 #pragma mark - Table view data source
@@ -168,27 +221,45 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     BDBTableViewCellCoustom *cell = [[NSBundle mainBundle]loadNibNamed:@"BDBTableViewCellCoustom" owner:nil options:nil][0];
     
     BDBMyColletDateBidListModel *model = _noticeModels[indexPath.row];
     
-    [cell deployPropertyWithModel: model];
+    [cell deployPropertyWithModel: model indexPath:indexPath];
     
+    cell.delegata = self;
     
+    cell.cancelButton.selected = [_selectedCellIndexPaths[indexPath] boolValue];
+
     return cell;
+    
 }
 
+#pragma mark - BDBTableViewCellCoustom Delegate Methods
 
+- (void)buttonselectd:(BOOL)selected indexPath:(NSIndexPath *)aIndexPath{
 
+    _selectedCellIndexPaths[aIndexPath] = [NSNumber numberWithBool:selected];
+}
 
+- (void)pushMyCollectionViewController:(NSString *)interestRateOfYear term:(NSString *)aTerm{
 
+    BDBUserProfitCalculatorViewController *profitController = [[BDBUserProfitCalculatorViewController alloc] init];
+    
+    profitController.interestRateText = interestRateOfYear;
+    
+    profitController.termText = aTerm;
+    
+    [self.navigationController pushViewController:profitController animated:YES];
+}
 
 
 //头尾封装方法
 -(void)RefreshHeaderAndFoot{
     __weak typeof (self) thisInstance = self;
      _collectTableView.header = [BDBTableViewRefreshHeader headerWithRefreshingBlock:^{
+         
+         [self.selectedCellIndexPaths removeAllObjects];
         [thisInstance RequestDate];
     }];
     _collectTableView.footer = [BDBTableViewRefreshFooter footerWithRefreshingBlock:^{

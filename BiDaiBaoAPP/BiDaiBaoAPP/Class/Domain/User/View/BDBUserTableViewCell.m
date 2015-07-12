@@ -16,6 +16,7 @@
 
 @property(nonatomic,weak) UIImageView *userHeaderImageView;
 
+
 @end
 
 @implementation BDBUserTableViewCell
@@ -73,7 +74,7 @@
     
     [_userQuestionBackgroundImageView addConstraint:trailingForContentQuestionLabel];
     
-    NSLayoutConstraint *topForContentQuestionLabel = [NSLayoutConstraint constraintWithItem:contentQuestionLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_userQuestionBackgroundImageView attribute:NSLayoutAttributeTop multiplier:1.0f constant:20.0f];
+    NSLayoutConstraint *topForContentQuestionLabel = [NSLayoutConstraint constraintWithItem:contentQuestionLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_userQuestionBackgroundImageView attribute:NSLayoutAttributeTop multiplier:1.0f constant:12.0f];
     
     [_userQuestionBackgroundImageView addConstraint:topForContentQuestionLabel];
     
@@ -84,6 +85,8 @@
     
     
 }
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

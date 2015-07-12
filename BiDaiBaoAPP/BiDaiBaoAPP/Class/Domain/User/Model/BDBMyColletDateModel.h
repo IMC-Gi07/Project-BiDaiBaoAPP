@@ -13,7 +13,7 @@
 /**
  *  返回状态(0:表示成功，1：表示失败)
  */
-@property(nonatomic,assign) NSUInteger Result;
+@property(nonatomic,copy) NSString *Result;
 
 /**
  *  附加消息
@@ -23,12 +23,12 @@
 /**
  *  所有页总标的数
  */
-@property(nonatomic,assign) NSUInteger BidCount;
+@property(nonatomic,copy) NSString *BidCount;
 
 /**
  *  返回当前页的BidListNum
  */
-@property(nonatomic,assign) NSUInteger BidListNum;
+@property(nonatomic,copy) NSString *BidListNum;
 
 /**
  *  BidList

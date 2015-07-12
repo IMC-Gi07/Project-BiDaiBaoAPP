@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="63" id="KGk-i7-Jjw" customClass="BDBQuestionListTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="            " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdk-ja-TUe" userLabel="TitleLabel">
+                        <rect key="frame" x="20" y="0.0" width="307" height="42.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGC-h4-27D" userLabel="TimeLabel">
+                        <rect key="frame" x="0.0" y="42" width="317" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="7lR-0l-MtV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="pGC-h4-27D" secondAttribute="bottom" id="70d-JI-xDr"/>
+                    <constraint firstItem="pGC-h4-27D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Bc4-oX-Y7n"/>
+                    <constraint firstItem="wdk-ja-TUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="D7M-xP-gro"/>
+                    <constraint firstAttribute="trailing" secondItem="pGC-h4-27D" secondAttribute="trailing" constant="10" id="E7e-Ji-xzT"/>
+                    <constraint firstItem="wdk-ja-TUe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Xyu-6H-5ka"/>
+                    <constraint firstItem="pGC-h4-27D" firstAttribute="top" secondItem="wdk-ja-TUe" secondAttribute="bottom" id="apX-Jb-UfQ"/>
+                    <constraint firstAttribute="trailing" secondItem="wdk-ja-TUe" secondAttribute="trailing" id="bvB-W2-HhU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="timeLabel" destination="pGC-h4-27D" id="xLJ-yL-c9N"/>
+                <outlet property="titleLabel" destination="wdk-ja-TUe" id="rjk-RI-hFd"/>
+            </connections>
+            <point key="canvasLocation" x="206.5" y="232.5"/>
+        </tableViewCell>
+    </objects>
+</document>

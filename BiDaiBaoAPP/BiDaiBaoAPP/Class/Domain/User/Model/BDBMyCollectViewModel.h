@@ -14,7 +14,7 @@
 /**
  *  返回状态(0:表示成功，1：表示失败)
  */
-@property(nonatomic,assign) NSUInteger Result;
+@property(nonatomic,assign) NSString *Result;
 
 /**
  *  附加消息
@@ -34,7 +34,7 @@
 /**
  *  BidList
  */
-@property(nonatomic,copy) NSString *BidList;
+@property(nonatomic,strong) NSMutableArray *BidList;
 @end
 
 

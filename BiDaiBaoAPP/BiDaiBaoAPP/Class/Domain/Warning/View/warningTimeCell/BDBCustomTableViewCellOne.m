@@ -14,9 +14,7 @@
     // Initialization code
 }
 - (IBAction)TitleTextFieldAction:(UITextField *)sender {
-    [_delegate transferTitleText:sender];
-    self.input = sender.text;
-    
+    [_delegate transferTitleText:sender.text];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

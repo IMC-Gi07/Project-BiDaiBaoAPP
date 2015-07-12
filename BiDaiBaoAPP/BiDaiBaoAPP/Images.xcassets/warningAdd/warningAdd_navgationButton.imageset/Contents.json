@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "warningAdd_navgationButton@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "warning_navgationButton.png"
+      "filename" : "warningAdd_navgationButton@3x.png"
     }
   ],
   "info" : {

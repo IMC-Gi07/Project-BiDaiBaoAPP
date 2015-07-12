@@ -25,8 +25,9 @@
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]) {
+        //隐藏底部
         self.hidesBottomBarWhenPushed = YES;
-        
+        self.title = @"注册账号";
     }
     return self;
 }
@@ -65,43 +66,62 @@
         
         [self.view addSubview:tishiLabel];
         
-        [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:1];
+        [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
         
         
     }
     else if (_RegisterTextField.text.length > 0 ){
+        //请求判断用户名是否已经存在
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *request = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetSearchUser"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        parameters[@"UID"] = _RegisterTextField.text;
+        [manager POST:request parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([responseObject[@"Result"] isEqualToString:@"0"]) {
+                UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+                
+                tishiLabel.text = @"该用户名已经存在";
+                tishiLabel.textColor = [UIColor whiteColor];
+                tishiLabel.backgroundColor = [UIColor grayColor];
+                tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
+                tishiLabel.textAlignment = NSTextAlignmentCenter;
+                
+                [self.view addSubview:tishiLabel];
+                
+                [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
+            }
+            else if ([responseObject[@"Result"]isEqualToString:@"1"]){
+                
+            [self performSegueWithIdentifier:@"BDBUserRegisterPassViewController" sender:sender];
+        }
+            else if ([responseObject[@"Result"]isEqualToString:@"2"]){
+                UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+                
+                tishiLabel.text = @"未知注册错误信息";
+                tishiLabel.textColor = [UIColor whiteColor];
+                tishiLabel.backgroundColor = [UIColor grayColor];
+                tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
+                tishiLabel.textAlignment = NSTextAlignmentCenter;
+                
+                [self.view addSubview:tishiLabel];
+                
+                [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
+
+            
+            
+            }
+                
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+}];
+
         
         
         
-        [self performSegueWithIdentifier:@"BDBUserRegisterPassViewController" sender:sender];
         
         
-    
-        
-    
     }
-    
-
-
-    
-        
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
- 
-    
-    
-    
-    
-    
-    
     
 }
 -(void)removetishi:(UILabel *)laber{
@@ -203,6 +223,8 @@
     }else{
         _RegisterUserLabel.text = [str stringByAppendingString:string];
     }
+    
+    
     if (_RegisterTextField.text.length <= 9) {
         self.NextButton.enabled = NO;
     }

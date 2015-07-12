@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "subject_cell_refresh_icon.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "iphone",

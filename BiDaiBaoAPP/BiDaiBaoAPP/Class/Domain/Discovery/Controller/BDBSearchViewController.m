@@ -33,13 +33,14 @@ typedef enum {
 /**
  公告数据
  */
+
 @property(nonatomic,strong) NSMutableArray *noticeModels;
 
 /**
  公告页数
  */
 
-@property (nonatomic,copy) NSString *TitleKey;
+@property (nonatomic,copy) NSString *TitleKe;
 
 
 @property(nonatomic,assign) NSUInteger PageIndex;
@@ -70,6 +71,8 @@ typedef enum {
     if (self = [super initWithCoder:aDecoder]) {
         self.title = @"百科问答";
         _state = display;
+        self.PageSize = 9;
+        self.PageIndex = 1;
     }
     return self;
 }
@@ -87,7 +90,7 @@ typedef enum {
     _searchTextField.returnKeyType = UIReturnKeySearch;
     _searchTextField.keyboardType = UIKeyboardTypeDefault;
     
-    self.TitleKey = textString;
+    self.TitleKe = textString;
     if (_textStringCount >0) {
         [self loadMoreDatas];
     }
@@ -116,11 +119,11 @@ typedef enum {
     }
     parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
     parameters[@"Device"] = @"0";
-    parameters[@"TitleKey"] = [NSString stringWithFormat:@"%@",_TitleKey];
-    ZXLLOG(@"%@",_TitleKey);
+    parameters[@"TitleKe"] = [NSString stringWithFormat:@"%@",_TitleKe];
+    ZXLLOG(@"%@",_TitleKe);
     parameters[@"PageIndex"] = [NSString stringWithFormat:@"%lu",
                                 (unsigned long)_PageIndex];
-    ZXLLOG(@"%lu",_PageIndex);
+    ZXLLOG(@"%lu",(unsigned long)_PageIndex);
     parameters[@"PageSize"] = [NSString stringWithFormat:@"%lu",(unsigned long)_PageSize];
     [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
@@ -196,7 +199,7 @@ typedef enum {
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 
-    parameters[@"TitleKey"] = [NSString stringWithFormat:@"%@",_TitleKey];
+    parameters[@"TitleKe"] = [NSString stringWithFormat:@"%@",_TitleKe];
     parameters[@"PageIndex"] = [NSString stringWithFormat:@"%lu",
                                 (unsigned long)_PageIndex];
     parameters[@"PageSize"] = [NSString stringWithFormat:@"%lu",(unsigned long)_PageSize];

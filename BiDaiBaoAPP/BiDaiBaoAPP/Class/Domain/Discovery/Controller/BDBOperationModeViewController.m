@@ -102,7 +102,10 @@
         questionContentCell.title.text = model.Title;
         questionContentCell.firstReply.text = model.FirstReply;
         questionContentCell.askUser.text = model.AskUser;
-        questionContentCell.askTime.text = model.AskTime;
+        NSString *askTime = model.AskTime;
+        NSString *simpleTime = [self transformDataFormat:askTime];
+        ZXLLOG(@"-x-x-x-xx-x-x-x-x-x-x-x-x-x--x-x-xx-x--x--%@",simpleTime);
+        questionContentCell.askTime.text = simpleTime;
         questionContentCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return questionContentCell;
     }
@@ -137,6 +140,30 @@
     [self.view addConstraints:@[trailing,bottom]];
     
     [questionBtn addTarget:self action:@selector(questionButtonClickedAction) forControlEvents:UIControlEventTouchUpInside];
+}
+- (NSString *)transformDataFormat:(NSString *)askTime {
+    NSDateFormatter *dateFomatter = [[NSDateFormatter alloc] init];
+    [dateFomatter setDateFormat:@"yyyy-MM-d HH:mm:ss"];
+    NSDate *askDate = [dateFomatter dateFromString:askTime];
+    NSTimeInterval timeInterval = -[askDate timeIntervalSinceNow];
+    NSString *simpleTime = @"";
+    //NSInteger year = timeInterval / (60*60*24*365);
+    NSInteger month = timeInterval / (60*60*24*30);
+    NSInteger day = timeInterval / (60*60*24);
+    NSInteger hour = timeInterval / (60*60);
+    NSInteger minute = timeInterval / 60;
+    if (month > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li月前",(long)month];
+    }else if (day > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li天前",(long)day];
+    }else if (hour > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li小时前",(long)hour];
+    }else if (minute > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li分钟前",(long)minute];
+    }else if (timeInterval > 0) {
+        simpleTime = [NSString stringWithFormat:@"%li秒前",(long)timeInterval];
+    }
+    return simpleTime;
 }
 
 #pragma mark - Getting Datas Methods

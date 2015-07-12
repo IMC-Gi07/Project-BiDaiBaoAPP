@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "subject_cell_progress_img.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "iphone",
@@ -11,9 +10,20 @@
       "filename" : "subject_cell_progress_img@2x.png"
     },
     {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1
+        },
+        "capInsets" : {
+          "right" : 20,
+          "left" : 20
+        }
+      },
       "idiom" : "iphone",
-      "scale" : "3x",
-      "filename" : "subject_cell_progress_img@3x.png"
+      "filename" : "subject_cell_progress_img@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

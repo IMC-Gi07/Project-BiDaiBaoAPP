@@ -24,44 +24,53 @@
     if (self) {
         self.pageControl = [[UIPageControl alloc] init];
         _pageControl.numberOfPages = _imagesArray.count;
+        self.pageCount = 0;
     }
     return self;
 }
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(switchToNextPage) userInfo:nil repeats:YES];
-    [timer fire];
-    self.pageCount = 0;
+    
+    
     self.width = self.frame.size.width;
     self.height = self.frame.size.height;
     _scrollView.delegate = self;
     
     
-//    _scrollView.contentSize = CGSizeMake(_width * (_imagesArray.count + 2), _height);
-    //生成n个UIImageView
-    for (int i = 0;i < [_imagesArray count];i ++){
+    if (_imagesArray.count == 0) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.frame = CGRectMake((_width * i) + _width, 0,_width, _height);
-
-        
-        imageView.image = _imagesArray[i];
+        imageView.frame = CGRectMake(0, 0, _width,_height);
+        imageView.image = [UIImage imageNamed:@"discovery_advPic_failedPic"];
         [_scrollView addSubview:imageView];
+    }else {
+        
+        //生成n个UIImageView
+        for (int i = 0;i < [_imagesArray count];i ++){
+            UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.frame = CGRectMake((_width * i) + _width, 0,_width, _height);
+            imageView.image = _imagesArray[i];
+            [_scrollView addSubview:imageView];
+        }
+        //再生成前后两个UIImageView
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.frame = CGRectMake(0, 0, _width,_height);
+        imageView.image = _imagesArray.lastObject;
+        [_scrollView addSubview:imageView];
+        
+        UIImageView *imageView_2 = [[UIImageView alloc] init];
+        imageView_2.frame = CGRectMake((_width * ([_imagesArray count] + 1)) , 0, _width,_height);
+        imageView_2.image = _imagesArray[0];
+        [_scrollView addSubview:imageView_2];
+        
+        [_scrollView setContentSize:CGSizeMake(_width * ([_imagesArray count] + 2),_height)];
+        
+        [_scrollView setContentOffset:CGPointMake(_width+200, 0) animated:NO];
+
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(switchToNextPage) userInfo:nil repeats:YES];
+        [timer fire];
     }
-    //再生成前后两个UIImageView
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.frame = CGRectMake(0, 0, _width,_height);
-    imageView.image = _imagesArray.lastObject;
-    [_scrollView addSubview:imageView];
-    
-    UIImageView *imageView_2 = [[UIImageView alloc] init];
-    imageView_2.frame = CGRectMake((_width * ([_imagesArray count] + 1)) , 0, _width,_height);
-    imageView_2.image = _imagesArray[0];
-    [_scrollView addSubview:imageView_2];
-    
-    [_scrollView setContentSize:CGSizeMake(_width * ([_imagesArray count] + 2),_height)];
-    
-    [_scrollView setContentOffset:CGPointMake(_width, 0) animated:NO];
+
     
 }
 - (void)awakeFromNib {
@@ -83,7 +92,7 @@
 
 - (void)switchToNextPage {
     
-    [_scrollView scrollRectToVisible:(CGRect){_width + _width * _pageCount,0,_scrollView.bounds.size.width,_scrollView.bounds.size.height} animated:YES];
+    [_scrollView setContentOffset:CGPointMake(_width + _width * _pageCount, 0) animated:YES];
     [self updataCurrentPageNo];
     _pageCount ++;
     if (_pageCount == _imagesArray.count) {

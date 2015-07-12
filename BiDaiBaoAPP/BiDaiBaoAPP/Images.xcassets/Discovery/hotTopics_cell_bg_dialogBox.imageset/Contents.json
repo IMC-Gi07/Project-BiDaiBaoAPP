@@ -5,25 +5,9 @@
       "scale" : "1x"
     },
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "fill",
-          "width" : 1,
-          "height" : 1
-        },
-        "capInsets" : {
-          "bottom" : 60,
-          "top" : 67,
-          "left" : 36,
-          "right" : 20
-        }
-      },
+      "scale" : "2x",
       "idiom" : "iphone",
       "filename" : "hotTopics_cell_bg_dialogBox@2x.png",
-      "scale" : "2x"
-    },
-    {
       "resizing" : {
         "mode" : "9-part",
         "center" : {
@@ -32,15 +16,31 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 93,
-          "top" : 98,
-          "left" : 54,
-          "right" : 30
+          "right" : 20,
+          "top" : 67,
+          "left" : 36,
+          "bottom" : 60
         }
-      },
+      }
+    },
+    {
+      "scale" : "3x",
       "idiom" : "iphone",
       "filename" : "hotTopics_cell_bg_dialogBox@3x.png",
-      "scale" : "3x"
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "right" : 30,
+          "top" : 98,
+          "left" : 54,
+          "bottom" : 93
+        }
+      }
     }
   ],
   "info" : {

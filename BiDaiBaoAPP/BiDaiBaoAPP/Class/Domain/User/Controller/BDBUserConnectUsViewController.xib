@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BDBUserConnectUsViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usercenterimage" translatesAutoresizingMaskIntoConstraints="NO" id="Y3c-hU-q9G">
+                    <rect key="frame" x="76" y="272" width="169" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="169" id="Oj2-qi-uH6"/>
+                        <constraint firstAttribute="height" constant="23" id="dCZ-IA-2Nk"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usercompanyicon" translatesAutoresizingMaskIntoConstraints="NO" id="XDJ-bV-jhd">
+                    <rect key="frame" x="79" y="140" width="163" height="114"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="163" id="itK-Kp-pzB"/>
+                        <constraint firstAttribute="height" constant="114" id="vcQ-w7-Blp"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNy-2T-nEr">
+                    <rect key="frame" x="165" y="446" width="137" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="137" id="qL9-VK-k0d"/>
+                        <constraint firstAttribute="height" constant="37" id="qZf-7F-u6M"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="usercomunselect">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="usercomselect"/>
+                    <connections>
+                        <action selector="localCompanny:" destination="-1" eventType="touchUpInside" id="z5N-cy-gHU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6k-13-ZbY">
+                    <rect key="frame" x="85" y="521" width="150" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="Nrj-K8-jZI"/>
+                        <constraint firstAttribute="height" constant="17" id="W7e-BH-xko"/>
+                    </constraints>
+                    <state key="normal" title="www.banker888.com">
+                        <color key="titleColor" red="0.12549020350000001" green="0.6784313917" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="bankerURL:" destination="-1" eventType="touchUpInside" id="Ek8-gl-Hh7"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="厦门蚌壳科技有限公司" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDg-qM-S17">
+                    <rect key="frame" x="0.0" y="540" width="320" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="j82-wG-BJo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.12549020349979401" green="0.67843139171600342" blue="0.97254908084869385" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khE-mO-YvN">
+                    <rect key="frame" x="18" y="446" width="124" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="Tgt-Ut-oHN"/>
+                        <constraint firstAttribute="width" constant="124" id="oV8-pU-3LA"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="usercallunselect">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="usercallselect"/>
+                    <connections>
+                        <action selector="ConnectUS:" destination="-1" eventType="touchUpInside" id="uaI-Nj-QGV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="SDg-qM-S17" firstAttribute="top" secondItem="m6k-13-ZbY" secondAttribute="bottom" constant="2" id="9aO-Gv-CNW"/>
+                <constraint firstAttribute="trailing" secondItem="MNy-2T-nEr" secondAttribute="trailing" constant="18" id="A0Z-Fc-V9B"/>
+                <constraint firstItem="khE-mO-YvN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="CGc-Ry-IDe"/>
+                <constraint firstItem="m6k-13-ZbY" firstAttribute="top" secondItem="khE-mO-YvN" secondAttribute="bottom" constant="38" id="G0v-5i-fPt"/>
+                <constraint firstItem="m6k-13-ZbY" firstAttribute="centerX" secondItem="SDg-qM-S17" secondAttribute="centerX" id="P2V-57-FTq"/>
+                <constraint firstItem="XDJ-bV-jhd" firstAttribute="centerX" secondItem="Y3c-hU-q9G" secondAttribute="centerX" id="W8w-Di-NPl"/>
+                <constraint firstItem="SDg-qM-S17" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZWC-8O-LYd"/>
+                <constraint firstAttribute="centerY" secondItem="Y3c-hU-q9G" secondAttribute="centerY" id="hWh-N5-NwF"/>
+                <constraint firstItem="Y3c-hU-q9G" firstAttribute="top" secondItem="XDJ-bV-jhd" secondAttribute="bottom" constant="18" id="nUU-hc-fOI"/>
+                <constraint firstAttribute="trailing" secondItem="SDg-qM-S17" secondAttribute="trailing" id="pEy-6E-r2V"/>
+                <constraint firstAttribute="centerX" secondItem="Y3c-hU-q9G" secondAttribute="centerX" id="sXW-o3-LSO"/>
+                <constraint firstAttribute="bottom" secondItem="SDg-qM-S17" secondAttribute="bottom" constant="8" id="xk3-LY-8kh"/>
+                <constraint firstItem="m6k-13-ZbY" firstAttribute="top" secondItem="MNy-2T-nEr" secondAttribute="bottom" constant="38" id="zFU-Cs-G3C"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="271" y="362"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="usercallselect" width="166" height="46"/>
+        <image name="usercallunselect" width="168" height="48"/>
+        <image name="usercenterimage" width="206" height="31"/>
+        <image name="usercompanyicon" width="209" height="173"/>
+        <image name="usercomselect" width="166" height="46"/>
+        <image name="usercomunselect" width="168" height="48"/>
+    </resources>
+</document>

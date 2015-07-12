@@ -38,10 +38,15 @@
 //轮播图片
 @property(nonatomic,strong) NSMutableArray *advPicArray;
 
+@property(nonatomic,strong) NSMutableArray *advPicArray2;
 
 @property (nonatomic,strong) ZXLLoadDataIndicatePage *loadDataIndicatePage;
 
 @property (nonatomic,assign) NSIndexPath *selectedIndexPath;
+
+@property (nonatomic,strong) NSArray *advPicUrls;
+
+@property (nonatomic,strong) NSArray *advPicUrls_2;
 
 - (void)searchButtonClickedAction:(UIBarButtonItem *)search;
 - (void)refreshDatas;
@@ -50,10 +55,15 @@
 @end
 
 @implementation BDBDiscoveryViewController
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        self.title = @"百科问答";
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.isSegmentFirst = YES;
+        self.pageSize = 5;
+        self.pageNo = 2;
+        [self refreshDatas];
+        
     }
     return self;
 }
@@ -61,23 +71,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavigationBar];
+    
+    if (_newsModels == nil) {
+        self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
+    }
+    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = NSUnderlineStyleNone;
     
-
-    self.isSegmentFirst = YES;
-    self.pageSize = 5;
-    self.pageNo = 2;
-
-    self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
     //获取网络数据
-    [self refreshDatas];
+    
     [self initHeaderAndFooter];
-    
-//    [_tableView registerNib:[UINib nibWithNibName:@"BDBScrollViewCell" bundle:nil] forCellReuseIdentifier:@"scrollView"];
-    
-
 
 }
 
@@ -92,6 +97,7 @@
     return rows;
 }
 
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat heightForRow;
     if (indexPath.row == 0) {
@@ -100,11 +106,11 @@
     if (_isSegmentFirst) {
         if ([UIScreen mainScreen].bounds.size.height == 736) {
             if (indexPath.row >0) {
-                return 130;
+                return 120;
             }
         }else {
             if (indexPath.row > 0) {
-                return 120;
+                return 110;
             }
         }
     }else {
@@ -129,8 +135,16 @@
     if (indexPath.row == 0) {
         BDBScrollViewCell *cell = [[NSBundle mainBundle] loadNibNamed:@"BDBScrollViewCell" owner:nil options:nil][0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (_advPicArray != nil) {
-            cell.imagesArray = [_advPicArray mutableCopy];
+        
+        if (_isSegmentFirst == YES) {
+            if (_advPicArray.count) {
+                cell.imagesArray = [_advPicArray mutableCopy];
+            }
+        }
+        if (_isSegmentFirst == NO) {
+            if(_advPicArray2.count){
+                cell.imagesArray = [_advPicArray2 mutableCopy];
+            }
         }
         return cell;
     }
@@ -202,7 +216,9 @@
 
 
 -(void)searchButtonClickedAction:(UIBarButtonItem *)search {
+   
     [self performSegueWithIdentifier:@"searchQuestions" sender:self];
+
 }
 
 
@@ -239,18 +255,23 @@
 
 - (void)refreshDatas {
     self.pageIndex = 1;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+    AFHTTPRequestOperationManager *manager_1 = [AFHTTPRequestOperationManager manager];
+    manager_1.responseSerializer = [AFJSONResponseSerializer serializer];
+
     NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetNews"];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"PageIndex"] = [NSString stringWithFormat:@"%lu",_pageIndex];
     parameters[@"PageSize"] = [NSString stringWithFormat:@"%lu",_pageSize];
     //获取资讯
-    [manager POST:requestURL parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [manager_1 POST:requestURL parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         
         BDBDiscoveryResponseModel *responseModel = [BDBDiscoveryResponseModel objectWithKeyValues:responseObject];
         self.newsModels = responseModel.NewsList;
+        
+        if (_loadDataIndicatePage) {
+            [_loadDataIndicatePage hide];
+            
+        }
         [_tableView reloadData];
         ZXLLOG(@"NewsList:success..");
         
@@ -259,38 +280,91 @@
         [alertView show];
     }];
     
-    //获取轮播图片
+    
+    
+    //获取轮播图片URL_1
+
+    AFHTTPRequestOperationManager *manager_2 = [AFHTTPRequestOperationManager manager];
     NSString *picUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetAdvPic"];
     NSMutableDictionary *picParameters = [NSMutableDictionary dictionary];
-    picParameters[@"PageNo"] = [NSString stringWithFormat:@"%lu",_pageNo];
+    picParameters[@"PageNo"] = [NSString stringWithFormat:@"%i",2];
     
-    [manager POST:picUrl parameters:picParameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [manager_2 POST:picUrl parameters:picParameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BDBDiscoveryAdvPicModel *advPicModel = [BDBDiscoveryAdvPicModel objectWithKeyValues:responseObject];
         NSString *string = advPicModel.PicList;
-        NSArray *advPicUrls = [string componentsSeparatedByString:@","];
-        self.advPicArray = [NSMutableArray array];
-        for (NSString *urlStr in advPicUrls) {
-            if (![urlStr isEqualToString:@""]) {
-                NSURL *url = [NSURL URLWithString:urlStr];
-                NSData *picData = [NSData dataWithContentsOfURL:url];
-                UIImage *pic = [UIImage imageWithData:picData];
-                [self.advPicArray addObject:pic];
-            }
-        }
-        [self.tableView reloadData];
-        if (_loadDataIndicatePage) {
-            [_loadDataIndicatePage hide];
-
-        }
-        ZXLLOG(@"picUrls:%@",_advPicArray);
+        self.advPicUrls = [string componentsSeparatedByString:@","];
+        [self getAdvImages_1];
+        ZXLLOG(@"picUrls:%@",_advPicUrls);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"advPic error response: %@",error);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片获取失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
     }];
-    //获取问题类型
-
+    
+    //获取轮播图片URL_2
+    
+    AFHTTPRequestOperationManager *manager_3 = [AFHTTPRequestOperationManager manager];
+    NSString *picUrl_2 = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetAdvPic"];
+    NSMutableDictionary *picParameters_2 = [NSMutableDictionary dictionary];
+    picParameters[@"PageNo"] = [NSString stringWithFormat:@"%i",3];
+    
+    [manager_3 POST:picUrl_2 parameters:picParameters_2 success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        BDBDiscoveryAdvPicModel *advPicModel = [BDBDiscoveryAdvPicModel objectWithKeyValues:responseObject];
+        NSString *string = advPicModel.PicList;
+        self.advPicUrls_2 = [string componentsSeparatedByString:@","];
+        [self getAdvImages_2];
+        ZXLLOG(@"picUrls:%@",_advPicUrls_2);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片获取失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    }];
     
 }
 
+- (void)getAdvImages_1 {
+
+    self.advPicArray = [NSMutableArray array];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    for (NSString *picURL in _advPicUrls) {
+        if (![picURL isEqualToString:@""]) {
+            [manager GET:picURL parameters:nil success:^(AFHTTPRequestOperation *operation, NSData *responseObject) {
+                UIImage *pic = [UIImage imageWithData:responseObject];
+                [_advPicArray addObject:pic];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                ZXLLOG(@"pic1 done..");
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                ZXLLOG(@"pic1 failed..");
+            }];
+            
+        }
+    }
+
+}
+
+- (void)getAdvImages_2 {
+    
+    self.advPicArray2 = [NSMutableArray array];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    for (NSString *picURL in _advPicUrls) {
+        if (![picURL isEqualToString:@""]) {
+            [manager GET:picURL parameters:nil success:^(AFHTTPRequestOperation *operation, NSData *responseObject) {
+                UIImage *pic = [UIImage imageWithData:responseObject];
+                [_advPicArray2 addObject:pic];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                ZXLLOG(@"pic2 done..");
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                ZXLLOG(@"pic2 failed..");
+            }];
+            
+        }
+    }
+    
+}
 - (void)loadMoreDatas {
     self.pageIndex ++;
     
@@ -368,5 +442,4 @@
 - (void)creditorsRightsTransferButtonClicked {
     [self performSegueWithIdentifier:@"creditorsRightsTransfer" sender:self];
 }
-
 @end

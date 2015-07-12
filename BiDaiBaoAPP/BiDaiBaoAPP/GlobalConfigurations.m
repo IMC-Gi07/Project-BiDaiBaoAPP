@@ -8,5 +8,6 @@
 
 #import "GlobalConfigurations.h"
 
-
 NSString *const BDBGlobal_HostAddress = @"http://117.25.155.115:8082";
+
+NSString *const BDBGlobal_CacheDatabaseName = @"BiDaiBaoAPP.sqlite";

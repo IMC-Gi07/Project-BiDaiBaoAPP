@@ -12,4 +12,13 @@
 
 @property(nonatomic,weak)UILabel *contentQuestionLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *questonTypeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *questionAskTimeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *answerLebel;
+
+
+
+
 @end

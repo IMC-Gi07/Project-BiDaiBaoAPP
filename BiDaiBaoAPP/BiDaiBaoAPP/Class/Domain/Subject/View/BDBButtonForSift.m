@@ -34,6 +34,8 @@
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     button.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+
+    button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     button.isSelected = selected;
     

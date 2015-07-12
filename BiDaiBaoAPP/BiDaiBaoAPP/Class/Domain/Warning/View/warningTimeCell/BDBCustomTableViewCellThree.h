@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BDBCustomTableViewCellThreeDelegate <NSObject>
+
+- (void)datePickerText:(NSString *)datePickerText andDatePickerHour:(NSString *)datePickerHourText CSdatePickerText:(NSString *)CSdatePickerText andCSDatePickerHour:(NSString *)CSdatePickerHourText;
+
+@end
+
+
 @interface BDBCustomTableViewCellThree : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak,nonatomic) id<BDBCustomTableViewCellThreeDelegate>delegate3;
+
 
 @end

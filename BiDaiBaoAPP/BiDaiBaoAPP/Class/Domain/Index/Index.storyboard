@@ -93,7 +93,7 @@
         <!--Notice Detail View Controller-->
         <scene sceneID="Z7w-YE-aDz">
             <objects>
-                <viewController id="0nf-RP-Fq3" customClass="BDBNoticeDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BDBNoticeDetailViewController" id="0nf-RP-Fq3" customClass="BDBNoticeDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hvW-Wc-017"/>
                         <viewControllerLayoutGuide type="bottom" id="p4f-uM-O8A"/>

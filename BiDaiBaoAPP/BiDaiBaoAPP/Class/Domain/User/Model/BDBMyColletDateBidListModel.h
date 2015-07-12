@@ -13,7 +13,7 @@
 /**
  *  标的编号
  */
-@property(nonatomic,assign) NSString *ID;
+@property(nonatomic,copy) NSString *ID;
 
 /**
  *  标的内部编号

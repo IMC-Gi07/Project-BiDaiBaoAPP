@@ -34,7 +34,7 @@
 - (IBAction)UserOfOver:(UIButton *)sender {
     
      if (_passWordTextField.text.length > 0 ){
-    
+         
             //创建一个httprequesoperationmanger
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             //定义网址和接口   接口接在网址后面
@@ -83,9 +83,6 @@
          
          
      }
-    
-    
-    
 }
 
 -(void)removetishi:(UILabel *)laber{

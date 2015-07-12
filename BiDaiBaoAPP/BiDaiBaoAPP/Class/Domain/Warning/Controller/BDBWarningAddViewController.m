@@ -7,20 +7,21 @@
 //
 #import "ZXLLoadDataIndicatePage.h"
 #import "BDBWarningAddViewController.h"
-#import "BDB_TableViewCell_One.h"
 #import "BDB_TableViewCell_Two.h"
 #import "MJDIYHeader.h"
 #import "MJDIYAutoFooter.h"
 #import "BDBWarningAddResponseModel.h"
 #import "MJExtension.h"
 #import "AFNetworking.h"
-#import "BDB_TableViewCell_Title.h"
 
 //<<-----warningTime------
 #import "BDBCustomTableViewCellOne.h"
 #import "BDBCustomTableViewCellTwo.h"
 #import "BDBCustomTableViewCellThree.h"
 #import "BDBWarningTimeResponseModel.h"
+#import "BDBwarningAddTableViewCellBtn.h"
+#import "BDBWarningViewController.h"
+#import "BDBwarningMoreBtnTableViewCell.h"
 //-----warningTime------>>
 
 
@@ -33,15 +34,15 @@ static const CGFloat MJDuration = 2.0;
 #define MJRandomData [NSString stringWithFormat:@"随机数据---%d", arc4random_uniform(1000000)]
 
 
-@interface BDBWarningAddViewController ()<UITableViewDelegate,UITableViewDataSource,BDB_TableViewCell_TwoDelegate,BDBCustomTableViewCellTwoDelegate,BDBCustomTableViewCellOneDelegate>
+@interface BDBWarningAddViewController ()<UITableViewDelegate,UITableViewDataSource,BDB_TableViewCell_TwoDelegate,BDBCustomTableViewCellTwoDelegate,BDBCustomTableViewCellOneDelegate,BDBCustomTableViewCellThreeDelegate,BDBwarningMoreBtnTableViewCellDelegate>
 @property(nonatomic,weak) ZXLLoadDataIndicatePage *
 
 indicatePage;
 
-@property (weak, nonatomic) IBOutlet UIButton *packUp;
 @property (weak, nonatomic) IBOutlet UIButton *warningTimeButton;
 @property (weak, nonatomic) IBOutlet UIButton *warningAddButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *theSureButton;
 
 
 
@@ -60,6 +61,13 @@ indicatePage;
 
 @property (nonatomic,assign)BOOL IsSegmentedAlarm;
 
+@property (nonatomic,copy)NSString *gainDatePicker;
+@property (nonatomic,copy)NSString *gainDatePickerHour;
+@property (nonatomic,copy)NSString *CSgainDatePicker;
+@property (nonatomic,copy)NSString *CSgainDatePickerHour;
+@property (nonatomic,copy)NSString *CSgainDatePickerYearAndHour;
+@property(nonatomic,assign)BOOL isNothing;
+
 
 //<<-----warningTime------
 
@@ -69,11 +77,10 @@ indicatePage;
 
 @property (nonatomic,assign) BOOL isYearPicker;
 
-
 //-----warningTime------>>
 
 
-
+- (void)hideDataIndicatePage;
 
 @end
 
@@ -85,63 +92,19 @@ indicatePage;
     
     if(self = [super initWithCoder:aDecoder]){
         
-        self.hidesBottomBarWhenPushed = YES;
         self.rowNumber = 2;
         self.rowrow = 1;
         
         self.IsSegmentedAlarm = NO;
+        self.isNothing = NO;
+		
+		self.hidesBottomBarWhenPushed = YES;
     }
     return self;
 }
 
-- (IBAction)packup:(UIButton *)sender {
-    
-    
-    if (self.rowrow % 2 == 0) {
-        self.rowNumber = 1;
-       
-    } else  {
-        self.rowNumber = 2;
-    }
-    
-    
-    [_WarningTableView reloadData];
-    self.rowrow ++;
-}
-
-
-
-- (void)loadNewData
-{
-    // 1.添加假数据
-    for (int i = 0; i<5; i++) {
-        [self.data insertObject:MJRandomData atIndex:0];
-    }
-    
-    // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MJDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 刷新表格
-        [self.WarningTableView reloadData];
-        
-        // 拿到当前的下拉刷新控件，结束刷新状态
-        [self.WarningTableView.header endRefreshing];
-    });
-    
-    
-    
-    
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
-    
-    
-    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-
-    self.WarningTableView.header = header;
-    
     
     self.WarningTableView.dataSource = self;
     self.WarningTableView.delegate = self;
@@ -150,46 +113,47 @@ indicatePage;
     
     self.isFloded = YES;
     self.isYearPicker = YES;
-
     
+    self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
+	
+	[self performSelector:@selector(hideDataIndicatePage) withObject:nil afterDelay:2.0f];
 }
-
-- (void)gainPlatFormID{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetP2PList"];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    
-    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameters[@"Device"] = @"0";
-    parameters[@"Type"] = @"1";
-    
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        ZXLLOG(@"success response: %@",responseObject);
-        NSArray *t = responseObject[@"P2PList"];
-        NSDictionary *m = t[2];
-        ZXLLOG(@"success/////////// response: %@",m[@"PlatformName"]);
-   
-      
-        
-        
-        
-        
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"error response: %@",error);
-    }];
-}
-
-
-
-
 
 //<<---------Model-------------
 
 - (void)warningAddLoadDatas {
-    if (!_thresHold == 0) {
+    if (!_thresHold == 0 && !_PlatFormIDnum == 0) {
         
+        self.isNothing = NO;
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmEarnings"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+        parameters[@"Device"] = @"0";
+        
+        parameters[@"UID"] = @"99999999999";
+        parameters[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
+        
+        
+        parameters[@"Action"] = @"0";
+        parameters[@"PlatFormID"] = [NSString stringWithFormat:@"%ld",_PlatFormIDnum];
+        parameters[@"Item"] = @"0";
+        parameters[@"Comparison"] = @"0";
+        parameters[@"ThresHold"] = [NSString stringWithFormat:@"%ld",(long)_thresHold];
+        parameters[@"Active"] = @"0";
+        
+        
+        [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+            BDBWarningAddResponseModel *warningAddResponseModel = [BDBWarningAddResponseModel objectWithKeyValues:responseObject];
+            self.warningAddModel = warningAddResponseModel;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ZXLLOG(@"error response: %@",error);
+        }];
+    }else if(_thresHold == 0 && !_PlatFormIDnum == 0){
+        _thresHold = 13;
+        self.isNothing = NO;
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmEarnings"];
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -221,44 +185,143 @@ indicatePage;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             ZXLLOG(@"error response: %@",error);
         }];
-    }else {
-        NSLog(@"请移动");
+    }else if (!_thresHold == 0 && _PlatFormIDnum == 0){
+        self.isNothing = YES;
+    }else if (_thresHold == 0 && _PlatFormIDnum == 0){
+        self.isNothing = YES;
     }
 
 }
 
 - (void)warningTimeLoadDatas{
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    
-    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameters[@"Device"] = @"0";
-    
-    parameters[@"UID"] = @"99999999999";
-    parameters[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
-    
-    
-    parameters[@"Action"] = @"0";
-    parameters[@"BidCompletedTime"] = @"2015-09-01 12:01:59";
-    parameters[@"Minutes"] = @"0";
-    if (_titleTextFieldOutput) {
+    if (_titleTextFieldOutput == nil) {
+        
+        self.isNothing = YES;
+    }else if(_CSgainDatePicker == nil && _CSgainDatePickerHour ==nil){
+        _CSgainDatePicker = @"2015-06-08";
+        _CSgainDatePickerHour = @"22:56:00";
+        self.isNothing = NO;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+        parameters[@"Device"] = @"0";
+        
+		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        parameters[@"UID"] = [userDefaults objectForKey:@"UID"];
+        parameters[@"PSW"] = [userDefaults objectForKey:@"PSW"];
+        
+        
+        parameters[@"Action"] = @"0";
+        //    parameters[@"BidCompletedTime"] = @"2015-09-01 12:01:59";
+        _CSgainDatePickerYearAndHour = [NSString stringWithFormat:@"%@ %@",_CSgainDatePicker,_CSgainDatePickerHour];
+        NSLog(@"1234567890%@",_CSgainDatePickerYearAndHour);
+        
+        parameters[@"BidCompletedTime"] = _CSgainDatePickerYearAndHour;
+        
+        
+        parameters[@"Minutes"] = @"0";
+        
         parameters[@"Title"] = _titleTextFieldOutput;
+        
+        parameters[@"Active"] = @"0";
+        
+        [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
+            BDBWarningTimeResponseModel *warningTimeResponseModel = [BDBWarningTimeResponseModel objectWithKeyValues:responseObject];
+            self.warningTimeModel = warningTimeResponseModel;
+            
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ZXLLOG(@"error response: %@",error);
+        }];
+    }else if (_CSgainDatePicker == nil){
+        _CSgainDatePicker = @"2015-06-08";
+        self.isNothing = NO;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+        parameters[@"Device"] = @"0";
+        
+		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+		parameters[@"UID"] = [userDefaults objectForKey:@"UID"];
+		parameters[@"PSW"] = [userDefaults objectForKey:@"PSW"];
+        
+        
+        parameters[@"Action"] = @"0";
+        //    parameters[@"BidCompletedTime"] = @"2015-09-01 12:01:59";
+        _CSgainDatePickerYearAndHour = [NSString stringWithFormat:@"%@ %@",_CSgainDatePicker,_CSgainDatePickerHour];
+        NSLog(@"1234567890%@",_CSgainDatePickerYearAndHour);
+        
+        parameters[@"BidCompletedTime"] = _CSgainDatePickerYearAndHour;
+        
+        
+        parameters[@"Minutes"] = @"0";
+        
+        parameters[@"Title"] = _titleTextFieldOutput;
+        
+        parameters[@"Active"] = @"0";
+        
+        [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
+            BDBWarningTimeResponseModel *warningTimeResponseModel = [BDBWarningTimeResponseModel objectWithKeyValues:responseObject];
+            self.warningTimeModel = warningTimeResponseModel;
+            
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ZXLLOG(@"error response: %@",error);
+        }];
+    }else if (_CSgainDatePickerHour == nil){
+        _CSgainDatePickerHour = @"22:56:00";
+        self.isNothing = NO;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        
+        parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+        parameters[@"Device"] = @"0";
+        
+		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+		parameters[@"UID"] = [userDefaults objectForKey:@"UID"];
+		parameters[@"PSW"] = [userDefaults objectForKey:@"PSW"];
+        
+        
+        parameters[@"Action"] = @"0";
+        //    parameters[@"BidCompletedTime"] = @"2015-09-01 12:01:59";
+        _CSgainDatePickerYearAndHour = [NSString stringWithFormat:@"%@ %@",_CSgainDatePicker,_CSgainDatePickerHour];
+        NSLog(@"1234567890%@",_CSgainDatePickerYearAndHour);
+        
+        parameters[@"BidCompletedTime"] = _CSgainDatePickerYearAndHour;
+        
+        
+        parameters[@"Minutes"] = @"0";
+        
+        parameters[@"Title"] = _titleTextFieldOutput;
+        
+        parameters[@"Active"] = @"0";
+        
+        [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
+            BDBWarningTimeResponseModel *warningTimeResponseModel = [BDBWarningTimeResponseModel objectWithKeyValues:responseObject];
+            self.warningTimeModel = warningTimeResponseModel;
+            
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ZXLLOG(@"error response: %@",error);
+        }];
     }
-    parameters[@"Active"] = @"0";
     
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
-        BDBWarningTimeResponseModel *warningTimeResponseModel = [BDBWarningTimeResponseModel objectWithKeyValues:responseObject];
-        self.warningTimeModel = warningTimeResponseModel;
-        
-        
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"error response: %@",error);
-    }];
+    
     
     
 }
@@ -308,10 +371,10 @@ indicatePage;
      
     switch (indexPath.row) {
         case 0:
-            self.row = 130;
+            self.row = 150;
             break;
         case 1:
-            self.row = 128;
+            self.row = 178;
             break;
        
             break;
@@ -355,8 +418,10 @@ indicatePage;
     
     }else if (self.rowNumber == 2){
         if (rowOn == 0) {
-            cell = [[NSBundle mainBundle] loadNibNamed:@"BDB_TableViewCell_One" owner:nil options:nil][0];
-            
+            BDBwarningMoreBtnTableViewCell *cell_One = [[NSBundle mainBundle] loadNibNamed:@"BDBwarningMoreBtnTableViewCell" owner:nil options:nil][0];
+            cell_One.btnDelegate = self;
+            cell = cell_One;
+
             
         } else if (rowOn == 1){
             BDB_TableViewCell_Two *cell_two =  [[NSBundle mainBundle] loadNibNamed:@"BDB_TableViewCell_Two" owner:nil options:nil][0];
@@ -365,7 +430,6 @@ indicatePage;
         }
     }
     }else if (_IsSegmentedAlarm == YES){
-        static NSString *cellID1 = @"cellId1";
         static NSString *cellID2 = @"cellId2";
         static NSString *cellID3 = @"cellId3";
         
@@ -373,19 +437,12 @@ indicatePage;
         
         NSUInteger rowNo = indexPath.section;
         if(rowNo == 0){
-            BDBCustomTableViewCellOne *cell_2 = [tableView dequeueReusableCellWithIdentifier:cellID1];
-            if (cell_2 == nil) {
-                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellOne" owner:nil options:nil];
-                for (id currentObject in topLevelObjects) {
-                    if ([currentObject isKindOfClass:[UITableViewCell class]]) {
-                        cell = (BDBCustomTableViewCellOne *)currentObject;
-                        // break;
-                    }
-                }
-            }
+
+            BDBCustomTableViewCellOne *cell_2 = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellOne" owner:nil options:nil][0];
+            
             cell_2.delegate = self;
-         //   self.titleTextFieldOutput = cell_2.titleTextField.text;
-            return cell;
+        
+            cell = cell_2;
         }else if (rowNo == 1){
             BDBCustomTableViewCellTwo *cell = [tableView dequeueReusableCellWithIdentifier:cellID2];
             if (cell == nil) {
@@ -397,12 +454,30 @@ indicatePage;
                     }
                 }
             }
+            
             cell.delegate1 = self;
+            if (_gainDatePicker == nil) {
+                [cell.yearBtnText setTitle:@"2015年06月08日" forState:UIControlStateNormal];
+              
+            }else{
+                [cell.yearBtnText setTitle:_gainDatePicker forState:UIControlStateNormal];
+               
+            }
+            
+            if (_gainDatePickerHour == nil) {
+                [cell.minutesBtnText setTitle:@"22:56" forState:UIControlStateNormal];
+            }else{
+                 [cell.minutesBtnText setTitle:_gainDatePickerHour forState:UIControlStateNormal];
+            }
+            
+          
             return cell;
         }else if (rowNo == 2){
             BDBCustomTableViewCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellID3];
             NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BDBCustomTableViewCellThree" owner:nil options:nil];
             cell = topLevelObjects[0];
+            cell.delegate3 = self;
+            
             if (_isYearPicker) {
                 cell.datePicker.datePickerMode = UIDatePickerModeDate;
                 
@@ -430,21 +505,22 @@ indicatePage;
 - (IBAction)confirmButtonClick:(UIButton *)sender {
     
     
+    [_WarningTableView reloadData];
+    
     if (self.IsSegmentedAlarm == NO) {
         [self warningAddLoadDatas];
     }else if (self.IsSegmentedAlarm == YES){
-        
-        [self warningTimeLoadDatas];
         [self warningTimeLoadDatas];
     }
-    
-//    [self gainPlatFormID];
-    
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-  
-    
+
+    if (_isNothing == YES) {
+        NSLog(@"点击button不能跳转");
+    }else{
+//        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+ 
+
 }
 
 
@@ -488,6 +564,16 @@ indicatePage;
 
 //<<-----warningTime------
 
+-(void)gainMoreBtnTagAction:(NSInteger)btnTag{
+    self.PlatFormIDnum = btnTag;
+}
+
+
+//-(void)gainBtnTagAction:(NSInteger)btnTag{
+//    
+//    self.PlatFormIDnum = btnTag;
+//}
+
 -(void)shrinkButtonClickedForChangingHeightOfRow:(UIButton *)sender {
     
     
@@ -512,41 +598,43 @@ indicatePage;
     
 }
 
-//- (void)warningTimeloadDatas{
-//    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
-//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-//    
-//    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-//    parameters[@"Device"] = @"0";
-//    
-//    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        ZXLLOG(@"success response: %@",responseObject);
-//        
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        ZXLLOG(@"error response: %@",error);
-//    }];
-//    
-//}
-
-
 
 //-----warningTime------>>
 
-- (void)PlatFormIDButtonClickedAction:(NSInteger)buttonValue{
-    self.PlatFormIDnum = buttonValue;
-}
 
 -(void)updateSliderValue:(NSInteger)sliderValue{
     self.thresHold = sliderValue;
-   // ZXLLOG(@"-----------%ld",(long)sliderValue);
 }
 
--(void)transferTitleText:(UITextField *)titleText{
-    self.titleTextFieldOutput = titleText.text;
+-(void)transferTitleText:(NSString *)titleText{
+    self.titleTextFieldOutput = titleText;
+    
+//    NSLog(@"%@",titleText);
     
 }
+
+- (void)datePickerText:(NSString *)datePickerText andDatePickerHour:(NSString *)datePickerHourText CSdatePickerText:(NSString *)CSdatePickerText andCSDatePickerHour:(NSString *)CSdatePickerHourText{
+  
+    
+    if (_isYearPicker) {
+        self.gainDatePicker = datePickerText;
+        self.CSgainDatePicker = CSdatePickerText;
+    }else{
+        self.gainDatePickerHour = datePickerHourText;
+        self.CSgainDatePickerHour = CSdatePickerHourText;
+    }
+    
+    
+    
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:1];
+    [self.WarningTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+    
+}
+
+#pragma mark - Private Methods
+- (void)hideDataIndicatePage {
+	[_indicatePage hide];
+}
+
 
 @end

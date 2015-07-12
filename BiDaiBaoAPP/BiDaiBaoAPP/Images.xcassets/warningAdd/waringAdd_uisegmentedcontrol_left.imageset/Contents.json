@@ -6,12 +6,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "waringAdd_uisegmentedcontrol_left@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "waring_uisegmentedcontrol_right.png"
+      "filename" : "waringAdd_uisegmentedcontrol_left@3x.png"
     }
   ],
   "info" : {

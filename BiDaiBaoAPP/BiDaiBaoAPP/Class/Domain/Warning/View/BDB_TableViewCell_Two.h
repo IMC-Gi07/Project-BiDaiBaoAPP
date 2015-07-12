@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ASValueTrackingSlider.h"
-@class BDBWarningAddViewController;
+
 @protocol BDB_TableViewCell_TwoDelegate <NSObject>
 
 - (void)updateSliderValue:(NSInteger)sliderValue;

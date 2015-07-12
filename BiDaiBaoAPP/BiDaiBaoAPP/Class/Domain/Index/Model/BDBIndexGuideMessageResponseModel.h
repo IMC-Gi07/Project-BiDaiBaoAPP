@@ -38,7 +38,7 @@
  *  今日的最高收益
  */
 
-@property(nonatomic,copy) NSString *EarningsMax;
+@property(nonatomic,assign) CGFloat EarningsMax;
 
 /**
  *  今日可投金额

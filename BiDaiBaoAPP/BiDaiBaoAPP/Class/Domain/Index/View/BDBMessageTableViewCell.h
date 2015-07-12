@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BDBMessageTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@class BBCyclingLabel;
 
-+ (BDBMessageTableViewCell *)cell;
+@interface BDBMessageTableViewCell : UITableViewCell
+
+@property(nonatomic,copy) NSArray *texts;
+
+- (NSString *)displayingText;
 
 @end

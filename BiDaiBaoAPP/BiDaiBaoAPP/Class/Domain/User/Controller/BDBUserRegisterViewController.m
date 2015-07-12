@@ -180,7 +180,7 @@ userPassWordTextField;
          *
          *  @return return value description
          */
-        [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:1];
+        [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
         
         
         
@@ -211,7 +211,7 @@ userPassWordTextField;
         NSLog(@"%@",passWord);
         NSLog(@"rusult%@",responseObject[@"Result"]);
         NSLog(@"%@",resultStr);
-        
+       NSString *userNiName = responseObject[@"NiName"];
         
         
         /**
@@ -225,7 +225,9 @@ userPassWordTextField;
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:userName forKey:@"UID"];
             [userDefaults setObject:resultStr forKey:@"PSW"];
+            [userDefaults setObject:userNiName forKey:@"NiName"];
             [userDefaults synchronize];
+            NSLog(@"用户名%@",userNiName);
             /**
              提示登入成功
              */
@@ -260,6 +262,7 @@ userPassWordTextField;
             //读取保存的数据
             NSString *defaultsUID = [defaults objectForKey:@"UID"];
             NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+            [defaults synchronize];
             NSLog(@"帐号 = %@,密码 ＝ %@",defaultsUID,defaultsPSW);
             
             
@@ -280,17 +283,12 @@ userPassWordTextField;
                 [GetMyParamDefaults setObject:responseObject[@"StoreNum"] forKey:@"StoreNum"];
                 [GetMyParamDefaults setObject:responseObject[@"MsgNum"] forKey:@"MsgNum"];
                 [GetMyParamDefaults synchronize];
+                [self.navigationController popViewControllerAnimated:YES];
                 
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"%@",error);
             }];
-            
-            
-            
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
         }
         
         

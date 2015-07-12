@@ -17,15 +17,13 @@
 #import "BDBQuestionTypeButton.h"
 #import "BDBQuestionTypeGapButton.h"
 
-#import "ZXLLoadDataIndicatePage.h"
-
 @interface BDBAskQuestionTypeViewController ()
 
 @property(nonatomic,strong) NSMutableArray *QuestionTypeModels;
 
 @property (nonatomic,assign) NSInteger buttonGap;
 
-@property (nonatomic,strong) ZXLLoadDataIndicatePage *indecatePage;
+
 
 @end
 
@@ -35,18 +33,19 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.buttonGap = SCREEN_WIDTH / 12;
-        NSLog(@"%li",_buttonGap);
+        NSLog(@"%li",(long)_buttonGap);
+        self.title = @"问题类别";
     }
     return self;
 }
 
 
 - (void)viewDidLoad {
-    [self loadMoreDatas];
+    
 
     [super viewDidLoad];
     
-    self.indecatePage = [ZXLLoadDataIndicatePage showInView:self.view];
+    [self loadMoreDatas];
     
 
 
@@ -72,12 +71,12 @@
         self.QuestionTypeModels = [NSMutableArray array];
         [_QuestionTypeModels addObjectsFromArray:questionTypeModel.QuestionTypeList];
 
+        
+        
         for (NSInteger i = 0; i < questionTypeModel.QuestionTypeNum ; i++) {
             
              BDBGetQuestionTypeListModel *listModel = (BDBGetQuestionTypeListModel *)_QuestionTypeModels[i];
            
-            
-            
             BDBQuestionTypeButton *button = [[BDBQuestionTypeButton alloc] init];
             [button setTitle:listModel.TypeName forState:UIControlStateNormal];
             [button setTitleColor:UIColorWithRGB(36, 130, 232) forState:UIControlStateNormal];
@@ -91,13 +90,13 @@
             
             [button addTarget:self action:@selector(buttonTouches:) forControlEvents:UIControlEventTouchDown];
             
-            NSLayoutConstraint *buttonGapConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0f constant:_buttonGap + (i % 3) * (SCREEN_WIDTH / 4)];
+            NSLayoutConstraint *buttonGapConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0f constant:_buttonGap + (i % 3) * (SCREEN_WIDTH / 3.8)];
 
             [self.view addConstraint:buttonGapConstraint];
             
             NSLayoutConstraint *buttonHeightConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:100 + (i / 3) * 40];
             [self.view addConstraint:buttonHeightConstraint];
-            self.indecatePage.hidden = YES;
+
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -113,6 +112,7 @@
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 

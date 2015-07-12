@@ -9,16 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BDBButtonForSift.h"
 
-typedef void (^SingleSelectForSiftBlock)(NSString *,BOOL);
-
-typedef void (^UpdataButtonInfo)(NSString *,BOOL);
-
 
 @interface BDBButtonForSift : UIButton
-
-@property(nonatomic,copy) SingleSelectForSiftBlock singleSelectForSiftBlock;
-
-@property(nonatomic,copy) UpdataButtonInfo updataButtonInfo;
 
 @property(nonatomic,assign) BOOL isShowMores;
 

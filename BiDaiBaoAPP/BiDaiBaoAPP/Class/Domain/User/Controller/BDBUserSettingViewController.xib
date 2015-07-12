@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BDBUserSettingViewController">
             <connections>
+                <outlet property="APPcache" destination="xzG-oO-Dou" id="4CA-Db-ee0"/>
                 <outlet property="loginOutButton" destination="7pf-4h-ZnQ" id="dIV-r8-hxS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -105,6 +106,7 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="GwC-7e-vhW" secondAttribute="trailing" constant="20" id="0LX-S7-osj"/>
                         <constraint firstItem="06V-6s-3ja" firstAttribute="leading" secondItem="mIC-2o-6hD" secondAttribute="trailing" constant="20" id="G4O-br-Efe"/>
@@ -114,6 +116,9 @@
                         <constraint firstAttribute="centerY" secondItem="06V-6s-3ja" secondAttribute="centerY" constant="-1.5" id="yco-t8-fzP"/>
                         <constraint firstAttribute="height" constant="44" id="zbI-Kg-pjd"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="cBI-nx-fI6" appends="YES" id="jXd-xW-5lt"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFm-pw-R4n">
                     <rect key="frame" x="0.0" y="229" width="320" height="1"/>
@@ -183,6 +188,7 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="uwY-Es-Uwu" secondAttribute="centerY" id="3TB-Tk-Hdu"/>
                         <constraint firstAttribute="trailing" secondItem="xzG-oO-Dou" secondAttribute="trailing" constant="20" id="5fX-1b-Zul"/>
@@ -192,6 +198,9 @@
                         <constraint firstAttribute="centerY" secondItem="tH5-5H-Lgt" secondAttribute="centerY" id="pXZ-24-po0"/>
                         <constraint firstItem="tH5-5H-Lgt" firstAttribute="leading" secondItem="uwY-Es-Uwu" secondAttribute="trailing" constant="20" id="xVx-eQ-ZGk"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="NG6-Ec-krg" appends="YES" id="94T-js-Ei5"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDU-iC-7A8">
                     <rect key="frame" x="0.0" y="340" width="320" height="1"/>
@@ -257,6 +266,16 @@
             </constraints>
             <point key="canvasLocation" x="305" y="352"/>
         </view>
+        <tapGestureRecognizer id="cBI-nx-fI6">
+            <connections>
+                <action selector="connectUS:" destination="-1" id="Uvx-nH-Lqc"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="NG6-Ec-krg">
+            <connections>
+                <action selector="BDBClearn:" destination="-1" id="1fT-8G-dza"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="user_set_btn_exit_login_icon" width="387" height="46"/>

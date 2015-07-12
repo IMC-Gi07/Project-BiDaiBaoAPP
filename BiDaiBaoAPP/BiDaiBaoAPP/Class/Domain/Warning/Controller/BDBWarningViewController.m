@@ -11,14 +11,14 @@
 #import "BDBWarningModelOne.h"
 #import "BDBWarningModelTwo.h"
 #import "BDBWarningResponseModel.h"
-#import "ZXLLoadDataIndicatePage.h"
 #import "BDBWarningTableViewCellTwo.h"
+#import "BDBWarningAddViewController.h"
+#import "BDBUserRegisterViewController.h"
+
 
 @interface BDBWarningViewController ()<UITableViewDataSource,UITableViewDelegate,BDBWarningTableViewCellDelegate,BDBWarningTableViewCellTwoDelegate>
 
-@property(nonatomic,weak) ZXLLoadDataIndicatePage *
-
-indicatePage;
+@property(nonatomic,weak) ZXLLoadDataIndicatePage *indicatePage;
 
 
 @property(nonatomic,copy) NSString *userChooseID_1;
@@ -35,22 +35,19 @@ indicatePage;
 
 @property (weak, nonatomic) IBOutlet UIButton *addWarningButton;
 
-@property (nonatomic,assign) NSUInteger warningRowsNum;
+/**
+ *  平台数据
+ */
+@property(nonatomic,strong) NSMutableArray *platformModels;
 
 
-
+@property(nonatomic,weak)UIButton *alearDel;
 
 
 /**
- 公告页数
+ *	刷新表格界面
  */
-@property(nonatomic,assign) NSUInteger pageIndex;
-
-/**
- 每页显示数量
- */
-@property(nonatomic,assign) NSUInteger pageSize;
-
+- (void)refreshWarningListTableViewDatas;
 
 
 
@@ -58,61 +55,43 @@ indicatePage;
 
 @implementation BDBWarningViewController
 
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]) {
-        
-        
-        self.pageSize = 5;
-        
         self.warningAddModels = [NSMutableArray array];
         self.warningTimeModels = [NSMutableArray array];
-        
+        self.platformModels = [NSMutableArray array];
     }
     return self;
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initWarningTableView];
-    
-    [self gainPlatFormID];
-    
-    
-    self.warningListTableView.dataSource = self;
-    self.warningListTableView.delegate = self;
-    
-    self.warningListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.warningListTableView.rowHeight = 100.0f;
-    self.warningListTableView.allowsSelection = NO;
-    self.warningListTableView.showsVerticalScrollIndicator = NO;
-    
-//    self.warningRowsNum = 2;
-    
-    self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
-    
-    
-    [self warningLoadDatas];
-    
+	
+	self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
 }
 - (void)initWarningTableView{
     _warningListTableView.estimatedRowHeight = 50;
+	
+	_warningListTableView.dataSource = self;
+	_warningListTableView.delegate = self;
+	
+	_warningListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	_warningListTableView.rowHeight = 100.0f;
+	_warningListTableView.allowsSelection = NO;
+	_warningListTableView.showsVerticalScrollIndicator = NO;
     
     [_warningListTableView registerNib:[UINib nibWithNibName:@"BDBWarningTableViewCell" bundle:nil] forCellReuseIdentifier:@"BDBWarningTableViewCell"];
     
     [_warningListTableView registerNib:[UINib nibWithNibName:@"BDBWarningTableViewCellTwo" bundle:nil] forCellReuseIdentifier:@"BDBWarningTableViewCellTwo"];
 
-    
-    
     __weak typeof(self) thisInstance = self;
     _warningListTableView.header = [BDBTableViewRefreshHeader headerWithRefreshingBlock:^{
-        [thisInstance warningLoadDatas];
+        [thisInstance refreshWarningListTableViewDatas];
     }];
-    
-    
+	
+	[self refreshWarningListTableViewDatas];
 }
 
 
@@ -134,66 +113,27 @@ indicatePage;
     
     if (rowNo < _warningAddModels.count ) {
         BDBWarningTableViewCell *cell_1 = [tableView dequeueReusableCellWithIdentifier:@"BDBWarningTableViewCell" forIndexPath:indexPath];
-        
-        
         cell_1.delegate = self;
-//        NSInteger colorRow = (indexPath.row + 1) % 4;
-//        switch (colorRow) {
-//            case 1:
-//                [cell_1.colorBlock setImage:[UIImage imageNamed:@"cell_bg_blueBlock"]];
-//                break;
-//            case 2:
-//                [cell_1.colorBlock setImage:[UIImage imageNamed:@"cell_bg_purpleBlock"]];
-//                break;
-//            case 3:
-//                [cell_1.colorBlock setImage:[UIImage imageNamed:@"cell_bg_orangeBlock"]];
-//                break;
-//            case 0:
-//                [cell_1.colorBlock setImage:[UIImage imageNamed:@"cell_bg_greenBlock"]];
-//                break;
-//                
-//            default:
-//                break;
-//        }
+
         BDBWarningModelOne *warningModelOne = _warningAddModels[indexPath.row];
-        
-        cell_1.PlateFormNameLable.text = warningModelOne.ID;
+		cell_1.PlateFormNameLable.text = warningModelOne.PlatformName;
         cell_1.ThresHoldLable.text = warningModelOne.ThresHold;
-        
         cell_1.delButton.tag = [warningModelOne.ID integerValue];
-        
-    
-        cell= cell_1;
-        
-        
+        cell = cell_1;
     }else{
         NSUInteger row = indexPath.row - _warningAddModels.count;
-        
 
         BDBWarningTableViewCellTwo *cell_2 = [tableView dequeueReusableCellWithIdentifier:@"BDBWarningTableViewCellTwo" forIndexPath:indexPath];
-
         cell_2.delegate_2 = self;
        
         BDBWarningModelTwo *warningModelTwo = _warningTimeModels[row];
-        
         cell_2.warningTimeTitleLabel.text = warningModelTwo.Title;
         cell_2.warningTimeTimeLabel.text = warningModelTwo.BidCompletedTime;
-        
         cell_2.delButton_2.tag = [warningModelTwo.ID integerValue];
-        
-        
         cell = cell_2;
-
-        
     }
     
-    
-        
-    
-        
-        
-        return cell;
-
+	return cell;
 }
 
 
@@ -205,6 +145,7 @@ indicatePage;
     [alertView show];
     
     self.userChooseID_2 = [NSString stringWithFormat:@"%ld",button.tag];
+    self.alearDel = button;
     
 }
 
@@ -214,217 +155,152 @@ indicatePage;
     [alertView show];
     
     self.userChooseID_1 = [NSString stringWithFormat:@"%ld",button.tag];
+    
+    self.alearDel = button;
 }
 
 
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+#pragma mark - UIAlertView Delegate Methods
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         [alertView dismissWithClickedButtonIndex:0 animated:YES];
         NSLog(@"点击了取消");
+        [self.alearDel setImage:[UIImage imageNamed:@"cell_btn_delete"] forState:UIControlStateNormal];
     }
     if (buttonIndex == 1) {
         [alertView dismissWithClickedButtonIndex:1 animated:YES];
-        NSLog(@"点击了确认");
-        
-        
+		
+        [self.alearDel setImage:[UIImage imageNamed:@"cell_btn_delete"] forState:UIControlStateNormal];
+        self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
         
         if (_userChooseID_1 == nil) {
-             NSLog(@"aaaaaaaaa");
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
-            NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
             
+			NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmRing"];
             
-            
-            parameters[@"UID"] = @"99999999999";
-            
-            parameters[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
-            
-            
-            parameters[@"Action"] = @"2";
-            parameters[@"ID"] = _userChooseID_2;
-            
-            
+			NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+			parameters[@"Action"] = @"2";
+			parameters[@"ID"] = _userChooseID_2;    
+				
+			NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            parameters[@"UID"] = [userDefaults objectForKey:@"UID"];
+            parameters[@"PSW"] = [userDefaults objectForKey:@"PSW"];
             
             [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-                
-                ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
-                
-                [self warningLoadDatas];
-                [_warningListTableView reloadData];
-                
-                
-                
+                [self refreshWarningListTableViewDatas];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 ZXLLOG(@"error response: %@",error);
             }];
             
            
         }else if (_userChooseID_2 == nil){
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSLog(@"bbbbbbb");
-            AFHTTPRequestOperationManager *manager_2 = [AFHTTPRequestOperationManager manager];
-            NSString *requestUrl_2 = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmEarnings"];
-            NSMutableDictionary *parameters_2 = [NSMutableDictionary dictionary];
+			NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetAlarmEarnings"];
+			
+            NSMutableDictionary *requestParameters = [NSMutableDictionary dictionary];
+			requestParameters[@"Action"] = @"2";
+			requestParameters[@"ID"] = _userChooseID_1;
             
+			NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            requestParameters[@"UID"] = [userDefaults objectForKey:@"UID"];
+            requestParameters[@"PSW"] = [userDefaults objectForKey:@"PSW"];
             
-            
-            parameters_2[@"UID"] = @"99999999999";
-            
-            parameters_2[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
-            
-            
-            parameters_2[@"Action"] = @"2";
-            parameters_2[@"ID"] = _userChooseID_1;
-            
-            
-            
-            [manager_2 POST:requestUrl_2 parameters:parameters_2 success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-                
-                ZXLLOG(@"success response: %@",responseObject[@"Msg"]);
-                
-                [self warningLoadDatas];
-                [_warningListTableView reloadData];
-                
-                
-                
+            [manager POST:requestURL parameters:requestParameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+                [self refreshWarningListTableViewDatas];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 ZXLLOG(@"error response: %@",error);
             }];
             
         }
-        
-       
-        
-        
-        
-    
-        
-    }
-    [_warningListTableView reloadData];
+	}
 }
 - (IBAction)warningAddButton:(UIButton *)sender {
     [self performSegueWithIdentifier:@"towarningAddViewControllerSegue" sender:self];
-    
+}
+
+#pragma mark - Private Methods
+- (void)refreshWarningListTableViewDatas {
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	
+	NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetMyAlarmInf"];
+	
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	
+	parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	parameters[@"Device"] = @"0";
+	parameters[@"UserType"] = @"0";
+
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	NSString *UID = [userDefaults objectForKey:@"UID"];
+	NSString *PSW = [userDefaults objectForKey:@"PSW"];
+	if (!UID || [@"" isEqualToString:UID] || !PSW || [@"" isEqualToString:PSW]) {
+		if(_indicatePage){
+			[_indicatePage hide];	
+		}
+		
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还未登录." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+		[alertView show];
+		
+		return;
+	}
+
+	
+	[manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	
+		BDBWarningResponseModel *warningResponseModel = [BDBWarningResponseModel objectWithKeyValues:responseObject];
+		self.warningAddModels = warningResponseModel.AlarmEarningsList;
+		
+		//根据model.platformID,查询数据库的平台名
+		FMDatabase *database = [FMDatabase databaseWithPath:[CACHE_DIRECTORY stringByAppendingPathComponent:BDBGlobal_CacheDatabaseName]];
+		if ([database open]) {
+			[_warningAddModels enumerateObjectsUsingBlock:^(BDBWarningModelOne *warningModelOne, NSUInteger idx, BOOL *stop) {
+				//查询表中的数据
+				NSString *sql = @"SELECT name FROM t_platform where pid=:pid";
+				
+				NSMutableDictionary *sqlParameters = [NSMutableDictionary dictionary];
+				sqlParameters[@"pid"] = warningModelOne.PlatFormID;
+				
+				FMResultSet *resultSet = [database executeQuery:sql withParameterDictionary:sqlParameters];
+				while([resultSet next]){
+					warningModelOne.PlatformName = [resultSet stringForColumn:@"name"];	
+				}
+				[resultSet close];
+			}];
+			
+			[database close];
+		}
+
+		self.warningTimeModels = warningResponseModel.AlarmRingList;
+		
+		//加载页面的显示
+		if (_indicatePage) {
+			[_indicatePage hide];
+		}
+		
+		if (_warningListTableView.header.isRefreshing) {
+			[_warningListTableView.header endRefreshing];
+		}
+		
+		[_warningListTableView reloadData];
+		
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		ZXLLOG(@"error response: %@",error);
+		
+		//加载页面的显示
+		if (_indicatePage) {
+			[_indicatePage hide];
+		}
+		
+		if (_warningListTableView.header.isRefreshing) {
+			[_warningListTableView.header endRefreshing];
+		}
+	}];
+
 }
 
 
-
-
-- (void)gainPlatFormID{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetP2PList"];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    
-    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameters[@"Device"] = @"0";
-    
-    parameters[@"Type"] = @"1";
-    
-    
-    
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        ZXLLOG(@"success response: %@",responseObject);
-//        NSArray *t = responseObject[@"P2PList"];
-//        NSDictionary *m = t[13];
-//        ZXLLOG(@"success/////////// response: %@",m[@"PlatformName"]);
-
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"error response: %@",error);
-    }];
-    
-    
-    
-}
-
-
--(void)warningLoadMoreDatas{
-    self.pageIndex ++;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetMyAlarmInf"];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    
-    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameters[@"Device"] = @"0";
-    
-    parameters[@"UID"] = @"99999999999";
-    
-    parameters[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
-    
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        BDBWarningResponseModel *warningResponseModel = [BDBWarningResponseModel objectWithKeyValues:responseObject];
-        
-        
-        [_warningAddModels addObjectsFromArray:warningResponseModel.AlarmEarningsList];
-        [_warningTimeModels addObjectsFromArray:warningResponseModel.AlarmRingList];
-        
-        
-        
-        [_warningListTableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"error response: %@",error);
-    }];
-    
-    
-}
-
-- (void)warningLoadDatas{
-    self.pageIndex = 1;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    NSString *requestUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetMyAlarmInf"];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    
-    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameters[@"Device"] = @"0";
-    
-    parameters[@"UID"] = @"99999999999";
-    
-    parameters[@"PSW"] = @"52C69E3A57331081823331C4E69D3F2E";
-    
-    
-    
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-   ZXLLOG(@"success response: %@",responseObject);
-        
-        BDBWarningResponseModel *warningResponseModel = [BDBWarningResponseModel objectWithKeyValues:responseObject];
-        
-//
-//         self.warningModels = warningResponseModel.AlarmRingList;
-        
-         self.warningAddModels = warningResponseModel.AlarmEarningsList;
-        self.warningTimeModels = warningResponseModel.AlarmRingList;
-        
-        //加载页面的显示
-        if (_indicatePage) {
-            [_indicatePage hide];
-            self.navigationController.navigationBarHidden = NO;
-        }else {
-            [_warningListTableView.header endRefreshing];
-        }
-        
-        
-        [_warningListTableView reloadData];
-        
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"error response: %@",error);
-    }];
-}
 
 
 @end

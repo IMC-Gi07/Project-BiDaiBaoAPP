@@ -16,6 +16,6 @@
 
 @property(nonatomic,strong) NSString *P2PNum;
 
-@property(nonatomic,strong) NSArray *P2PList;
+@property(nonatomic,strong) NSMutableArray *P2PList;
 
 @end

@@ -12,3 +12,7 @@
  */
 extern NSString *const BDBGlobal_HostAddress;
 
+/**
+ *  全局缓存数据库
+ */
+extern NSString *const BDBGlobal_CacheDatabaseName;

@@ -10,5 +10,9 @@
 
 @interface BDBUserProfitCalculatorViewController : UIViewController
 
+@property(nonatomic,copy)NSString *investmentMoneyText;
 
+@property(nonatomic,copy)NSString *interestRateText;
+
+@property(nonatomic,copy)NSString *termText;
 @end

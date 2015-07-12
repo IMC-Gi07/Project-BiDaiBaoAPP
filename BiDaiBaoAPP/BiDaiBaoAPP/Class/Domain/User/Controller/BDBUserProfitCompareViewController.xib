@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BDBUserProfitCompareViewController">
             <connections>
+                <outlet property="bankDemand" destination="BZS-vq-mrm" id="3sU-R8-P3S"/>
+                <outlet property="bankTerm" destination="Lcw-n8-Bw2" id="Gjx-ve-Pr3"/>
+                <outlet property="grossInvestmentTextField" destination="BLX-Uc-cex" id="SLx-4b-kDj"/>
                 <outlet property="topBlueView" destination="Vde-2y-rVT" id="XkM-4H-JwQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yearsInvestmentTextField" destination="iKP-6q-g7B" id="q7E-1P-ZnG"/>
+                <outlet property="yebLabel" destination="bFI-5a-b1z" id="xIi-2y-g2j"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -37,12 +42,16 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pW5-ei-OeN">
                             <rect key="frame" x="285" y="13" width="15" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="cXV-Jp-Dit"/>
+                                <constraint firstAttribute="height" constant="18" id="icH-F5-u2Y"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLX-Uc-cex">
-                            <rect key="frame" x="242" y="15" width="33" height="17"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLX-Uc-cex">
+                            <rect key="frame" x="95" y="15" width="180" height="17"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -50,6 +59,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="BLX-Uc-cex" firstAttribute="leading" secondItem="IDZ-hx-8qU" secondAttribute="trailing" constant="10" id="1Kt-DQ-aS7"/>
                         <constraint firstAttribute="centerY" secondItem="IDZ-hx-8qU" secondAttribute="centerY" constant="0.5" id="8Zo-w0-X1j"/>
                         <constraint firstAttribute="trailing" secondItem="9ha-Wj-QQw" secondAttribute="trailing" id="COt-Ay-rtn"/>
                         <constraint firstAttribute="bottom" secondItem="9ha-Wj-QQw" secondAttribute="bottom" id="KsT-wk-WF3"/>
@@ -82,14 +92,18 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iKP-6q-g7B">
-                            <rect key="frame" x="242" y="15" width="33" height="17"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iKP-6q-g7B">
+                            <rect key="frame" x="95" y="15" width="180" height="17"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAy-UI-KtG">
                             <rect key="frame" x="285" y="13" width="15" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="YEb-aM-kDB"/>
+                                <constraint firstAttribute="height" constant="18" id="tMd-eR-qz2"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -104,6 +118,7 @@
                         <constraint firstAttribute="bottom" secondItem="NsO-On-SyV" secondAttribute="bottom" id="PoS-a1-G79"/>
                         <constraint firstItem="WAy-UI-KtG" firstAttribute="leading" secondItem="iKP-6q-g7B" secondAttribute="trailing" constant="10" id="RpQ-vm-nic"/>
                         <constraint firstAttribute="centerY" secondItem="BOg-59-WoN" secondAttribute="centerY" constant="0.5" id="V9s-Rp-M9B"/>
+                        <constraint firstItem="iKP-6q-g7B" firstAttribute="leading" secondItem="BOg-59-WoN" secondAttribute="trailing" constant="10" id="VCD-rk-GF5"/>
                         <constraint firstAttribute="centerY" secondItem="WAy-UI-KtG" secondAttribute="centerY" id="g58-Jz-c3a"/>
                         <constraint firstItem="NsO-On-SyV" firstAttribute="leading" secondItem="WHE-s8-UHJ" secondAttribute="leading" id="usE-Q0-fca"/>
                         <constraint firstAttribute="trailing" secondItem="WAy-UI-KtG" secondAttribute="trailing" constant="20" id="vW0-CU-hmO"/>

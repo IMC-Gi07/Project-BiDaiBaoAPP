@@ -12,10 +12,16 @@
 @interface BDBCustomTableViewCellTwo : UITableViewCell
 
 @property (nonatomic,weak) id<BDBCustomTableViewCellTwoDelegate>delegate1;
+@property (weak, nonatomic) IBOutlet UIButton *yearBtnText;
+
+@property (weak, nonatomic) IBOutlet UIButton *minutesBtnText;
+
+
 
 @end
 
 @protocol BDBCustomTableViewCellTwoDelegate <NSObject>
+
 -(void)changeHour_Minutes_Picker:(UIButton *)sender;
 
 - (void)changeYear_Month_Day_Picker:(UIButton *)sender;

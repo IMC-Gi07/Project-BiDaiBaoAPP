@@ -16,7 +16,7 @@
 #import "MJExtension.h"
 #import "BDBDetailReplyModel.h"
 #import "BDBDetailReplyResponseModel.h"
-//#import "IQKeyboardManager.h"
+#import "IQKeyboardManager.h"
 #import "ZXLLoadDataIndicatePage.h"
 static NSString *const kCellIdentifier = @"cell";
 static NSString *const kCellIdentifier2 = @"cell2";
@@ -166,7 +166,13 @@ static NSString *const kCellIdentifier2 = @"cell2";
     parameters[@"ID"] = _ID;
     NSString *answer = _answerTextField.text;
     parameters[@"Answerinfo"] = answer;
-    parameters[@"AnswerUser"] = @"1***8";
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *answerUser = [userDefaults objectForKey:@"UID"];
+    if (answerUser == nil) {
+        parameters[@"AnswerUser"] = @"1***8";
+    }else {
+        parameters[@"AnswerUser"] = answerUser;
+    }    
     parameters[@"UserType"] = [NSString stringWithFormat:@"%i",0];
     [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         

@@ -26,10 +26,12 @@ static NSString *const kVersionCodeKey = @"VersionCode";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-	self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+	self.window = [[UIWindow alloc] init];
 	self.window.backgroundColor = [UIColor whiteColor];
-	
 	[self.window makeKeyAndVisible];
+	
+	//推迟设置window的frame
+	self.window.frame = [[UIScreen mainScreen] bounds];
 
 	//获取旧版本号
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

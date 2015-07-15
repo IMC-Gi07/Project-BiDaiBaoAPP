@@ -51,11 +51,11 @@
          parameters[@"Device"] = @"0";
          
          [manager POST:request parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"注册账户名:%@",_UserWordLabel);
-             NSLog(@"请求成功%@",responseObject[@"Msg"]);
-             NSLog(@"请求成功%@",responseObject[@"Result"]);
-             NSLog(@"加密后密码%@",MD5passWord);
-             NSLog(@"responseObject:%@",responseObject);
+             ZXLLOG(@"注册账户名:%@",_UserWordLabel);
+             ZXLLOG(@"请求成功%@",responseObject[@"Msg"]);
+             ZXLLOG(@"请求成功%@",responseObject[@"Result"]);
+             ZXLLOG(@"加密后密码%@",MD5passWord);
+             ZXLLOG(@"responseObject:%@",responseObject);
              if ([responseObject[@"Result"] isEqualToString:@"0"]) {
                  
                  UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
@@ -77,7 +77,7 @@
              }
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"%@",error);
+             ZXLLOG(@"%@",error);
          }];
          
          
@@ -105,14 +105,14 @@
     }
     NSString *mdfiveString = [hash lowercaseString];
     
-    NSLog(@"Encryption Result = %@",mdfiveString);
+    ZXLLOG(@"Encryption Result = %@",mdfiveString);
     return mdfiveString;
 }
 
 
 
 -(void)viewDidLoad{
-    NSLog(@"%@",_number);
+    ZXLLOG(@"%@",_number);
     _passWordTextField.delegate = self;
     NSString *str = _number;
     NSString *xingxingStr =  [str stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];

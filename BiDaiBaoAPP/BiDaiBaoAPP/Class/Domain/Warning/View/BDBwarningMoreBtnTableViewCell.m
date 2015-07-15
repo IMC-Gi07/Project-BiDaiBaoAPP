@@ -31,6 +31,8 @@
 
 @property(nonatomic,assign)BOOL isChangeWhite;
 
+@property(nonatomic,assign)BOOL isShink;
+
 @end
 
 
@@ -92,7 +94,6 @@
 	
 	[self loadFilterScrollViewSubView];
 	
-	[self sureButtonClickedAction];
     
 }
 
@@ -164,8 +165,8 @@
     
     [self layoutFilterViewPlatformButtonsWith:_platformArray view:platformView];
     
-    //展开平台区
-	[self performSelector:@selector(showMoreButtonClickedAction:) withObject:showMoreButton];
+    //展开平台区（如需一开始展开平台请打开）
+//	[self performSelector:@selector(showMoreButtonClickedAction:) withObject:showMoreButton];
 }
 
 
@@ -174,10 +175,14 @@
  */
 - (void)showMoreButtonClickedAction: (BDBButtonForSift *)button{
     
+    //代理，接受收缩按钮触发事件
+    [_btnDelegate shinkTheMoreButton:button];
+    
     UIView *platformView = [_filterScrollView viewWithTag:100];
     
     if(button.isShowMores){
-        
+        ZXLLOG(@"闭合");
+                
         button.isShowMores = NO;
         [UIView animateWithDuration:0.5f animations:^{
             _heigtConstraintForPlatformView.constant = 65.0f;
@@ -191,7 +196,8 @@
         
     }
     else{
-        
+        ZXLLOG(@"张开");
+
         button.isShowMores = YES;
         [UIView animateWithDuration:0.5f animations:^{
             
@@ -259,7 +265,6 @@
                     
                     [_btnDelegate gainMoreBtnTagAction:[model.PlatFormID integerValue]];
                     
-//                    NSLog(@"hahhahahahahahuuuuuuu%ld",[model.PlatFormID integerValue]);
                     
                     _isChangeWhite = YES;
                     break;
@@ -314,18 +319,6 @@
     
     [self addConstraint:bottomConstraint];
     
-    
-}
-
-
-- (void)sureButtonClickedAction{
-
-    
-    _filterCondition[@"平台"] = _selectedPlatformArray;
-    
-    BDBWarningAddViewController *controller = [[BDBWarningAddViewController alloc] init];
-    
-    controller.filterCondition = _filterCondition;
     
 }
 

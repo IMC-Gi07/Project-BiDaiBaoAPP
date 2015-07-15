@@ -113,7 +113,7 @@
                 
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+        ZXLLOG(@"%@",error);
 }];
 
         
@@ -239,16 +239,6 @@
     
 }
 
-//- (void)textFieldDidEndEditing:(UITextField *)textField{
-//    
-//    if (_RegisterTextField.text.length > 10 && [self.selectButton imageForState:UIControlStateNormal]   != nil ) {
-//        self.NextButton.enabled = YES;
-//        NSLog(@"进来了没有啊啊");
-//    }
-//    
-//    
-//    
-//}
 
 
 

@@ -40,22 +40,6 @@ typedef enum{
 
 @property(nonatomic,copy) NSString *PageSize;
 
-@property(nonatomic,copy) NSString *Count;
-
-@property(nonatomic,copy) NSString *AnnualEarnings_Min;
-
-@property(nonatomic,copy) NSString *AnnualEarnings_Max;
-
-@property(nonatomic,copy) NSString *Term_Min;
-
-@property(nonatomic,copy) NSString *Term_Max;
-
-@property(nonatomic,copy) NSString *ProgressPercent_Min;
-
-@property(nonatomic,copy) NSString *ProgressPercent_Max;
-
-@property(nonatomic,copy) NSString *PlatFormID;
-
 @end
 
 @implementation BDBSubjectDeepexcavationContronller
@@ -100,12 +84,6 @@ typedef enum{
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (void)loadBidsInf: (RefreshWays)refreshWay{
     
     if(refreshWay == pullUpRefresh){
@@ -124,7 +102,7 @@ typedef enum{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter"];
+    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetWorthyBids_Filter_Ex"];
     
     NSMutableDictionary *parametersDict = [NSMutableDictionary dictionary];
     
@@ -138,91 +116,28 @@ typedef enum{
     
     parametersDict[@"Count"] = @"1";
     
-    NSArray *array  = _filterCondition[@"平台"];
+    if(_selectedPlatformArray.count > 0){
     
-    if(array.count > 0){
-    
-         NSString *str = [array componentsJoinedByString:@","];
+         NSString *str = [_selectedPlatformArray componentsJoinedByString:@","];
         parametersDict[@"PlatFormID"] = str;
     }
-    if(![_filterCondition[@"收益率"] isEqualToString:@""]){
+    if(_selectedProfitArray.count > 0){
         
-        if([_filterCondition[@"收益率"] isEqualToString:@"<12%"]){
-            parametersDict[@"AnnualEarnings_Min"] = @"0";
-            parametersDict[@"AnnualEarnings_Max"] = @"0.12";
-        }
-        if([_filterCondition[@"收益率"] isEqualToString:@"12%-15%"]){
-            
-            parametersDict[@"AnnualEarnings_Min"] = @"0.12";
-            
-            parametersDict[@"AnnualEarnings_Max"] = @"0.15";
-        }
-        if([_filterCondition[@"收益率"] isEqualToString:@">15%"]){
-            
-            parametersDict[@"AnnualEarnings_Min"] = @"0.15";
-            parametersDict[@"AnnualEarnings_Max"] = @"1";
-            
-        }
+        NSString *str = [_selectedProfitArray componentsJoinedByString:@","];
+        parametersDict[@"AnnualEarnings"] = str;
     }
-    
-    if(![_filterCondition[@"进度"] isEqualToString:@""]){
+    if(_selectedTermArray.count > 0){
         
-        if([_filterCondition[@"进度"] isEqualToString:@"50%以内"]){
-            parametersDict[@"ProgressPercent_Min"] = @"0";
-            parametersDict[@"ProgressPercent_Max"] = @"0.5";
-        }
-        if([_filterCondition[@"进度"] isEqualToString:@"50%-80%"]){
-            
-            parametersDict[@"ProgressPercent_Min"] = @"0.5";
-            
-            parametersDict[@"ProgressPercent_Max"] = @"0.8";
-        }
-        if([_filterCondition[@"进度"] isEqualToString:@"80%以上"]){
-            
-            parametersDict[@"ProgressPercent_Min"] = @"0.8";
-            parametersDict[@"ProgressPercent_Max"] = @"1";
-            
-        }
+        NSString *str = [_selectedTermArray componentsJoinedByString:@","];
+        parametersDict[@"Term"] = str;
     }
-    
-    if(![_filterCondition[@"期限"] isEqualToString:@""]){
+    if(_selectedProgressArray.count > 0){
         
-        if([_filterCondition[@"期限"] isEqualToString:@"30天内"]){
-            parametersDict[@"Term_Min"] = @"1";
-            parametersDict[@"Term_Max"] = @"30";
-        }
-        if([_filterCondition[@"期限"] isEqualToString:@"1-3个月"]){
-            
-            parametersDict[@"Term_Min"] = @"30";
-            
-            parametersDict[@"Term_Max"] = @"90";
-        }
-        if([_filterCondition[@"期限"] isEqualToString:@"3-6个月"]){
-            
-            parametersDict[@"Term_Min"] = @"90";
-            
-            parametersDict[@"Term_Max"] = @"180";
-            
-        }
-        if([_filterCondition[@"期限"] isEqualToString:@"6-12个月"]){
-            
-            parametersDict[@"Term_Min"] = @"180";
-            
-            parametersDict[@"Term_Max"] = @"360";
-            
-        }
-        if([_filterCondition[@"期限"] isEqualToString:@"1-2年"]){
-            
-            parametersDict[@"Term_Min"] = @"360";
-            
-            parametersDict[@"Term_Max"] = @"720";
-            
-        }
-        if([_filterCondition[@"期限"] isEqualToString:@"2年以上"]){
-            
-            parametersDict[@"Term_Min"] = @"720";
-        }
+        NSString *str = [_selectedProgressArray componentsJoinedByString:@","];
+        parametersDict[@"ProgressPercent"] = str;
     }
+	
+	parametersDict[@"EarningsDesc"] = @"1";
     
     [manager POST:requestURL parameters:parametersDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         
@@ -655,15 +570,6 @@ typedef enum{
         
     };
     
-    cell.pushWebView = ^{
-        
-        BDBSubjectShowWebViewController *webView = [[BDBSubjectShowWebViewController alloc] init];
-        
-        webView.webURL = model.DetailURL;
-        
-        [self.navigationController pushViewController:webView animated:YES];
-        
-    };
     
     cell.collectButton.selected = [self.isCollectedDict[indexPath] boolValue];
     cell.isRrefreshing = [self.isRefreshingDict[indexPath] boolValue];

@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "MJRefresh.h"
 
+@protocol BDBWarningAddViewControllerDlegate <NSObject>
 
+- (void)CompleteWarningAdd;
+
+@end
 
 @interface BDBWarningAddViewController : UIViewController
 
 @property(nonatomic,strong)NSMutableDictionary *filterCondition;
+@property (nonatomic,retain) id<BDBWarningAddViewControllerDlegate> TBDelegate;
 
 @end
 

@@ -112,10 +112,11 @@ typedef enum{
         [_collectTableView.header endRefreshing];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+        ZXLLOG(@"%@",error);
     }];
     
 
+    
 
 
 }
@@ -161,7 +162,7 @@ typedef enum{
         
         [_collectTableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+        ZXLLOG(@"%@",error);
     }];
 
 

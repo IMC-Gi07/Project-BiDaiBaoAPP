@@ -78,7 +78,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"BDBQuestionContentCell" bundle:nil]  forCellReuseIdentifier:@"questionContentCell"];
     
     
-    ZXLLOG(@"x-x-x-xx-x-x-x-x-x-x-x-x-x-x-x-x-x-%@",[self transformDataFormat:@"2015/7/7 7:07:07"]);
+    ZXLLOG(@"%@",[self transformUserName:@"xxxxxx"]);
 }
 
 
@@ -118,10 +118,13 @@
         BDBHotTopicsModel *model = _questionListModels[indexPath.row - 1];
         BDBQuestionContentCell *questionContentCell = [_tableView dequeueReusableCellWithIdentifier:@"questionContentCell" forIndexPath:indexPath];
         questionContentCell.title.text = [self cutText:model.Title];
-        questionContentCell.firstReply.text = [self cutText:model.FirstReply];        questionContentCell.askUser.text = model.AskUser;
+        questionContentCell.firstReply.text = [self cutText:model.FirstReply];
+        if (model.AskUser.length > 0) {
+            NSString *userName = [self transformUserName:model.AskUser];
+            questionContentCell.askUser.text = userName;
+        }
         NSString *askTime = model.AskTime;
         NSString *simpleTime = [self transformDataFormat:askTime];
-        ZXLLOG(@"-x-x-x-xx-x-x-x-x-x-x-x-x-x--x-x-xx-x--x--%@,%@",simpleTime,model.AskTime);
         questionContentCell.askTime.text = simpleTime;
         questionContentCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return questionContentCell;
@@ -251,6 +254,18 @@
     }
 }
 
+- (NSString *)transformUserName:(NSString *)userName {
+    if ([userName isEqualToString:@"匿名"]) {
+        return userName;
+    }else {
+        NSString *first = [userName substringToIndex:1];
+        NSString *last = [userName substringFromIndex:(userName.length - 1)];
+        NSString *temp = [first stringByAppendingString:@"***"];
+        NSString *final = [temp stringByAppendingString:last];
+        return final;
+    }
+    
+}
 #pragma mark - Privite Methods
 - (void)generateQuestionButton {
     UIButton *questionBtn = [UIButton buttonWithType:UIButtonTypeCustom];

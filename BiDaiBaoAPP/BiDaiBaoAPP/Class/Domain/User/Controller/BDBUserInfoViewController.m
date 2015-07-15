@@ -22,6 +22,7 @@
 
 @property(nonatomic,weak) UIImageView *currentHeadImageView;
 
+@property(nonatomic,weak) UILabel *userNameLabel;
 
 - (void)changeHeadImage: (UIGestureRecognizer *)gesture;
 
@@ -52,6 +53,14 @@
     
     [self.view addGestureRecognizer:tapGesture];
     [self subViewOfTopArea];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsNiName = [defaults objectForKey:@"NiName"];
+    NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    _userNameLabel.text = defaultsNiName;
+    if (defaultsNiName == nil) {
+        _userNameLabel.text = defaultsUID;
+    }
     
 }
 
@@ -154,13 +163,11 @@
     //*此为动态生成，后期修改
     UILabel *userNameLabel = [[UILabel alloc] init];
     
-    userNameLabel.text = @"用户名";
+    //userNameLabel.text = @"用户名";
     
     userNameLabel.textColor = [UIColor whiteColor];
     
     userNameLabel.textAlignment = NSTextAlignmentCenter;
-    
-    CGSize userNameLabelSize = [userNameLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
     
     [self.view addSubview:userNameLabel];
     
@@ -170,15 +177,10 @@
     
     NSLayoutConstraint *BottomConstraintForUserNameLabel = [NSLayoutConstraint constraintWithItem:userNameLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:headBackgroundImageView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:10.0f];
     
-    NSLayoutConstraint *heightConstraintForUserNameLabel = [NSLayoutConstraint constraintWithItem:userNameLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:userNameLabelSize.height];
-    
-    NSLayoutConstraint *widthConstraintForUserNameLabel = [NSLayoutConstraint constraintWithItem:userNameLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:userNameLabelSize.width];
     
     [self.view addConstraint:centerXConstraintForUserNameLabel];
     [self.view addConstraint:BottomConstraintForUserNameLabel];
-    
-    [userNameLabel addConstraint:heightConstraintForUserNameLabel];
-    [userNameLabel addConstraint:widthConstraintForUserNameLabel];
+    _userNameLabel = userNameLabel;
     
     
     //修改昵称
@@ -409,6 +411,8 @@
     if (buttonTag == 100) {
         if (_nameTextField.text.length != 0) {
             parameterDict[@"NiName"] = _nameTextField.text;
+            [defaults setObject:_nameTextField.text forKey:@"NiName"];
+            _userNameLabel.text = _nameTextField.text;
         }
     }
     if(buttonTag == 101){
@@ -424,8 +428,10 @@
             NSString *passWord = _passwordTextField.text;
             NSString *resultStr = [[self md5HexDigest:passWord]uppercaseString];
             parameterDict[@"NewPSW"] = resultStr;
+            [defaults setObject:resultStr forKey:@"PSW"];
         }
     }
+    
    [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
        if ([responseObject[@"Result"] isEqualToString:@"0"]) {
            UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];

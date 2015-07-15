@@ -8,19 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ENUM(NSInteger, BDBSortTableViewCellMaxViewTag) {
+	BDBSortTableViewCellMaxViewTagMaxProfitable = 9000,
+	BDBSortTableViewCellMaxViewTagMaxStable,
+	BDBSortTableViewCellMaxViewTagMaxSafe
+};
+
+
+@class BDBSortTableViewCell;
+
+@protocol BDBSortTableViewCellDelegate <NSObject>
+
+@optional
+
+- (void)maxView:(UIView *)view withTag:(NSInteger)tag tappedInBDBSortTableViewCell:(BDBSortTableViewCell *)sortTableViewCell;
+
+@end
+
 @interface BDBSortTableViewCell : UITableViewCell
 
 
-@property (weak, nonatomic) IBOutlet UIView *redView;
+@property(nonatomic,weak) id<BDBSortTableViewCellDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIView *greenView;
-
-@property (weak, nonatomic) IBOutlet UIView *blueView;
-
-@property (weak, nonatomic) IBOutlet UILabel *moreThanFifteenPercentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *moreThanTwelvePercentLessThanFifteenPercentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lessThanTwelvePercentLabel;
-
-+ (BDBSortTableViewCell *)cell;
 
 @end

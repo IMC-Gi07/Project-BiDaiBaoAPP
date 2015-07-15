@@ -5,9 +5,23 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "slider_min_blackground@2x.png"
+      "idiom" : "universal",
+      "filename" : "slider_min_blackground@2x.png",
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "right" : 14,
+          "top" : 11,
+          "left" : 14,
+          "bottom" : 12
+        }
+      }
     },
     {
       "scale" : "3x",
@@ -21,9 +35,9 @@
           "height" : 1
         },
         "capInsets" : {
-          "left" : 20,
-          "top" : 17,
           "right" : 20,
+          "top" : 17,
+          "left" : 20,
           "bottom" : 18
         }
       }

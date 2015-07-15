@@ -320,15 +320,6 @@ typedef enum{
     [buttonOfSift handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
         
         BDBSubjectFilterViewController *controller = [[BDBSubjectFilterViewController alloc] init];
-        
-        CATransition *transition = [CATransition animation];
-        
-        transition.type = kCATransitionMoveIn;
-        
-        transition.subtype = kCATransitionFromBottom;
-        
-        [controller.view.layer addAnimation:transition forKey:nil];
-        
         [thisInstance.navigationController pushViewController:controller animated:YES];
         
     }];
@@ -608,17 +599,6 @@ typedef enum{
         
     };
     
-    //单元格点击后跳转到对应的webSie
-    cell.pushWebView = ^{
-        
-        BDBSubjectShowWebViewController *webView = [[BDBSubjectShowWebViewController alloc] init];
-        
-        webView.webURL = model.DetailURL;
-        
-        [self.navigationController pushViewController:webView animated:YES];
-        
-    };
-    
     cell.collectButton.selected = [self.isCollectedDict[indexPath] boolValue];
     cell.isRrefreshing = [self.isRefreshingDict[indexPath] boolValue];
     
@@ -631,34 +611,6 @@ typedef enum{
     
     return 150;
 }
-
-
-#pragma mark -Upadate SetBidsStore
-
-
-- (void)upDateBidStore: (NSString *)action platformID: (NSString *)aPlatforID{
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetBidsStore"];
-    
-    NSMutableDictionary *parameterDict = [NSMutableDictionary dictionary];
-    
-    parameterDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameterDict[@"Device"] = @"0";
-    parameterDict[@"UID"] = @"55555555555";
-    parameterDict[@"PSW"] = @"5B1B68A9ABF4D2CD155C81A9225FD158";
-    parameterDict[@"Action"] = action;
-    parameterDict[@"ID"] = aPlatforID;
-    parameterDict[@"UserType"] = @"0";
-    
-    [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        
-        ZXLLOG(@"%@",responseObject[@"Result"]);
-        
-    } failure:nil];
-}
-
 
 #pragma mark -TopView Button  Methods
 

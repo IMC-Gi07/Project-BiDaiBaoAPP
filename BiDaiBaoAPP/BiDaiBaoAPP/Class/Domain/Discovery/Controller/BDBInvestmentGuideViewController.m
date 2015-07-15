@@ -99,7 +99,10 @@
         BDBQuestionContentCell *questionContentCell = [[NSBundle mainBundle] loadNibNamed:@"BDBQuestionContentCell" owner:nil options:nil][0];
         questionContentCell.title.text = model.Title;
         questionContentCell.firstReply.text = model.FirstReply;
-        questionContentCell.askUser.text = model.AskUser;
+        if (model.AskUser.length > 0) {
+            NSString *userName = [self transformUserName:model.AskUser];
+            questionContentCell.askUser.text = userName;
+        }
         NSString *askTime = model.AskTime;
         NSString *simpleTime = [self transformDataFormat:askTime];
         ZXLLOG(@"-x-x-x-xx-x-x-x-x-x-x-x-x-x--x-x-xx-x--x--%@",simpleTime);
@@ -164,6 +167,18 @@
     return simpleTime;
 }
 
+- (NSString *)transformUserName:(NSString *)userName {
+    if ([userName isEqualToString:@"匿名"]) {
+        return userName;
+    }else {
+        NSString *first = [userName substringToIndex:1];
+        NSString *last = [userName substringFromIndex:(userName.length - 1)];
+        NSString *temp = [first stringByAppendingString:@"***"];
+        NSString *final = [temp stringByAppendingString:last];
+        return final;
+    }
+    
+}
 #pragma mark - Getting Datas Methods
 
 - (void)refreshDatas {

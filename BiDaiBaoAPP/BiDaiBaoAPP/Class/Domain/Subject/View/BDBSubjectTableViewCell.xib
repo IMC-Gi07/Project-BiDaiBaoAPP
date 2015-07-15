@@ -303,6 +303,7 @@
                 <outlet property="TermLabel" destination="Crx-B9-IMU" id="vou-0A-ZYL"/>
                 <outlet property="collectButton" destination="AxI-bw-KMY" id="nr4-zL-n3N"/>
                 <outlet property="loanButton" destination="anj-h7-6mg" id="qlN-xs-vyz"/>
+                <outlet property="monetaryUnitLabel" destination="qpU-he-Yve" id="eUX-M9-XX3"/>
                 <outlet property="progressView" destination="Bll-Hf-hE5" id="UOY-iR-kQE"/>
                 <outlet property="refreshButton" destination="FeV-Pr-8O0" id="2LC-H6-tzg"/>
             </connections>

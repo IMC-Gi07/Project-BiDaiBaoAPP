@@ -27,11 +27,11 @@ userPassWordTextField;
 /**
  *  更新微信支付宝等第三方登入按钮约束
  */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button1;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button2;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button3;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button4;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWith;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button1;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button2;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button3;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *button4;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWith;
 @property (weak,nonatomic) IBOutlet NSLayoutConstraint *qwe;
 
 
@@ -74,33 +74,33 @@ userPassWordTextField;
 /**
  *  更新约束方法
  */
--(void)updateViewConstraints{
-    
-    [self autoArrayBoxWithConstraints:@[self.button1,
-                                        self.button2,
-                                        self.button3,
-                                        self.button4] width:self.buttonWith.constant];
-    [super updateViewConstraints];
-
-
-
-}
-/**
- *  更新约束方法
- *
- *  @param autoConstranitsArray autoConstranitsArray description
- *  @param width                width description
- */
--(void)autoArrayBoxWithConstraints:(NSArray *)autoConstranitsArray width:(CGFloat)width{
-    CGFloat step = (self.view.frame.size.width - (width * autoConstranitsArray.count)) / (autoConstranitsArray.count + 1);
-    
-    for (int i  = 0; i < autoConstranitsArray.count; i++) {
-        NSLayoutConstraint * constraint = autoConstranitsArray[i];
-        constraint.constant = step * (i + 1) + width * i;
-    }
-}
-
-
+//-(void)updateViewConstraints{
+//    
+//    [self autoArrayBoxWithConstraints:@[self.button1,
+//                                        self.button2,
+//                                        self.button3,
+//                                        self.button4] width:self.buttonWith.constant];
+//    [super updateViewConstraints];
+//
+//
+//
+//}
+///**
+// *  更新约束方法
+// *
+// *  @param autoConstranitsArray autoConstranitsArray description
+// *  @param width                width description
+// */
+//-(void)autoArrayBoxWithConstraints:(NSArray *)autoConstranitsArray width:(CGFloat)width{
+//    CGFloat step = (self.view.frame.size.width - (width * autoConstranitsArray.count)) / (autoConstranitsArray.count + 1);
+//    
+//    for (int i  = 0; i < autoConstranitsArray.count; i++) {
+//        NSLayoutConstraint * constraint = autoConstranitsArray[i];
+//        constraint.constant = step * (i + 1) + width * i;
+//    }
+//}
+//
+//
 
 - (IBAction)returnButton:(UISwipeGestureRecognizer *)sender {
     
@@ -206,11 +206,11 @@ userPassWordTextField;
         parameters[@"Device"] = @"0";
     
     [manager POST:requesturl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"返回结果:%@",responseObject[@"Msg"]);
-        NSLog(@"%@",userName);
-        NSLog(@"%@",passWord);
-        NSLog(@"rusult%@",responseObject[@"Result"]);
-        NSLog(@"%@",resultStr);
+        ZXLLOG(@"返回结果:%@",responseObject[@"Msg"]);
+        ZXLLOG(@"%@",userName);
+        ZXLLOG(@"%@",passWord);
+        ZXLLOG(@"rusult%@",responseObject[@"Result"]);
+        ZXLLOG(@"%@",resultStr);
        NSString *userNiName = responseObject[@"NiName"];
         
         
@@ -248,10 +248,10 @@ userPassWordTextField;
             BDBUserReturnResponseModel *noticeResponseModel = [BDBUserReturnResponseModel objectWithKeyValues:responseObject];
             
             
-            NSLog(@"图像地址:%@",noticeResponseModel.Photo);
-            NSLog(@"msg信息:%@",noticeResponseModel.Msg);
-            NSLog(@"昵称:%@",noticeResponseModel.NiName);
-            NSLog(@"用户名:%@",noticeResponseModel.UserName);
+            ZXLLOG(@"图像地址:%@",noticeResponseModel.Photo);
+            ZXLLOG(@"msg信息:%@",noticeResponseModel.Msg);
+            ZXLLOG(@"昵称:%@",noticeResponseModel.NiName);
+            ZXLLOG(@"用户名:%@",noticeResponseModel.UserName);
             
             
             
@@ -263,7 +263,7 @@ userPassWordTextField;
             NSString *defaultsUID = [defaults objectForKey:@"UID"];
             NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
             [defaults synchronize];
-            NSLog(@"帐号 = %@,密码 ＝ %@",defaultsUID,defaultsPSW);
+            ZXLLOG(@"帐号 = %@,密码 ＝ %@",defaultsUID,defaultsPSW);
             
             
             AFHTTPRequestOperationManager *GetMyParamManager = [AFHTTPRequestOperationManager manager];
@@ -275,9 +275,9 @@ userPassWordTextField;
             GetMyParamParameters[@"PSW"] = defaultsPSW;
             
             [GetMyParamManager POST:GetMyParamUrl parameters:GetMyParamParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"得出我的收藏%@",responseObject[@"StoreNum"]);
-                NSLog(@"得出我的消息%@",responseObject[@"MsgNum"]);
-                NSLog(@"得出字典%@",responseObject);
+                ZXLLOG(@"得出我的收藏%@",responseObject[@"StoreNum"]);
+                ZXLLOG(@"得出我的消息%@",responseObject[@"MsgNum"]);
+                ZXLLOG(@"得出字典%@",responseObject);
                 
                 NSUserDefaults *GetMyParamDefaults = [NSUserDefaults standardUserDefaults];
                 [GetMyParamDefaults setObject:responseObject[@"StoreNum"] forKey:@"StoreNum"];
@@ -287,7 +287,7 @@ userPassWordTextField;
                 
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"%@",error);
+                ZXLLOG(@"%@",error);
             }];
         }
         
@@ -320,7 +320,7 @@ userPassWordTextField;
         
         
     }  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"错误信息:%@",error);
+        ZXLLOG(@"错误信息:%@",error);
 }];
   
     
@@ -376,7 +376,7 @@ userPassWordTextField;
     _userNameTextField.delegate = self;
     _userPassWordTextField.delegate = self;
     self.qwe.constant = [UIScreen mainScreen].bounds.size.width;
-    [super updateViewConstraints];
+    //[super updateViewConstraints];
     
 
     

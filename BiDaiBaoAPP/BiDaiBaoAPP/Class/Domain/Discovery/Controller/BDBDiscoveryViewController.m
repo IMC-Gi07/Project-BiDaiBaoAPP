@@ -62,7 +62,7 @@
         self.isSegmentFirst = YES;
         self.pageSize = 5;
         self.pageNo = 2;
-        [self refreshDatas];
+        
         
     }
     return self;
@@ -71,7 +71,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavigationBar];
-    
+    [self refreshDatas];
     if (_newsModels == nil) {
         self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
     }
@@ -162,7 +162,10 @@
             informationCell.selectionStyle = UITableViewCellSelectionStyleNone;
             informationCell.title.text = news.Title;
             informationCell.publisher.text = news.Publisher;
-            informationCell.DT.text = news.DT;
+            
+            NSString *simpleDate = [self transformDataFormat:news.DT];
+            
+            informationCell.DT.text = simpleDate;
             informationCell.firstSection.text = news.FirstSection;
             informationCell.commentNum.text = news.CommentNum;
             informationCell.PopularIndex.text = news.PopularIndex;
@@ -414,6 +417,13 @@
   
 }
 
+
+- (NSString *)transformDataFormat:(NSString *)askTime {
+    NSArray *date = [askTime componentsSeparatedByString:@" "];
+    NSString *simpleDate = date[0];
+    return simpleDate;
+}
+
 #pragma mark - BDBCollectionCellDelegate Method
 - (void)hotTopicsClicked {
     [self performSegueWithIdentifier:@"hotTopics" sender:self];
@@ -442,4 +452,5 @@
 - (void)creditorsRightsTransferButtonClicked {
     [self performSegueWithIdentifier:@"creditorsRightsTransfer" sender:self];
 }
+
 @end

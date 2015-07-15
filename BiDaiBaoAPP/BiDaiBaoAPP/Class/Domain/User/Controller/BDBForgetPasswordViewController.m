@@ -83,9 +83,8 @@
         parameters[@"Device"] = @"0";
         
         [manger POST:requesturl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"请求是否成功%@",responseObject[@"Result"]);
-            NSLog(@"修改密码输出%@",responseObject[@"Msg"]);
-            NSLog(@"修改密码邮箱%@",responseObject[@"EMail"]);
+      
+        
             if ([responseObject[@"Msg"] isEqualToString:@"用户没有绑定邮箱或者手机"]) {
                 UILabel *forgetLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
                 forgetLabel.text = @"用户没有绑定邮箱或者手机";
@@ -101,12 +100,12 @@
 
             }
             else if ([responseObject[@"Result"] isEqualToString:@"0"]){
-                NSLog(@"dd%@",responseObject[@"EMail"]);
+                ZXLLOG(@"dd%@",responseObject[@"EMail"]);
                 [self.navigationController popViewControllerAnimated:YES];
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"错误信息:%@",error);
+            ZXLLOG(@"错误信息:%@",error);
     }];
         
 }

@@ -108,7 +108,7 @@
                     [self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:1];
                 }
                 //如果账户不为空执行退出登录语句
-                else{
+                else if ([defaults objectForKey:@"UID"] != nil){
                     
                     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                     
@@ -257,8 +257,9 @@
         NSDictionary *attributes = [fileManager attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", cachesDir, file] error:nil];
         //从属性字典里取出文件大小
         theFileSize += [[attributes objectForKey:NSFileSize] intValue];
-        NSLog(@"%d", theFileSize);            }
-    NSLog(@"%fKB", theFileSize / 1024.0);
+        //NSLog(@"%d", theFileSize);
+    }
+    //NSLog(@"%fKB", theFileSize / 1024.0);
     NSString *strFloat = [NSString stringWithFormat:@"%.2f",theFileSize/1024.0f/1024.0f];
     
     _APPcache.text = [strFloat stringByAppendingString:@"M"];

@@ -25,7 +25,7 @@
 
 
 
-@interface BDBIndexViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface BDBIndexViewController ()<UITableViewDataSource,UITableViewDelegate,BDBParameterTableViewCellDelegate,BDBSortTableViewCellDelegate>
 
 @property(nonatomic,strong) NSMutableArray *indexPaths;
 
@@ -93,24 +93,20 @@
  */
 - (void)appendWorthyBidsWithMinAnnualEarnimgs:(NSString *)minAnnualEarnimgs maxAnnualEarnimgs:(NSString *)maxAnnualEarnimgs;
 
-
 /**
- *  切换选项背景
+ *	加载所有可投资金等信息
  */
-- (void)rgyView:(BDBSortTableViewCell *)sortTableViewCell changedByJude:(NSUInteger)jude;
-
-
-
-//加载公告引导信息
-- (void)loadNoticeGuideMessage;
+- (void)loadAllNoticeGuideMessage;
 
 //加载公告信息
 - (void)loadNoticeMessage;
  
 /**
- *	隐藏界面头部
+ *	按钮点击隐藏界面头部
  */
 - (void)hideIndexTableViewHeader; 
+
+- (void)parameterTableViewCellHideAndShowButtonClickedAction:(UIButton *)button;
 
 /**
  *	初始化数据库缓存
@@ -150,7 +146,8 @@
    	//加载公告信息
     [self loadNoticeMessage];
 	
-    [self loadNoticeGuideMessage];
+	//加载可投资金额等信息
+    [self loadAllNoticeGuideMessage];
    
     //显示加载页面
     self.loadDataIndicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
@@ -159,6 +156,13 @@
 
 
 #pragma mark - Private Methods
+- (void)parameterTableViewCellHideAndShowButtonClickedAction:(UIButton *)button {
+	[self hideIndexTableViewHeader];
+	
+#warning 在这里改变按钮的旋转方向
+	//button.transform = CGAffineTransformMakeRotation(M_PI);
+}
+
 - (void)initDBCache {
 	self.dbQueue = [FMDatabaseQueue databaseQueueWithPath:[CACHE_DIRECTORY stringByAppendingPathComponent:BDBGlobal_CacheDatabaseName]];
 	
@@ -179,22 +183,22 @@
 	}
 }
 
-
-- (void)loadNoticeGuideMessage {
-    //创建一个请求对象
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    //GetRealTimeStatistics主机地址
-    NSString *realTimeStatisticsUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetRealTimeStatistics"];
-    NSMutableDictionary *realTimeStatisticsDict = [NSMutableDictionary dictionary];
+- (void)loadAllNoticeGuideMessage {
+	//创建一个请求对象
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 	
-    realTimeStatisticsDict[@"PlatFormID"] = @"-1";
-    realTimeStatisticsDict[@"Device"] = @"0";
-    realTimeStatisticsDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    
-    [manager POST:realTimeStatisticsUrl parameters:realTimeStatisticsDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        BDBIndexGuideMessageResponseModel *indexResponseModel = [BDBIndexGuideMessageResponseModel objectWithKeyValues:responseObject];
-        self.indexModel = indexResponseModel;
+	//GetRealTimeStatistics主机地址
+	NSString *realTimeStatisticsUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetRealTimeStatistics"];
+	NSMutableDictionary *realTimeStatisticsDict = [NSMutableDictionary dictionary];
+	
+	realTimeStatisticsDict[@"PlatFormID"] = @"-1";
+	realTimeStatisticsDict[@"Device"] = @"0";
+	realTimeStatisticsDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	
+	[manager POST:realTimeStatisticsUrl parameters:realTimeStatisticsDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+		BDBIndexGuideMessageResponseModel *indexResponseModel = [BDBIndexGuideMessageResponseModel objectWithKeyValues:responseObject];
+		
+		self.indexModel = indexResponseModel;
 		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 			[_dbQueue inDatabase:^(FMDatabase *db) {
@@ -218,8 +222,8 @@
 		
 		NSIndexPath *realTimeStatisticsCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
 		
-        [self.IndexTableView reloadRowsAtIndexPaths:@[realTimeStatisticsCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		[self.IndexTableView reloadRowsAtIndexPaths:@[realTimeStatisticsCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		[_dbQueue inDatabase:^(FMDatabase *db) {
 			NSString *sql = @"SELECT * FROM t_realtimestatistics";
 			FMResultSet *resultSet = [db executeQuery:sql];
@@ -239,7 +243,7 @@
 			[self.IndexTableView reloadRowsAtIndexPaths:@[realTimeStatisticsCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 		}];
 	}];
-
+	
 }
 
 - (void)loadNoticeMessage {
@@ -398,7 +402,7 @@
 			[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideIndexTableViewHeader) userInfo:nil repeats:NO];
 		}
 		
-		[_IndexTableView reloadData];
+		[_IndexTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		ZXLLOG(@"error: %@",error);
 	
@@ -588,32 +592,6 @@
 	_IndexTableView.allowsSelection = YES;
 }
 
-- (void)rgyView:(BDBSortTableViewCell *)sortTableViewCell changedByJude:(NSUInteger)jude {
-	switch (jude) {
-		case 0:{
-			sortTableViewCell.redView.backgroundColor = UIColorWithRGB(185, 35, 40);
-			sortTableViewCell.greenView.backgroundColor = UIColorWithRGB(95, 215, 90);
-			sortTableViewCell.blueView.backgroundColor = UIColorWithRGB(75, 140, 249);
-			break;
-		}
-		case 1:{
-			sortTableViewCell.redView.backgroundColor = UIColorWithRGB(240, 80, 90);
-			sortTableViewCell.greenView.backgroundColor = UIColorWithRGB(60, 150, 40);
-			sortTableViewCell.blueView.backgroundColor = UIColorWithRGB(75, 140, 249);
-			break;
-		}
-		case 2:{
-			sortTableViewCell.redView.backgroundColor = UIColorWithRGB(240, 80, 90);
-			sortTableViewCell.greenView.backgroundColor = UIColorWithRGB(95, 215, 90);
-			sortTableViewCell.blueView.backgroundColor = UIColorWithRGB(30, 90, 160);
-			break;
-		}
-			
-  		default:
-			break;
-	}
-}
-
 - (void)rightBarButtonClickedAction:(UIBarButtonItem *)buttonItem {
     [self performSegueWithIdentifier:@"ToNoticeViewControllerSegue" sender:self];
 }
@@ -665,6 +643,8 @@
 		BDBParameterTableViewCell *parameterTableViewCell = [tableView dequeueReusableCellWithIdentifier:parameterTableViewCellIdentifier];
 		if (!parameterTableViewCell) {
 			parameterTableViewCell = [BDBParameterTableViewCell cell];
+			parameterTableViewCell.delegate = self;
+			parameterTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
 		
 		//可投资金
@@ -686,53 +666,33 @@
 		
         //投资人数
         parameterTableViewCell.InvestorNumLabel.text = _indexModel.InvestorNum;
-        
         parameterTableViewCell.userInteractionEnabled = YES;
-        
-        [parameterTableViewCell.hideAndShowButton addTarget:self action:@selector(hideIndexTableViewHeader) forControlEvents:UIControlEventTouchUpInside];
+        [parameterTableViewCell.hideAndShowButton addTarget:self action:@selector(parameterTableViewCellHideAndShowButtonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return parameterTableViewCell;
-    }else if (indexPath.section == 0 && indexPath.row == 2) {
-        
-        BDBSortTableViewCell *cell = [BDBSortTableViewCell cell];
-        
-        NSMutableAttributedString *firstString = [[NSMutableAttributedString alloc] initWithString:@">15%"];
-        [firstString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:7.0f] range:NSMakeRange(3, 1)];
-        [firstString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(0, 3)];
-        cell.moreThanFifteenPercentLabel.attributedText = firstString;
-        
-        NSMutableAttributedString *secondString = [[NSMutableAttributedString alloc] initWithString:@"12%-15%"];
-        [secondString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(0, 2)];
-        [secondString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(4, 2)];
-        [secondString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:7.0f] range:NSMakeRange(2, 2)];
-        [secondString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:7.0f] range:NSMakeRange(6, 1)];
-        cell.moreThanTwelvePercentLessThanFifteenPercentLabel.attributedText = secondString;
-        
-        NSMutableAttributedString *thirdString = [[NSMutableAttributedString alloc] initWithString:@"<12%"];
-        [thirdString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(0, 3)];
-        [thirdString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:7.0f] range:NSMakeRange(3, 1)];
-        cell.lessThanTwelvePercentLabel.attributedText = thirdString;
-        
-        UITapGestureRecognizer *redViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeRedMessage:)];
-        [cell.redView addGestureRecognizer:redViewTapGestureRecognizer];
-        
-        UITapGestureRecognizer *greenViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeGreenMessage:)];
-        [cell.greenView addGestureRecognizer:greenViewTapGestureRecognizer];
-        
-        UITapGestureRecognizer *blueViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeBlueMessage:)];
-        [cell.blueView addGestureRecognizer:blueViewTapGestureRecognizer];
+    }
+	/**
+	 *  蓝(最保守),绿(最赚钱),红(最稳定)
+	 */
+	else if (indexPath.section == 0 && indexPath.row == 2) {
+        static NSString *BDBSortTableViewCellIdentifier = @"BDBSortTableViewCell";
 		
-		[self rgyView:cell changedByJude:_judge];
+		BDBSortTableViewCell *sortTableViewCell = [tableView dequeueReusableCellWithIdentifier:BDBSortTableViewCellIdentifier];
+		if (!sortTableViewCell) {
+			sortTableViewCell = [[MAIN_BUNDLE loadNibNamed:@"BDBSortTableViewCell" owner:nil options:nil] lastObject];
+			sortTableViewCell.delegate = self;
+			sortTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;			
+		}
         
-        return cell;
+		return sortTableViewCell;
     }
 
-     if (indexPath.section == 1) {
-	 	NSString *detailMessageTableViewCellIdentifier = @"detailedCell";
+	else if (indexPath.section == 1) {
+		NSString *detailMessageTableViewCellIdentifier = @"detailedCell";
 	 
-        BDBDetailedMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailMessageTableViewCellIdentifier];
-        if (!cell) {
-            cell = [BDBDetailedMessageTableViewCell cell];
+		BDBDetailedMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailMessageTableViewCellIdentifier];
+		if (!cell) {
+			cell = [BDBDetailedMessageTableViewCell cell];
 		}
 		
 		 //设置红点上的数字
@@ -740,8 +700,12 @@
 		 
 		 BDBIndexClassifyParticularMessageModel *indexClassifyParticularMessageModel = _indexClassifyParticularMessageModels[indexPath.row];
 		 
-			
-		 //cell.AmountLabel.text = [NSString stringWithFormat:@"%.2f",[indexClassifyParticularMessageModel.Amount floatValue] * 0.0001];
+		if (indexPath.row < 3) {
+			cell.iconBallImageView.image = [UIImage imageNamed:@"icon_reddot_03"];
+		}else {
+			cell.iconBallImageView.image = [UIImage imageNamed:@"Index_icon_gray_ball"];
+		}
+		
 			//标的期限
 		 cell.TermLabel.text = indexClassifyParticularMessageModel.Term;
 			//平台名称
@@ -750,46 +714,13 @@
 		 cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%.0f",[indexClassifyParticularMessageModel.AnnualEarnings floatValue] * 100];
 
 		return cell;
-     }
+	}
     return nil;
 }
 
 - (void)hideIndexTableViewHeader {
 	_IndexTableView.tableHeaderView = (_IndexTableView.tableHeaderView)? nil : _indexTableViewHeader;
 }
-
-
-
-
-
-#pragma mark - GestureRecognizer
-- (void)changeRedMessage: (UIGestureRecognizer *)gesture {
-    self.judge = 0;
-	
-	[self refreshWorthyBids];
-	
-    BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
-    [self rgyView:cell changedByJude:_judge];
-}
-
-- (void)changeGreenMessage: (UIGestureRecognizer *)gesture {
-    self.judge = 1;
-	
-	[self refreshWorthyBids];
-    
-    BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
-	[self rgyView:cell changedByJude:_judge];
-}
-
-- (void)changeBlueMessage: (UIGestureRecognizer *)gesture {
-    self.judge = 2;
-	
-	[self refreshWorthyBids];
-    
-    BDBSortTableViewCell *cell = (BDBSortTableViewCell *)gesture.view.superview.superview;
-    [self rgyView:cell changedByJude:_judge];
-}
-
 
 #pragma mark - UITableView Delegate Methods
 //行高
@@ -798,9 +729,9 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         hight = 30;
     }else if (indexPath.section == 0 && indexPath.row == 1) {
-        hight = 100;
+        hight = 95;
     }else if (indexPath.section == 0 && indexPath.row == 2) {
-        hight = 55;
+        hight = 69;
     }else if (indexPath.section == 1) {
         hight = 44;
     }
@@ -835,6 +766,128 @@
 	}
 }
 
+#pragma mark - BDBParameterTableViewCellDelegate Delegate Methods
+- (void)button:(UIButton *)button withTag:(NSInteger)tag selectedInParameterTableViewCell:(BDBParameterTableViewCell *)parameterTableViewCell {
+	//创建一个请求对象
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	
+	//GetRealTimeStatistics主机地址
+	NSString *realTimeStatisticsUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetRealTimeStatistics"];
+	NSMutableDictionary *realTimeStatisticsDict = [NSMutableDictionary dictionary];
+	
+	realTimeStatisticsDict[@"PlatFormID"] = @"-1";
+	realTimeStatisticsDict[@"Device"] = @"0";
+	realTimeStatisticsDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	
+	[manager POST:realTimeStatisticsUrl parameters:realTimeStatisticsDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+		BDBIndexGuideMessageResponseModel *indexResponseModel = [BDBIndexGuideMessageResponseModel objectWithKeyValues:responseObject];
+		
+		switch (tag) {
+			/**
+			 *  可投资金
+			 */
+			case BDBParameterTableViewCellButtonTagInvestableFund: {
+				NSString *investableFund = indexResponseModel.AmountRemain;
+    			_indexModel.AmountRemain = investableFund;
+				[parameterTableViewCell.AmountRemainLabel dd_setNumber:@([_indexModel.AmountRemain floatValue]  / 10000.0f)];
+    			break;
+			}
+			/**
+			 *  可投项目
+			 */
+			case BDBParameterTableViewCellButtonTagInvestableProject: {
+				NSString *investableProject = indexResponseModel.BidNum;
+				_indexModel.BidNum = investableProject;
+				[parameterTableViewCell.BidNumLabel dd_setNumber:@([investableProject floatValue])];
+				break;
+			}
+			/**
+			 *  最高收益
+			 */
+			case BDBParameterTableViewCellButtonTagMaxProfit: {
+				CGFloat maxProfit = indexResponseModel.EarningsMax;
+				_indexModel.EarningsMax = maxProfit;
+				[parameterTableViewCell.EarningsMaxLabel dd_setNumber:@(maxProfit) format:@"%.2g%%"];
+				break;
+			}
+			/**
+			 *  投资人数
+			 */
+			case BDBParameterTableViewCellButtonTagInvestPeopleNumber: {
+				NSString *investPeopleNumber = indexResponseModel.InvestorNum;
+				_indexModel.InvestorNum = investPeopleNumber;
+				[parameterTableViewCell.InvestorNumLabel dd_setNumber:@([investPeopleNumber floatValue])];
+				break;
+			}
+			default:
+    			break;
+		}
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		switch (tag) {
+			/**
+			 *  可投资金
+			 */
+			case BDBParameterTableViewCellButtonTagInvestableFund: {
+				[parameterTableViewCell.AmountRemainLabel dd_setNumber:@([_indexModel.AmountRemain floatValue])];
+				break;
+			}
+			/**
+			 *  可投项目
+			 */
+			case BDBParameterTableViewCellButtonTagInvestableProject: {
+				[parameterTableViewCell.BidNumLabel dd_setNumber:@([_indexModel.BidNum floatValue])];
+				break;
+			}
+			/**
+			 *  最高收益
+			 */
+			case BDBParameterTableViewCellButtonTagMaxProfit: {
+				[parameterTableViewCell.EarningsMaxLabel dd_setNumber:@(_indexModel.EarningsMax)];
+				break;
+			}
+			/**
+			 *  投资人数
+			 */
+			case BDBParameterTableViewCellButtonTagInvestPeopleNumber: {
+				[parameterTableViewCell.InvestorNumLabel dd_setNumber:@([_indexModel.InvestorNum floatValue])];
+				break;
+			}
+			default:
+				break;
+		}
+	}];
+}
 
+#pragma mark - BDBSortTableViewCellDelegate Delegate Methods
+- (void)maxView:(UIView *)view withTag:(NSInteger)tag tappedInBDBSortTableViewCell:(BDBSortTableViewCell *)sortTableViewCell {
+	switch (tag) {
+		/**
+		 *  最赚钱
+		 */
+		case BDBSortTableViewCellMaxViewTagMaxProfitable:{
+			self.judge = 0;
+			[self refreshWorthyBids];
+			break;
+		}
+		/**
+		 *  最稳健
+		 */
+		case BDBSortTableViewCellMaxViewTagMaxStable:{
+			self.judge = 1;
+			[self refreshWorthyBids];
+			break;
+		}
+		/**
+		 *  最安全
+		 */
+		case BDBSortTableViewCellMaxViewTagMaxSafe:{
+			self.judge = 2;
+			[self refreshWorthyBids];
+			break;
+		}
+  		default:
+			break;
+	}
+}
 
 @end

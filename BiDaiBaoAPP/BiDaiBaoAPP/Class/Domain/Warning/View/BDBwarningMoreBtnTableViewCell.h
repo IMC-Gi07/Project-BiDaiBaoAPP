@@ -10,6 +10,7 @@
 @protocol BDBwarningMoreBtnTableViewCellDelegate <NSObject>
 
 - (void)gainMoreBtnTagAction:(NSInteger)btnTag;
+- (void)shinkTheMoreButton:(UIButton *)SMBtn;
 
 @end
 

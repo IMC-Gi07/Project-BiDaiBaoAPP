@@ -33,6 +33,9 @@
 
 @property (weak, nonatomic) IBOutlet MOProgressView *progressView;
 
+@property (weak, nonatomic) IBOutlet UILabel *monetaryUnitLabel;
+
+
 
 @end
 
@@ -83,7 +86,19 @@
     
     CGFloat amountNumber = [model.Amount floatValue];
     
-    amountNumber /= 10000.0f;
+    if(model.Amount.length > 9){
+    
+        amountNumber /= 100000000.0f;
+        _monetaryUnitLabel.text = @"亿元";
+        
+    }
+    else{
+        
+        amountNumber /= 10000.0f;
+        _monetaryUnitLabel.text = @"万元";
+    }
+    
+
     
     self.AmountLabel.text = [NSString stringWithFormat:@"%.2f",amountNumber];
     
@@ -126,10 +141,6 @@
         _refreshButton.userInteractionEnabled = YES;
     }
     
-    if(_updateCellisRefresh != nil){
-       
-    }
-
 }
 
 
@@ -203,7 +214,11 @@
 //链接到响应的页面
 - (void)pushWebView:(UIGestureRecognizer *)gesture{
 
-    _pushWebView();
+    BDBSubjectShowWebViewController *webView = [[BDBSubjectShowWebViewController alloc] init];
+    
+    webView.webURL = _model.DetailURL;
+    webView.title = _model.BidName;
+    [_controller.navigationController pushViewController:webView animated:YES];
 }
 
 
@@ -211,6 +226,11 @@
 
 - (void)upDateGetBidsInf:(UIButton *)button{
 
+    NSUserDefaults *userDefaults =[NSUserDefaults standardUserDefaults];
+    
+    NSString *uid = [userDefaults objectForKey:@"UID"];
+    NSString *psw = [userDefaults objectForKey:@"PSW"];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetBidsInf"];
@@ -219,8 +239,12 @@
     
     parameterDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
     parameterDict[@"Device"] = @"0";
-    parameterDict[@"UID"] = @"55555555555";
-    parameterDict[@"PSW"] = @"5B1B68A9ABF4D2CD155C81A9225FD158";
+    if(uid != nil && psw != nil){
+        
+        parameterDict[@"UID"] = uid;
+        parameterDict[@"PSW"] = psw;
+    }
+
     parameterDict[@"ID_List"] = _model.ID;
     
     [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
@@ -275,7 +299,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-    NSLog(@"alertViewCancel");
     UIStoryboard *userStoryboard = [UIStoryboard storyboardWithName:@"User" bundle:nil];
     
     BDBMyCollectViewController *controller = [userStoryboard instantiateViewControllerWithIdentifier:@"userLoginViewController"];

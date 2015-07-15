@@ -12,7 +12,6 @@
 typedef void (^UpdateCollectButtonSelected)(BOOL);
 typedef void (^UpdateCellisRefresh)(BOOL);
 typedef void (^UpdateCellModel)(BDBSujectModel *);
-typedef void (^PushWebView)();
 
 @interface BDBSubjectTableViewCell : UITableViewCell
 
@@ -31,7 +30,6 @@ typedef void (^PushWebView)();
 
 @property(nonatomic,copy) UpdateCellModel updateCellModel;
 
-@property(nonatomic,copy) PushWebView pushWebView;
 
 + (BDBSubjectTableViewCell *)cell;
 

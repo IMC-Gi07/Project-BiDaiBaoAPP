@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *PlatformNameLabel;
 
 
-
+@property (weak, nonatomic) IBOutlet UIImageView *iconBallImageView;
 
 
 + (BDBDetailedMessageTableViewCell *)cell;

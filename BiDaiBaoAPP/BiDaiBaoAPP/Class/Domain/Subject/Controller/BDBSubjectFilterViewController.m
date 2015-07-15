@@ -28,14 +28,25 @@
 //被选中的平台按钮
 @property(nonatomic,strong) NSMutableArray *selectedPlatformArray;
 
+//被选中的收益率按钮
+@property(nonatomic,strong) NSMutableArray *selectedProfitArray;
+
+//被选中的期限按钮
+@property(nonatomic,strong) NSMutableArray *selectedTermArray;
+
+//被选中的进度按钮
+@property(nonatomic,strong) NSMutableArray *selectedProgressArray;
+
 //被选中的所有筛选按钮的数组
 @property(nonatomic,strong) NSMutableArray *selectedFilterArray;
 
 //筛选条件的字典
 @property(nonatomic,strong) NSMutableDictionary *filterCondition;
 
+@property(nonatomic,strong) FMDatabaseQueue *dbqueue;
 
-- (void)loadP2PList;
+
+- (void)loadDBP2PList;
 
 - (void)loadButtonOfBottom;
 
@@ -48,9 +59,6 @@
 @implementation BDBSubjectFilterViewController
 
 
-
-
-
 - (instancetype)init{
 
     if (self = [super init]) {
@@ -59,7 +67,15 @@
         
         self.hidesBottomBarWhenPushed = YES;
         
+        self.platformArray = [NSMutableArray array];
+        
         self.selectedPlatformArray = [NSMutableArray array];
+        
+        self.selectedProfitArray = [NSMutableArray array];
+        
+        self.selectedTermArray = [NSMutableArray array];
+        
+        self.selectedProgressArray = [NSMutableArray array];
         
         self.selectedFilterArray = [NSMutableArray array];
         
@@ -72,16 +88,16 @@
         _filterCondition[@"期限"] = @"";
         
         _filterCondition[@"进度"] = @"";
-        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self loadDBP2PList];
     [self loadFilterScrollView];
-    [self loadP2PList];
+    [self loadFilterScrollViewSubView];
+    [self loadButtonOfBottom];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,6 +105,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)loadDBP2PList{
+
+    NSString *dbFilePath = [CACHE_DIRECTORY stringByAppendingPathComponent:BDBGlobal_CacheDatabaseName];
+    self.dbqueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    
+    if(_dbqueue){
+    
+        [_dbqueue inDatabase:^(FMDatabase *db) {
+            
+            NSString *sql = @"SELECT pid,name from t_platform";
+            
+            FMResultSet *resultSet = [db executeQuery:sql];
+            
+            while ([resultSet next]) {
+                
+                BDBSujectP2PListModel *platformModel = [[BDBSujectP2PListModel alloc] init];
+                
+                platformModel.PlatFormID = [resultSet stringForColumn:@"pid"];
+                platformModel.PlatformName = [resultSet stringForColumn:@"name"];
+                
+                [_platformArray addObject:platformModel];
+            }
+        }];
+    }
+}
 
 /**
  *  加载底部button（确认和重置）
@@ -183,7 +225,7 @@
     
 }
 /**
- *  加载筛选页面的自视图
+ *  加载筛选页面的子视图
  */
 - (void)loadFilterScrollViewSubView{
 
@@ -388,35 +430,7 @@
 
 }
 
-//加载所有平台信息
 
-- (void)loadP2PList{
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetP2PList"];
-    
-    NSMutableDictionary *parameterDict = [NSMutableDictionary dictionary];
-    
-    parameterDict[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameterDict[@"Device"] = @"0";
-    parameterDict[@"Type"] = @"0";
-    
-    [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-       
-        BDBSujectP2PListResponseModel *reponseModel = [BDBSujectP2PListResponseModel objectWithKeyValues:responseObject];
-        
-        self.platformArray = reponseModel.P2PList;
-        
-        [self loadFilterScrollViewSubView];
-        
-        [self loadButtonOfBottom];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"%@",error);
-    }];
-    
-}
 
 //平台按钮
 
@@ -451,18 +465,36 @@
                 
                 //将被选中的按钮添加到数组中，以便重置
                 [thisInstance.selectedFilterArray addObject:button];
-            }
-            
-            for (BDBSujectP2PListModel *model in _platformArray) {
-                
-                if([model.PlatformName isEqualToString:[tmpButton titleForState:UIControlStateNormal]]){
-  
-                    //将被选中的平台按钮添加数组中
-                    [thisInstance.selectedPlatformArray addObject:model.PlatFormID];
-
-                    break;
+                for (BDBSujectP2PListModel *model in _platformArray) {
+                    
+                    if([model.PlatformName isEqualToString:[tmpButton titleForState:UIControlStateNormal]]){
+                        
+                        //将被选中的平台按钮添加数组中
+                        [thisInstance.selectedPlatformArray addObject:model.PlatFormID];
+                        
+                        break;
+                    }
                 }
             }
+            
+            else{
+            
+                tmpButton.isSelected = NO;
+                [thisInstance.selectedFilterArray removeObject:tmpButton];
+                
+                for (BDBSujectP2PListModel *model in _platformArray) {
+                    
+                    if([model.PlatformName isEqualToString:[tmpButton titleForState:UIControlStateNormal]]){
+                        
+                        //将被选中的平台按钮移除数组
+                        [thisInstance.selectedPlatformArray removeObject:model.PlatFormID];
+                        
+                        break;
+                    }
+                }
+            }
+            
+
         }];
         [aView addSubview:button];
         
@@ -513,35 +545,109 @@
             
             if(!weakButton.isSelected){
                 
-                for (id obj in aView.subviews) {
-                    if([obj isKindOfClass:[BDBButtonForSift class]]){
-                        
-                        BDBButtonForSift *btn = obj;
-                        
-                        if(btn.isSelected == YES){
-                            
-                            btn.isSelected = NO;
-                            //移除上一个被选中的按钮
-                            [thisInstance.selectedFilterArray removeObject:btn];
-                            break;
-                        }
-                    }
-                }
+//                for (id obj in aView.subviews) {
+//                    if([obj isKindOfClass:[BDBButtonForSift class]]){
+//                        
+//                        BDBButtonForSift *btn = obj;
+//                        
+//                        if(btn.isSelected == YES){
+//                            
+//                            btn.isSelected = NO;
+//                            //移除上一个被选中的按钮
+//                            [thisInstance.selectedFilterArray removeObject:btn];
+//                            break;
+//                        }
+//                    }
+//                }
                 
                 weakButton.isSelected = YES;
                 //添加新选中的按钮
-                [thisInstance.selectedFilterArray addObject:button];
+                [thisInstance.selectedFilterArray addObject:weakButton];
             }
+            
+            else{
+            
+                weakButton.isSelected = NO;
+                [thisInstance.selectedFilterArray removeObject:weakButton];
+            }
+            
+            NSString *buttonTitle = [button titleForState:UIControlStateNormal];
+            
+            NSString *filterStr = [NSString string];
             
             switch (number) {
                 case 0:
-                    thisInstance.filterCondition[@"收益率"] = [button titleForState:UIControlStateNormal];
+                    
+                    if([buttonTitle isEqualToString:@"<12%"]){
+                        
+                        filterStr = @"0.0|0.12";
+                        
+                    }
+                    
+                    if([buttonTitle isEqualToString:@"12%-15%"]){
+                    
+                        filterStr = @"0.12|0.15";
+                        
+                    }
+                    
+                    if([buttonTitle isEqualToString:@">15%"]){
+                        
+                        filterStr = @"0.15|1.0";
+                        
+                    }
+                    
+                    [thisInstance.selectedProfitArray addObject:filterStr];
                     break;
                 case 1:
-                    thisInstance.filterCondition[@"期限"] = [button titleForState:UIControlStateNormal];
+                    
+                    if([buttonTitle isEqualToString:@"30天内"]){
+                        
+                        filterStr = @"0|30";
+
+                    }
+                    if([buttonTitle isEqualToString:@"1-3个月"]){
+                        
+                        filterStr = @"31|90";
+                    }
+                    if([buttonTitle isEqualToString:@"3-6个月"]){
+                        
+                        filterStr = @"91|120";
+                        
+                    }
+                    if([buttonTitle isEqualToString:@"6-12个月"]){
+                        
+                        filterStr = @"121|365";
+                        
+                    }
+                    if([buttonTitle isEqualToString:@"1-2年"]){
+                        
+                        filterStr = @"366|730";
+                        
+                    }
+                    if([buttonTitle isEqualToString:@"2年以上"]){
+                        
+                        filterStr = @"731|9999999999";
+                    }
+                    
+                    [thisInstance.selectedTermArray addObject:filterStr];
                     break;
                 case 2:
-                    thisInstance.filterCondition[@"进度"] = [button titleForState:UIControlStateNormal];
+                    
+                    if([buttonTitle isEqualToString:@"50%以内"]){
+                        
+                        filterStr = @"0|0.5";
+
+                    }
+                    if([buttonTitle isEqualToString:@"50%-80%"]){
+                        
+                        filterStr = @"0.5|0.8";
+                    }
+                    if([buttonTitle isEqualToString:@"80%以上"]){
+                        
+                        filterStr = @"0.8|1.0";
+                    }
+                    
+                    [thisInstance.selectedProgressArray addObject:filterStr];
                     break;
                 default:
                     break;
@@ -569,12 +675,14 @@
     
     button.backgroundColor = UIColorWithRGB(228, 93, 99);
     
-    _filterCondition[@"平台"] = _selectedPlatformArray;
+    //_filterCondition[@"平台"] = _selectedPlatformArray;
     
     BDBSubjectDeepexcavationContronller *controller = [[BDBSubjectDeepexcavationContronller alloc] init];
     
-    controller.filterCondition = _filterCondition;
-        
+    controller.selectedPlatformArray = _selectedPlatformArray;
+    controller.selectedProfitArray = _selectedProfitArray;
+    controller.selectedTermArray = _selectedTermArray;
+    controller.selectedProgressArray = _selectedProgressArray;
     [self.navigationController pushViewController:controller animated:YES];
 }
 /**
@@ -589,13 +697,13 @@
         button.isSelected = NO;
     }
     
-    [_selectedPlatformArray removeAllObjects];
+    [self.selectedPlatformArray removeAllObjects];
     
-    _filterCondition[@"收益率"] = @"";
+    [self.selectedProgressArray removeAllObjects];
     
-    _filterCondition[@"期限"] = @"";
+    [self.selectedTermArray removeAllObjects];
     
-    _filterCondition[@"进度"] = @"";
+    [self.selectedProgressArray removeAllObjects];
 }
 
 /**

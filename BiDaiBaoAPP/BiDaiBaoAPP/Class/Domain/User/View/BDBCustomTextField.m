@@ -19,7 +19,7 @@
 
 - (CGRect)textRectForBounds:(CGRect)bounds{
 
-    CGRect textRect = CGRectMake(70, 0, bounds.size.width - 150,bounds.size.height);
+    CGRect textRect = CGRectMake(60, 0, bounds.size.width - 150,bounds.size.height);
     
     self.textRect = textRect;
     return textRect;
@@ -27,19 +27,19 @@
 //
 - (CGRect)placeholderRectForBounds:(CGRect)bounds{
     
-    return CGRectMake(70, 0, bounds.size.width,bounds.size.height);
+    return CGRectMake(60, 0, bounds.size.width,bounds.size.height);
 
 }
 //
 - (CGRect)editingRectForBounds:(CGRect)bounds{
 
-    return CGRectMake(70, 0, bounds.size.width - 150,bounds.size.height);
+    return CGRectMake(60, 0, bounds.size.width - 150,bounds.size.height);
 }
 
 
 - (CGRect)leftViewRectForBounds:(CGRect)bounds{
 
-    CGRect leftViewRect = CGRectMake(25,10, 25, 25);
+    CGRect leftViewRect = CGRectMake(25,10, 20, 20);
 
     return leftViewRect;
 }

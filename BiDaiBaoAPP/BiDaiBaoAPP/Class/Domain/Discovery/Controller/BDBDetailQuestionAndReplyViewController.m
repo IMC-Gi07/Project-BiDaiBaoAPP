@@ -165,28 +165,35 @@ static NSString *const kCellIdentifier2 = @"cell2";
     parameters[@"Machine_id"] = [UIDevice currentDevice].identifierForVendor.UUIDString;
     parameters[@"ID"] = _ID;
     NSString *answer = _answerTextField.text;
-    parameters[@"Answerinfo"] = answer;
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *answerUser = [userDefaults objectForKey:@"UID"];
-    if (answerUser == nil) {
-        parameters[@"AnswerUser"] = @"1***8";
-    }else {
-        parameters[@"AnswerUser"] = answerUser;
-    }    
-    parameters[@"UserType"] = [NSString stringWithFormat:@"%i",0];
-    [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        
-        if ([responseObject[@"Result"] isEqualToString:@"0"]) {
-            _answerTextField.text = nil;
-            [self refreshDatas];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"回复成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alertView show];
+    if (![answer isEqualToString:@""]) {
+        parameters[@"Answerinfo"] = answer;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *answerUser = [userDefaults objectForKey:@"UID"];
+        if (answerUser == nil) {
+            parameters[@"AnswerUser"] = @"1***8";
+        }else {
+            parameters[@"AnswerUser"] = answerUser;
         }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"回复失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        parameters[@"UserType"] = [NSString stringWithFormat:@"%i",0];
+        [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+            
+            if ([responseObject[@"Result"] isEqualToString:@"0"]) {
+                _answerTextField.text = nil;
+                [self refreshDatas];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"回复成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"回复失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        }];
+
+    }else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"回复内容不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alertView show];
-    }];
+
+    }
     
     
 }
@@ -216,7 +223,11 @@ static NSString *const kCellIdentifier2 = @"cell2";
 
         BDBDetailQuestionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
         if (![_questionModel[@"AskUser"] isKindOfClass:[NSNull class]]) {
-            cell.askUser.text = _questionModel[@"AskUser"];
+            NSString *user = _questionModel[@"AskUser"];
+            if (user.length > 0) {
+                cell.askUser.text = [self transformUserName:_questionModel[@"AskUser"]];
+            }
+            
         }
         if (![_questionModel[@"AskTime"] isKindOfClass:[NSNull class]]) {
             cell.askTime.text = _questionModel[@"AskTime"];
@@ -244,7 +255,9 @@ static NSString *const kCellIdentifier2 = @"cell2";
             cell.hot.text = model.Hot;
         }
         if (![model.AnswerUser isKindOfClass:[NSNull class]]) {
-            cell.titleLable.text = model.AnswerUser;
+            if (model.AnswerUser.length > 0) {
+                cell.titleLable.text = [self transformUserName:model.AnswerUser];
+            }
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -329,5 +342,17 @@ static NSString *const kCellIdentifier2 = @"cell2";
     
 }
 
+- (NSString *)transformUserName:(NSString *)userName {
+    if ([userName isEqualToString:@"匿名"]) {
+        return userName;
+    }else {
+        NSString *first = [userName substringToIndex:1];
+        NSString *last = [userName substringFromIndex:(userName.length - 1)];
+        NSString *temp = [first stringByAppendingString:@"***"];
+        NSString *final = [temp stringByAppendingString:last];
+        return final;
+    }
+    
+}
 
 @end

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="opW-hH-Hhi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="opW-hH-Hhi">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -3864,7 +3863,6 @@
         <!--Ask Question View Controller-->
         <scene sceneID="aEW-jX-KYF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DgP-Py-0Qw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="plW-v5-eDS" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dOh-TQ-Oq9"/>
@@ -3902,7 +3900,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNI-0f-0GQ">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -3958,13 +3956,13 @@
                         <outlet property="titleTextField" destination="wNR-lP-cAk" id="WuN-1i-GhW"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DgP-Py-0Qw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2515" y="-266"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="2yA-u2-bSh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EpB-IH-ycp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="EJF-Hv-j7L" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Of-s4-mLd"/>
@@ -3977,13 +3975,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EpB-IH-ycp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2880" y="-266"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="mSo-Pn-A1e">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vj-1u-pFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="iUY-ld-sK3" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xyY-1n-b3t"/>
@@ -4021,7 +4019,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf3-vc-6ar">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4077,13 +4075,13 @@
                         <outlet property="titleTextField" destination="1Dp-Fb-FPj" id="aTU-KC-h9V"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vj-1u-pFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1684" y="2498"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="3rs-mW-4Sr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FQU-9Q-Ye7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="4tG-vq-W1D" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4OQ-en-nX6"/>
@@ -4096,13 +4094,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQU-9Q-Ye7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2020" y="2482"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="TJ4-vP-Jjt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sSV-Ik-00h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="F6T-vf-WyU" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b2K-5l-uW3"/>
@@ -4140,7 +4138,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Co7-QJ-jzi">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4196,13 +4194,13 @@
                         <outlet property="titleTextField" destination="IRn-uD-aBl" id="xV1-eL-rHk"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sSV-Ik-00h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3160" y="2490"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="TvJ-eP-XHH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4KU-ye-EcI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="h2a-UN-lgo" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UdU-Ug-KWB"/>
@@ -4215,13 +4213,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4KU-ye-EcI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3527" y="2490"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="bcX-6r-nKh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dcM-eG-wyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9NX-my-Stx" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dGL-CJ-5nt"/>
@@ -4259,7 +4257,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epu-Yv-wOb">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4315,13 +4313,13 @@
                         <outlet property="titleTextField" destination="YZK-1i-5mh" id="iWx-U7-vfe"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dcM-eG-wyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2391" y="2490"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="Qtd-go-dZK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0gW-wG-SKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="DVT-8J-vyH" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ocI-HX-huO"/>
@@ -4334,13 +4332,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0gW-wG-SKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2775" y="2490"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="Cb7-XF-Tbj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QKe-ld-hVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="1zI-5f-L2b" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lRO-jf-OvB"/>
@@ -4378,7 +4376,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ns-Yn-CT1">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4434,13 +4432,13 @@
                         <outlet property="titleTextField" destination="kap-c3-bBf" id="toE-Fm-zUo"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QKe-ld-hVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="946" y="2490"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="Wr8-Fq-1T0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uGW-Ue-qDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="eqv-4N-JIb" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NyX-zP-HYr"/>
@@ -4453,13 +4451,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uGW-Ue-qDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1303" y="2498"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="wq2-9p-48O">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t9U-nP-5ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zKP-uL-J36" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UAt-Id-5MP"/>
@@ -4497,7 +4495,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOL-pb-ptu">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4553,13 +4551,13 @@
                         <outlet property="titleTextField" destination="QMg-yp-roM" id="YbB-rU-p69"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t9U-nP-5ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="212" y="2482"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="BPe-tR-sTt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Mb-TX-OYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="gq1-MB-rqU" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eGL-Ru-z2S"/>
@@ -4572,13 +4570,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Mb-TX-OYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="587" y="2490"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="eGf-va-W2E">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mbx-CR-WiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8KR-qG-Vme" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bH3-Yg-uq8"/>
@@ -4616,7 +4614,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4L-l0-77y">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4672,13 +4670,13 @@
                         <outlet property="titleTextField" destination="8wp-Fx-Xhb" id="6Ov-VH-RBz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbx-CR-WiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-516" y="2482"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="qB0-AN-dX5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dEG-4I-h2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8dM-UC-kTL" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DrJ-US-gi5"/>
@@ -4691,13 +4689,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEG-4I-h2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-144" y="2482"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="WiL-1h-Suj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dnm-1z-dyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Buw-6d-5Pq" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A34-mx-ViR"/>
@@ -4735,7 +4733,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CzK-Ug-Dni">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4791,13 +4789,13 @@
                         <outlet property="titleTextField" destination="sfv-1r-4Jr" id="xWc-kj-RVA"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dnm-1z-dyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1334" y="2482"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="hWL-nO-hRt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Upu-Y6-WK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="grC-XY-COM" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Kj-Oz-YgS"/>
@@ -4810,13 +4808,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Upu-Y6-WK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-900" y="2482"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="GiD-Mo-osf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kq9-Vm-zkr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="MFL-S9-LeN" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RAs-Hg-kaI"/>
@@ -4854,7 +4852,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouc-OE-mpP">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" title="Button" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" title="Button" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -4910,13 +4908,13 @@
                         <outlet property="titleTextField" destination="7HS-Qy-mVx" id="N0v-gE-dtS"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kq9-Vm-zkr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2131" y="2482"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="nbe-MC-b2N">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wrf-0Q-7NV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8q3-Am-frq" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nvl-0x-3QU"/>
@@ -4929,13 +4927,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wrf-0Q-7NV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1705" y="2482"/>
         </scene>
         <!--Ask Question View Controller-->
         <scene sceneID="Mp1-uf-eY8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AfF-ZC-yqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="tDz-yP-7LU" customClass="BDBAskQuestionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q6c-Ns-cCB"/>
@@ -4945,7 +4943,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="517-3Y-wRQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="517-3Y-wRQ">
                                 <rect key="frame" x="25" y="89" width="270" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -4971,13 +4969,13 @@
                                     <action selector="askButtonClickedAction:" destination="tDz-yP-7LU" eventType="touchUpInside" id="sMZ-XA-VNI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0D-Ue-qdk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0D-Ue-qdk">
                                 <rect key="frame" x="275" y="94" width="20" height="20"/>
-                                <state key="normal" image="73B7CD17-6362-4B65-9410-8D054A923738">
+                                <state key="normal" image="5A554E24-E1B4-4D8B-B427-07CD238E9717">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3eZ-4X-hK8">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eZ-4X-hK8">
                                 <rect key="frame" x="25" y="194" width="270" height="219"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -4991,7 +4989,7 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kn5-N8-lrd">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kn5-N8-lrd">
                                 <rect key="frame" x="25" y="138" width="270" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -5029,13 +5027,13 @@
                         <outlet property="titleTextField" destination="Kn5-N8-lrd" id="kU1-Vf-PXg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AfF-ZC-yqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1439" y="-878"/>
         </scene>
         <!--Ask Question Type View Controller-->
         <scene sceneID="qD6-fZ-wub">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="79i-mr-rEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="T22-zP-KZ8" customClass="BDBAskQuestionTypeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uhy-yF-b5a"/>
@@ -5048,12 +5046,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="79i-mr-rEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1832" y="-878"/>
         </scene>
     </scenes>
     <resources>
-        <image name="73B7CD17-6362-4B65-9410-8D054A923738" width="8" height="16">
+        <image name="5A554E24-E1B4-4D8B-B427-07CD238E9717" width="8" height="16">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

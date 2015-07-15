@@ -23,18 +23,19 @@
     self.slider2.minimumValue = 1;
     self.slider2.maximumValue = 25;
     
-    self.slider2.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:26];
-    self.slider2.textColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    self.slider2.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:17];
+    self.slider2.textColor = [UIColor whiteColor];
     
     UIColor *blue = [UIColor colorWithHue:0.58 saturation:0.75 brightness:1.0 alpha:1.0];
 
     [self.slider2 setPopUpViewAnimatedColors:@[blue] withPositions:@[@0]];
     
-    
-    
+    [self.slider2 showPopUpViewAnimated:NO];
+
+
     
     UIImage *stetchLeftTrack= [UIImage imageNamed:@"slider_min_blackground"];
-    UIImage *stetchRightTrack = [UIImage imageNamed:@"slider_max_blackground.png"];
+    UIImage *stetchRightTrack = [UIImage imageNamed:@"slider_max_blackground"];
     //滑块图片
     UIImage *thumbImage = [UIImage imageNamed:@"slider_button.png"];
     [self.slider2 setFrame:CGRectMake(30, 320, 257, 7)];
@@ -46,6 +47,9 @@
     
     [self.slider2 setThumbImage:thumbImage forState:UIControlStateHighlighted];
     [self.slider2 setThumbImage:thumbImage forState:UIControlStateNormal];
+    
+    
+    
     
     
     

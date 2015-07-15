@@ -7,6 +7,7 @@
 //
 
 #import "BDBUserConnectUsViewController.h"
+#import "BDBUserWebViewController.h"
 
 @interface BDBUserConnectUsViewController ()<UIAlertViewDelegate>
 
@@ -20,7 +21,7 @@
     [alertView show];
 }
 - (IBAction)localCompanny:(UIButton *)sender {
-    UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.view.center.y, 320, 60)];
+    UILabel * tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.view.center.y, [UIScreen mainScreen].bounds.size.width, 60)];
     tishiLabel.numberOfLines = 3;
     tishiLabel.text = @"厦门市思明区观音山商务运营中心4号楼12层1205";
     tishiLabel.textColor = [UIColor whiteColor];
@@ -35,6 +36,11 @@
     
 }
 - (IBAction)bankerURL:(UIButton *)sender {
+    BDBUserWebViewController *webViewcontroller = [[BDBUserWebViewController alloc]init];
+    
+    [self.navigationController pushViewController:webViewcontroller animated:YES];
+    
+    
 }
 
 - (void)viewDidLoad {

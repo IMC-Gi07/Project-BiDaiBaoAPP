@@ -16,7 +16,7 @@
 #import "BDBUserRegisterViewController.h"
 
 
-@interface BDBWarningViewController ()<UITableViewDataSource,UITableViewDelegate,BDBWarningTableViewCellDelegate,BDBWarningTableViewCellTwoDelegate>
+@interface BDBWarningViewController ()<UITableViewDataSource,UITableViewDelegate,BDBWarningTableViewCellDelegate,BDBWarningTableViewCellTwoDelegate,BDBWarningAddViewControllerDlegate>
 
 @property(nonatomic,weak) ZXLLoadDataIndicatePage *indicatePage;
 
@@ -33,7 +33,7 @@
 @property (nonatomic ,strong) NSMutableArray *warningTimeModels;
 
 
-@property (weak, nonatomic) IBOutlet UIButton *addWarningButton;
+
 
 /**
  *  平台数据
@@ -187,6 +187,7 @@
             parameters[@"PSW"] = [userDefaults objectForKey:@"PSW"];
             
             [manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+                
                 [self refreshWarningListTableViewDatas];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 ZXLLOG(@"error response: %@",error);
@@ -215,9 +216,19 @@
         }
 	}
 }
+
 - (IBAction)warningAddButton:(UIButton *)sender {
     [self performSegueWithIdentifier:@"towarningAddViewControllerSegue" sender:self];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"towarningAddViewControllerSegue"]) {
+        BDBWarningAddViewController *controller = [segue destinationViewController];
+        controller.TBDelegate = self;
+    }
+}
+
+
 
 #pragma mark - Private Methods
 - (void)refreshWarningListTableViewDatas {
@@ -231,7 +242,7 @@
 	parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
 	parameters[@"Device"] = @"0";
 	parameters[@"UserType"] = @"0";
-
+    
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	NSString *UID = [userDefaults objectForKey:@"UID"];
 	NSString *PSW = [userDefaults objectForKey:@"PSW"];
@@ -245,10 +256,13 @@
 		
 		return;
 	}
+    
+    parameters[@"UID"] = UID;
+    parameters[@"PSW"] = PSW;
 
 	
 	[manager POST:requestUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-	
+        
 		BDBWarningResponseModel *warningResponseModel = [BDBWarningResponseModel objectWithKeyValues:responseObject];
 		self.warningAddModels = warningResponseModel.AlarmEarningsList;
 		
@@ -300,7 +314,11 @@
 
 }
 
+#pragma mark - Delegate
 
+-(void)CompleteWarningAdd{
+    [self.warningListTableView.header beginRefreshing];
+}
 
 
 @end

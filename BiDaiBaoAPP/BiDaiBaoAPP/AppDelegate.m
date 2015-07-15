@@ -29,8 +29,7 @@ static NSString *const kVersionCodeKey = @"VersionCode";
 	self.window = [[UIWindow alloc] init];
 	self.window.backgroundColor = [UIColor whiteColor];
 	[self.window makeKeyAndVisible];
-	
-	//推迟设置window的frame
+	//推迟设置window的frame，解决底部20个px空白
 	self.window.frame = [[UIScreen mainScreen] bounds];
 
 	//获取旧版本号
@@ -103,7 +102,7 @@ static NSString *const kVersionCodeKey = @"VersionCode";
 		NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 		parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
 		parameters[@"Device"] = @"0";
-		parameters[@"Type"] = @"0";
+		parameters[@"Type"] = @"1";
 		
 		[httpRequestOperationManager POST:requestURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 			BDBGetP2PListResponseModel *responseModel = [BDBGetP2PListResponseModel objectWithKeyValues:responseObject];

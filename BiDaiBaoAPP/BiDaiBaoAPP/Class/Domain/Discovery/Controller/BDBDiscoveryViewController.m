@@ -21,6 +21,7 @@
 #import "BDBDiscoveryAdvPicModel.h"
 #import "ZXLLoadDataIndicatePage.h"
 #import "BDBDiscoveryDetailNewsViewController.h"
+#import "UIImageView+WebCache.h"
 @interface BDBDiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,BDBCollectionCellDelegate>
 
 @property (nonatomic,assign) BOOL isSegmentFirst;
@@ -40,7 +41,7 @@
 
 @property(nonatomic,strong) NSMutableArray *advPicArray2;
 
-@property (nonatomic,strong) ZXLLoadDataIndicatePage *loadDataIndicatePage;
+@property (nonatomic,weak) ZXLLoadDataIndicatePage *loadDataIndicatePage;
 
 @property (nonatomic,assign) NSIndexPath *selectedIndexPath;
 
@@ -48,7 +49,7 @@
 
 @property (nonatomic,strong) NSArray *advPicUrls_2;
 
-- (void)searchButtonClickedAction:(UIBarButtonItem *)search;
+//- (void)searchButtonClickedAction:(UIBarButtonItem *)search;
 - (void)refreshDatas;
 - (void)loadMoreDatas;
 - (void)initHeaderAndFooter;
@@ -169,11 +170,9 @@
             informationCell.firstSection.text = news.FirstSection;
             informationCell.commentNum.text = news.CommentNum;
             informationCell.PopularIndex.text = news.PopularIndex;
-            NSString *picUrl = news.PicURL;
-            NSURL *picURL = [NSURL URLWithString:picUrl];
-            NSData *picData = [NSData dataWithContentsOfURL:picURL];
-            UIImage *pic = [UIImage imageWithData:picData];
-            informationCell.pic.image = pic;
+			
+			[informationCell.pic sd_setImageWithURL:[NSURL URLWithString:news.PicURL] placeholderImage:nil options:SDWebImageRetryFailed|SDWebImageLowPriority];
+			
             return informationCell;
         }
     }else {
@@ -218,21 +217,21 @@
 
 
 
--(void)searchButtonClickedAction:(UIBarButtonItem *)search {
-   
-    [self performSegueWithIdentifier:@"searchQuestions" sender:self];
-
-}
+//-(void)searchButtonClickedAction:(UIBarButtonItem *)search {
+//   
+//    [self performSegueWithIdentifier:@"searchQuestions" sender:self];
+//
+//}
 
 
 //初始化导航栏样式
 - (void)initNavigationBar {
     //给导航控制栏添加button
-    UIButton *search = [[UIButton alloc] initWithFrame:(CGRect){0,0,44,44}];
-    [search setImage:[UIImage imageNamed:@"Discovery_navigation_search"] forState:UIControlStateNormal];
-    [search addTarget:self action:@selector(searchButtonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightView = [[UIBarButtonItem alloc] initWithCustomView:search];
-    self.navigationItem.rightBarButtonItem = rightView;
+//    UIButton *search = [[UIButton alloc] initWithFrame:(CGRect){0,0,44,44}];
+//    [search setImage:[UIImage imageNamed:@"Discovery_navigation_search"] forState:UIControlStateNormal];
+//    [search addTarget:self action:@selector(searchButtonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *rightView = [[UIBarButtonItem alloc] initWithCustomView:search];
+//    self.navigationItem.rightBarButtonItem = rightView;
     
     UIView *titleView = [[UIView alloc] initWithFrame:(CGRect){0,0,200,30}];
     _index_0 = [[UIButton alloc] initWithFrame:(CGRect){0,0,100,30}];
@@ -273,20 +272,20 @@
         
         if (_loadDataIndicatePage) {
             [_loadDataIndicatePage hide];
-            
         }
         [_tableView reloadData];
-        ZXLLOG(@"NewsList:success..");
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"获取数据失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+		if (_loadDataIndicatePage) {
+			__weak typeof(self) thisInstance = self;
+			[_loadDataIndicatePage showReloadButtonWithClickedHandler:^{
+				[thisInstance refreshDatas];
+			}];
+		}
     }];
     
     
     
     //获取轮播图片URL_1
-
     AFHTTPRequestOperationManager *manager_2 = [AFHTTPRequestOperationManager manager];
     NSString *picUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetAdvPic"];
     NSMutableDictionary *picParameters = [NSMutableDictionary dictionary];
@@ -297,14 +296,13 @@
         NSString *string = advPicModel.PicList;
         self.advPicUrls = [string componentsSeparatedByString:@","];
         [self getAdvImages_1];
-        ZXLLOG(@"picUrls:%@",_advPicUrls);
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片获取失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片获取失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alertView show];
     }];
     
     //获取轮播图片URL_2
-    
     AFHTTPRequestOperationManager *manager_3 = [AFHTTPRequestOperationManager manager];
     NSString *picUrl_2 = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetAdvPic"];
     NSMutableDictionary *picParameters_2 = [NSMutableDictionary dictionary];
@@ -315,16 +313,15 @@
         NSString *string = advPicModel.PicList;
         self.advPicUrls_2 = [string componentsSeparatedByString:@","];
         [self getAdvImages_2];
-        ZXLLOG(@"picUrls:%@",_advPicUrls_2);
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片获取失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"图片获取失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alertView show];
     }];
     
 }
 
 - (void)getAdvImages_1 {
-
     self.advPicArray = [NSMutableArray array];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -334,11 +331,11 @@
             [manager GET:picURL parameters:nil success:^(AFHTTPRequestOperation *operation, NSData *responseObject) {
                 UIImage *pic = [UIImage imageWithData:responseObject];
                 [_advPicArray addObject:pic];
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                ZXLLOG(@"pic1 done..");
+//                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                ZXLLOG(@"pic1 failed..");
+
             }];
             
         }
@@ -347,7 +344,6 @@
 }
 
 - (void)getAdvImages_2 {
-    
     self.advPicArray2 = [NSMutableArray array];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -357,11 +353,11 @@
             [manager GET:picURL parameters:nil success:^(AFHTTPRequestOperation *operation, NSData *responseObject) {
                 UIImage *pic = [UIImage imageWithData:responseObject];
                 [_advPicArray2 addObject:pic];
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                ZXLLOG(@"pic2 done..");
+//                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                ZXLLOG(@"pic2 failed..");
+
             }];
             
         }
@@ -388,7 +384,7 @@
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"error response: %@",error);
+
     }];
     
 }

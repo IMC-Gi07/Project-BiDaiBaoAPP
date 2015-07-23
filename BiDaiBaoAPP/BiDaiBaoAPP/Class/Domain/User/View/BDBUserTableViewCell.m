@@ -26,6 +26,10 @@
     if(self = [super initWithCoder:aDecoder]){
     
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+		
+		UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellClickedAction)];
+		
+		[self addGestureRecognizer:tapGesture];
     }
     return self;
 }
@@ -86,7 +90,17 @@
     
 }
 
+- (void)cellClickedAction{
 
+	if(_answerLebel.text.length > 0){
+	
+		[_delegate pushDestinationController:_answerModel.ID];
+	
+	}
+	else{
+		[_delegate pushDestinationController:_questionModel.ID];
+	}
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

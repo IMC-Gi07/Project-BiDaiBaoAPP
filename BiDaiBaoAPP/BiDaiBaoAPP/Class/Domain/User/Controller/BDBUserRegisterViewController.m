@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *
 userPassWordTextField;
 
+@property (weak, nonatomic) UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) UIView *warningView;
 /**
  *  更新微信支付宝等第三方登入按钮约束
  */
@@ -172,6 +174,7 @@ userPassWordTextField;
         tishiLabel.backgroundColor = [UIColor grayColor];
         tishiLabel.font = [UIFont fontWithName:@"Arial" size:15];
         tishiLabel.textAlignment = NSTextAlignmentCenter;
+        tishiLabel.alpha = 0.5f;
         [self.view addSubview:tishiLabel];
         /**
          *  一秒后移除提示
@@ -186,13 +189,42 @@ userPassWordTextField;
         
     }
     
-    
-    /**
-     *      开始请求数据
-     */
+    else{
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        if ([UIApplication sharedApplication].networkActivityIndicatorVisible == YES) {
+            UIView *warningView = [[UIView alloc]init];
+            warningView.backgroundColor = [UIColor grayColor];
+            warningView.alpha = 0.7f;
+            [self.view addSubview:warningView];
+            warningView.translatesAutoresizingMaskIntoConstraints = NO;
+            NSArray *Hlayout = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[warningView]|" options:0 metrics:nil views:@{@"warningView":warningView}];
+            NSArray *Vlayout = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[warningView(height)]" options:0 metrics:@{@"height":@SCREEN_HEIGHT} views:@{@"warningView":warningView}];
+            
+            [self.view addConstraints:Hlayout];
+            [self.view addConstraints:Vlayout];
+            self.warningView = warningView;
+			
+            UIActivityIndicatorView *indecitorView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.origin.y, 100, 100)];
+            indecitorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+            indecitorView.center = self.view.center;
+            
+            //indecitorView.color = [UIColor redColor];
+            [indecitorView startAnimating];
+            [warningView addSubview:indecitorView];
+            self.activityIndicatorView = indecitorView;
+            
+            //[self.view bringSubviewToFront:view];
+
+        }
+        /**
+         *      开始请求数据
+         */
+        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         //manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+        
         //网址后面加上getlogin接口
         NSString *userName = _userNameTextField.text;
         NSString *passWord = _userPassWordTextField.text;
@@ -204,125 +236,137 @@ userPassWordTextField;
         parameters[@"UserType"] = @"0";
         parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
         parameters[@"Device"] = @"0";
+        
+        [manager POST:requesturl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            ZXLLOG(@"返回结果:%@",responseObject[@"Msg"]);
+            ZXLLOG(@"%@",userName);
+            ZXLLOG(@"%@",passWord);
+            ZXLLOG(@"rusult%@",responseObject[@"EMail"]);
+            ZXLLOG(@"写进去时候的密码%@",resultStr);
+            NSString *userNiName = responseObject[@"NiName"];
+            NSString *Photo = responseObject[@"Photo"];
+            NSString *emial = responseObject[@"EMail"];
+            //NSString *userNames = responseObject[@"UserName"];
+            /**
+             *  如果数据请求成功
+             */
+            if ([responseObject[@"Result"] isEqualToString:@"0"]) {
+                
+                /**
+                 *  获取偏好设置，立刻把账号和密码写到沙盒里面
+                 */
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults setObject:userName forKey:@"UID"];
+                [userDefaults setObject:resultStr forKey:@"PSW"];
+                [userDefaults setObject:userNiName forKey:@"NiName"];
+                [userDefaults setObject:Photo forKey:@"Photo"];
+                [userDefaults setObject:emial forKey:@"EMail"];
+                [userDefaults synchronize];
+                /**
+                 提示登入成功
+                 */
+//                UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+//                dengruLabel.text = @"登录成功";
+//                dengruLabel.textColor = [UIColor whiteColor];
+//                dengruLabel.backgroundColor = [UIColor grayColor];
+//                dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
+//                dengruLabel.textAlignment = NSTextAlignmentCenter;
+//                
+//                [[UIApplication sharedApplication].keyWindow addSubview:dengruLabel];
+//                [self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:1];
+//                
+                
+                /**
+                 *  返回一个字典 用模型承接
+                 */
+                BDBUserReturnResponseModel *noticeResponseModel = [BDBUserReturnResponseModel objectWithKeyValues:responseObject];
+                
+                
+                ZXLLOG(@"图像地址:%@",noticeResponseModel.Photo);
+                ZXLLOG(@"msg信息:%@",noticeResponseModel.Msg);
+                ZXLLOG(@"昵称:%@",noticeResponseModel.NiName);
+                ZXLLOG(@"用户名:%@",noticeResponseModel.UserName);
+                
+                
+                
+                //再次请求收藏和我的消息借口
+                
+                //获取偏好设置帐号和密码
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                //读取保存的数据
+                NSString *defaultsUID = [defaults objectForKey:@"UID"];
+                NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+                [defaults synchronize];
+                ZXLLOG(@"帐号 = %@,密码 ＝ %@",defaultsUID,defaultsPSW);
+                
+                
+                AFHTTPRequestOperationManager *GetMyParamManager = [AFHTTPRequestOperationManager manager];
+                //够造网址
+                NSString *GetMyParamUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetMyParam"];
+                //数据请求的参数
+                NSMutableDictionary *GetMyParamParameters = [NSMutableDictionary dictionary];
+                GetMyParamParameters[@"UID"] = defaultsUID;
+                GetMyParamParameters[@"PSW"] = defaultsPSW;
+                
+                [GetMyParamManager POST:GetMyParamUrl parameters:GetMyParamParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    ZXLLOG(@"得出我的收藏%@",responseObject[@"StoreNum"]);
+                    ZXLLOG(@"得出我的消息%@",responseObject[@"MsgNum"]);
+                    ZXLLOG(@"得出字典%@",responseObject);
+                    
+                    NSUserDefaults *GetMyParamDefaults = [NSUserDefaults standardUserDefaults];
+                    [GetMyParamDefaults setObject:responseObject[@"StoreNum"] forKey:@"StoreNum"];
+                    [GetMyParamDefaults setObject:responseObject[@"MsgNum"] forKey:@"MsgNum"];
+                    [GetMyParamDefaults synchronize];
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+					[UIApplication sharedApplication].networkActivityIndicatorVisible =NO;
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    ZXLLOG(@"%@",error);
+                }];
+            }
+            
+            
+            
+            /**
+             *  如果请求不成功
+             *
+             *  @param 0 0 description
+             *
+             *  @return return value description
+             */
+            else if ([responseObject[@"Result"] isEqualToString:@"1"] && _userNameTextField.text.length > 0 && _userPassWordTextField.text.length > 0) {
+                
+				[_warningView removeFromSuperview];
+				[_activityIndicatorView removeFromSuperview];
+				
+                UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+                
+                dengruLabel.text = @"账户或密码错误";
+                dengruLabel.textColor = [UIColor whiteColor];
+                dengruLabel.backgroundColor = [UIColor grayColor];
+                dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
+                dengruLabel.textAlignment = NSTextAlignmentCenter;
+                
+                [self.view addSubview:dengruLabel];
+                [self performSelector:@selector(removedengru:) withObject:dengruLabel afterDelay:1];
+                
+            }
+            
+            
+            
+            
+            
+        }  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ZXLLOG(@"错误信息:%@",error);
+        }];
+
+        
+        
+    }
     
-    [manager POST:requesturl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        ZXLLOG(@"返回结果:%@",responseObject[@"Msg"]);
-        ZXLLOG(@"%@",userName);
-        ZXLLOG(@"%@",passWord);
-        ZXLLOG(@"rusult%@",responseObject[@"Result"]);
-        ZXLLOG(@"%@",resultStr);
-       NSString *userNiName = responseObject[@"NiName"];
-        
-        
-        /**
-         *  如果数据请求成功
-         */
-        if ([responseObject[@"Result"] isEqualToString:@"0"]) {
-            
-            /**
-             *  获取偏好设置，立刻把账号和密码写到沙盒里面
-             */
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setObject:userName forKey:@"UID"];
-            [userDefaults setObject:resultStr forKey:@"PSW"];
-            [userDefaults setObject:userNiName forKey:@"NiName"];
-            [userDefaults synchronize];
-            NSLog(@"用户名%@",userNiName);
-            /**
-             提示登入成功
-             */
-            UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
-            dengruLabel.text = @"登录成功";
-            dengruLabel.textColor = [UIColor whiteColor];
-            dengruLabel.backgroundColor = [UIColor grayColor];
-            dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
-            dengruLabel.textAlignment = NSTextAlignmentCenter;
-            
-            [[UIApplication sharedApplication].keyWindow addSubview:dengruLabel];
-            [self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:1];
-            
-            
-            /**
-             *  返回一个字典 用模型承接
-             */
-            BDBUserReturnResponseModel *noticeResponseModel = [BDBUserReturnResponseModel objectWithKeyValues:responseObject];
-            
-            
-            ZXLLOG(@"图像地址:%@",noticeResponseModel.Photo);
-            ZXLLOG(@"msg信息:%@",noticeResponseModel.Msg);
-            ZXLLOG(@"昵称:%@",noticeResponseModel.NiName);
-            ZXLLOG(@"用户名:%@",noticeResponseModel.UserName);
-            
-            
-            
-//再次请求收藏和我的消息借口
-            
-            //获取偏好设置帐号和密码
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            //读取保存的数据
-            NSString *defaultsUID = [defaults objectForKey:@"UID"];
-            NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
-            [defaults synchronize];
-            ZXLLOG(@"帐号 = %@,密码 ＝ %@",defaultsUID,defaultsPSW);
-            
-            
-            AFHTTPRequestOperationManager *GetMyParamManager = [AFHTTPRequestOperationManager manager];
-            //够造网址
-            NSString *GetMyParamUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetMyParam"];
-            //数据请求的参数
-            NSMutableDictionary *GetMyParamParameters = [NSMutableDictionary dictionary];
-            GetMyParamParameters[@"UID"] = defaultsUID;
-            GetMyParamParameters[@"PSW"] = defaultsPSW;
-            
-            [GetMyParamManager POST:GetMyParamUrl parameters:GetMyParamParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                ZXLLOG(@"得出我的收藏%@",responseObject[@"StoreNum"]);
-                ZXLLOG(@"得出我的消息%@",responseObject[@"MsgNum"]);
-                ZXLLOG(@"得出字典%@",responseObject);
-                
-                NSUserDefaults *GetMyParamDefaults = [NSUserDefaults standardUserDefaults];
-                [GetMyParamDefaults setObject:responseObject[@"StoreNum"] forKey:@"StoreNum"];
-                [GetMyParamDefaults setObject:responseObject[@"MsgNum"] forKey:@"MsgNum"];
-                [GetMyParamDefaults synchronize];
-                [self.navigationController popViewControllerAnimated:YES];
-                
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                ZXLLOG(@"%@",error);
-            }];
-        }
-        
-        
-        
-        /**
-         *  如果请求不成功
-         *
-         *  @param 0 0 description
-         *
-         *  @return return value description
-         */
-        else if ([responseObject[@"Result"] isEqualToString:@"1"] && _userNameTextField.text.length > 0 && _userPassWordTextField.text.length > 0) {
-            
-            UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
-            
-            dengruLabel.text = @"账户或密码错误";
-            dengruLabel.textColor = [UIColor whiteColor];
-            dengruLabel.backgroundColor = [UIColor grayColor];
-            dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
-            dengruLabel.textAlignment = NSTextAlignmentCenter;
-            
-            [self.view addSubview:dengruLabel];
-            [self performSelector:@selector(removedengru:) withObject:dengruLabel afterDelay:1];
-            
-        }
-        
-        
-        
-        
-        
-    }  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ZXLLOG(@"错误信息:%@",error);
-}];
-  
+    
     
 }
 

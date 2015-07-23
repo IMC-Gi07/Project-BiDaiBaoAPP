@@ -10,6 +10,9 @@
       "filename" : "subject_cell_progress_img@2x.png"
     },
     {
+      "scale" : "3x",
+      "idiom" : "iphone",
+      "filename" : "subject_cell_progress_img@3x.png",
       "resizing" : {
         "mode" : "3-part-horizontal",
         "center" : {
@@ -20,10 +23,7 @@
           "right" : 20,
           "left" : 20
         }
-      },
-      "idiom" : "iphone",
-      "filename" : "subject_cell_progress_img@3x.png",
-      "scale" : "3x"
+      }
     }
   ],
   "info" : {

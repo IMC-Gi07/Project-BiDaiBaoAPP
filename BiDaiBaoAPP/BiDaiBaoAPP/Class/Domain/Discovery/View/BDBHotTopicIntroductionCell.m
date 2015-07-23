@@ -17,7 +17,8 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    self.introductionCellTitle.textColor = UIColorWithRGB16Radix(0x4c4c4c);
+    self.introductionContent.textColor = UIColorWithRGB16Radix(0x666666);
 }
 
 @end

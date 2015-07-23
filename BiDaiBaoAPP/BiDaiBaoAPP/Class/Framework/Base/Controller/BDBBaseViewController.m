@@ -19,9 +19,6 @@
 
 @implementation BDBBaseViewController
 
-+ (void)initialize {
-	
-}
 
 /*
 - (instancetype)initWithCoder:(NSCoder *)coder{
@@ -45,6 +42,7 @@
 			
 			//普通icon
 			UIImage *iconImage = [UIImageWithName(module[@"icon"]) imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+			
 			//高亮icon
 			UIImage *iconHighlightedImage = [UIImageWithName(module[@"icon_highlighted"]) imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 			

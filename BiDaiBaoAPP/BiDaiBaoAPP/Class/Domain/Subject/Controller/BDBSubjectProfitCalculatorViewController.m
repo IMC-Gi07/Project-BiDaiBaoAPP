@@ -38,12 +38,21 @@
     
         self.title = @"收益计算器";
         self.hidesBottomBarWhenPushed = YES;
+		
+		
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	 /**
+	  *	放置根视图被导航栏遮住
+	  */
+	if(SYSTEM_VERSION_GREATER_THAN(@"7.0")){
+		self.edgesForExtendedLayout = UIRectEdgeNone;
+	}
     
     UITapGestureRecognizer *rootViewGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backKeyboardMethods:)];
     

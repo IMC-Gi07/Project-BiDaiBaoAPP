@@ -48,6 +48,7 @@
             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="backgroundImgView" destination="J7R-xS-Ofh" id="QPY-4J-Mjj"/>
+                <outlet property="isReadImageView" destination="8rR-nO-GFy" id="6gw-05-GHk"/>
             </connections>
             <point key="canvasLocation" x="186.5" y="32"/>
         </tableViewCell>

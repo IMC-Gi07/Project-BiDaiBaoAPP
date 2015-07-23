@@ -15,7 +15,7 @@
 #import "ZXLLoadDataIndicatePage.h"
 #import "BDBUserAnswerResponseModel.h"
 #import "BDBUserAnswerModel.h"
-
+#import "BDBDetailQuestionAndReplyViewController.h"
 typedef enum{
     questionPage,answerPage
 } CurrentPage;
@@ -23,7 +23,7 @@ typedef enum{
 typedef enum{
     pullUpRefresh,dropDownRefresh} RefreshWays;
 
-@interface BDBUserQAViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface BDBUserQAViewController ()<UITableViewDataSource,UITableViewDelegate,BDBUserTableViewCellDelegate>
 
 
 
@@ -321,8 +321,6 @@ typedef enum{
     parameterDict[@"UID"] = uid;
     parameterDict[@"PSW"] = psw;
     parameterDict[@"UserType"] = @"0";
-    
-    //后期必须改成当前用户，这个只是为了测试
     parameterDict[@"AnswerUser"] = uid;
     
     
@@ -442,6 +440,8 @@ typedef enum{
         cell.questionAskTimeLabel.text = questionModel.AskTime;
         
         cell.answerLebel.text = @"";
+		
+		cell.questionModel = questionModel;
         
     }
     
@@ -468,7 +468,12 @@ typedef enum{
         cell.questionAskTimeLabel.text = answerModel.Timeinfo;
         
         cell.answerLebel.text = answerModel.Answerinfo;
+		
+		cell.answerModel = answerModel;
     }
+	
+	cell.delegate = self;
+	
     return cell;
 }
 
@@ -515,4 +520,20 @@ typedef enum{
         }
     }];
 }
+
+#pragma mark -BDBUserTableViewCellDelegate Method
+
+- (void)pushDestinationController:(NSString *)modelID{
+
+	UIStoryboard *discover = [UIStoryboard storyboardWithName:@"Discovery" bundle:nil];
+	
+	BDBDetailQuestionAndReplyViewController *controller = [discover instantiateViewControllerWithIdentifier:@"BDBDetailQuestionAndReplyViewController"];
+	
+	controller.ID = modelID;
+	
+	[self.navigationController pushViewController:controller animated:YES];
+	
+
+}
+
 @end

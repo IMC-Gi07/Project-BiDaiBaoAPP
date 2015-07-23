@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="319" height="149"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money_icon" translatesAutoresizingMaskIntoConstraints="NO" id="gTa-1u-mBi">
-                        <rect key="frame" x="128" y="70" width="10" height="10"/>
+                        <rect key="frame" x="132" y="70" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="Avg-UC-hJ5"/>
                             <constraint firstAttribute="height" constant="10" id="ovx-Oa-k8w"/>
@@ -77,7 +78,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="万元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-gf-ezf">
-                        <rect key="frame" x="181" y="68" width="25" height="15"/>
+                        <rect key="frame" x="177" y="68" width="25" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="j3H-f1-OyN"/>
                             <constraint firstAttribute="height" constant="15" id="j6n-l3-Wod"/>
@@ -97,14 +98,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar_icon" translatesAutoresizingMaskIntoConstraints="NO" id="QHJ-ex-k5u">
-                        <rect key="frame" x="73" y="70" width="10" height="11"/>
+                        <rect key="frame" x="71" y="70" width="10" height="11"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="Sk8-l0-kT4"/>
                             <constraint firstAttribute="width" constant="10" id="vng-Bb-SIx"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6A-WZ-hmJ">
-                        <rect key="frame" x="108" y="67" width="15" height="15"/>
+                        <rect key="frame" x="114" y="67" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="5m1-Y7-pMV"/>
                             <constraint firstAttribute="height" constant="15" id="cZ0-7I-BNy"/>
@@ -113,10 +114,10 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="900" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-Yq-G3t">
-                        <rect key="frame" x="83" y="65" width="25" height="19"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3900" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-Yq-G3t">
+                        <rect key="frame" x="81" y="65" width="33" height="19"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="N1f-xv-s9j"/>
+                            <constraint firstAttribute="width" constant="33" id="N1f-xv-s9j"/>
                             <constraint firstAttribute="height" constant="19" id="pxh-og-Vjv"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -185,10 +186,10 @@
                         <color key="textColor" red="1" green="0.4184136966" blue="0.22466636509999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wal-4c-45t">
-                        <rect key="frame" x="138" y="65" width="43" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wal-4c-45t">
+                        <rect key="frame" x="142" y="65" width="35" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="43" id="VrL-rr-n6w"/>
+                            <constraint firstAttribute="width" constant="35" id="VrL-rr-n6w"/>
                             <constraint firstAttribute="height" constant="20" id="ats-zN-9bW"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -217,7 +218,7 @@
                     <constraint firstItem="n5r-zs-ptN" firstAttribute="centerY" secondItem="KEm-Yd-nuJ" secondAttribute="centerY" id="TXd-7F-7ht"/>
                     <constraint firstItem="wal-4c-45t" firstAttribute="centerY" secondItem="QHJ-ex-k5u" secondAttribute="centerY" id="XZG-G2-8JN"/>
                     <constraint firstItem="jlR-PK-X8L" firstAttribute="centerX" secondItem="1D2-CT-p6X" secondAttribute="centerX" id="YcA-Ug-iA4"/>
-                    <constraint firstItem="gTa-1u-mBi" firstAttribute="leading" secondItem="w6A-WZ-hmJ" secondAttribute="trailing" constant="5" id="a7H-Qy-xBa"/>
+                    <constraint firstItem="gTa-1u-mBi" firstAttribute="leading" secondItem="w6A-WZ-hmJ" secondAttribute="trailing" constant="3" id="a7H-Qy-xBa"/>
                     <constraint firstAttribute="trailing" secondItem="3hJ-jM-bHQ" secondAttribute="trailing" constant="5" id="ala-Zb-plA"/>
                     <constraint firstAttribute="bottom" secondItem="EJC-TE-NdF" secondAttribute="bottom" constant="15" id="bvu-Xe-ThI"/>
                     <constraint firstItem="wal-4c-45t" firstAttribute="centerY" secondItem="aDR-pd-X4C" secondAttribute="centerY" id="dBN-9r-bix"/>

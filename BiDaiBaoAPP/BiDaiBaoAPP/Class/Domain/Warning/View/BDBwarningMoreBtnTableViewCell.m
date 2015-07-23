@@ -29,6 +29,8 @@
 
 @property(nonatomic,strong) NSMutableArray *platformArray;
 
+@property(nonatomic,weak) UIScrollView *platformView;
+
 @property(nonatomic,assign)BOOL isChangeWhite;
 
 @property(nonatomic,assign)BOOL isShink;
@@ -39,20 +41,22 @@
 @implementation BDBwarningMoreBtnTableViewCell
 
 
-- (instancetype)init{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
     
-    if (self = [super init]) {
+    if (self = [super initWithCoder:aDecoder]) {
         
         self.selectedPlatformArray = [NSMutableArray array];
         
         self.selectedFilterArray = [NSMutableArray array];
         
         self.filterCondition = [NSMutableDictionary dictionary];
+		
+		
         
         _filterCondition[@"平台"] = @"";
         
         self.isChangeWhite = NO;
-        
+		
     }
     return self;
 }
@@ -61,7 +65,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 	
-    [self loadP2PList];
+	self.platformArray = [NSMutableArray array];
+	[self loadP2PList];
+    
 }
 
 //加载所有平台信息
@@ -73,7 +79,6 @@
 		
 		FMResultSet *resultSet = [database executeQuery:sql];
 		
-		NSMutableArray *P2PPlatformModels = [NSMutableArray array];
 		while ([resultSet next]) {
 			BDBP2PPlatformModel *P2PPlatformModel = [[BDBP2PPlatformModel alloc] init];
 			P2PPlatformModel.PlatFormID = [resultSet stringForColumn:@"pid"];
@@ -83,14 +88,13 @@
 			P2PPlatformModel.Popularity = [resultSet stringForColumn:@"popularity"];
 			P2PPlatformModel.Earnings = [resultSet stringForColumn:@"earnings"];
 			
-			[P2PPlatformModels addObject:P2PPlatformModel];
+			[_platformArray addObject:P2PPlatformModel];
 		}
-		self.platformArray = P2PPlatformModels;
 		
 		[database close];
 	}
 	
-	[self loadFilterScrollView];
+	//[self loadFilterScrollView];
 	
 	[self loadFilterScrollViewSubView];
 	
@@ -103,29 +107,14 @@
     UIScrollView *platformView = [[UIScrollView alloc] init];
     
     platformView.tag = 200;
-    
-    [_filterScrollView addSubview:platformView];
-    
-    platformView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSString *constraintsVFL = @"H:|[platformView(screenWidth)]|";
-    
-    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"platformView":platformView}];
-    
-    [_filterScrollView addConstraints:hConstraints];
-    
-    
-    constraintsVFL = @"V:|[platformView]|";
-    
-    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"platformView":platformView}];
-    
-    NSLayoutConstraint *heigtConstraintForPlatformView = [NSLayoutConstraint constraintWithItem:platformView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:65.0f];
-    
-    self.heigtConstraintForPlatformView = heigtConstraintForPlatformView;
-    
-    [platformView addConstraint:heigtConstraintForPlatformView];
-    
-    [_filterScrollView addConstraints:vConstraints];
+	
+	platformView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 65);
+	
+	platformView.contentSize = platformView.frame.size;
+	
+    [self.contentView addSubview:platformView];
+	
+	self.platformView = platformView;
     
     //筛选页面－》选择平台(选择平台)
     
@@ -147,19 +136,6 @@
     
     [platformView addSubview:showMoreButton];
 	
-    //筛选页面－》选择平台(显示被选择平台的名称)
-    
-    UILabel *selectedPlatformName = [[UILabel alloc] init];
-    
-    selectedPlatformName.textColor = UIColorWithRGB(12, 79, 125);
-    
-    [platformView addSubview:selectedPlatformName];
-    
-    self.selectedPlatformName = selectedPlatformName;
-    
-    selectedPlatformName.font  = [UIFont systemFontOfSize:12.0f];
-    
-    selectedPlatformName.frame = CGRectMake(SCREEN_WIDTH - 80, 10, 60, 15);
     
     //选择平台按钮
     
@@ -176,21 +152,15 @@
 - (void)showMoreButtonClickedAction: (BDBButtonForSift *)button{
     
     //代理，接受收缩按钮触发事件
-    [_btnDelegate shinkTheMoreButton:button];
-    
-    UIView *platformView = [_filterScrollView viewWithTag:100];
+   [_btnDelegate shinkTheMoreButton:button];
     
     if(button.isShowMores){
         ZXLLOG(@"闭合");
                 
         button.isShowMores = NO;
         [UIView animateWithDuration:0.5f animations:^{
-            _heigtConstraintForPlatformView.constant = 65.0f;
-            
-            [platformView setNeedsLayout];
-            [platformView layoutIfNeeded];
-            [_filterScrollView setNeedsLayout];
-            [_filterScrollView layoutIfNeeded];
+			_platformView.frame = CGRectMake(0, 0,SCREEN_WIDTH, 65);
+			_platformView.contentSize = _platformView.frame.size;
             
         }];
         
@@ -200,22 +170,22 @@
 
         button.isShowMores = YES;
         [UIView animateWithDuration:0.5f animations:^{
+
+			CGFloat heigth = 0.0f;
             
             NSInteger buttonCount = _platformArray.count;
             
             if(buttonCount % 4 == 0){
                 
-                _heigtConstraintForPlatformView.constant = buttonCount / 4 * 30 +  (buttonCount / 4 - 1) * 10 + 40;
+                heigth = buttonCount / 4 * 30 +  (buttonCount / 4 - 1) * 10 + 40;
             }
             else{
                 
-                _heigtConstraintForPlatformView.constant = (buttonCount / 4 + 1) * 30 + buttonCount / 4  * 10 + 40;
+                heigth = (buttonCount / 4 + 1) * 30 + buttonCount / 4  * 10 + 40;
             }
             
-            [platformView setNeedsLayout];
-            [platformView layoutIfNeeded];
-            [_filterScrollView setNeedsLayout];
-            [_filterScrollView layoutIfNeeded];
+			_platformView.frame = CGRectMake(0, 0,SCREEN_WIDTH, heigth);
+			_platformView.contentSize = _platformView.frame.size;
         }];
     }
     
@@ -288,39 +258,6 @@
     
 }
 
-
-- (void)loadFilterScrollView{
-    
-    //筛选页面
-    UIScrollView *filterScrollView = [[UIScrollView alloc] init];
-    
-    filterScrollView.backgroundColor = [UIColor whiteColor];
-    
-    [self addSubview:filterScrollView];
-    
-    self.filterScrollView = filterScrollView;
-    
-    filterScrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSString *constraintsVFL = @"H:|[filterScrollView]|";
-    
-    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"filterScrollView":filterScrollView}];
-    
-    [self addConstraints:hConstraints];
-
-    NSLayoutConstraint *topConstrains = [NSLayoutConstraint constraintWithItem:filterScrollView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f];
-    
-
-    
-    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:filterScrollView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0f constant:50.0f];
-
-    
-    [self addConstraint:topConstrains];
-    
-    [self addConstraint:bottomConstraint];
-    
-    
-}
 
 
 

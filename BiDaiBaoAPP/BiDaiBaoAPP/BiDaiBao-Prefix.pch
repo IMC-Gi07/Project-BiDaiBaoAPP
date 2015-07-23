@@ -199,7 +199,7 @@
 
 
 //----------------------字体----------------------------
-#define UIFontWithNameAndSize(name,size) ([UIFont fontWithName:name size:size])
+#define UIFontWithNameAndSize(fontName,fontSize) ([UIFont fontWithName:fontName size:fontSize])
 #define UIFontWithSize(size) ([UIFont systemFontOfSize:size])
 //----------------------字体----------------------------
 

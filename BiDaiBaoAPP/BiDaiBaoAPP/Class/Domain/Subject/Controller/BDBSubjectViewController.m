@@ -224,8 +224,13 @@ typedef enum{
 
         [self.showDataTableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		if (_indicatePage) {
+			__weak typeof(self) thisInstance = self;
+			[_indicatePage showReloadButtonWithClickedHandler:^{
+				[thisInstance loadBidsInfWithRefreshWay:pullUpRefresh];
+			}];
+		}
         
-        ZXLLOG(@"%@",error);
     }];
     
     

@@ -40,8 +40,6 @@
 //被选中的所有筛选按钮的数组
 @property(nonatomic,strong) NSMutableArray *selectedFilterArray;
 
-//筛选条件的字典
-@property(nonatomic,strong) NSMutableDictionary *filterCondition;
 
 @property(nonatomic,strong) FMDatabaseQueue *dbqueue;
 
@@ -78,23 +76,16 @@
         self.selectedProgressArray = [NSMutableArray array];
         
         self.selectedFilterArray = [NSMutableArray array];
+		
+		[self loadDBP2PList];
         
-        self.filterCondition = [NSMutableDictionary dictionary];
-        
-        _filterCondition[@"平台"] = @"";
-        
-        _filterCondition[@"收益率"] = @"";
-        
-        _filterCondition[@"期限"] = @"";
-        
-        _filterCondition[@"进度"] = @"";
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadDBP2PList];
+    
     [self loadFilterScrollView];
     [self loadFilterScrollViewSubView];
     [self loadButtonOfBottom];
@@ -229,211 +220,209 @@
  */
 - (void)loadFilterScrollViewSubView{
 
-        //筛选页面－》选择平台
-        UIScrollView *platformView = [[UIScrollView alloc] init];
-    
-        platformView.tag = 200;
-    
-        [_filterScrollView addSubview:platformView];
-    
-        platformView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        NSString *constraintsVFL = @"H:|[platformView(screenWidth)]|";
-    
-        NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"platformView":platformView}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-        //筛选页面－》选择平台(分割线)
-    
-        UIView *separator_0 = [[UIView alloc] init];
-    
-        separator_0.backgroundColor = UIColorWithRGB(204, 204, 204);
-    
-        [_filterScrollView addSubview:separator_0];
-    
-        separator_0.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        constraintsVFL = @"H:|-[separator_0]-|";
-    
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_0":separator_0}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-        //筛选页面－》年化收益率
-        UIScrollView *profitView = [[UIScrollView alloc] init];
-    
-        [_filterScrollView addSubview:profitView];
-    
-        profitView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        constraintsVFL = @"H:|[profitView(screenWidth)]|";
-    
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"profitView":profitView}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-        //筛选页面－》年化收益率(分割线)
-    
-        UIView *separator_1 = [[UIView alloc] init];
-    
-        separator_1.backgroundColor = UIColorWithRGB(204, 204, 204);
-    
-        [_filterScrollView addSubview:separator_1];
-    
-        separator_1.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        constraintsVFL = @"H:|-[separator_1]-|";
-    
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_1":separator_1}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-        //筛选页面－》投资期限
-    
-        UIScrollView *termView = [[UIScrollView alloc] init];
-    
-        [_filterScrollView addSubview:termView];
-    
-        termView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        constraintsVFL = @"H:|[termView(screenWidth)]|";
-    
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"termView":termView}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-        //筛选页面－》年化收益率(分割线)
-    
-        UIView *separator_2 = [[UIView alloc] init];
-    
-        separator_2.backgroundColor = UIColorWithRGB(204, 204, 204);
-    
-        [_filterScrollView addSubview:separator_2];
-    
-        separator_2.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        constraintsVFL = @"H:|-[separator_2]-|";
-    
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_2":separator_2}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-        // 筛选页面－》投资进度
-        UIScrollView *progressView = [[UIScrollView alloc] init];
-    
-        [_filterScrollView addSubview:progressView];
-    
-        progressView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-        constraintsVFL = @"H:|[progressView(screenWidth)]|";
-    
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"progressView":progressView}];
-    
-        [_filterScrollView addConstraints:hConstraints];
-    
-    
-        constraintsVFL = @"V:|[platformView][separator_0(1)][profitView(65)][separator_1(1)][termView(105)][separator_2(1)][progressView(65)]|";
-    
-       NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"platformView":platformView,@"separator_0":separator_0,@"profitView":profitView,@"separator_1":separator_1,@"termView":termView,@"separator_2":separator_2,@"progressView":progressView}];
-    
-        NSLayoutConstraint *heigtConstraintForPlatformView = [NSLayoutConstraint constraintWithItem:platformView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:65.0f];
-    
-        self.heigtConstraintForPlatformView = heigtConstraintForPlatformView;
-    
-        [platformView addConstraint:heigtConstraintForPlatformView];
-    
-        [_filterScrollView addConstraints:vConstraints];
-    
-        //筛选页面－》选择平台(选择平台)
-    
-        UILabel *platformLabel = [[UILabel alloc] init];
-    
-        platformLabel.text = @"选择平台:";
-    
-        [platformView addSubview:platformLabel];
-    
-        platformLabel.font  = [UIFont systemFontOfSize:15.0f];
-    
-        platformLabel.frame = CGRectMake(10, 10, 70, 15);
-    
-        //筛选页面－》选择平台(显示更多平台按钮)
-    
-        BDBButtonForSift *showMoreButton = [BDBButtonForSift showMoreButton];
-    
-        [showMoreButton addTarget:self action:@selector(showMoreButtonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-        [platformView addSubview:showMoreButton];
-    
-        //筛选页面－》选择平台(显示被选择平台的名称)
-    
-        UILabel *selectedPlatformName = [[UILabel alloc] init];
-    
-        selectedPlatformName.textColor = UIColorWithRGB(12, 79, 125);
-    
-        [platformView addSubview:selectedPlatformName];
-    
-        self.selectedPlatformName = selectedPlatformName;
-    
-        selectedPlatformName.font  = [UIFont systemFontOfSize:12.0f];
-    
-        selectedPlatformName.frame = CGRectMake(SCREEN_WIDTH - 80, 10, 60, 15);
-    
-        //筛选页面－》年化收益率(年化收益率)
-    
-        UILabel *profitLabel = [[UILabel alloc] init];
-    
-        profitLabel.text = @"年化收益率:";
-    
-        [profitView addSubview:profitLabel];
-    
-        profitLabel.font  = [UIFont systemFontOfSize:15.0f];
-    
-        profitLabel.frame = CGRectMake(10, 10, 80, 15);
-    
-        //筛选页面－》投资期限(投资期限)
-    
-        UILabel *termLabel = [[UILabel alloc] init];
-    
-        termLabel.text = @"投资期限:";
-    
-        [termView addSubview:termLabel];
-    
-        termLabel.font  = [UIFont systemFontOfSize:15.0f];
-    
-        termLabel.frame = CGRectMake(10, 10, 80, 15);
-        
-        //筛选页面－》投资期限(投资期限)
-        
-        UILabel *progressLabel = [[UILabel alloc] init];
-        
-        progressLabel.text = @"投标进度:";
-        
-        [progressView addSubview:progressLabel];
-        
-        progressLabel.font  = [UIFont systemFontOfSize:15.0f];
-        
-        progressLabel.frame = CGRectMake(10, 10, 80, 15);
-        
-        //选择平台按钮
-        
-        [self layoutFilterViewPlatformButtonsWith:_platformArray view:platformView];
-        
-        //收益区间按钮
-        [self layoutFilterViewButtons:0 view:profitView];
-        
-        //期限区间按钮
-        [self layoutFilterViewButtons:1 view:termView];
-        
-        //投标进度按钮
-        [self layoutFilterViewButtons:2 view:progressView];
+    //筛选页面－》选择平台
+    UIScrollView *platformView = [[UIScrollView alloc] init];
+
+    platformView.tag = 200;
+
+    [_filterScrollView addSubview:platformView];
+
+    platformView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSString *constraintsVFL = @"H:|[platformView(screenWidth)]|";
+
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"platformView":platformView}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    //筛选页面－》选择平台(分割线)
+
+    UIView *separator_0 = [[UIView alloc] init];
+
+    separator_0.backgroundColor = UIColorWithRGB(204, 204, 204);
+
+    [_filterScrollView addSubview:separator_0];
+
+    separator_0.translatesAutoresizingMaskIntoConstraints = NO;
+
+    constraintsVFL = @"H:|-[separator_0]-|";
+
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_0":separator_0}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    //筛选页面－》年化收益率
+    UIScrollView *profitView = [[UIScrollView alloc] init];
+
+    [_filterScrollView addSubview:profitView];
+
+    profitView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    constraintsVFL = @"H:|[profitView(screenWidth)]|";
+
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"profitView":profitView}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    //筛选页面－》年化收益率(分割线)
+
+    UIView *separator_1 = [[UIView alloc] init];
+
+    separator_1.backgroundColor = UIColorWithRGB(204, 204, 204);
+
+    [_filterScrollView addSubview:separator_1];
+
+    separator_1.translatesAutoresizingMaskIntoConstraints = NO;
+
+    constraintsVFL = @"H:|-[separator_1]-|";
+
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_1":separator_1}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    //筛选页面－》投资期限
+
+    UIScrollView *termView = [[UIScrollView alloc] init];
+
+    [_filterScrollView addSubview:termView];
+
+    termView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    constraintsVFL = @"H:|[termView(screenWidth)]|";
+
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"termView":termView}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    //筛选页面－》年化收益率(分割线)
+
+    UIView *separator_2 = [[UIView alloc] init];
+
+    separator_2.backgroundColor = UIColorWithRGB(204, 204, 204);
+
+    [_filterScrollView addSubview:separator_2];
+
+    separator_2.translatesAutoresizingMaskIntoConstraints = NO;
+
+    constraintsVFL = @"H:|-[separator_2]-|";
+
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:nil views:@{@"separator_2":separator_2}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    // 筛选页面－》投资进度
+    UIView *progressView = [[UIView alloc] init];
+
+    [_filterScrollView addSubview:progressView];
+
+    progressView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    constraintsVFL = @"H:|[progressView(screenWidth)]|";
+
+    hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"screenWidth":@SCREEN_WIDTH} views:@{@"progressView":progressView}];
+
+    [_filterScrollView addConstraints:hConstraints];
+
+    CGFloat margin = (SCREEN_HEIGHT - 450) / 3.0f;
+    constraintsVFL = @"V:|[platformView][separator_0(1)]-(margin)-[profitView(70)][separator_1(1)]-(margin)-[termView(140)][separator_2(1)]-(margin)-[progressView(70)]|";
+
+    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintsVFL options:0 metrics:@{@"margin":[NSString stringWithFormat:@"%g",margin]} views:@{@"platformView":platformView,@"separator_0":separator_0,@"profitView":profitView,@"separator_1":separator_1,@"termView":termView,@"separator_2":separator_2,@"progressView":progressView}];
+
+    NSLayoutConstraint *heigtConstraintForPlatformView = [NSLayoutConstraint constraintWithItem:platformView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:75.0f];
+
+    self.heigtConstraintForPlatformView = heigtConstraintForPlatformView;
+
+    [platformView addConstraint:heigtConstraintForPlatformView];
+
+    [_filterScrollView addConstraints:vConstraints];
+
+    //筛选页面－》选择平台(选择平台)
+
+    UILabel *platformLabel = [[UILabel alloc] init];
+
+    platformLabel.text = @"选择平台:";
+
+    [platformView addSubview:platformLabel];
+
+    platformLabel.font  = [UIFont systemFontOfSize:15.0f];
+
+    platformLabel.frame = CGRectMake(15, 20, 70, 15);
+
+    //筛选页面－》选择平台(显示更多平台按钮)
+
+    BDBButtonForSift *showMoreButton = [BDBButtonForSift showMoreButton];
+
+    [showMoreButton addTarget:self action:@selector(showMoreButtonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    [platformView addSubview:showMoreButton];
+
+    //筛选页面－》选择平台(显示被选择平台的名称)
+
+    UILabel *selectedPlatformName = [[UILabel alloc] init];
+
+    selectedPlatformName.textColor = UIColorWithRGB(12, 79, 125);
+
+    [platformView addSubview:selectedPlatformName];
+
+    self.selectedPlatformName = selectedPlatformName;
+
+    selectedPlatformName.font  = [UIFont systemFontOfSize:12.0f];
+
+    selectedPlatformName.frame = CGRectMake(SCREEN_WIDTH - 80, 10, 60, 15);
+
+    //筛选页面－》年化收益率(年化收益率)
+
+    UILabel *profitLabel = [[UILabel alloc] init];
+
+    profitLabel.text = @"年化收益率:";
+
+    [profitView addSubview:profitLabel];
+
+    profitLabel.font  = [UIFont systemFontOfSize:15.0f];
+
+    profitLabel.frame = CGRectMake(15, 10, 80, 15);
+
+    //筛选页面－》投资期限(投资期限)
+
+    UILabel *termLabel = [[UILabel alloc] init];
+
+    termLabel.text = @"投资期限:";
+
+    [termView addSubview:termLabel];
+
+    termLabel.font  = [UIFont systemFontOfSize:15.0f];
+
+    termLabel.frame = CGRectMake(15, 10, 80, 15);
+    
+    //筛选页面－》投资期限(投资期限)
+    
+    UILabel *progressLabel = [[UILabel alloc] init];
+    
+    progressLabel.text = @"投标进度:";
+    
+    [progressView addSubview:progressLabel];
+    
+    progressLabel.font  = [UIFont systemFontOfSize:15.0f];
+    
+    progressLabel.frame = CGRectMake(15, 10, 80, 15);
+    
+    //选择平台按钮
+    [self layoutFilterViewPlatformButtonsWith:_platformArray view:platformView];
+    
+    //收益区间按钮
+    [self layoutFilterViewButtons:0 view:profitView];
+    
+    //期限区间按钮
+    [self layoutFilterViewButtons:1 view:termView];
+    
+    //投标进度按钮
+    [self layoutFilterViewButtons:2 view:progressView];
 
 }
 
 
 
 //平台按钮
-
 - (void)layoutFilterViewPlatformButtonsWith:(NSArray *)array view: (UIView *)aView{
     //更改横坐标
     NSInteger hButtonCount = 0;
@@ -453,7 +442,7 @@
         CGFloat platformButtonHorizontalMargin;
         CGRect frame;
         platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -4 * 65) / 3.0f;
-        frame = CGRectMake(15 + 65 * buttonModel.xPoint + platformButtonHorizontalMargin * buttonModel.xPoint, 30 + 30 * buttonModel.yPoint + 10 * buttonModel.yPoint, 65, 30);
+        frame = CGRectMake(15 + 65 * buttonModel.xPoint + platformButtonHorizontalMargin * buttonModel.xPoint, 40 + 30 * buttonModel.yPoint + 40 * buttonModel.yPoint, 65, 30);
         
         BDBButtonForSift *button = [BDBButtonForSift buttonWithTitle:buttonModel.title  isSelected:buttonModel.isSelected frame:frame];
         __weak BDBButtonForSift *tmpButton = button;
@@ -535,7 +524,7 @@
         
             platformButtonHorizontalMargin = (SCREEN_WIDTH - 30 -3 * 90) / 2.0f;
             
-            frame = CGRectMake(15 + 90 * sievingButtonInfos.xPoint + platformButtonHorizontalMargin * sievingButtonInfos.xPoint, 30 + 30 * sievingButtonInfos.yPoint + 10 * sievingButtonInfos.yPoint, 90, 30);
+            frame = CGRectMake(15 + 90 * sievingButtonInfos.xPoint + platformButtonHorizontalMargin * sievingButtonInfos.xPoint, 30 + 30 * sievingButtonInfos.yPoint + 40 * sievingButtonInfos.yPoint, 90, 30);
         
         BDBButtonForSift *button = [BDBButtonForSift buttonWithTitle:sievingButtonInfos.title  isSelected:sievingButtonInfos.isSelected frame:frame];
         
@@ -544,21 +533,6 @@
         [button handleControlEvent:UIControlEventTouchUpInside withHandleBlock:^{
             
             if(!weakButton.isSelected){
-                
-//                for (id obj in aView.subviews) {
-//                    if([obj isKindOfClass:[BDBButtonForSift class]]){
-//                        
-//                        BDBButtonForSift *btn = obj;
-//                        
-//                        if(btn.isSelected == YES){
-//                            
-//                            btn.isSelected = NO;
-//                            //移除上一个被选中的按钮
-//                            [thisInstance.selectedFilterArray removeObject:btn];
-//                            break;
-//                        }
-//                    }
-//                }
                 
                 weakButton.isSelected = YES;
                 //添加新选中的按钮
@@ -596,7 +570,16 @@
                         
                     }
                     
-                    [thisInstance.selectedProfitArray addObject:filterStr];
+					if(weakButton.isSelected){
+				
+						[thisInstance.selectedProfitArray addObject:filterStr];
+
+					}else{
+						
+						[thisInstance.selectedProfitArray removeObject:filterStr];
+						
+					}
+
                     break;
                 case 1:
                     
@@ -629,7 +612,16 @@
                         filterStr = @"731|9999999999";
                     }
                     
-                    [thisInstance.selectedTermArray addObject:filterStr];
+					if(weakButton.isSelected){
+					
+						[thisInstance.selectedTermArray addObject:filterStr];
+					
+					}
+					else{
+						[thisInstance.selectedTermArray removeObject:filterStr];
+
+					}
+
                     break;
                 case 2:
                     
@@ -647,7 +639,16 @@
                         filterStr = @"0.8|1.0";
                     }
                     
-                    [thisInstance.selectedProgressArray addObject:filterStr];
+					if(weakButton.isSelected){
+						
+						[thisInstance.selectedProgressArray addObject:filterStr];
+					
+					}
+					else{
+					
+						[thisInstance.selectedProgressArray removeObject:filterStr];
+					}
+
                     break;
                 default:
                     break;
@@ -674,8 +675,6 @@
 - (void)sureButtonClickedAction: (UIButton *)button{
     
     button.backgroundColor = UIColorWithRGB(228, 93, 99);
-    
-    //_filterCondition[@"平台"] = _selectedPlatformArray;
     
     BDBSubjectDeepexcavationContronller *controller = [[BDBSubjectDeepexcavationContronller alloc] init];
     
@@ -717,7 +716,7 @@
         
         button.isShowMores = NO;
         [UIView animateWithDuration:0.5f animations:^{
-            _heigtConstraintForPlatformView.constant = 65.0f;
+            _heigtConstraintForPlatformView.constant = 75.0f;
             
             [platformView setNeedsLayout];
             [platformView layoutIfNeeded];
@@ -736,11 +735,11 @@
             
             if(buttonCount % 4 == 0){
                 
-                _heigtConstraintForPlatformView.constant = buttonCount / 4 * 30 +  (buttonCount / 4 - 1) * 10 + 40;
+                _heigtConstraintForPlatformView.constant = buttonCount / 4 * 30 +  (buttonCount / 4 - 1) * 10 + 105;
             }
             else{
             
-                _heigtConstraintForPlatformView.constant = (buttonCount / 4 + 1) * 30 + buttonCount / 4  * 10 + 40;
+                _heigtConstraintForPlatformView.constant = (buttonCount / 4 + 1) * 30 + buttonCount / 4  * 10 + 105;
             }
         
             [platformView setNeedsLayout];

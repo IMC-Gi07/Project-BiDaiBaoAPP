@@ -81,6 +81,7 @@ typedef enum{
     self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
     
     [self loadBidsInf:pullUpRefresh];
+
     
 }
 
@@ -115,6 +116,8 @@ typedef enum{
     parametersDict[@"PageSize"] = _PageSize;
     
     parametersDict[@"Count"] = @"1";
+	
+	parametersDict[@"EarningsDesc"] = @"1";
     
     if(_selectedPlatformArray.count > 0){
     
@@ -136,8 +139,6 @@ typedef enum{
         NSString *str = [_selectedProgressArray componentsJoinedByString:@","];
         parametersDict[@"ProgressPercent"] = str;
     }
-	
-	parametersDict[@"EarningsDesc"] = @"1";
     
     [manager POST:requestURL parameters:parametersDict success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         
@@ -160,7 +161,6 @@ typedef enum{
         }
         
         [self.showDataTableView reloadData];
-        //[self.view bringSubviewToFront:[self.view viewWithTag:200]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         ZXLLOG(@"%@",error);

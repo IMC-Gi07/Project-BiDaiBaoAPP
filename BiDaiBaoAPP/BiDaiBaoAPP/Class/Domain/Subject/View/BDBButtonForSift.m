@@ -20,7 +20,7 @@
     
     button.isShowMores = NO;
     
-    button.frame = CGRectMake(SCREEN_WIDTH - 50, 0, 40, 40);
+    button.frame = CGRectMake(SCREEN_WIDTH - 50, 0, 50, 50);
         
     return button;
 }

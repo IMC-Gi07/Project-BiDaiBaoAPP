@@ -9,15 +9,22 @@
 #import "AppDelegate.h"
 #import "BDBBaseViewController.h"
 #import "BDBFeatureViewController.h"
+#import "BDBNoticeResponseModel.h"
+#import "BDBNoticeModel.h"
 
 static NSString *const kVersionCodeKey = @"VersionCode";
 
-@interface AppDelegate ()
+@interface AppDelegate () <UIAlertViewDelegate>
 
 /**
  *  应用启动时，下载平台数据到数据库缓存中(全局使用)
  */
 - (void)downloadP2PPlatforms;
+
+/**
+ *  界面显示时，请求公告数据
+ */
+- (void)requestNotices;
 
 @end
 
@@ -55,7 +62,13 @@ static NSString *const kVersionCodeKey = @"VersionCode";
 	[networkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 		switch (status) {
 			case AFNetworkReachabilityStatusNotReachable: {
-				UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络不给力" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+				UIAlertView *alertView = nil;
+				if (SYSTEM_VERSION_GREATER_THAN(@"8.0")) {
+					alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"无法连接网络" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"网络设置",nil];
+				}else {
+					alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"无法连接网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+				}
+				
 				[alertView show];
 				break;
 			}
@@ -75,10 +88,87 @@ static NSString *const kVersionCodeKey = @"VersionCode";
 	//设置根控制器
 	self.window.rootViewController = rootViewController;
 	
+	/**
+	 *	设置状态栏颜色
+	 *  1、在info.plist中，将View controller-based status bar appearance设NO.
+	 *  2、在app delegate中：
+	 */ 
+	if(SYSTEM_VERSION_GREATER_THAN(@"7.0")){
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+	}
+	
 	return YES;
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+	[self requestNotices];
+}
+
 #pragma mark - Private Methods
+- (void)requestNotices {
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	
+	//GetNotice主机地址
+	NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetNotice"];
+	NSMutableDictionary *requestParameters = [NSMutableDictionary dictionary];
+	
+	NSUserDefaults *userDfaults = [NSUserDefaults standardUserDefaults];
+	
+	NSString *UID = [userDfaults objectForKey:@"UID"];
+	if (UID && ![UID isEqualToString:@""]) {
+		requestParameters[@"UID"] = UID;
+	}
+	
+	NSString *PSW = [userDfaults objectForKey:@"PSW"];
+	if (PSW && ![PSW isEqualToString:@""]) {
+		requestParameters[@"PSW"] = PSW;
+	}
+	
+	requestParameters[@"UserType"] = @"0";
+	requestParameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	requestParameters[@"Device"] = @"0";
+	requestParameters[@"PageIndex"] = @1;
+	requestParameters[@"PageSize"] = @5;
+	
+	[manager POST:requestURL parameters:requestParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		BDBNoticeResponseModel *noticeResponseModel = [BDBNoticeResponseModel objectWithKeyValues:responseObject];
+		
+		NSArray *noticeModels = noticeResponseModel.NoticeList;
+		if (noticeModels.count > 0) {
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				NSString *dbFilePath = [CACHE_DIRECTORY stringByAppendingPathComponent:BDBGlobal_CacheDatabaseName];
+				FMDatabase *database = [FMDatabase databaseWithPath:dbFilePath];
+				if ([database open]) {
+					NSString *sql = @"DROP TABLE IF EXISTS t_notice";
+					[database executeUpdate:sql];
+					
+					sql = @"CREATE TABLE IF NOT EXISTS t_notice(rowid INTEGER PRIMARY KEY AUTOINCREMENT,newsid text,publisher text,dt text,title text,firstsection text,detailurl text,isread text)";
+					[database executeUpdate:sql];
+					
+					[noticeModels enumerateObjectsUsingBlock:^(BDBNoticeModel *noticeModel, NSUInteger idx, BOOL *stop) {
+						NSString *sql = @"INSERT INTO t_notice(newsid,publisher,dt,title,firstsection,detailurl,isread) VALUES(:newsid,:publisher,:dt,:title,:firstsection,:detailurl,:isread)";
+						
+						NSMutableDictionary *sqlParameters = [NSMutableDictionary dictionary];
+						sqlParameters[@"newsid"] = noticeModel.NewsID;
+						sqlParameters[@"publisher"] = noticeModel.Publisher;
+						sqlParameters[@"dt"] = noticeModel.DT;
+						sqlParameters[@"title"] = noticeModel.Title;
+						sqlParameters[@"firstsection"] = noticeModel.FirstSection;
+						sqlParameters[@"detailurl"] = noticeModel.DetailURL;
+						sqlParameters[@"isread"] = noticeModel.IsRead;
+						
+						[database executeUpdate:sql withParameterDictionary:sqlParameters];
+					}];
+					
+					[database close];
+				}	
+					
+			});	
+		}
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
+}
+
 - (void)downloadP2PPlatforms {
 	//打开数据库，创建平台数据表
 	NSString *dbFilePath = [CACHE_DIRECTORY stringByAppendingPathComponent:BDBGlobal_CacheDatabaseName];
@@ -136,9 +226,20 @@ static NSString *const kVersionCodeKey = @"VersionCode";
 	
 }
 
-
-
-
+#pragma mark - UIAlertView Delegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch (buttonIndex) {
+		/**
+		 *  网络设置
+		 */
+		case 1:
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]; 
+			break;
+			
+  		default:
+			break;
+	}
+}
 
 
 

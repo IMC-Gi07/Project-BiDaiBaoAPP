@@ -12,7 +12,6 @@
 #import "BDBParameterTableViewCell.h"
 #import "BDBIndexGuideMessageResponseModel.h"
 #import "ZXLLoadDataIndicatePage.h"
-#import "BDBWebAnnouncementResponseModel.h"
 #import "BDBIndexTableViewHeader.h"
 #import "BDBNoticeModel.h"
 #import "BDBIndexClassifyParticularMessageResponseModel.h"
@@ -131,7 +130,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	UIImage *rightBarButtonImage = [UIImageWithName(@"index_nav_right") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	UIImage *rightBarButtonImage = [[UIImage imageNamed:@"Index_navbar_right_clock"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:rightBarButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonClickedAction:)];
 	
 	//初始化表视图
@@ -159,8 +158,12 @@
 - (void)parameterTableViewCellHideAndShowButtonClickedAction:(UIButton *)button {
 	[self hideIndexTableViewHeader];
 	
-#warning 在这里改变按钮的旋转方向
-	//button.transform = CGAffineTransformMakeRotation(M_PI);
+	if (_IndexTableView.tableHeaderView) {
+		[button setImage:[UIImage imageNamed:@"Index_arrow_up"] forState:UIControlStateNormal];
+	}else {
+		[button setImage:[UIImage imageNamed:@"Index_arrow_down"] forState:UIControlStateNormal];
+	}
+	
 }
 
 - (void)initDBCache {
@@ -233,7 +236,7 @@
 				indexResponseModel.AmountRemain = [resultSet stringForColumn:@"amountremain"];
 				indexResponseModel.BidNum = [resultSet stringForColumn:@"bidnum"];
 				indexResponseModel.EarningsMax = [resultSet doubleForColumn:@"earningsmax"];
-				indexResponseModel.BidAmount = [resultSet stringForColumn:@"bitamount"];
+				indexResponseModel.BidAmount = [resultSet stringForColumn:@"bidamount"];
 				indexResponseModel.InvestorNum = [resultSet stringForColumn:@"investornum"];
 			}
 			
@@ -247,87 +250,56 @@
 }
 
 - (void)loadNoticeMessage {
-    //创建一个请求对象
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
-    //GetNotice主机地址
-    NSString *noticeUrl = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetNotice"];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-	
-	NSUserDefaults *userDfaults = [NSUserDefaults standardUserDefaults];
-	
-	NSString *UID = [userDfaults objectForKey:@"UID"];
-    if (UID && ![UID isEqualToString:@""]) {
-        parameters[@"UID"] = UID;
-    }
-    
-	NSString *PSW = [userDfaults objectForKey:@"PSW"];
-    if (PSW && ![PSW isEqualToString:@""]) {
-        parameters[@"PSW"] = PSW;
-    }
-	
-    parameters[@"UserType"] = @"0";
-    parameters[@"Machine_id"] = IPHONE_DEVICE_UUID;
-    parameters[@"Device"] = @"0";
-    parameters[@"PageIndex"] = @1;
-    parameters[@"PageSize"] = @5;
-    
-    [manager POST:noticeUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        BDBWebAnnouncementResponseModel *announcementResponseModel = [BDBWebAnnouncementResponseModel objectWithKeyValues:responseObject];
-        self.noticeModels = [announcementResponseModel.NoticeList mutableCopy];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSString *dbFilePath = [CACHE_DIRECTORY stringByAppendingPathComponent:BDBGlobal_CacheDatabaseName];
 		
-		if (_noticeModels.count > 0) {
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-				[_dbQueue inDatabase:^(FMDatabase *db) {
-					//清空记录
-					NSString *sql = @"DELETE FROM t_notice";
-					[db executeUpdate:sql];
-				
-					//将新加载的每一项记录插入表中
-					[_noticeModels enumerateObjectsUsingBlock:^(BDBNoticeModel *noticeModel, NSUInteger idx, BOOL *stop) {
-						NSString *sql = @"INSERT INTO t_notice(newsid,publisher,dt,title,firstsection,detailurl) VALUES(:newsid,:publisher,:dt,:title,:firstsection,:detailurl)";
-						
-						NSMutableDictionary *sqlParameters = [NSMutableDictionary dictionary];
-						sqlParameters[@"newsid"] = noticeModel.NewsID;
-						sqlParameters[@"publisher"] = noticeModel.Publisher;
-						sqlParameters[@"dt"] = noticeModel.DT;
-						sqlParameters[@"title"] = noticeModel.Title;
-						sqlParameters[@"firstsection"] = noticeModel.FirstSection;
-						sqlParameters[@"detailurl"] = noticeModel.DetailURL;
-
-						[db executeUpdate:sql withParameterDictionary:sqlParameters];
-					}];
-				}];
-			});
-		}
-		
-
-		[self.IndexTableView reloadRowsAtIndexPaths:@[_noticeCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-		[_dbQueue inDatabase:^(FMDatabase *db) {
-			NSString *sql = @"SELECT * FROM t_notice";
-			FMResultSet *resultSet = [db executeQuery:sql];
-			
+		FMDatabase *database = [FMDatabase databaseWithPath:dbFilePath];
+		if ([database open]) {
+			NSString *sql = @"SELECT * FROM t_notice LIMIT 0,4";
+			FMResultSet *resultSet = [database executeQuery:sql];
 			NSMutableArray *noticeModels = [NSMutableArray array];
 			while ([resultSet next]) {
-    			BDBNoticeModel *noticeModel = [[BDBNoticeModel alloc] init];
+				BDBNoticeModel *noticeModel = [[BDBNoticeModel alloc] init];
 				noticeModel.NewsID = [resultSet stringForColumn:@"newsid"];
 				noticeModel.Publisher = [resultSet stringForColumn:@"publisher"];
 				noticeModel.DT = [resultSet stringForColumn:@"dt"];
 				noticeModel.Title = [resultSet stringForColumn:@"title"];
 				noticeModel.FirstSection = [resultSet stringForColumn:@"firstsection"];
 				noticeModel.DetailURL = [resultSet stringForColumn:@"detailurl"];
+				noticeModel.IsRead = [resultSet stringForColumn:@"isread"];
 				
 				[noticeModels addObject:noticeModel];
 			}
-			
 			self.noticeModels = noticeModels;
-		}];
-		
-		NSIndexPath *noticeCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-		[_IndexTableView reloadRowsAtIndexPaths:@[noticeCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-	}];
+			
+			[resultSet close];
+			[database close];
+			
+			//主线程刷新界面
+			dispatch_async(dispatch_get_main_queue(), ^{
+				NSIndexPath *noticeCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+				[_IndexTableView reloadRowsAtIndexPaths:@[noticeCellIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+			});
+			
+			//查看是否有未读公告
+			__block BOOL hasUnReadNotice = NO;
+			[noticeModels enumerateObjectsUsingBlock:^(BDBNoticeModel *noticeModel, NSUInteger idx, BOOL *stop) {
+				if ([@"false" isEqualToString:noticeModel.IsRead]) {
+					hasUnReadNotice = YES;
+					*stop = YES;
+				}
+			}];
+			
+			if(hasUnReadNotice){
+				//主线程显示红点
+				dispatch_async(dispatch_get_main_queue(), ^{
+					//TODO: 在右上角显示小红点
+					self.navigationItem.rightBarButtonItem.image = [[UIImage imageNamed:@"Index_navbar_right_clock_reddot"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+				});
+			}
+			
+		}
+	});
 
 }
 
@@ -593,6 +565,7 @@
 }
 
 - (void)rightBarButtonClickedAction:(UIBarButtonItem *)buttonItem {
+	buttonItem.image = [[UIImage imageNamed:@"Index_navbar_right_clock"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [self performSegueWithIdentifier:@"ToNoticeViewControllerSegue" sender:self];
 }
 
@@ -686,7 +659,10 @@
         
 		return sortTableViewCell;
     }
-
+	
+	/**
+	 *  标的列表
+	*/
 	else if (indexPath.section == 1) {
 		NSString *detailMessageTableViewCellIdentifier = @"detailedCell";
 	 
@@ -706,12 +682,16 @@
 			cell.iconBallImageView.image = [UIImage imageNamed:@"Index_icon_gray_ball"];
 		}
 		
-			//标的期限
-		 cell.TermLabel.text = indexClassifyParticularMessageModel.Term;
-			//平台名称
-		 cell.PlatformNameLabel.text = indexClassifyParticularMessageModel.PlatformName;
-		 //标的年利率
-		 cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%.0f",[indexClassifyParticularMessageModel.AnnualEarnings floatValue] * 100];
+		
+		//标的年利率
+		cell.ProgressPercentLabel.text = [NSString stringWithFormat:@"%.1f",[indexClassifyParticularMessageModel.AnnualEarnings floatValue] * 100];
+		//标的期限
+	 	cell.TermLabel.text = indexClassifyParticularMessageModel.Term;
+		//标的金额
+		cell.AmountLabel.text = indexClassifyParticularMessageModel.Amount;
+		//标的名称
+	 	cell.PlatformNameLabel.text = indexClassifyParticularMessageModel.BidName;
+	 	
 
 		return cell;
 	}
@@ -787,9 +767,11 @@
 			 *  可投资金
 			 */
 			case BDBParameterTableViewCellButtonTagInvestableFund: {
-				NSString *investableFund = indexResponseModel.AmountRemain;
-    			_indexModel.AmountRemain = investableFund;
-				[parameterTableViewCell.AmountRemainLabel dd_setNumber:@([_indexModel.AmountRemain floatValue]  / 10000.0f)];
+				_indexModel.AmountRemain = indexResponseModel.AmountRemain;
+				
+				NSString *investableFundStringValue = [NSString stringWithFormat:@"%.1f",[_indexModel.AmountRemain floatValue] / 10000.0f];
+				
+				[parameterTableViewCell.AmountRemainLabel dd_setNumber:@([investableFundStringValue floatValue])];
     			break;
 			}
 			/**
@@ -805,9 +787,11 @@
 			 *  最高收益
 			 */
 			case BDBParameterTableViewCellButtonTagMaxProfit: {
-				CGFloat maxProfit = indexResponseModel.EarningsMax;
-				_indexModel.EarningsMax = maxProfit;
-				[parameterTableViewCell.EarningsMaxLabel dd_setNumber:@(maxProfit) format:@"%.2g%%"];
+				NSInteger EarningsMax = 0;
+				if (_indexModel.EarningsMax) {
+					EarningsMax = _indexModel.EarningsMax * 100;
+				}
+				[parameterTableViewCell.EarningsMaxLabel dd_setNumber:@(EarningsMax) format:@"%.2g%%"];
 				break;
 			}
 			/**
@@ -828,7 +812,9 @@
 			 *  可投资金
 			 */
 			case BDBParameterTableViewCellButtonTagInvestableFund: {
-				[parameterTableViewCell.AmountRemainLabel dd_setNumber:@([_indexModel.AmountRemain floatValue])];
+				NSString *investableFundStringValue = [NSString stringWithFormat:@"%.1f",[_indexModel.AmountRemain floatValue] / 10000.0f];
+			
+				[parameterTableViewCell.AmountRemainLabel dd_setNumber:@([investableFundStringValue floatValue])];
 				break;
 			}
 			/**
@@ -842,7 +828,11 @@
 			 *  最高收益
 			 */
 			case BDBParameterTableViewCellButtonTagMaxProfit: {
-				[parameterTableViewCell.EarningsMaxLabel dd_setNumber:@(_indexModel.EarningsMax)];
+				NSInteger EarningsMax = 0;
+				if (_indexModel.EarningsMax) {
+					EarningsMax = _indexModel.EarningsMax * 100;
+				}
+				[parameterTableViewCell.EarningsMaxLabel dd_setNumber:@(EarningsMax)];
 				break;
 			}
 			/**

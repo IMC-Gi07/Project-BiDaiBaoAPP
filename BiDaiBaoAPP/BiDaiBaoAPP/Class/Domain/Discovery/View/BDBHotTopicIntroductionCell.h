@@ -12,4 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *introductionLeadingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *introductionCellTitle;
 
+@property (weak, nonatomic) IBOutlet UILabel *introductionContent;
+
 @end

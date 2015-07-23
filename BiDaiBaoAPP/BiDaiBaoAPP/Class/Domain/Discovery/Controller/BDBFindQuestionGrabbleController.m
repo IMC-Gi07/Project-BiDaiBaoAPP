@@ -52,7 +52,7 @@ typedef enum{
         self.returnUpOrDown = ReturnTimeEqual;
         CGRect rect = [[UIScreen mainScreen] bounds];
            self.screenWidth = rect.size.width;
-        NSLog(@"%i",self.screenWidth);
+       
         self.overflowToScreen = 0 ;
         self.buttonTag = 2;
         self.hidesBottomBarWhenPushed = YES;
@@ -110,7 +110,7 @@ typedef enum{
  
     
     if (self.textField.text.length == 0) {
-        NSLog(@"请输入的内容大于一个字符的");
+     
     }else {
         
            [self performSegueWithIdentifier:@"toBDBQuestionListTableViewController" sender:self];
@@ -279,7 +279,7 @@ typedef enum{
 
 
 - (void)button {
-    NSLog(@"最近搜索");
+    ZXLLOG(@"最近搜索Button");
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

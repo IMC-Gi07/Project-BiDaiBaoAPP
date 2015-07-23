@@ -80,10 +80,12 @@
     [super viewDidLoad];
 	
 	[self initNoticeTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 	
-	//self.navigationController.navigationBarHidden = YES;
 	self.indicatePage = [ZXLLoadDataIndicatePage showInView:self.view];
-	
 	[self refreshDatas];
 }
 
@@ -198,7 +200,16 @@
 	BDBNoticeModel *noticeModel = _noticeModels[indexPath.row];
 	
 	tableViewCell.titleLabel.text = noticeModel.FirstSection;
-	tableViewCell.pubTimeLabel.text = noticeModel.DT; 
+	tableViewCell.pubTimeLabel.text = noticeModel.DT;
+	
+	//设置已读|未读标记
+	if ([noticeModel.IsRead isEqualToString:@"true"]) {
+		tableViewCell.isReadImageView.image = [UIImage imageNamed:@"index_notice_dot_gray"];
+		tableViewCell.titleLabel.textColor = UIColorWithRGB16Radix(0xcbcbcb);
+	}else if([noticeModel.IsRead isEqualToString:@"false"]) {
+		tableViewCell.isReadImageView.image = [UIImage imageNamed:@"index_notice_dot_blue"];
+		tableViewCell.titleLabel.textColor = UIColorWithRGB16Radix(0x444444);
+	}
 	
 	return tableViewCell;
 }
@@ -210,12 +221,14 @@
 		
 		cell.titleLabel.text = noticeModel.FirstSection;
 		cell.pubTimeLabel.text = noticeModel.DT; 
+		
+		//设置已读|未读标记
+		cell.isReadImageView.image = [noticeModel.IsRead isEqualToString:@"false"]? [UIImage imageNamed:@"index_notice_dot_blue"] : [UIImage imageNamed:@"index_notice_dot_gray"];
 	}];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	self.selectedModelIndexPath = indexPath;
-
 	[self performSegueWithIdentifier:@"ToNoticeDetailViewControllerSegue" sender:self];
 }
 
@@ -226,6 +239,7 @@
 	
 		BDBNoticeDetailViewController *noticeDetailViewController = segue.destinationViewController;
 		noticeDetailViewController.noticeDetailURL = selectedNoticeModel.DetailURL;
+		noticeDetailViewController.noticeId = selectedNoticeModel.NewsID;
 	}
 }
 

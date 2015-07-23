@@ -15,4 +15,9 @@
  */
 @property(nonatomic,copy) NSString *noticeDetailURL;
 
+/**
+ *  资讯编号
+ */
+@property(nonatomic,copy) NSString *noticeId;
+
 @end

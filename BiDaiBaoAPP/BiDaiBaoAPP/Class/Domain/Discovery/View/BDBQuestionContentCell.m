@@ -17,6 +17,10 @@
     
     _userPhotoView.layer.cornerRadius = 20.0f;
     _userPhotoView.layer.masksToBounds = YES;
+    self.title.textColor = UIColorWithRGB16Radix(0x4c4c4c);
+    self.firstReply.textColor = UIColorWithRGB16Radix(0x808080);
+    self.askTime.textColor = UIColorWithRGB16Radix(0xb2b2b2);
+    self.askUser.textColor = UIColorWithRGB16Radix(0xb2b2b2);
 }
 - (void)awakeFromNib {
     

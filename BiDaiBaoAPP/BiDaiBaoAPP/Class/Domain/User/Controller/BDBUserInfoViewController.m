@@ -10,6 +10,9 @@
 
 #import "BDBCustomTextField.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "BDBUserChangeViewController.h"
+
+
 
 @interface BDBUserInfoViewController ()<UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -18,10 +21,10 @@
 
 @property(nonatomic,weak) BDBCustomTextField *nameTextField;
 @property(nonatomic,weak) BDBCustomTextField *emialTextField;
-@property(nonatomic,weak) BDBCustomTextField *passwordTextField;
+//@property(nonatomic,weak) BDBCustomTextField *passwordTextField;
 
 @property(nonatomic,weak) UIImageView *currentHeadImageView;
-
+@property(nonatomic,strong) UIImage *headerImage;
 @property(nonatomic,weak) UILabel *userNameLabel;
 
 - (void)changeHeadImage: (UIGestureRecognizer *)gesture;
@@ -39,6 +42,19 @@
         self.title = @"个人资料";
         
         self.hidesBottomBarWhenPushed = YES;
+        
+        NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+        NSString *archivePath = [cachesPath stringByAppendingPathComponent:@"HeartPhoto.atchive"];
+        
+        UIImage *heartImage = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+        
+        if (heartImage != nil) {
+            self.headerImage = heartImage;
+        }
+        else{
+            self.headerImage = [UIImage imageNamed:@"default_head_img"];
+        }
+        
     }
     
     return self;
@@ -57,9 +73,15 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultsNiName = [defaults objectForKey:@"NiName"];
     NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    NSString *defaultsEmial = [defaults objectForKey:@"EMail"];
     _userNameLabel.text = defaultsNiName;
+    _nameTextField.text = defaultsNiName;
     if (defaultsNiName == nil) {
         _userNameLabel.text = defaultsUID;
+        _nameTextField.text = defaultsUID;
+    }
+    if (defaultsEmial != nil) {
+        _emialTextField.text = defaultsEmial;
     }
     
 }
@@ -69,6 +91,8 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,11 +149,11 @@
     
     
     //用户头像
-    UIImage *defaultHeadImage = [UIImage imageNamed:@"user_default_head_img"];
+   // UIImage *defaultHeadImage = [UIImage imageNamed:@"user_default_head_img"];
     
-    UIImageView *defaultHeadImageView = [[UIImageView alloc] initWithImage:defaultHeadImage];
+    UIImageView *defaultHeadImageView = [[UIImageView alloc] initWithImage:_headerImage];
     
-    defaultHeadImageView.layer.cornerRadius = defaultHeadImage.size.width / 2;
+    defaultHeadImageView.layer.cornerRadius = 45.0f;
     
     defaultHeadImageView.layer.masksToBounds = YES;
     
@@ -150,9 +174,9 @@
     
     NSLayoutConstraint *centerXConstraintForDefaultHeadImageView = [NSLayoutConstraint constraintWithItem:defaultHeadImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:headBackgroundImageView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f];
     
-    NSLayoutConstraint *heightConstraintForDefaultHeadImageView = [NSLayoutConstraint constraintWithItem:defaultHeadImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:defaultHeadImage.size.height];
+    NSLayoutConstraint *heightConstraintForDefaultHeadImageView = [NSLayoutConstraint constraintWithItem:defaultHeadImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:90.0f];
     
-    NSLayoutConstraint *widthConstraintForDefaultHeadImageView = [NSLayoutConstraint constraintWithItem:defaultHeadImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:defaultHeadImage.size.width];
+    NSLayoutConstraint *widthConstraintForDefaultHeadImageView = [NSLayoutConstraint constraintWithItem:defaultHeadImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:90.0f];
     
     [self.view addConstraint:centerXConstraintForDefaultHeadImageView];
     [self.view addConstraint:centerYConstraintForDefaultHeadImageView];
@@ -307,9 +331,10 @@
     
     //修改密码
     
-    BDBCustomTextField *passwordTextField = [[BDBCustomTextField alloc] init];
+    UIView *passwordView = [[UIView alloc] init];
     
-    passwordTextField.delegate = self;
+    //passwordView.delegate = self;
+    //passwordTextField.enabled = NO;
     
     UIButton *passwordTextFieldButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
@@ -325,29 +350,52 @@
     
     [passwordTextFieldButton setTitle:@"立即修改" forState:UIControlStateNormal];
     
-    UIImageView *passwordTextFieldLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user_info_password_icon"]];
+//    UIImageView *passwordTextFieldLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user_info_password_icon"]];
     
-    passwordTextField.leftView = passwordTextFieldLeftView;
+   // passwordView.leftView = passwordTextFieldLeftView;
     
-    passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    //passwordView.leftViewMode = UITextFieldViewModeAlways;
     
-    passwordTextField.rightView = passwordTextFieldButton;
+    //passwordView.rightView = passwordTextFieldButton;
     
-    passwordTextField.rightViewMode = UITextFieldViewModeAlways;
+   // passwordView.rightViewMode = UITextFieldViewModeAlways;
     
-    passwordTextField.placeholder = @"密码修改";
+   // passwordView.placeholder = @"密码修改";
     
-    passwordTextField.borderStyle = UITextBorderStyleNone;
+   // passwordView.borderStyle = UITextBorderStyleNone;
     
-    [self.view addSubview:passwordTextField];
+    [self.view addSubview:passwordView];
     
-    self.passwordTextField = passwordTextField;
+    UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(25, 10, 20, 20)];
+    leftView.image = [UIImage imageNamed:@"user_info_password_icon"];
     
-    passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    [passwordView addSubview:leftView];
     
-    NSArray *hContraintsForPasswordTextField = [NSLayoutConstraint constraintsWithVisualFormat:@"|[passwordTextField]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"passwordTextField":passwordTextField}];
     
-    NSArray *vContraintsForPasswordTextField = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[secondSeparatorView][passwordTextField(44)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"passwordTextField":passwordTextField,@"secondSeparatorView":secondSeparatorView}];
+    UILabel *passWordLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, 100, 20)];
+    passWordLabel.text = @"修改密码";
+    passWordLabel.backgroundColor = [UIColor whiteColor];
+    passWordLabel.textColor = UIColorWithRGB(187, 186, 194);
+    passWordLabel.font = [UIFont systemFontOfSize:15];
+    
+    [passwordView addSubview:passWordLabel];
+    
+    
+    UIImageView *jiantouView = [[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 50, 10, 10, 20)];
+    jiantouView.image = [UIImage imageNamed:@"jiantouicon"];
+    
+    [passwordView addSubview:jiantouView];
+    
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ChangePassWord)];
+    
+    [passwordView addGestureRecognizer:tapGestureRecognizer];
+    
+    passwordView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSArray *hContraintsForPasswordTextField = [NSLayoutConstraint constraintsWithVisualFormat:@"|[passwordTextField]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"passwordTextField":passwordView}];
+    
+    NSArray *vContraintsForPasswordTextField = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[secondSeparatorView][passwordTextField(44)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"passwordTextField":passwordView,@"secondSeparatorView":secondSeparatorView}];
     
     [self.view addConstraints:hContraintsForPasswordTextField];
     [self.view addConstraints:vContraintsForPasswordTextField];
@@ -361,7 +409,7 @@
     thirdSeparatorView.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSArray *hConstraintsForThirdSeparatorView = [NSLayoutConstraint constraintsWithVisualFormat:@"|[thirdSeparatorView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"thirdSeparatorView":thirdSeparatorView}];
-    NSArray *vConstraintsForThirdSeparatorView = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[passwordTextField][thirdSeparatorView(1)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"passwordTextField":passwordTextField,@"thirdSeparatorView":thirdSeparatorView}];
+    NSArray *vConstraintsForThirdSeparatorView = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[passwordTextField][thirdSeparatorView(1)]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"passwordTextField":passwordView,@"thirdSeparatorView":thirdSeparatorView}];
     
     [self.view addConstraints:hConstraintsForThirdSeparatorView];
     [self.view addConstraints:vConstraintsForThirdSeparatorView];
@@ -369,6 +417,18 @@
     
 
 }
+
+
+-(void)ChangePassWord{
+    
+    BDBUserChangeViewController *changeViewController = [[BDBUserChangeViewController alloc]init];
+    
+    [self.navigationController pushViewController:changeViewController animated:YES];
+
+
+
+}
+
 
 - (void)changeHeadImage: (UIGestureRecognizer *)gesture{
 
@@ -381,8 +441,17 @@
 }
 //立即修改按钮事件
 - (void)modifyUserInformations: (UIButton *)button{
-  
+    
+    if(button.tag == 102){
+    
+        BDBUserChangeViewController *changeViewController = [[BDBUserChangeViewController alloc]init];
+        
+        [self.navigationController pushViewController:changeViewController animated:YES];
+    }
+    else{
+    
         [self loadSetUserInf:button.tag];
+    }
   
 }
 
@@ -422,15 +491,6 @@
         }
 
     }
-    if(buttonTag == 102){
-        
-        if (_passwordTextField.text.length != 0 && defaultsPSW != nil) {
-            NSString *passWord = _passwordTextField.text;
-            NSString *resultStr = [[self md5HexDigest:passWord]uppercaseString];
-            parameterDict[@"NewPSW"] = resultStr;
-            [defaults setObject:resultStr forKey:@"PSW"];
-        }
-    }
     
    [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
        if ([responseObject[@"Result"] isEqualToString:@"0"]) {
@@ -446,7 +506,7 @@
            
            [self performSelector:@selector(removetishi:) withObject:tishiLabel afterDelay:2];
            
-           [_passwordTextField setText:@""];
+           //[_passwordTextField setText:@""];
            [_emialTextField setText:@""];
            [_nameTextField setText:@""];
            
@@ -541,9 +601,15 @@
     
     self.currentHeadImageView.image = headerImage;
     
-    //self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.height);
-    
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+    NSString *archiveFilePath = [cachesPath stringByAppendingPathComponent:@"HeartPhoto.atchive"];
+    
+    [self requestPushHeardPhoton];
+    
+    [NSKeyedArchiver archiveRootObject:headerImage toFile:archiveFilePath];
+    
     
 
 }
@@ -567,6 +633,73 @@
     return YES;
 }
 
+-(void)requestPushHeardPhoton{
+    
+    
+    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+    NSString *archivePath = [cachesPath stringByAppendingPathComponent:@"HeartPhoto.atchive"];
+    
+    UIImage *heartImage = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+    
+    NSData *data = UIImagePNGRepresentation(heartImage);
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    NSString * photo64 = [self base64EncodingWithData:data];
+    NSLog(@"%@",photo64);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"SetUserInf"];
+    
+    NSMutableDictionary *parameterDict = [NSMutableDictionary dictionary];
+    
+    parameterDict[@"Photo"] = photo64;
+    parameterDict[@"UID"] = defaultsUID;
+    parameterDict[@"UserType"] = @"0";
+    [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject[@"Msg"]);
+        NSLog(@"%@",responseObject[@"Result"]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"sfsfsd");
+         }];
+
+
+}
+
+static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+- (NSString *)base64EncodingWithData:(NSData *)aData
+{
+    if ([aData length] == 0)
+        return @"";
+    
+    char *characters = malloc((([aData length] + 2) / 3) * 4);
+    if (characters == NULL)
+        return nil;
+    NSUInteger length = 0;
+    
+    NSUInteger i = 0;
+    while (i < [aData length])
+    {
+        char buffer[3] = {0,0,0};
+        short bufferLength = 0;
+        while (bufferLength < 3 && i < [aData length])
+            buffer[bufferLength++] = ((char *)[aData bytes])[i++];
+        
+        //  Encode the bytes in the buffer to four characters, including padding "=" characters if necessary.
+        characters[length++] = encodingTable[(buffer[0] & 0xFC) >> 2];
+        characters[length++] = encodingTable[((buffer[0] & 0x03) << 4) | ((buffer[1] & 0xF0) >> 4)];
+        if (bufferLength > 1)
+            characters[length++] = encodingTable[((buffer[1] & 0x0F) << 2) | ((buffer[2] & 0xC0) >> 6)];
+        else characters[length++] = '=';
+        if (bufferLength > 2)
+            characters[length++] = encodingTable[buffer[2] & 0x3F];
+        else characters[length++] = '=';
+    }
+    
+    return [[NSString alloc] initWithBytesNoCopy:characters length:length encoding:NSASCIIStringEncoding freeWhenDone:YES];
+}
 
 
 @end

@@ -41,8 +41,9 @@
 	 */
 	UILabel *titleLabel = [[UILabel alloc] init];
 	titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-	titleLabel.numberOfLines = 0;
-	titleLabel.textColor = UIColorWithRGB(83,83,83);
+	titleLabel.numberOfLines = 2;
+	titleLabel.textColor = UIColorWithRGB16Radix(0x444444);
+	titleLabel.font = UIFontWithNameAndSize(@"Arial Rounded MT Bold" ,15.0f);
 	
 	[_backgroundImgView addSubview:titleLabel];
 	self.titleLabel = titleLabel;
@@ -75,7 +76,8 @@
 	 */
 	UILabel *pubTimeLabel = [[UILabel alloc] init];
 	pubTimeLabel.textColor = UIColorWithRGB(164, 164, 164);
-	pubTimeLabel.text = @"2015/6/11 10:15:54";
+	pubTimeLabel.font = UIFontWithSize(12);
+
 	[_backgroundImgView addSubview:pubTimeLabel];
 	self.pubTimeLabel = pubTimeLabel;
 	

@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginOutButton;
 @property (weak, nonatomic) IBOutlet UILabel *APPcache;
 
+@property (weak, nonatomic) UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) UIView *warningView;
+
 //获取缓存的数据
 
 @end
@@ -95,6 +98,7 @@
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 NSString *defaultsUID = [defaults objectForKey:@"UID"];
                 NSString *defaultsPSW = [defaults objectForKey:@"PSW"];
+                NSLog(@"要提交的密码%@",defaultsPSW);
                 //判断账户如果已经为nil，则提示还没有登录
                 if ([defaults objectForKey:@"UID"] == nil){
                     UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
@@ -110,6 +114,36 @@
                 //如果账户不为空执行退出登录语句
                 else if ([defaults objectForKey:@"UID"] != nil){
                     
+					UIView *warningView = [[UIView alloc]init];
+					warningView.backgroundColor = [UIColor grayColor];
+					warningView.alpha = 0.7f;
+					[self.view addSubview:warningView];
+					warningView.translatesAutoresizingMaskIntoConstraints = NO;
+					NSArray *Hlayout = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[warningView]|" options:0 metrics:nil views:@{@"warningView":warningView}];
+					NSArray *Vlayout = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[warningView(height)]" options:0 metrics:@{@"height":@SCREEN_HEIGHT} views:@{@"warningView":warningView}];
+					
+					[self.view addConstraints:Hlayout];
+					[self.view addConstraints:Vlayout];
+					self.warningView = warningView;
+					
+					UIActivityIndicatorView *indecitorView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.origin.y, 100, 100)];
+					indecitorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+					indecitorView.center = self.view.center;
+					
+					//indecitorView.color = [UIColor redColor];
+					[indecitorView startAnimating];
+					[warningView addSubview:indecitorView];
+					self.activityIndicatorView = indecitorView;					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
                     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                     
                     NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"GetLogout"];
@@ -124,13 +158,18 @@
                     
                     [manager POST:requestURL parameters:parameterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         
+                        NSLog(@"%@",responseObject[@"Msg"]);
+                        
                         if ([responseObject[@"Result"] isEqualToString:@"0"]) {
                             
                             //删除本地数据
                             NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
                             NSDictionary * dict = [defaults dictionaryRepresentation];
                             for (id key in dict) {
-                                [defaults removeObjectForKey:key];
+                                if (![key isEqualToString:@"VersionCode"]) {
+                                    [defaults removeObjectForKey:key];
+                                }
+
                             }
                             [defaults synchronize];
                             
@@ -144,16 +183,46 @@
                             
                             [[UIApplication sharedApplication].keyWindow addSubview:dengruLabel];
                             [self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:1];
+                            
                             if ([defaults objectForKey:@"UID"] == nil) {
                                 [self.navigationController popViewControllerAnimated:YES];
                             }
                             
                         }
+						else if ([responseObject[@"Result"] isEqualToString:@"1"]){
+						
+						[_warningView removeFromSuperview];
+						[_activityIndicatorView removeFromSuperview];
+						
+							UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+							dengruLabel.text = responseObject[@"Msg"];
+							dengruLabel.textColor = [UIColor whiteColor];
+							dengruLabel.backgroundColor = [UIColor grayColor];
+							dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
+							dengruLabel.textAlignment = NSTextAlignmentCenter;
+							
+							[[UIApplication sharedApplication].keyWindow addSubview:dengruLabel];
+							[self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:1];
+						
+						
+						
+						}
                         
                     }
                      
                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                              NSLog(@"%@",error);
+							  [_warningView removeFromSuperview];
+							  [_activityIndicatorView removeFromSuperview];
+							  
+							  UILabel * dengruLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.center.x - 70, self.view.center.y, 150, 21)];
+							  dengruLabel.text = @"网络可能出问题呢！";
+							  dengruLabel.textColor = [UIColor whiteColor];
+							  dengruLabel.backgroundColor = [UIColor grayColor];
+							  dengruLabel.font = [UIFont fontWithName:@"Arial" size:15];
+							  dengruLabel.textAlignment = NSTextAlignmentCenter;
+							  
+							  [[UIApplication sharedApplication].keyWindow addSubview:dengruLabel];
+							  [self performSelector:@selector(removedengruchenggong:) withObject:dengruLabel afterDelay:1];
                               
                           }];
                     

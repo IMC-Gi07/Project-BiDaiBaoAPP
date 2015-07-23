@@ -14,4 +14,9 @@
 
 - (void)hide;
 
+/**
+ *  显示加载按钮
+ */
+- (void)showReloadButtonWithClickedHandler:(void (^)())clickedHandler;
+
 @end

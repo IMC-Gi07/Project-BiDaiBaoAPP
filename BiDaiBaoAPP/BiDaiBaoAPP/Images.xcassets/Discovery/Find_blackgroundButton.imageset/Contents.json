@@ -10,9 +10,6 @@
       "filename" : "Find_blackgroundButton@2x.png"
     },
     {
-      "scale" : "3x",
-      "idiom" : "universal",
-      "filename" : "Find_blackgroundButton@3x.png",
       "resizing" : {
         "mode" : "9-part",
         "center" : {
@@ -21,12 +18,15 @@
           "height" : 1
         },
         "capInsets" : {
-          "right" : 8,
+          "bottom" : 8,
           "top" : 8,
           "left" : 8,
-          "bottom" : 8
+          "right" : 8
         }
-      }
+      },
+      "idiom" : "universal",
+      "filename" : "Find_blackgroundButton@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

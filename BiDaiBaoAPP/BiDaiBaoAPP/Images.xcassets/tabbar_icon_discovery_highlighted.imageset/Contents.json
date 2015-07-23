@@ -1,17 +1,16 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "tabbar_icon_discovery_highlighted.png"
+      "idiom" : "universal",
+      "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "2x",
       "filename" : "tabbar_icon_discovery_highlighted@2x.png"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "3x",
       "filename" : "tabbar_icon_discovery_highlighted@3x.png"
     }

@@ -21,5 +21,9 @@
  */
 @property(nonatomic,weak) UILabel *pubTimeLabel;
 
+/**
+ *  是否已读
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *isReadImageView;
 
 @end

@@ -41,6 +41,24 @@
 @end
 
 @implementation BDBUserViewController
+- (IBAction)touchHeaderImage:(UITapGestureRecognizer *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultsUID = [defaults objectForKey:@"UID"];
+    if (defaultsUID == nil) {
+        [self performSegueWithIdentifier:@"headerimage" sender:sender];
+        
+    }
+    else{
+    
+        BDBUserInfoViewController *bdbuserInfoViewController = [[BDBUserInfoViewController alloc]init];
+    
+        [self.navigationController pushViewController:bdbuserInfoViewController animated:YES];
+    }
+    
+    
+    
+    
+}
 /**
  *  通过点击我的收藏来转场
  *

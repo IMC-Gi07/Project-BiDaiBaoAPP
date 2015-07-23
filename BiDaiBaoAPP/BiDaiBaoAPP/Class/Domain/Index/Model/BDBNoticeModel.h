@@ -40,4 +40,9 @@
  */
 @property(nonatomic,copy) NSString *DetailURL;
 
+/**
+ *  是否已读
+ */
+@property(nonatomic,copy) NSString *IsRead;
+
 @end

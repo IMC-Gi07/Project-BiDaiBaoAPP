@@ -33,7 +33,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.buttonGap = SCREEN_WIDTH / 12;
-        NSLog(@"%li",(long)_buttonGap);
+        
         self.title = @"问题类别";
     }
     return self;
@@ -66,7 +66,7 @@
         ZXLLOG(@"success response: %@",responseObject);
         
         BDBGetQuestionTypeModel *questionTypeModel = [BDBGetQuestionTypeModel objectWithKeyValues:responseObject];
-        NSLog(@"%@",questionTypeModel);
+        
         //将更多的数据，追加到数组后面
         self.QuestionTypeModels = [NSMutableArray array];
         [_QuestionTypeModels addObjectsFromArray:questionTypeModel.QuestionTypeList];

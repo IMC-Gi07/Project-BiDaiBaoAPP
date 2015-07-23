@@ -66,8 +66,26 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 	if (_loadDataIndicatePage) {
 		[_loadDataIndicatePage hide];
-		self.navigationController.navigationBarHidden = NO;
 	}
+	
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	NSString *UID = [userDefaults objectForKey:@"UID"];
+	if (!UID || [@"" isEqualToString:UID]) return;
+	
+	//请求服务器，记录用户读取情况
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	
+	NSString *requestURL = [BDBGlobal_HostAddress stringByAppendingPathComponent:@"ReadNews"];
+	
+	NSMutableDictionary *requestParams = [NSMutableDictionary dictionary];
+	requestParams[@"Machine_id"] = IPHONE_DEVICE_UUID;
+	requestParams[@"Device"] = @"0";
+	requestParams[@"UID"] = UID;
+	requestParams[@"NewsID"] = _noticeId;
+	
+	[manager POST:requestURL parameters:requestParams success:^(AFHTTPRequestOperation *operation, id responseObject){} failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
 }
 
 

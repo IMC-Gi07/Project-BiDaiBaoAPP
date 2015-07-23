@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xC6-VK-xoM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xC6-VK-xoM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -86,13 +87,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="95" id="9Cc-Ts-drf"/>
                                     <constraint firstAttribute="height" constant="95" id="unQ-6N-qf4"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_head_img" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-FI-lba">
-                                <rect key="frame" x="118" y="48" width="85" height="85"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="Dts-hD-sBX"/>
-                                    <constraint firstAttribute="height" constant="85" id="v0I-wm-rr1"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Xub-qr-YLt">
@@ -217,8 +211,17 @@
                                 <rect key="frame" x="0.0" y="244" width="320" height="324"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_head_img" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-FI-lba">
+                                <rect key="frame" x="118" y="48" width="85" height="85"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="Dts-hD-sBX"/>
+                                    <constraint firstAttribute="height" constant="85" id="v0I-wm-rr1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="yhg-Vf-du6" firstAttribute="leading" secondItem="Gld-7N-zxl" secondAttribute="leading" id="2IP-Bj-nqI"/>
                             <constraint firstItem="Xub-qr-YLt" firstAttribute="top" secondItem="yhg-Vf-du6" secondAttribute="bottom" constant="3" id="4kv-5I-r0c"/>
@@ -245,6 +248,9 @@
                             <constraint firstItem="Ux8-FI-lba" firstAttribute="centerX" secondItem="Xub-qr-YLt" secondAttribute="centerX" id="sEj-gC-7ih"/>
                             <constraint firstItem="9oD-4m-lHO" firstAttribute="leading" secondItem="Gld-7N-zxl" secondAttribute="leading" id="yET-pU-VMU"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ZGK-Xe-Wn3" appends="YES" id="Zuo-fE-ww2"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="hn0-5C-S4b"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -256,6 +262,7 @@
                         <segue destination="LEw-Zb-Ai7" kind="show" identifier="BDBUserRegisterViewController" id="sfJ-pY-DgJ"/>
                         <segue destination="Z5z-f6-bIK" kind="show" identifier="BDBMyCollectViewController" id="0ql-1f-BAf"/>
                         <segue destination="4Iq-td-acH" kind="show" identifier="BDBMyMeassageViewController" id="If0-2q-DtA"/>
+                        <segue destination="LEw-Zb-Ai7" kind="show" identifier="headerimage" id="PMx-b8-pqR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gqe-p1-5BM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -267,6 +274,11 @@
                 <tapGestureRecognizer id="5um-pe-qxu">
                     <connections>
                         <action selector="myMeassage:" destination="Bsl-f8-dKX" id="PlE-Om-co1"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="ZGK-Xe-Wn3">
+                    <connections>
+                        <action selector="touchHeaderImage:" destination="Bsl-f8-dKX" id="smK-cW-M69"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -284,8 +296,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="evU-Ua-ykL">
-                                <rect key="frame" x="0.0" y="140" width="375" height="527"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="evU-Ua-ykL">
+                                <rect key="frame" x="0.0" y="133" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ANW-Gc-NBT">
@@ -295,7 +307,7 @@
                                 </constraints>
                                 <segments>
                                     <segment title="进行中"/>
-                                    <segment title="已售馨"/>
+                                    <segment title="已售罄"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -447,7 +459,7 @@
                             <constraint firstItem="Bdp-J3-7BP" firstAttribute="leading" secondItem="HgD-TR-lSN" secondAttribute="trailing" id="j0s-rX-Fef"/>
                             <constraint firstItem="lGB-hj-ixw" firstAttribute="leading" secondItem="els-6I-lTt" secondAttribute="leading" constant="85" id="nzI-Ou-9ox"/>
                             <constraint firstItem="HgD-TR-lSN" firstAttribute="leading" secondItem="2Qu-Er-hAs" secondAttribute="trailing" constant="8" id="qT8-CB-Krw"/>
-                            <constraint firstItem="c7X-Ez-cIU" firstAttribute="top" secondItem="cpu-aI-cQ7" secondAttribute="bottom" constant="20" id="r0k-HW-q1o"/>
+                            <constraint firstItem="c7X-Ez-cIU" firstAttribute="top" secondItem="cpu-aI-cQ7" secondAttribute="bottom" constant="64" id="r0k-HW-q1o"/>
                             <constraint firstItem="2Qu-Er-hAs" firstAttribute="top" secondItem="kzy-Mh-oD9" secondAttribute="bottom" constant="65" id="udW-SI-8OM"/>
                             <constraint firstItem="wKs-IH-6lX" firstAttribute="top" secondItem="c7X-Ez-cIU" secondAttribute="bottom" id="uzN-hL-iyG"/>
                             <constraint firstItem="2Qu-Er-hAs" firstAttribute="centerY" secondItem="HgD-TR-lSN" secondAttribute="centerY" id="w6T-ui-Piu"/>
@@ -485,13 +497,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="比贷宝注册协议" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoC-m2-e2t">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="比贷宝注册协议" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoC-m2-e2t">
                                 <rect key="frame" x="61" y="52" width="198" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Iu-O2T">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Iu-O2T">
                                 <rect key="frame" x="0.0" y="93" width="320" height="475"/>
                                 <string key="text">本注册协议内容包括以下条款及已经发布的或将来可能发布的各类规则。所有规则为协议不可分割的一部分，与协议正文具有同等法律效力。本协议是由用户与本网站共同签订的，适用于用户在本网站的全部活动。在注册成为用户时，用户已经阅读、理解并接受本协议的全部条款及各类规则，并承诺遵守中国现行的法律、法规、规章及其他政府规定，如有违反而导致任何法律后果的发生，用户将以自己的名义独立承担所有相应的法律责任。
 用户确认本注册协议后，本注册协议即在用户和本网站之间产生法律效力。按照本网站规定的注册程序成功注册为用户，用户的行为即表示同意并签署了本注册协议。本注册协议不涉及用户与本网站的其他用户之间因网上交易而产生的法律关系及法律纠纷，但用户在此同意将全面接受和履行与本网站其他用户在本网站签订的任何电子法律文本，并承诺按该法律文本享有和/或放弃相应的权利、承担和/或豁免相应的义务。
@@ -544,7 +556,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请确认手机号或邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cou-xu-ezY">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请确认手机号或邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cou-xu-ezY">
                                 <rect key="frame" x="0.0" y="120" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="k7f-ju-f9Z"/>
@@ -552,7 +564,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrH-cw-gfB">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrH-cw-gfB">
                                 <rect key="frame" x="43" y="221" width="234" height="46"/>
                                 <state key="normal" title="确认" backgroundImage="buttonbackground">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -562,7 +574,7 @@
                                     <action selector="ForgetButton:" destination="YoN-1R-kkV" eventType="touchUpInside" id="zmv-U2-4HS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入手机号或邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xcT-4r-76Y">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入手机号或邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xcT-4r-76Y">
                                 <rect key="frame" x="0.0" y="72" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="BKM-m4-DhZ"/>
@@ -830,7 +842,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qio-a6-Xkm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qio-a6-Xkm">
                                 <rect key="frame" x="50" y="20" width="220" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -840,7 +852,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="请输入至少6位字母或数字密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WAl-al-RhS">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="请输入至少6位字母或数字密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WAl-al-RhS">
                                 <rect key="frame" x="0.0" y="89" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ecj-CN-KJ5"/>
@@ -848,7 +860,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1B-3T-tLo">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1B-3T-tLo">
                                 <rect key="frame" x="269" y="99" width="35" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="KUI-d7-Pv2"/>
@@ -920,6 +932,6 @@
         <image name="user_ plaintext_icon" width="24" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fpn-iD-DEs"/>
+        <segue reference="PMx-b8-pqR"/>
     </inferredMetricsTieBreakers>
 </document>

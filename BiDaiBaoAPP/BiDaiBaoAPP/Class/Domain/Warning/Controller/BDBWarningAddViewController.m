@@ -305,7 +305,7 @@
     
     if (_IsSegmentedAlarm == NO) {
      
-    warningRow = self.rowNumber;
+    warningRow = 2;
         
     }else if (_IsSegmentedAlarm == YES){
         warningRow = 1;
@@ -319,40 +319,38 @@
 //设置行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger rowNo2;
+	
+	CGFloat heightForRow = 0.0f;
     if (_IsSegmentedAlarm == NO) {
      
     switch (indexPath.row) {
         case 0:
-            
             if (_isShrink == 0) {
-                self.row = 8500;
-            }else if (_isShrink == 1){
-                self.row = 15;
+                heightForRow = 178;
+            }
+			else{
+                heightForRow = 65;
             }
             
             break;
         case 1:
-            self.row = 178;
+            heightForRow = 120;
             break;
-       
-            break;
-
-    }
-    return self.row;
+		default:
+			break;
+    	}
     }else if (_IsSegmentedAlarm == YES){
         NSUInteger rowNo1 = indexPath.section;
         
         if(rowNo1 == 0){
-            return 52.0f;
+            heightForRow =  52.0f;
         }else if (rowNo1 == 1){
-            return 52.0f;
+            heightForRow = 52.0f;
         }else if(rowNo1 == 2){
-            return 135.0f;
+            heightForRow = 135.0f;
         }
-        return rowNo1;
     }
-    return rowNo2;
+    return heightForRow;
 }
 
 //表格内容

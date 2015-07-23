@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -42,7 +42,7 @@
                             <action selector="investmentGuideButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MQz-R1-xpm"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8MB-r6-8E7">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8MB-r6-8E7">
                         <rect key="frame" x="10" y="126" width="99" height="107"/>
                         <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -64,7 +64,7 @@
                             <action selector="securityAssuranceButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EA5-fg-xAu"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BC-Eo-oss">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BC-Eo-oss">
                         <rect key="frame" x="213" y="126" width="99" height="107"/>
                         <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" image="discovery_funcBtn_2_3.png">
@@ -96,7 +96,7 @@
                             <action selector="riskControlButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VuL-nX-D3n"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01O-zw-oyS">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01O-zw-oyS">
                         <rect key="frame" x="112" y="241" width="98" height="108"/>
                         <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" image="discovery_funcBtn_3_2.png">
@@ -116,7 +116,7 @@
                             <action selector="creditorsRightsTransferButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iWZ-LD-zqX"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-hu-7Jy">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-hu-7Jy">
                         <rect key="frame" x="112" y="126" width="98" height="107"/>
                         <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" image="discovery_funcBtn_2_2.png">
@@ -126,7 +126,7 @@
                             <action selector="operationModeButtonClickedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9VP-dm-5Or"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXK-Ic-QOz">
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXK-Ic-QOz">
                         <rect key="frame" x="112" y="10" width="98" height="108"/>
                         <color key="backgroundColor" red="0.83660061429999999" green="0.84051511509999999" blue="0.85102982949999995" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" image="discovery_funcBtn_1_2.png"/>
@@ -218,7 +218,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="discovery_funcBtn_1_1.png" width="379" height="310"/>
+        <image name="discovery_funcBtn_1_1.png" width="28" height="64"/>
         <image name="discovery_funcBtn_1_2.png" width="382" height="420"/>
         <image name="discovery_funcBtn_1_3.png" width="382" height="420"/>
         <image name="discovery_funcBtn_2_1.png" width="382" height="420"/>

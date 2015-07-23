@@ -11,12 +11,21 @@
 @implementation BDBImformationCell
 
 - (void)awakeFromNib {
-    // Initialization code
+   
+    self.title.textColor = UIColorWithRGB16Radix(0x4c4c4c);
+    self.firstSection.textColor = UIColorWithRGB16Radix(0x8c8c8c);
+    self.DT.textColor = UIColorWithRGB16Radix(0x999999);
+    self.commentNum.textColor = UIColorWithRGB16Radix(0x999999);
+     self.PopularIndex.textColor = UIColorWithRGB16Radix(0x999999);
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+    
+    
     // Configure the view for the selected state
 }
 

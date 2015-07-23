@@ -74,7 +74,7 @@
     [super viewDidLoad];
     
     self.PageSize = 10;
-    NSLog(@"%@",_TitleKey);
+
     [self initQuestionTableView];
 //      [self.questionListTableView reloadData];
 //    self.navigationController.navigationBarHidden = YES;
@@ -254,7 +254,7 @@
         self.questionListTableView.rowHeight = 80;
         self.questionListTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         BDBQuestionListTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-        
+       
         BDBHotTopicsModel *hotTopicsModel = _getQuestionsModels[indexPath.row];
         
         tableViewCell.titleLabel.text = hotTopicsModel.Title;
